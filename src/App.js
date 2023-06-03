@@ -1,8 +1,10 @@
+import TopMainNav from './components/common/TopNavBar/TopMainNav';
+
 function App() {
   return (
-    <div>
-      hello world
-    </div>
+    <>
+      <TopMainNav />
+    </>
   );
 }
 export default App;
