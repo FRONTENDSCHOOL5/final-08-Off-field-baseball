@@ -1,0 +1,53 @@
+:root {
+  font-size: 10px;
+
+  /* 메인 컬러 */
+  --primary-color: #52c33d;
+
+  /* 구단별 컬러 */
+  --brand-color-samsung: red;
+  --brand-color-hanwha: red;
+  --brand-color-kiwoom: red;
+  --brand-color-lotte: red;
+  --brand-color-lg: red;
+  --brand-color-kia: red;
+  --brand-color-ssg: red;
+  --brand-color-doosan: red;
+  --brand-color-nc: red;
+  --brand-color-kt: red;
+
+  /* 서브 컬러 */
+  --secondary-color: #c9eac3;
+  /* --secondary-color-samsung: red;
+  --secondary-color-hanwha: red;
+  --secondary-color-kiwoom: red;
+  --secondary-color-lotte: red;
+  --secondary-color-lg: red;
+  --secondary-color-kia: red;
+  --secondary-color-ssg: red;
+  --secondary-color-doosan: red;
+  --secondary-color-nc: red;
+  --secondary-color-kt: red; */
+
+  --gray-100: #f2f2f2;
+  --gray-200: #dbdbdb;
+  --gray-300: #c4c4c4;
+  --gray-400: #767676;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.a11y-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+}
