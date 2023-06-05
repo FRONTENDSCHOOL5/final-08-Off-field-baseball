@@ -1,1 +1,30 @@
 /* 폰트 불러오기 */
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 400;
+  src: url('./../assets/fonts/SpoqaHanSansNeo-Regular.woff2') format('woff2'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Regular.woff') format('woff'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Regular.ttf') format('truetype'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Regular.eot')
+      format('embedded-opentype');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 500;
+  src: url('./../assets/fonts/SpoqaHanSansNeo-Medium.woff2') format('woff2'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Medium.woff') format('woff'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Medium.ttf') format('truetype'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Medium.eot')
+      format('embedded-opentype');
+}
+
+@font-face {
+  font-family: 'Spoqa Han Sans Neo';
+  font-weight: 700;
+  src: url('./../assets/fonts/SpoqaHanSansNeo-Bold.woff2') format('woff2'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Bold.woff') format('woff'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Bold.ttf') format('truetype'),
+    url('./../assets/fonts/SpoqaHanSansNeo-Bold.eot')
+      format('embedded-opentype');
+}

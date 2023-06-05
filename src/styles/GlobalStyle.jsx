@@ -13,8 +13,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     color: inherit;
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
     /* background-color */
-    /* font-family */
   }
 
   a {
@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button, input, textarea {
-    /* font-family: 'Spoqa Han Sans Neo', sans-serif; */
+    font-family: 'Spoqa Han Sans Neo', sans-serif;
     padding: 0;
     border: none;
     font-size: inherit;
