@@ -11,7 +11,7 @@ export const TopNavBar = styled.header`
   height: 48px;
   padding: 0.8em 1.2em 0.8em 1.6em;
   z-index: 100;
-  background-color: #5ea152;
+  background-color: #fff;
   border-bottom: 1px solid black;
 `;
 
