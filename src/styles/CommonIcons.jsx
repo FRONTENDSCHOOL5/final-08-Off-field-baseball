@@ -29,7 +29,7 @@ import BASIC_PROFILE_SM from '../assets/icons/basic-profile-sm.png';
 
 export {
   ARROW_LEFT,
-  CLOSE,
+  X,
   HOME,
   HEART,
   EDIT,
