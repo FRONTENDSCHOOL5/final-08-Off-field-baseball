@@ -4,7 +4,6 @@ import './global.css';
 import './fonts.css';
 
 const GlobalStyle = createGlobalStyle`
-
   ${reset}
 
   * {
@@ -14,7 +13,14 @@ const GlobalStyle = createGlobalStyle`
   body {
     color: inherit;
     font-family: 'Spoqa Han Sans Neo', sans-serif;
-    /* background-color */
+  }
+
+  #root {
+    /* main이 100vh에서 남는 값을 갖기 위해 flex 사용 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--gray-100);
   }
 
   a {
