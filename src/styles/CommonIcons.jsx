@@ -1,5 +1,5 @@
 import ARROW_LEFT from '../assets/icons/arrow-left.png';
-import CLOSE from '../assets/icons/close.png';
+import X from '../assets/icons/x.png';
 import HOME from '../assets/icons/home.png';
 import HEART from '../assets/icons/heart.png';
 import EDIT from '../assets/icons/edit.png';
