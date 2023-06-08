@@ -1,40 +1,15 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import {
   HOME_FILL,
+  HOME,
   MESSAGE_CIRCLE_LG,
+  MESSAGE_CIRCLE_FILL,
   EDIT,
   USER_ICON,
+  USER_FILL,
 } from '../../../styles/CommonIcons';
-
-const TabNavBar = styled.footer`
-  width: 100%;
-  max-width: 430px;
-  height: 60px;
-  position: fixed;
-  bottom: 0;
-  z-index: 100;
-  background-color: #fff;
-  border-top: 1px solid #dbdbdb;
-`;
-
-const TabNavUl = styled.ul`
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 0;
-  margin: 0;
-`;
-
-const TabNavLi = styled.li`
-  margin-top: 10px;
-  text-align: center;
-  width: 84px;
-`;
-
-const TabNavSpan = styled.span`
-  display: block;
-  font-size: 10px;
-`;
 
 export default function TabHomeNav() {
   return (
@@ -65,3 +40,40 @@ export default function TabHomeNav() {
     </>
   );
 }
+
+const TabNavBar = styled.footer`
+  width: 100%;
+  max-width: 430px;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+  z-index: 100;
+  background-color: #fff;
+  border-top: 1px solid #dbdbdb;
+`;
+
+const TabNavUl = styled.ul`
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 14px;
+`;
+
+const TabNavLi = styled.li`
+  width: 84px;
+  height: 100%;
+  text-align: center;
+  margin-top: 12px;
+  cursor: pointer;
+
+  img {
+    width: 24px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 4px;
+  }
+`;
+
+const TabNavSpan = styled.span`
+  display: block;
+  font-size: 10px;
+`;
