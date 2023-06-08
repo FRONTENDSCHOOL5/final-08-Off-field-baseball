@@ -7,7 +7,6 @@ import styled from "styled-components";
 // MainLayout 확장
 const StyledLogin = styled(MainLayout)`
   padding: 30px 34px;
-
   h1 {
     margin-bottom: 40px;
     font-weight: 500;

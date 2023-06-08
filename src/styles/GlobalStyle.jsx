@@ -16,10 +16,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   #root {
-    /* main이 100vh에서 남는 값을 갖기 위해 flex 사용 */
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
     background: var(--gray-100);
   }
 
