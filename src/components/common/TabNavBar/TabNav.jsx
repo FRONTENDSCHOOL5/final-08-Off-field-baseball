@@ -11,7 +11,7 @@ import {
   USER_FILL,
 } from '../../../styles/CommonIcons';
 
-export default function TabHomeNav() {
+export default function TabNav() {
   return (
     <>
       <TabNavBar>
@@ -48,8 +48,6 @@ const TabNavBar = styled.footer`
   position: fixed;
   bottom: 0;
   z-index: 100;
-  left: 50%;
-  transform: translate(-50%);
   background-color: #fff;
   border-top: 1px solid #dbdbdb;
 `;
