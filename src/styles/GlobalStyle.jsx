@@ -15,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Spoqa Han Sans Neo', sans-serif;
   }
 
-  #root {
+  :root {
     background: var(--gray-100);
   }
 
