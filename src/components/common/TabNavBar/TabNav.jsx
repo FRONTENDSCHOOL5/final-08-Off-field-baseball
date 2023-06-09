@@ -47,9 +47,9 @@ const TabNavBar = styled.footer`
   height: 60px;
   position: fixed;
   bottom: 0;
-  z-index: 100;
   left: 50%;
   transform: translate(-50%);
+  z-index: 100;
   background-color: #fff;
   border-top: 1px solid #dbdbdb;
 `;
