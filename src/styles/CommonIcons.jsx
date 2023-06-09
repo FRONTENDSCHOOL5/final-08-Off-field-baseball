@@ -2,6 +2,7 @@ import ARROW_LEFT from '../assets/icons/arrow-left.png';
 import X from '../assets/icons/x.png';
 import HOME from '../assets/icons/home.png';
 import HEART from '../assets/icons/heart.png';
+import HEART_FILL from '../assets/icons/heart-fill.png';
 import EDIT from '../assets/icons/edit.png';
 import KAKAO from '../assets/icons/kakao-logo.png';
 import FACEBOOK from '../assets/icons/facebook-logo.png';
@@ -56,4 +57,5 @@ export {
   HOME_FILL,
   BASIC_PROFILE_LG,
   BASIC_PROFILE_SM,
+  HEART_FILL,
 };
