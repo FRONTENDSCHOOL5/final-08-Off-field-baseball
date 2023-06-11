@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Form from '../../components/common/Form/Form';
-import MainLayout from '../../components/layout/MainLayout';
+import MainLayout from '../../components/layout/MainLayout/MainLayout';
 import styled from 'styled-components';
 
 // MainLayout 확장
