@@ -4,6 +4,7 @@ import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Post from '../../components/common/Post/Post';
 
 export default function Upload() {
   const [isImg, setIsImg] = useState(true); // 레이아웃을 위해 임시로 true
@@ -15,6 +16,9 @@ export default function Upload() {
       <h2 className='a11y-hidden'>{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
 
       <TopBasicNav />
+      <StyledSection>
+        <Post></Post>
+      </StyledSection>
       <CommentListSection>
         <article>
           {/* 야구러버의 프로파일로 연결 */}
@@ -76,60 +80,4 @@ const CommentListSection = styled.section`
 
 const StyledSection = styled.section`
   padding: 68px 16px 24px;
-
-  p,
-  ul,
-  .wrap-icon,
-  time {
-    margin-left: auto;
-    width: calc(100% - 55px); // 프사 + 마진 = 55px
-  }
-
-  p {
-    margin-top: 12px;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-  }
-  ul {
-    margin-top: 16px;
-    margin-bottom: 12px;
-    aspect-ratio: 304/228;
-    overflow: hidden;
-    display: flex;
-  }
-  ul > li:not(:first-child) {
-    margin-left: 8px;
-  }
-  ul > li > img {
-    border-radius: 10px;
-  }
-  ul > li {
-    flex-basis: 100%;
-    flex-shrink: 0;
-  }
-
-  .wrap-icon {
-    display: flex;
-    align-items: center;
-  }
-  .wrap-icon img {
-    display: inline-block;
-    width: 20px;
-    aspect-ratio: 1/1;
-    margin-right: 6px;
-  }
-  span {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    color: var(--gray-400);
-  }
-  span:not(:last-child) {
-    margin-right: 16px;
-  }
-  time {
-    margin-top: 16px;
-    display: block;
-    color: var(--gray-400);
-    line-height: 1.2rem;
-  }
 `;
