@@ -1,5 +1,137 @@
+import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+export default function Select({ optionTextList }) {
+  const [isOn, setIsOn] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [FocusOptIndex, setFocusOptIndex] = useState(0);
+  const [selectedOpt, setSelectedOpt] = useState(optionTextList[0]);
+  const optionList = useRef(null);
+
+  const handleOpen = (e) => {
+    e.preventDefault();
+    setIsOn(true);
+    setIsOpen(!isOpen);
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
+
+  const nextOpt = (e) => {
+    e.preventDefault(); //이 함수를 지우면 포커스 두 번 이동함
+    const next = e.target.closest('li').nextElementSibling;
+    if (!next) {
+      e.currentTarget.firstElementChild.firstElementChild.focus();
+      setFocusOptIndex(0);
+    } else {
+      next.firstElementChild.focus();
+      setFocusOptIndex(FocusOptIndex + 1);
+    }
+  };
+
+  const prevOpt = (e) => {
+    e.preventDefault();
+    const prev = e.target.closest('li').previousElementSibling;
+    if (!prev) {
+      e.currentTarget.lastElementChild.lastElementChild.focus();
+      setFocusOptIndex(optionTextList.length - 1);
+    } else {
+      prev.lastElementChild.focus();
+      setFocusOptIndex(FocusOptIndex - 1);
+    }
+  };
+
+  const moveOpt = (e) => {
+    // 아래 방향키 | 탭
+    if (e.keyCode === 40 || (!e.shiftKey && e.keyCode === 9)) {
+      nextOpt(e);
+    }
+    // 위 방향키 | shift + 탭
+    else if (e.keyCode === 38 || (e.shiftKey && e.keyCode === 9)) {
+      prevOpt(e);
+    }
+  };
+
+  // 셀렉트 바깥 영역을 클릭했을 때
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (
+        !e.target.classList.contains('select-btn') &&
+        !e.target.closest('.list')
+      ) {
+        handleClose(e);
+        setIsOn(false);
+      }
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, []);
+
+  // 셀렉트가 open 됐을 때, 선택되어 있는 옵션에 포커스
+  useEffect(() => {
+    if (isOpen) {
+      optionList.current.children[FocusOptIndex].firstElementChild.focus();
+    }
+    return;
+  }, [isOpen]);
+
+  // 옵션 선택
+  const selectOpt = (e) => {
+    e.target.focus();
+    const btn = e.currentTarget.previousElementSibling;
+    setTimeout(() => {
+      setSelectedOpt(e.target.textContent);
+      setIsOpen(false);
+      btn.focus();
+    }, 110);
+  };
+
+  return (
+    <StyledSelect
+      className='custom-select'
+      onKeyDown={(e) => {
+        // Esc
+        if (e.keyCode === 27 && isOpen) {
+          handleClose(e);
+          e.currentTarget.firstElementChild.focus();
+        }
+      }}
+    >
+      <button
+        id='myTeam-btn'
+        className={isOn ? 'select-btn on' : 'select-btn'}
+        // onClick : 탭, 스페이스 포함
+        onClick={handleOpen}
+        onKeyDown={(e) => {
+          // 아래, 위 방향키
+          if (e.keyCode === 40 || e.keyCode === 38) {
+            setIsOpen(true);
+          }
+        }}
+      >
+        {selectedOpt}
+      </button>
+
+      {isOpen && (
+        <ul
+          className='list'
+          onKeyDown={moveOpt}
+          onClick={selectOpt}
+          ref={optionList}
+        >
+          {optionTextList.map((txt, i) => (
+            <li key={i}>
+              <button type='button'>{txt}</button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </StyledSelect>
+  );
+}
 
 const StyledSelect = styled.div`
   position: relative;
@@ -53,112 +185,3 @@ const StyledSelect = styled.div`
     outline: none;
   }
 `;
-
-function Select({ selectBtnText, optionTextList }) {
-  const [isOn, setIsOn] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleOpen = (e) => {
-    setIsOn(true);
-
-    if (isOpen) {
-      setIsOpen(false);
-      console.log(e.currentTarget);
-    } else {
-      setIsOpen(true);
-    }
-  };
-  const handleClose = (e) => {
-    e.preventDefault();
-    setIsOpen(false);
-  };
-
-  const handleOptionsTab = (e) => {
-    // 엔터
-    console.log(e.keyCode);
-    if (e.keyCode === 13) {
-      handleClose(e);
-    } else if (e.keyCode === 40) {
-      e.preventDefault(); //이 함수를 지우면 탭을 두 번 한 것처럼 포커스가 이동
-      // 탭은 기본 지원
-      const next = e.target.closest('li').nextElementSibling;
-      if (!next) {
-        e.currentTarget.firstElementChild.firstElementChild.focus();
-      } else {
-        next.firstElementChild.focus();
-      }
-    } else if (e.keyCode === 38) {
-      e.preventDefault();
-      const prev = e.target.closest('li').previousElementSibling;
-      if (!prev) {
-        e.currentTarget.lastElementChild.lastElementChild.focus();
-      } else {
-        prev.lastElementChild.focus();
-      }
-    }
-  };
-
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (!e.target.closest('.select-btn')) {
-        handleClose(e);
-        setIsOn(false);
-      }
-    };
-    document.addEventListener('click', handleClick);
-    return () => document.removeEventListener('click', handleClick);
-  }, []);
-
-  return (
-    <StyledSelect
-      className="custom-select"
-      onKeyDown={(e) => {
-        // Esc
-        if (e.keyCode === 27 && isOpen) {
-          handleClose(e);
-          e.currentTarget.firstElementChild.focus();
-        }
-      }}
-    >
-      <button
-        id="myTeam-btn"
-        className={isOn ? 'select-btn on' : 'select-btn'}
-        // onClick : 탭, 스페이스 포함
-        onClick={(e) => {
-          e.preventDefault();
-          handleOpen(e);
-        }}
-        onKeyDown={(e) => {
-          // 아래, 위 방향키
-          if (e.keyCode === 40 || e.keyCode === 38) {
-            setIsOn(true);
-            if (isOpen) {
-              e.target.nextElementSibling.firstElementChild.firstElementChild.focus();
-            } else {
-              setIsOpen(true);
-            }
-          }
-        }}
-      >
-        {selectBtnText}
-      </button>
-
-      {isOpen && (
-        <ul onKeyDown={handleOptionsTab}>
-          {optionTextList.map((txt, i) => (
-            <li key={i}>
-              <button
-                type="button"
-                className={0 === i ? 'selected-option' : ''}
-              >
-                {txt}
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </StyledSelect>
-  );
-}
-
-export default Select;
