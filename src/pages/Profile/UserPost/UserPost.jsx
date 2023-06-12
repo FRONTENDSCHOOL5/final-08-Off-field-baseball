@@ -52,6 +52,7 @@ export default function UserPost() {
               <Link to='#'>
                 <PostAlbumItem imageCount={3}>
                   <img src={TEST} alt='' />
+                  <img className='layer' src={IMG_LAYERS} alt='' />
                 </PostAlbumItem>
               </Link>
               <Link to='#'>
@@ -75,7 +76,7 @@ export default function UserPost() {
                 </PostAlbumItem>
               </Link>
             </PostAlbum>
-          )}{' '}
+          )}
         </>
       ) : (
         <EmptyPost />
@@ -117,25 +118,15 @@ const PostAlbumItem = styled.div`
   img {
     aspect-ratio: 1 / 1;
   }
-  &::after {
-    content: '';
-    width: 20px;
-    height: 20px;
+
+  img.layer {
     position: absolute;
-    background: no-repeat url(${IMG_LAYERS});
     top: 6px;
     right: 6px;
-    display: none;
-    cursor: pointer;
+    width: 20px;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
-
-  ${({ imageCount }) =>
-    imageCount > 1 &&
-    `
-    &::after {
-      display: block;
-    }
-    `}
 `;
 
 const EmptyPost = styled.div`
