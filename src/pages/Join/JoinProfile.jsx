@@ -1,6 +1,6 @@
 import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
 import styled from 'styled-components';
-import StyledSelect from '../../components/common/Select(임시)/Select';
+import StyledSelect from '../../components/common/Select/Select';
 import Form from '../../components/common/Form/Form';
 import Button from '../../components/common/Button/Button';
 import { Link } from 'react-router-dom';

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Form from '../../components/common/Form(임시)/Form';
+import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
 
