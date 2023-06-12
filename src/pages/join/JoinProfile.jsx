@@ -1,4 +1,4 @@
-import MainLayout from '../../components/layout/MainLayout';
+import MainLayout from '../../components/layout/MainLayout/MainLayout';
 import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
 
 import styled from 'styled-components';
