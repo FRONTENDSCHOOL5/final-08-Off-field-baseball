@@ -3,6 +3,7 @@ import {
   BASIC_PROFILE_SM,
   HEART,
   MESSAGE_CIRCLE_SM,
+  MORE_VERTICAL_LIGHT,
 } from '../../../styles/CommonIcons';
 import { ERROR_404 } from '../../../styles/CommonImages';
 import styled from 'styled-components';
@@ -13,7 +14,7 @@ export default function Post() {
       <ProfileImg src={BASIC_PROFILE_SM} alt='' />
       <UserPost>
         <UserInfo>
-          <p>최강롯데</p>
+          <h2>최강롯데</h2>
           <p>@Unbeatable_Lotte</p>
         </UserInfo>
         <UserText>
@@ -37,6 +38,9 @@ export default function Post() {
         </PostBtnWrapper>
         <CreateTime dateTime='2023-06-09'>2023년 6월 9일</CreateTime>
       </UserPost>
+      <PostMenu>
+        <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+      </PostMenu>
     </PostWrapper>
   );
 }
@@ -44,6 +48,7 @@ export default function Post() {
 const PostWrapper = styled.article`
   display: flex;
   gap: 12px;
+  position: relative;
   &:not(:last-child) {
     margin-bottom: 20px;
   }
@@ -62,11 +67,12 @@ const UserPost = styled.div`
 `;
 
 const UserInfo = styled.div`
-  p:first-child {
+  h2 {
     font-size: 1.4rem;
-    margin-bottom: 2px;
+    margin-bottom: 4px;
+    font-weight: 500;
   }
-  p:last-child {
+  p {
     color: var(--gray-400);
     font-size: 1.2rem;
   }
@@ -109,4 +115,10 @@ const PostBtn = styled.button`
 
 const CreateTime = styled.time`
   color: var(--gray-400);
+`;
+
+const PostMenu = styled.button`
+  position: absolute;
+  right: 0;
+  top: 2px;
 `;
