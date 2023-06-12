@@ -12,7 +12,7 @@ export const TopNavBar = styled.header`
   padding: 0.8em 1.2em 0.8em 1.6em;
   z-index: 100;
   background-color: #fff;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--gray-200);
 `;
 
 export const LeftArrow = styled.img`
