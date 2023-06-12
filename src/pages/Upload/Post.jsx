@@ -1,13 +1,6 @@
-import {
-  BASIC_PROFILE_LG,
-  BASIC_PROFILE_SM,
-  HEART,
-  MESSAGE_CIRCLE_LG,
-} from '../../styles/CommonIcons';
-import { TEST_PRODUCT } from '../../styles/CommonImages';
+import { BASIC_PROFILE_SM } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
-import UserSearch from '../../components/common/UserSearch/UserSearch';
 import Comment from '../../components/common/Comment/Comment';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -18,61 +11,27 @@ export default function Upload() {
   return (
     <>
       {/* h~ 태그 고려 중 */}
-      <h1 className="a11y-hidden">구장 밖 야구</h1>
-      <h2 className="a11y-hidden">{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
+      <h1 className='a11y-hidden'>구장 밖 야구</h1>
+      <h2 className='a11y-hidden'>{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
 
       <TopBasicNav />
-      <StyledSection>
-        <UserSearch
-          name="최강롯데"
-          id="@Unbeatable_Lotte"
-          img={BASIC_PROFILE_LG}
-        ></UserSearch>
-        <p>
-          옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-          이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는 풍부하게
-          뛰노는 인생의 힘있다.
-        </p>
-
-        {isImg && (
-          <ul>
-            <li>
-              <img src={TEST_PRODUCT} alt="" />
-            </li>
-            <li>
-              <img src={TEST_PRODUCT} alt="" />
-            </li>
-          </ul>
-        )}
-
-        <div className="wrap-icon">
-          <img src={HEART} alt="" />
-          {/* 임시 하트 수 */}
-          <span>{'58'}</span>
-          <img src={MESSAGE_CIRCLE_LG} alt="" />
-          {/* 임시 댓글 수 */}
-          <span>{'12'}</span>
-        </div>
-        {/* 임시 날짜 -> 작성일 서버에서 가져와서 속성, 텍스트에 넣기 */}
-        <time>{'2020년 10월 21일'}</time>
-      </StyledSection>
       <CommentListSection>
         <article>
           {/* 야구러버의 프로파일로 연결 */}
-          <Link className="profile-img" to="/profile">
-            <img src={BASIC_PROFILE_SM} alt="" />
+          <Link className='profile-img' to='/profile'>
+            <img src={BASIC_PROFILE_SM} alt='' />
           </Link>
-          <Link to="/profile" className="name">
+          <Link to='/profile' className='name'>
             야구러버
           </Link>
           <p>모자가 예쁘네요~ㅎㅎ</p>
         </article>
         <article>
           {/* 야구러버의 프로파일로 연결 */}
-          <Link className="profile-img" to="/profile">
-            <img src={BASIC_PROFILE_SM} alt="" />
+          <Link className='profile-img' to='/profile'>
+            <img src={BASIC_PROFILE_SM} alt='' />
           </Link>
-          <Link to="/profile" className="name">
+          <Link to='/profile' className='name'>
             야구러버
           </Link>
           <p>
@@ -81,7 +40,7 @@ export default function Upload() {
           </p>
         </article>
       </CommentListSection>
-      <Comment txt="게시" placeholder="댓글 입력하기"></Comment>
+      <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
     </>
   );
 }

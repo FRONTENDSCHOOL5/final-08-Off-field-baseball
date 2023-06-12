@@ -1,21 +1,21 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Form from '../../components/common/Form/Form';
+import Form from '../../components/common/Form(임시)/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
 
 function Login({ team }) {
   return (
     <StyledLogin>
-      <h1>이메일로 회원가입</h1>
+      <h1>로그인</h1>
       <Form team={team}>
-        <label htmlFor="email-inp">이메일</label>
-        <input id="email-inp" type="text" />
-        <label htmlFor="password-inp">비밀번호</label>
-        <input id="password-inp" type="text" />
-        <Link to="/join/profile">
-          <StyledButton type="submit">다음</StyledButton>
+        <label htmlFor='email-inp'>이메일</label>
+        <input id='email-inp' type='text' />
+        <label htmlFor='password-inp'>비밀번호</label>
+        <input id='password-inp' type='text' />
+        <Link to='/'>
+          <StyledButton type='submit'>로그인</StyledButton>
         </Link>
+        <Link to='/join'>이메일로 회원가입</Link>
       </Form>
     </StyledLogin>
   );

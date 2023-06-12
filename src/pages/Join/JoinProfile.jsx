@@ -1,6 +1,6 @@
 import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
 import styled from 'styled-components';
-import StyledSelect from '../../components/common/Select/Select';
+import StyledSelect from '../../components/common/Select(임시)/Select';
 import Form from '../../components/common/Form/Form';
 import Button from '../../components/common/Button/Button';
 import { Link } from 'react-router-dom';
@@ -23,21 +23,21 @@ export default function JoinProfile({ team }) {
     <StyledJoinProfile>
       <h1>프로필 설정</h1>
       <p>나중에 언제든지 변경할 수 있습니다.</p>
-      <StyledImg src={BASIC_PROFILE_LG} alt="" />
+      <StyledImg src={BASIC_PROFILE_LG} alt='' />
       <Form team={team} handelForm={handelForm}>
-        <label htmlFor="email-inp">사용자 이름</label>
-        <input id="email-inp" type="text" />
-        <label htmlFor="password-inp">계정 ID</label>
-        <input id="password-inp" type="text" />
-        <label htmlFor="introduce-inp">소개</label>
-        <input id="introduce-inp" type="text" />
-        <label htmlFor="myTeam-btn">응원 중인 팀</label>
+        <label htmlFor='email-inp'>사용자 이름</label>
+        <input id='email-inp' type='text' />
+        <label htmlFor='password-inp'>계정 ID</label>
+        <input id='password-inp' type='text' />
+        <label htmlFor='introduce-inp'>소개</label>
+        <input id='introduce-inp' type='text' />
+        <label htmlFor='myTeam-btn'>응원 중인 팀</label>
         <StyledSelect
-          selectBtnText="삼성 라이온즈"
+          selectBtnText='삼성 라이온즈'
           optionTextList={teamList}
         ></StyledSelect>
-        <Link to="/">
-          <Button id="start-btn" type="submit">
+        <Link to='/'>
+          <Button id='start-btn' type='submit'>
             감귤마켓 시작하기
           </Button>
         </Link>

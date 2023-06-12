@@ -1,5 +1,5 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE, X } from '../../styles/CommonIcons';
-import { TEST_PRODUCT } from '../../styles/CommonImages';
+import { ERROR_404 } from '../../styles/CommonImages';
 import styled from 'styled-components';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import { useState } from 'react';
@@ -13,30 +13,30 @@ export default function Upload() {
   };
   return (
     <>
-      <TopUploadNav btnTxt="업로드" />
+      <TopUploadNav btnTxt='업로드' />
       <StyledSection>
-        <img className="profile-img" src={BASIC_PROFILE_LG} alt="" />
+        <img className='profile-img' src={BASIC_PROFILE_LG} alt='' />
         <textarea
-          name=""
-          id=""
-          placeholder="게시글 입력하기..."
+          name=''
+          id=''
+          placeholder='게시글 입력하기...'
           onChange={ResizeHeight}
           rows={1}
         ></textarea>
-        <img className="uplode-img" src={UPLOAD_FILE} alt="이미지 업로드하기" />
+        <img className='uplode-img' src={UPLOAD_FILE} alt='이미지 업로드하기' />
 
         {isImg && (
           <ul>
             <li>
-              <img className="product-img" src={TEST_PRODUCT} alt="" />
-              <button type="button" className="">
-                <img className="delete-img" src={X} alt="이미지 삭제하기" />
+              <img className='product-img' src={ERROR_404} alt='' />
+              <button type='button' className=''>
+                <img className='delete-img' src={X} alt='이미지 삭제하기' />
               </button>
             </li>
             <li>
-              <img className="product-img" src={TEST_PRODUCT} alt="" />
-              <button type="button" className="">
-                <img className="delete-img" src={X} alt="이미지 삭제하기" />
+              <img className='product-img' src={ERROR_404} alt='' />
+              <button type='button' className=''>
+                <img className='delete-img' src={X} alt='이미지 삭제하기' />
               </button>
             </li>
           </ul>
