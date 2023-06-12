@@ -20,8 +20,10 @@ export default function Feed() {
           <FeedText>유저를 검색해 팔로우 해보세요!</FeedText>
         </FeedWrapper>
         <FeedButton>검색하기</FeedButton> */}
-        <Post />
-        <Post />
+        <PostWrapper>
+          <Post />
+          <Post />
+        </PostWrapper>
       </ContentsLayout>
       <TabNav />
     </>
@@ -49,4 +51,10 @@ const FeedButton = styled(Button)`
   width: 120px;
   height: 44px;
   margin: 20px auto 0;
+`;
+
+const PostWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
