@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const StyledSelect = styled.div`
   position: relative;
@@ -81,7 +81,7 @@ function Select({ selectBtnText, optionTextList }) {
     } else if (e.keyCode === 40) {
       e.preventDefault(); //이 함수를 지우면 탭을 두 번 한 것처럼 포커스가 이동
       // 탭은 기본 지원
-      const next = e.target.closest("li").nextElementSibling;
+      const next = e.target.closest('li').nextElementSibling;
       if (!next) {
         e.currentTarget.firstElementChild.firstElementChild.focus();
       } else {
@@ -89,7 +89,7 @@ function Select({ selectBtnText, optionTextList }) {
       }
     } else if (e.keyCode === 38) {
       e.preventDefault();
-      const prev = e.target.closest("li").previousElementSibling;
+      const prev = e.target.closest('li').previousElementSibling;
       if (!prev) {
         e.currentTarget.lastElementChild.lastElementChild.focus();
       } else {
@@ -100,13 +100,13 @@ function Select({ selectBtnText, optionTextList }) {
 
   useEffect(() => {
     const handleClick = (e) => {
-      if (!e.target.closest(".select-btn")) {
+      if (!e.target.closest('.select-btn')) {
         handleClose(e);
         setIsOn(false);
       }
     };
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   return (
@@ -122,7 +122,7 @@ function Select({ selectBtnText, optionTextList }) {
     >
       <button
         id="myTeam-btn"
-        className={isOn ? "select-btn on" : "select-btn"}
+        className={isOn ? 'select-btn on' : 'select-btn'}
         // onClick : 탭, 스페이스 포함
         onClick={(e) => {
           e.preventDefault();
@@ -149,7 +149,7 @@ function Select({ selectBtnText, optionTextList }) {
             <li key={i}>
               <button
                 type="button"
-                className={0 === i ? "selected-option" : ""}
+                className={0 === i ? 'selected-option' : ''}
               >
                 {txt}
               </button>

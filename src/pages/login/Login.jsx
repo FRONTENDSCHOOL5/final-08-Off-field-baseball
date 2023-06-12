@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import Form from "../../components/common/Form/Form";
-import styled from "styled-components";
-import Button from "../../components/common/Button/Button";
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Form from '../../components/common/Form/Form';
+import styled from 'styled-components';
+import Button from '../../components/common/Button/Button';
 
 function Login({ team }) {
   return (

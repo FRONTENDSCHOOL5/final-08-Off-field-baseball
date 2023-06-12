@@ -1,22 +1,22 @@
-import { BASIC_PROFILE_LG } from "../../styles/CommonIcons";
-import styled from "styled-components";
-import StyledSelect from "../../components/common/Select/Select";
-import Form from "../../components/common/Form/Form";
-import Button from "../../components/common/Button/Button";
-import { Link } from "react-router-dom";
+import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
+import styled from 'styled-components';
+import StyledSelect from '../../components/common/Select/Select';
+import Form from '../../components/common/Form/Form';
+import Button from '../../components/common/Button/Button';
+import { Link } from 'react-router-dom';
 
 export default function JoinProfile({ team }) {
   const teamList = [
-    "삼성 라이온즈",
-    "한화 이글스",
-    "키움 히어로즈",
-    "롯데 자이언츠",
-    "LG 트윈스",
-    "KIA 타이거즈",
-    "SSG 랜더스",
-    "두산 베어스",
-    "NC 다이노스",
-    "KT 위즈",
+    '삼성 라이온즈',
+    '한화 이글스',
+    '키움 히어로즈',
+    '롯데 자이언츠',
+    'LG 트윈스',
+    'KIA 타이거즈',
+    'SSG 랜더스',
+    '두산 베어스',
+    'NC 다이노스',
+    'KT 위즈',
   ];
   const handelForm = () => {};
   return (

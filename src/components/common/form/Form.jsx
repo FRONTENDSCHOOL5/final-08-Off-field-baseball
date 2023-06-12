@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 const StyledForm = styled.form`
   label {
@@ -13,19 +13,22 @@ const StyledForm = styled.form`
   }
   input {
     width: 100%;
-    font-size: 1.4rem,;
+    font-size: 1.4rem;
     line-height: 1.4rem;
-    border: 1px solid #DBDBDB;
+    border: 1px solid #dbdbdb;
     border-width: 0 0 1px 0;
     padding: 10px 0 8px 0;
   }
   input:focus {
     outline: none;
-    border-color: ${(props) => (props.team ? 'var(--main-color-'+props.team+')':'var(--primary-color)')};
+    border-color: ${(props) =>
+      props.team
+        ? 'var(--main-color-' + props.team + ')'
+        : 'var(--primary-color)'};
   }
 `;
 
-export default function Form({team, children, handleForm}) {
+export default function Form({ team, children, handleForm }) {
   return (
     <StyledForm team={team} onSummit={handleForm || null}>
       {children}
