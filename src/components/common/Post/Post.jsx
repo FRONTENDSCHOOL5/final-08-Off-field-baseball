@@ -49,9 +49,6 @@ const PostWrapper = styled.article`
   display: flex;
   gap: 12px;
   position: relative;
-  &:not(:last-child) {
-    margin-bottom: 20px;
-  }
 `;
 
 const ProfileImg = styled.img`

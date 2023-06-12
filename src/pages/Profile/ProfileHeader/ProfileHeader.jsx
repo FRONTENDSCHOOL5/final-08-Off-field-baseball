@@ -40,7 +40,8 @@ const ProfileHeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding-bottom: 24px;
-  margin-bottom: 6px;
+  margin: 10px -16px 6px;
+  border-bottom: 6px solid var(--gray-100);
 `;
 
 const UserHeader = styled.div`

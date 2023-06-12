@@ -4,6 +4,7 @@ import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayou
 import UserProduct from './UserProduct/UserProduct';
 import UserPost from './UserPost/UserPost';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
+import TabNav from '../../components/common/TabNavBar/TabNav';
 
 export default function Profile() {
   return (
@@ -14,6 +15,7 @@ export default function Profile() {
         <UserProduct />
         <UserPost />
       </ContentsLayout>
+      <TabNav />
     </>
   );
 }
