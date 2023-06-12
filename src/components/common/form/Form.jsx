@@ -26,7 +26,6 @@ const StyledForm = styled.form`
 `;
 
 export default function Form({team, children, handleForm}) {
-  console.log(handleForm)
   return (
     <StyledForm team={team} onSummit={handleForm || null}>
       {children}
