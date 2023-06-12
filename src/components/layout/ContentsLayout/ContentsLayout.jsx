@@ -7,8 +7,7 @@ export default function ContentsLayout({ children }) {
 
 const ContentsWrapper = styled.div`
   min-height: 100vh;
-  margin-top: 4.8rem;
   display: flex;
   flex-direction: column;
-  padding: 2rem 1.6rem 0;
+  padding: 6.8rem 1.6rem 6rem;
 `;
