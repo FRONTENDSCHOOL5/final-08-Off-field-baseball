@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
+import Button from '../Button/Button';
 
 export default function TopUploadNav({ btnTxt }) {
   return (
