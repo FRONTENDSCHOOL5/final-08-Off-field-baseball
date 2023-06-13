@@ -30,16 +30,16 @@ export default function JoinProfile({ team }) {
       <p>나중에 언제든지 변경할 수 있습니다.</p>
       <StyledImg src={BASIC_PROFILE_LG} alt='' />
       <Form team={team} handelForm={handelForm}>
-        <label htmlFor='email-inp'>사용자 이름</label>
+        <label htmlFor='name-inp'>사용자 이름</label>
         <input
-          id='email-inp'
+          id='name-inp'
           type='text'
           placeholder='2~10자 이내여야 합니다.'
         />
-        <label htmlFor='password-inp'>계정 ID</label>
+        <label htmlFor='id-inp'>계정 ID</label>
         <input
-          id='password-inp'
-          type='text'
+          id='id-inp'
+          type='password'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
         />
         <label htmlFor='introduce-inp'>소개</label>
@@ -49,7 +49,10 @@ export default function JoinProfile({ team }) {
           placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
         />
         <label htmlFor='myTeam-btn'>응원 중인 팀</label>
-        <StyledSelect optionTextList={teamList}></StyledSelect>
+        <StyledSelect
+          btnId='myTeam-btn'
+          optionTextList={teamList}
+        ></StyledSelect>
         <Link to='/'>
           <Button
             id='start-btn'
@@ -57,7 +60,7 @@ export default function JoinProfile({ team }) {
             bgColor={
               isValid ? 'var(--primary-color)' : 'var(--secondary-color)'
             }
-            padding='13px 0'
+            lBtn
             disabled={isValid ? '' : 'disabled'}
           >
             감귤마켓 시작하기
