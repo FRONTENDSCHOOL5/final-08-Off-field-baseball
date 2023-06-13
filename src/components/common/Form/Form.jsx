@@ -1,6 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 
+// team props로 받지 않고, context로 관리하기
+export default function Form({ team, children, handleForm }) {
+  return (
+    <StyledForm team={team} onSubmit={handleForm || null}>
+      {children}
+    </StyledForm>
+  );
+}
+
 const StyledForm = styled.form`
   label {
     display: block;
@@ -26,12 +35,7 @@ const StyledForm = styled.form`
         ? 'var(--main-color-' + props.team + ')'
         : 'var(--primary-color)'};
   }
+  input::placeholder {
+    color: var(--gray-200);
+  }
 `;
-
-export default function Form({ team, children, handleForm }) {
-  return (
-    <StyledForm team={team} onSubmit={handleForm || null}>
-      {children}
-    </StyledForm>
-  );
-}
