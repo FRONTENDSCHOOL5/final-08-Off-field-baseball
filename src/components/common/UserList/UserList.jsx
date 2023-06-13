@@ -44,28 +44,17 @@ export default function UserList({ loc, id, nickname, isFollow }) {
           </div>
         </Link>
         <Container>
-          {loc === 'follow' ? (
-            <>
-              <TeamLogo>
-                <img src={myTeam[7].img} alt='내가 좋아하는 팀 로고' />
-              </TeamLogo>
-              {isFollow ? (
-                <Button whiteBtn fontSize='1.2rem' style={{ width: '56px' }}>
-                  취소
-                </Button>
-              ) : (
-                <Button
-                  fontSize='1.2rem'
-                  style={{ width: '56px', height: '28px' }}
-                >
-                  팔로우
-                </Button>
-              )}
-            </>
+          <TeamLogo>
+            <img src={myTeam[7].img} alt='내가 좋아하는 팀 로고' />
+          </TeamLogo>
+          {isFollow ? (
+            <Button whiteBtn fontSize='1.2rem' style={{ width: '56px' }}>
+              취소
+            </Button>
           ) : (
-            <TeamLogo>
-              <img src={GIANTS} alt='내가 좋아하는 팀 로고' />
-            </TeamLogo>
+            <Button fontSize='1.2rem' style={{ width: '56px', height: '28px' }}>
+              팔로우
+            </Button>
           )}
         </Container>
       </UserListItem>
