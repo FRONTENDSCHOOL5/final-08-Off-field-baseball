@@ -5,7 +5,8 @@ import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import { useState } from 'react';
 
 export default function Upload() {
-  const [imgList, setImgList] = useState([ERROR_404]); // 임시로 이미지 추가
+  const [imgList, setImgList] = useState([ERROR_404, BASIC_PROFILE_LG]); // 임시로 이미지 추가
+  const [isValid, setIsValid] = useState(false);
 
   const ResizeHeight = (e) => {
     e.target.style.height = 'auto';
@@ -13,12 +14,15 @@ export default function Upload() {
   };
 
   const deleteImg = (e) => {
-    setImgList();
+    const i = findIndex(e.currentTarget.parentNode);
+    const list = [...imgList];
+    list.splice(i, 1);
+    setImgList(list);
   };
 
   return (
     <>
-      <TopUploadNav btnTxt='업로드' />
+      <TopUploadNav btnTxt='업로드' isValid={isValid} />
       <StyledSection>
         <img className='profile-img' src={BASIC_PROFILE_LG} alt='' />
         <textarea
@@ -30,11 +34,11 @@ export default function Upload() {
         ></textarea>
         <img className='uplode-img' src={UPLOAD_FILE} alt='이미지 업로드하기' />
 
-        {imgList.length && (
+        {!!imgList.length && (
           <ul>
-            {imgList.map((img) => {
+            {imgList.map((img, i) => {
               return (
-                <li>
+                <li key={i}>
                   <img src={img} alt='' />
                   <button
                     className='delete-btn'
@@ -52,6 +56,16 @@ export default function Upload() {
     </>
   );
 }
+
+// select에서 사용하는 동일한 함수
+const findIndex = (target) => {
+  const siblingList = target.parentNode.children;
+  for (let i = 0; i < siblingList.length; i++) {
+    if (siblingList[i] === target) {
+      return i;
+    }
+  }
+};
 
 const StyledSection = styled.section`
   padding: 68px 16px 16px;
