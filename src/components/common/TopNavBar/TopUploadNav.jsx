@@ -5,19 +5,34 @@ import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import Button from '../Button/Button';
 
-export default function TopUploadNav() {
+export default function TopUploadNav({ btnTxt }) {
   return (
     <>
-      <TopNavBar>
+      <ExtendTopUploadNav>
         <button>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
         {/* 업로드 버튼 임포트해서 사용 */}
-        {/* 임시 사이즈 */}
-        <Button type='submit' style={{ width: '90px' }}>
-          저장
-        </Button>
-      </TopNavBar>
+        <UploadBtn>{btnTxt}</UploadBtn>
+      </ExtendTopUploadNav>
     </>
   );
 }
+
+TopUploadNav.defaultProps = {
+  btnTxt: '저장',
+};
+
+const ExtendTopUploadNav = styled(TopNavBar)`
+  padding: 0.8em 1.6em;
+`;
+
+const UploadBtn = styled.button`
+  max-width: 90px;
+  width: 100%;
+  height: 32px;
+  font-size: 1.4rem;
+  background-color: var(--primary-color);
+  border-radius: 32px;
+  color: #fff;
+`;
