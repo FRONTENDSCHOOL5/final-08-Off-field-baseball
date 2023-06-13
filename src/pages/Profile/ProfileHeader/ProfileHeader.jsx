@@ -30,8 +30,8 @@ export default function ProfileHeader() {
           롯데 자이언츠 팬입니다. 여긴 자기 소개가 들어가요
         </p>
       </UserInfo>
-      {/* <UserBtns /> */}
-      <MyBtns />
+      <UserBtns />
+      {/* <MyBtns /> */}
     </ProfileHeaderWrapper>
   );
 }

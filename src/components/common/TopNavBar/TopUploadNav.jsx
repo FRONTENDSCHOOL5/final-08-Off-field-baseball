@@ -13,13 +13,13 @@ export default function TopUploadNav({ btnTxt, isValid }) {
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
         {/* 업로드 버튼 임포트해서 사용 */}
-        <UploadBtn
+        <Button
           bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
           disabled={isValid ? '' : 'disabled'}
-          styled
+          sBtn
         >
           {btnTxt}
-        </UploadBtn>
+        </Button>
       </ExtendTopUploadNav>
     </>
   );
@@ -31,9 +31,4 @@ TopUploadNav.defaultProps = {
 
 const ExtendTopUploadNav = styled(TopNavBar)`
   padding: 0.8em 1.6em;
-`;
-
-// 임시
-const UploadBtn = styled(Button)`
-  width: 90px;
 `;
