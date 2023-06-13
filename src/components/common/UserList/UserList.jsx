@@ -16,7 +16,7 @@ import {
   HEROES,
 } from '../../../styles/CommonImages';
 
-export default function UserList({ loc, id, nickname, isFollow }) {
+export default function UserList({ id, nickname, isFollow }) {
   // 임시로 팔로우 상태를 true로 설정
 
   // 받아온 마이 팀 데이터와 일치하는 이미지를 로드하도록 하는 배열
