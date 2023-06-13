@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
 
 export default function Upload() {
-  const [isTxt, setIsTxt] = useState(true); // 임시로 true
-
   return (
     <>
       {/* h~ 태그 고려 중 */}
@@ -44,7 +42,7 @@ export default function Upload() {
           </p>
         </article>
       </CommentListSection>
-      <Comment isValid={isTxt} txt='게시' placeholder='댓글 입력하기'></Comment>
+      <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
     </>
   );
 }

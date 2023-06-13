@@ -2,14 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 // 임시. 기본 프로필 사진
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
+import { useState } from 'react';
 
-export default function UserSearch({ placeholder, txt, isValid }) {
+export default function UserSearch({ placeholder, txt }) {
+  const [isValid, setIsValid] = useState(false);
+
+  // input에 텍스트가 입력되어 있으면, '게시' 버튼이 활성화된다
+  const handleForm = (e) => {
+    if (e.target.value) {
+      setIsValid(true);
+    }
+  };
+
   return (
     <StyledForm isValid={isValid}>
-      {/* 내 정보(context) -> 서버에서 이미지 가져오기 */}
+      {/* 임시 이미지 */}
       <img src={BASIC_PROFILE_SM} alt='내 프로필 사진' />
-      <input type='text' placeholder={placeholder} />
-      <button type='summit'>{txt}</button>
+      <input type='text' placeholder={placeholder} onChange={handleForm} />
+      <button type='summit' disabled={isValid ? '' : 'disabled'}>
+        {txt}
+      </button>
     </StyledForm>
   );
 }
