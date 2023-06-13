@@ -30,7 +30,7 @@ const StyledForm = styled.form`
 
 export default function Form({ team, children, handleForm }) {
   return (
-    <StyledForm team={team} onSummit={handleForm || null}>
+    <StyledForm team={team} onSubmit={handleForm || null}>
       {children}
     </StyledForm>
   );
