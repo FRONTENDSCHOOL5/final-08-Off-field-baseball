@@ -7,6 +7,7 @@ import Feed from '../pages/Feed/Feed';
 import Post from '../pages/Upload/Post';
 import Profile from '../pages/Profile/Profile';
 import ProductUpload from '../pages/product/ProductUpload';
+import Error404 from '../pages/Error404/Error404';
 
 export default function Router() {
   return (
@@ -20,6 +21,7 @@ export default function Router() {
         <Route path='/post/*' element={<Post />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/productupload' element={<ProductUpload />} />
+        <Route path='/error404' element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );
