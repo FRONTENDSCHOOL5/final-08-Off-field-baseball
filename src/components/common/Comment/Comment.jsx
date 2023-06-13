@@ -14,6 +14,11 @@ export default function UserSearch({ placeholder, txt, isValid }) {
   );
 }
 
+UserSearch.defaultProps = {
+  txt: '전송',
+  placeholder: '메시지 입력하기...',
+};
+
 const StyledForm = styled.form`
   background: white;
   position: fixed;

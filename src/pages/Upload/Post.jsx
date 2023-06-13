@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
 
 export default function Upload() {
-  const [isImg, setIsImg] = useState(true); // 레이아웃을 위해 임시로 true
+  const [isTxt, setIsTxt] = useState(true); // 임시로 true
 
   return (
     <>
@@ -44,7 +44,7 @@ export default function Upload() {
           </p>
         </article>
       </CommentListSection>
-      <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
+      <Comment isValid={isTxt} txt='게시' placeholder='댓글 입력하기'></Comment>
     </>
   );
 }
