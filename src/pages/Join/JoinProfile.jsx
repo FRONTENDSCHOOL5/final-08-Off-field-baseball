@@ -32,10 +32,7 @@ export default function JoinProfile({ team }) {
         <label htmlFor='introduce-inp'>소개</label>
         <input id='introduce-inp' type='text' />
         <label htmlFor='myTeam-btn'>응원 중인 팀</label>
-        <StyledSelect
-          selectBtnText='삼성 라이온즈'
-          optionTextList={teamList}
-        ></StyledSelect>
+        <StyledSelect optionTextList={teamList}></StyledSelect>
         <Link to='/'>
           <Button id='start-btn' type='submit'>
             감귤마켓 시작하기
