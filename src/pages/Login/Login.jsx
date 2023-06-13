@@ -2,8 +2,16 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
+import { useState } from 'react';
 
-function Login({ team }) {
+export default function Login({ team }) {
+  const [isValid, setIsVaild] = useState(false);
+
+  // 이메일, 비밀번호 유효성 검사 -> 유효하지 않은 항목에 안내문와 에러색으로 표시
+  const handelForm = (e) => {
+    console.log(e);
+  };
+
   return (
     <StyledLogin>
       <h1>로그인</h1>
@@ -13,15 +21,22 @@ function Login({ team }) {
         <label htmlFor='password-inp'>비밀번호</label>
         <input id='password-inp' type='text' />
         <Link to='/'>
-          <StyledButton type='submit'>로그인</StyledButton>
+          <StyledButton
+            type='submit'
+            bgColor={
+              isValid ? 'var(--primary-color)' : 'var(--secondary-color)'
+            }
+            padding='13px 0'
+            disabled={isValid ? '' : 'disabled'}
+          >
+            로그인
+          </StyledButton>
         </Link>
         <Link to='/join'>이메일로 회원가입</Link>
       </Form>
     </StyledLogin>
   );
 }
-
-export default Login;
 
 const StyledButton = styled(Button)`
   margin: 30px 0 20px;
