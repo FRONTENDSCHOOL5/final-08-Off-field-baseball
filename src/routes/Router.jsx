@@ -8,6 +8,7 @@ import Post from '../pages/Upload/Post';
 import Profile from '../pages/Profile/Profile';
 import ProductUpload from '../pages/product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
+import ChatList from '../pages/ChatList/ChatList';
 
 export default function Router() {
   return (
@@ -22,6 +23,7 @@ export default function Router() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/productupload' element={<ProductUpload />} />
         <Route path='/error404' element={<Error404 />} />
+        <Route path='/chatList' element={<ChatList />} />
       </Routes>
     </BrowserRouter>
   );
