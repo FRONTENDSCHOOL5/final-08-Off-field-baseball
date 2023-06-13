@@ -11,13 +11,11 @@ export default function FollowList() {
       <ContentsLayout>
         <UserListWrap>
           <UserList
-            loc='follow'
             id={'@Unbeatable_Lotte'}
             nickname={'최강롯데'}
             isFollow={true}
           />
           <UserList
-            loc='follow'
             id={'@Super_Lions'}
             nickname={'최강삼성'}
             isFollow={false}
