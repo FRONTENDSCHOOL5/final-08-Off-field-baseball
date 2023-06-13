@@ -81,6 +81,8 @@ export default function Select({ optionTextList }) {
   // 옵션 선택
   const selectOpt = (e) => {
     e.target.focus();
+    const optIndex = findIndex(e.target.parentNode);
+    setFocusOptIndex(optIndex);
     const btn = e.currentTarget.previousElementSibling;
     setTimeout(() => {
       setSelectedOpt(e.target.textContent);
@@ -132,6 +134,15 @@ export default function Select({ optionTextList }) {
     </StyledSelect>
   );
 }
+
+const findIndex = (target) => {
+  const siblingList = target.parentNode.children;
+  for (let i = 0; i < siblingList.length; i++) {
+    if (siblingList[i] === target) {
+      return i;
+    }
+  }
+};
 
 const StyledSelect = styled.div`
   position: relative;
