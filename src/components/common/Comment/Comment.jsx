@@ -1,19 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 // 임시. 기본 프로필 사진
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 
-export default function UserSearch({ placeholder, txt }) {
+export default function UserSearch({ placeholder, txt, isValid }) {
   return (
-    <StyledForm>
+    <StyledForm isValid={isValid}>
       {/* 내 정보(context) -> 서버에서 이미지 가져오기 */}
-      <img src={BASIC_PROFILE_SM} alt="내 프로필 사진" />
-      <input type="text" placeholder={placeholder} />
-      <button type="summit">{txt}</button>
+      <img src={BASIC_PROFILE_SM} alt='내 프로필 사진' />
+      <input type='text' placeholder={placeholder} />
+      <button type='summit'>{txt}</button>
     </StyledForm>
   );
 }
+
+UserSearch.defaultProps = {
+  txt: '전송',
+  placeholder: '메시지 입력하기...',
+};
 
 const StyledForm = styled.form`
   background: white;
@@ -45,6 +49,7 @@ const StyledForm = styled.form`
     font-weight: 500;
     font-size: 1.4rem;
     line-height: 1.8rem;
-    color: var(--gray-300);
+    color: ${(props) =>
+      props.isValid ? 'var(--primary-color)' : 'var(--gray-300)'};
   }
 `;
