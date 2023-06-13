@@ -4,11 +4,12 @@ import {
   HEART,
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
+  MESSAGE_CIRCLE_FILL,
 } from '../../../styles/CommonIcons';
 import { ERROR_404 } from '../../../styles/CommonImages';
 import styled from 'styled-components';
 
-export default function Post() {
+export default function Post({ loc }) {
   return (
     <PostWrapper>
       <ProfileImg src={BASIC_PROFILE_SM} alt='' />
@@ -27,6 +28,12 @@ export default function Post() {
           </li>
         </ImgWrapper>
         <PostBtnWrapper>
+          {loc === 'product' && (
+            <PostBtn className='chat-btn'>
+              <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
+              <span>채팅하기</span>
+            </PostBtn>
+          )}
           <PostBtn>
             <img src={HEART} alt='좋아요 누르기 버튼' />
             <span>50</span>
@@ -108,6 +115,9 @@ const PostBtn = styled.button`
   gap: 6px;
   align-items: center;
   font-size: 1.2rem;
+  img {
+    width: 20px;
+  }
 `;
 
 const CreateTime = styled.time`
