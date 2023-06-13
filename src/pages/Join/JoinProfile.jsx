@@ -39,7 +39,7 @@ export default function JoinProfile({ team }) {
         <label htmlFor='id-inp'>계정 ID</label>
         <input
           id='id-inp'
-          type='password'
+          type='text'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
         />
         <label htmlFor='introduce-inp'>소개</label>
