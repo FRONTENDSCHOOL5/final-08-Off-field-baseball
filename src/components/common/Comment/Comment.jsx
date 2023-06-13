@@ -19,7 +19,7 @@ export default function UserSearch({ placeholder, txt }) {
       {/* 임시 이미지 */}
       <img src={BASIC_PROFILE_SM} alt='내 프로필 사진' />
       <input type='text' placeholder={placeholder} onChange={handleForm} />
-      <button type='summit' disabled={isValid ? '' : 'disabled'}>
+      <button type='submit' disabled={isValid ? '' : 'disabled'}>
         {txt}
       </button>
     </StyledForm>
