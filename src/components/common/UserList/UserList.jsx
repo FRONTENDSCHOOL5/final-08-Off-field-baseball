@@ -48,11 +48,11 @@ export default function UserList({ id, nickname, isFollow }) {
             <img src={myTeam[7].img} alt='내가 좋아하는 팀 로고' />
           </TeamLogo>
           {isFollow ? (
-            <Button whiteBtn fontSize='1.2rem' style={{ width: '56px' }}>
+            <Button xsBtn whiteBtn padding='0'>
               취소
             </Button>
           ) : (
-            <Button fontSize='1.2rem' style={{ width: '56px', height: '28px' }}>
+            <Button xsBtn padding='0'>
               팔로우
             </Button>
           )}
