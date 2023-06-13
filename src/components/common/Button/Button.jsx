@@ -62,7 +62,6 @@ const ButtonStyle = styled.button`
   ${(props) =>
     props.lBtn &&
     css`
-      width: 322px;
       height: 44px;
       font-size: 1.4rem;
       font-weight: 500;
