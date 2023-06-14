@@ -1,16 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../../components/common/Button/Button';
 import { MESSAGE_CIRCLE_SM, SHARE } from '../../../styles/CommonIcons';
 
 export default function UserBtns() {
+  // 팔로우 상태를 useState로 관리(임시)
+  const [isFollow, setIsFollow] = useState(false);
   return (
     <BtnsWrapper>
       <BtnSmall>
         <img src={MESSAGE_CIRCLE_SM} alt='채팅 시작하기 버튼' />
       </BtnSmall>
-      {/* <UserButton>팔로우</UserButton> */}
-      <Button whiteBtn>언팔로우</Button>
+      {isFollow ? (
+        <Button whiteBtn mBtn>
+          언팔로우
+        </Button>
+      ) : (
+        <Button mBtn>팔로우</Button>
+      )}
       <BtnSmall>
         <img src={SHARE} alt='공유하기 버튼' />
       </BtnSmall>
