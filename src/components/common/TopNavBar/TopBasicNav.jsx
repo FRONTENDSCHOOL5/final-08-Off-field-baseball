@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
+import MoreModal from '../Modal/SettingModal';
 import { useNavigate } from 'react-router-dom';
 
 export default function TopBasicNav({ loc }) {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -16,9 +18,16 @@ export default function TopBasicNav({ loc }) {
         {loc === 'follow' ? (
           <TopNavH2>Followers</TopNavH2>
         ) : (
-          <MoreBtn>
+          <MoreBtn onClick={() => setIsModalOpen(true)}>
             <img src={MORE_VERTICAL} alt='more' />
           </MoreBtn>
+        )}
+
+        {isModalOpen && (
+          <MoreModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
         )}
       </TopNavBar>
     </>

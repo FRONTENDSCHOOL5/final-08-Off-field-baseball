@@ -2,7 +2,6 @@ import { BASIC_PROFILE_SM } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
 
@@ -46,7 +45,6 @@ export default function Upload() {
     </>
   );
 }
-
 const CommentListSection = styled.section`
   border-top: 1px solid var(--gray-200);
   padding: 20px 16px 82px; //bottom : form 높이 + 20px
