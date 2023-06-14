@@ -11,9 +11,10 @@ import Post from '../../../components/common/Post/Post';
 import { Link } from 'react-router-dom';
 import TEST from '../../../assets/images/test.jpg';
 
-export default function UserPost() {
+export default function UserPost({ posts }) {
   const [isList, setIsList] = useState(true);
   const [isPostExist, setIsPostExist] = useState(true); // 게시글이 없을 경우를 위한 state
+
   return (
     <>
       {isPostExist ? (
@@ -34,12 +35,11 @@ export default function UserPost() {
           </PostViewBtns>
           {isList ? (
             <PostList>
-              <li>
-                <Post />
-              </li>
-              <li>
-                <Post />
-              </li>
+              {posts.map((post, index) => (
+                <li key={index}>
+                  <Post post={post} />
+                </li>
+              ))}
             </PostList>
           ) : (
             <PostAlbum>

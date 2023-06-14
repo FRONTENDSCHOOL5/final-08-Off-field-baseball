@@ -1,0 +1,59 @@
+[
+  {
+    "user": {
+      "_id": "5f9f5b9b9c3b9a0017d5f2a6",
+      "username": "최강롯데",
+      "accountname": "Unbeatable_Lotte",
+      "intro": "자기소개. 롯데는 최강일까?$롯데 자이언츠",
+      "image": "",
+      "isfollow": false,
+      "following": [],
+      "follower": [],
+      "followerCount": 2,
+      "followingCount": 5
+    },
+
+    "posts": [
+      {
+        "id": "1",
+        "content": "6월 13일 어제는 롯데가 한화를 상대로 7대5로 이겼다. 진승현 선수의 첫승과 윤동희 선수의 시즌 2호 홈런이자 결승 홈런이 터져서 정말 재밌는 경기였다.",
+        "image": "http://placeimg.com/640/480/nature",
+        "createdAt": "2023-06-14",
+        "updatedAt": "2023-06-14",
+        "hearted": false,
+        "heartCount": 7,
+        "commentCount": 2,
+        "author": {
+          "_id": "5f9f5b9b9c3b9a0017d5f2a6",
+          "username": "최강롯데",
+          "accountname": "Unbeatable_Lotte",
+          "image": "",
+          "following": [],
+          "follower": [],
+          "followerCount": 2,
+          "followingCount": 5
+        }
+      },
+      {
+        "id": "2",
+        "content": "6월 14일 오늘은 한화와의 주중 2번째 경기가 펼쳐진다. 우리 선발은 스트레일리 한화 선발은 김민우다. 오늘도 이겼으면 좋겠다..",
+        "image": "http://placeimg.com/640/480/people",
+        "createdAt": "2023-06-14",
+        "updatedAt": "2023-06-14",
+        "hearted": true,
+        "heartCount": 8,
+        "commentCount": 1,
+        "author": {
+          "_id": "5f9f5b9b9c3b9a0017d5f2a6",
+          "username": "최강롯데",
+          "accountname": "Unbeatable_Lotte",
+          "image": "",
+          "following": [],
+          "follower": [],
+          "followerCount": 2,
+          "followingCount": 5
+        }
+      }
+    ]
+  }
+]
