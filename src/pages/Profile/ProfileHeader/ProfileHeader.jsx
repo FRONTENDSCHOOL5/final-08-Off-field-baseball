@@ -3,35 +3,71 @@ import styled from 'styled-components';
 import UserBtns from './UserBtns';
 import MyBtns from './MyBtns';
 import { BASIC_PROFILE_LG } from '../../../styles/CommonIcons';
-import { GIANTS } from '../../../styles/CommonImages';
+import {
+  LANDERS,
+  GIANTS,
+  WIZ,
+  EAGLES,
+  LIONS,
+  TIGERS,
+  TWINS,
+  DINOS,
+  BEARS,
+  HEROES,
+} from '../../../styles/CommonImages';
 
-export default function ProfileHeader() {
+export default function ProfileHeader({
+  followingCount,
+  followerCount,
+  username,
+  accountname,
+  image,
+  intro,
+  team,
+}) {
+  const myTeam = [
+    { id: '1', name: '두산 베어스', img: BEARS },
+    { id: '2', name: '키움 히어로즈', img: HEROES },
+    { id: '3', name: 'LG 트윈스', img: TWINS },
+    { id: '4', name: 'NC 다이노스', img: DINOS },
+    { id: '5', name: 'KIA 타이거즈', img: TIGERS },
+    { id: '6', name: '삼성 라이온즈', img: LIONS },
+    { id: '7', name: 'SSG 랜더스', img: LANDERS },
+    { id: '8', name: '롯데 자이언츠', img: GIANTS },
+    { id: '9', name: '한화 이글스', img: EAGLES },
+    { id: '10', name: 'KT 위즈', img: WIZ },
+  ];
+  let myTeamImg = '';
+  myTeam.forEach((item) => {
+    if (item.name === team) {
+      myTeamImg = item.img;
+    }
+  });
+
   return (
     <ProfileHeaderWrapper>
       <UserHeader>
         <Follow>
-          <strong>2950</strong>
+          <strong>{followerCount}</strong>
           <p>Followers</p>
         </Follow>
         <img src={BASIC_PROFILE_LG} alt='유저 프로필 이미지' />
         <Follow followings>
-          <strong>115</strong>
+          <strong>{followingCount}</strong>
           <p>Followings</p>
         </Follow>
       </UserHeader>
       <MyTeamShow>
-        <img src={GIANTS} srcSet='' alt='내가 응원하는 팀' />
-        <span>롯데 자이언츠 응원중!</span>
+        <img src={myTeamImg} srcSet='' alt='내가 응원하는 팀' />
+        <span>{team} 응원중!</span>
       </MyTeamShow>
       <UserInfo>
-        <h2>최강롯데</h2>
-        <p className='id'>@Unbeatable_Lotte</p>
-        <p className='text'>
-          롯데 자이언츠 팬입니다. 여긴 자기 소개가 들어가요
-        </p>
+        <h2>{username}</h2>
+        <p className='id'>@{accountname}</p>
+        <p className='text'>{intro}</p>
       </UserInfo>
-      <UserBtns />
-      {/* <MyBtns /> */}
+      {/* <UserBtns /> */}
+      <MyBtns />
     </ProfileHeaderWrapper>
   );
 }

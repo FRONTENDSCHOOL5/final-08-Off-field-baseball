@@ -11,9 +11,10 @@ import Post from '../../../components/common/Post/Post';
 import { Link } from 'react-router-dom';
 import TEST from '../../../assets/images/test.jpg';
 
-export default function UserPost() {
+export default function UserPost({ posts }) {
   const [isList, setIsList] = useState(true);
   const [isPostExist, setIsPostExist] = useState(true); // 게시글이 없을 경우를 위한 state
+
   return (
     <>
       {isPostExist ? (
@@ -34,47 +35,22 @@ export default function UserPost() {
           </PostViewBtns>
           {isList ? (
             <PostList>
-              <li>
-                <Post />
-              </li>
-              <li>
-                <Post />
-              </li>
+              {posts.map((post, index) => (
+                <li key={index}>
+                  <Post post={post} />
+                </li>
+              ))}
             </PostList>
           ) : (
             <PostAlbum>
               {/* 이미지를 클릭하면 해당 게시글로 이동해야함 */}
-              <Link to='#'>
-                <PostAlbumItem>
-                  <img src={TEST} alt='' />
+              {posts.map((post, index) => (
+                <PostAlbumItem id={index}>
+                  <Link to='#'>
+                    <img src={post.image} alt='' />
+                  </Link>
                 </PostAlbumItem>
-              </Link>
-              <Link to='#'>
-                <PostAlbumItem imageCount={3}>
-                  <img src={TEST} alt='' />
-                  <img className='layer' src={IMG_LAYERS} alt='' />
-                </PostAlbumItem>
-              </Link>
-              <Link to='#'>
-                <PostAlbumItem>
-                  <img src={TEST} alt='' />
-                </PostAlbumItem>
-              </Link>
-              <Link to='#'>
-                <PostAlbumItem>
-                  <img src={TEST} alt='' />
-                </PostAlbumItem>
-              </Link>
-              <Link to='#'>
-                <PostAlbumItem>
-                  <img src={TEST} alt='' />
-                </PostAlbumItem>
-              </Link>
-              <Link to='#'>
-                <PostAlbumItem>
-                  <img src={TEST} alt='' />
-                </PostAlbumItem>
-              </Link>
+              ))}
             </PostAlbum>
           )}
         </>
@@ -106,14 +82,14 @@ const PostList = styled.ul`
   margin-bottom: 20px;
 `;
 
-const PostAlbum = styled.div`
+const PostAlbum = styled.ul`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   margin-top: 16px;
 `;
 
-const PostAlbumItem = styled.div`
+const PostAlbumItem = styled.li`
   position: relative;
   img {
     aspect-ratio: 1 / 1;

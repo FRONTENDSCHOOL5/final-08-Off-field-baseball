@@ -2,6 +2,7 @@ import React from 'react';
 import {
   BASIC_PROFILE_SM,
   HEART,
+  HEART_FILL,
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
   MESSAGE_CIRCLE_FILL,
@@ -9,22 +10,24 @@ import {
 import { ERROR_404 } from '../../../styles/CommonImages';
 import styled from 'styled-components';
 
-export default function Post({ loc }) {
+export default function Post({
+  loc,
+  post = [], // post: {id, userId, content, img, like, comment, createdAt}
+}) {
+  const date = post.createdAt.split('-');
+
   return (
     <PostWrapper>
       <ProfileImg src={BASIC_PROFILE_SM} alt='' />
       <UserPost>
         <UserInfo>
-          <h2>최강롯데</h2>
-          <p>@Unbeatable_Lotte</p>
+          <h2>{post.author.username}</h2>
+          <p>@{post.author.accountname}</p>
         </UserInfo>
-        <UserText>
-          어제 롯데가 KT위즈에게 연장 12회까지 가는 접전 끝에 7:6 석패를 당했다.
-          이걸로 롯데는 4연패째다. 진짜 할말이 없다. 에휴
-        </UserText>
+        <UserText>{post.content}</UserText>
         <ImgWrapper>
           <li>
-            <img src={ERROR_404} alt='' />
+            <img src={post.image} alt='' />
           </li>
         </ImgWrapper>
         <PostBtnWrapper>
@@ -35,15 +38,21 @@ export default function Post({ loc }) {
             </PostBtn>
           )}
           <PostBtn>
-            <img src={HEART} alt='좋아요 누르기 버튼' />
-            <span>50</span>
+            {post.hearted ? (
+              <img src={HEART_FILL} alt='좋아요 취소 버튼' />
+            ) : (
+              <img src={HEART} alt='좋아요 누르기 버튼' />
+            )}
+            <span>{post.heartCount}</span>
           </PostBtn>
           <PostBtn>
             <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-            <span>21</span>
+            <span>{post.commentCount}</span>
           </PostBtn>
         </PostBtnWrapper>
-        <CreateTime dateTime='2023-06-09'>2023년 6월 9일</CreateTime>
+        <CreateTime dateTime={post.createdAt}>
+          {date[0]}년 {date[1]}월 {date[2]}일
+        </CreateTime>
       </UserPost>
       <PostMenu>
         <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
@@ -91,15 +100,15 @@ const UserText = styled.p`
 const ImgWrapper = styled.ul`
   display: flex;
   overflow: hidden;
-  li {
+  & li {
     flex-basis: 100%;
     height: 228px;
-    border-radius: 10px;
-    box-shadow: inset 0 0 10px;
     flex-shrink: 0;
   }
-  li img {
-    object-fit: contain;
+  & li img {
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: inset 0 0 10px;
   }
 `;
 
