@@ -21,7 +21,6 @@ const ChatListStyle = (props) => {
 export default ChatListStyle;
 
 const ProfileStyle = styled.div`
-  /* margin: 0 16px 0; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -57,7 +56,7 @@ const ProfileStyle = styled.div`
   }
 
   .last-chat {
-    color: #767676;
+    color: var(--gray-400);
     font-size: 12px;
     font-weight: 400;
     line-height: 15px;
@@ -66,7 +65,7 @@ const ProfileStyle = styled.div`
     text-overflow: ellipsis;
   }
   .date {
-    color: #dbdbdb;
+    color: var(--gray-200);
     align-self: flex-end;
     padding-bottom: 3px;
   }
