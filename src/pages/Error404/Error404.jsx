@@ -8,9 +8,7 @@ const Error404 = () => {
     <ErrorLayout>
       <img src={ERROR_404} alt='에러 화면입니다.' />
       <p>페이지를 찾을 수 없습니다 :(</p>
-      <Button padding='13px 0' fontWeight='500'>
-        이전 페이지
-      </Button>
+      <Button mBtn>이전 페이지</Button>
     </ErrorLayout>
   );
 };
@@ -37,6 +35,6 @@ const ErrorLayout = styled.div`
   }
 
   Button {
-    width: 120px;
+    height: 44px;
   }
 `;

@@ -13,13 +13,13 @@ function Login({ team }) {
         <label htmlFor='email-inp'>이메일</label>
         <input
           id='email-inp'
-          type='text'
+          type='email'
           placeholder='이메일 주소를 입력해 주세요.'
         />
         <label htmlFor='password-inp'>비밀번호</label>
         <input
           id='password-inp'
-          type='text'
+          type='password'
           placeholder='비밀번호를 설정해 주세요.'
         />
         <Link to='/join/profile'>
@@ -28,7 +28,7 @@ function Login({ team }) {
             bgColor={
               isValid ? 'var(--primary-color)' : 'var(--secondary-color)'
             }
-            padding='13px 0'
+            lBtn
             disabled={isValid ? '' : 'disabled'}
           >
             다음

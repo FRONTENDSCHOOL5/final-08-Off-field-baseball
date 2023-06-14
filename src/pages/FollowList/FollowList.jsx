@@ -1,23 +1,21 @@
 import React from 'react';
 import UserList from '../../components/common/UserList/UserList';
-import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
 import styled from 'styled-components';
+import TopTitleNav from '../../components/common/TopNavBar/TopTitleNav';
 
 export default function FollowList() {
   return (
     <>
-      <TopBasicNav loc='follow' />
+      <TopTitleNav loc='followers' />
       <ContentsLayout>
         <UserListWrap>
           <UserList
-            loc='follow'
             id={'@Unbeatable_Lotte'}
             nickname={'최강롯데'}
             isFollow={true}
           />
           <UserList
-            loc='follow'
             id={'@Super_Lions'}
             nickname={'최강삼성'}
             isFollow={false}

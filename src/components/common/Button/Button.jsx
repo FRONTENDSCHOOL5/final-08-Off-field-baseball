@@ -34,6 +34,40 @@ const ButtonStyle = styled.button`
     `}
 
   ${(props) =>
+    props.xsBtn &&
+    css`
+      width: 56px;
+      height: 28px;
+      font-size: 1.2rem;
+    `}
+
+  ${(props) =>
+    props.sBtn &&
+    css`
+      width: 90px;
+      height: 32px;
+      font-size: 1.4rem;
+      font-weight: 500;
+    `}
+
+  ${(props) =>
+    props.mBtn &&
+    css`
+      width: 120px;
+      height: 34px;
+      font-size: 1.4rem;
+      font-weight: 500;
+    `}
+
+  ${(props) =>
+    props.lBtn &&
+    css`
+      height: 44px;
+      font-size: 1.4rem;
+      font-weight: 500;
+    `}
+
+  ${(props) =>
     props.noCursor &&
     css`
       cursor: default;

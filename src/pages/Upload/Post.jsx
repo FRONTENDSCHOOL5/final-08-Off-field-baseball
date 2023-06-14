@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
 
 export default function Upload() {
-  const [isImg, setIsImg] = useState(true); // 레이아웃을 위해 임시로 true
-
   return (
     <>
       {/* h~ 태그 고려 중 */}
