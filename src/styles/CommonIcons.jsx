@@ -7,7 +7,7 @@ import EDIT from '../assets/icons/edit.png';
 import KAKAO from '../assets/icons/kakao-logo.png';
 import FACEBOOK from '../assets/icons/facebook-logo.png';
 import GOOGLE from '../assets/icons/google-logo.png';
-import USER_ICON from '../assets/icons/icon-user.png';
+import USER_ICON from '../assets/icons/user.png';
 import SEARCH from '../assets/icons/search.png';
 import SHARE from '../assets/icons/share.png';
 import UPLOAD_FILE from '../assets/icons/upload-file.png';
