@@ -3,7 +3,7 @@ import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
 
-export default function TopBasicNav({ loc }) {
+export default function TopBasicNav({ loc, setIsModalOpen }) {
   return (
     <>
       <TopNavBar>
@@ -13,7 +13,7 @@ export default function TopBasicNav({ loc }) {
         {loc === 'follow' ? (
           <TopNavH2>Followers</TopNavH2>
         ) : (
-          <MoreBtn>
+          <MoreBtn onClick={() => setIsModalOpen(true)}>
             <img src={MORE_VERTICAL} alt='more' />
           </MoreBtn>
         )}

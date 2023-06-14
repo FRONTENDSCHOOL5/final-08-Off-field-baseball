@@ -5,9 +5,10 @@ import Comment from '../../components/common/Comment/Comment';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
+import MoreModal from '../../components/common/Modal/MoreModal';
 
 export default function Upload() {
-  const [isImg, setIsImg] = useState(true); // 레이아웃을 위해 임시로 true
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -15,7 +16,7 @@ export default function Upload() {
       <h1 className='a11y-hidden'>구장 밖 야구</h1>
       <h2 className='a11y-hidden'>{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
 
-      <TopBasicNav />
+      <TopBasicNav setIsModalOpen={setIsModalOpen} />
       <StyledSection>
         <Post></Post>
       </StyledSection>
@@ -45,10 +46,13 @@ export default function Upload() {
         </article>
       </CommentListSection>
       <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
+
+      {isModalOpen && (
+        <MoreModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      )}
     </>
   );
 }
-
 const CommentListSection = styled.section`
   border-top: 1px solid var(--gray-200);
   padding: 20px 16px 82px; //bottom : form 높이 + 20px
