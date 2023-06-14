@@ -31,7 +31,7 @@ const ErrorLayout = styled.div`
   p {
     margin-bottom: 20px;
     font-size: 1.4rem;
-    color: #767676;
+    color: var(--gray-400);
   }
 
   Button {
