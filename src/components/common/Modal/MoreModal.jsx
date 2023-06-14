@@ -3,7 +3,12 @@ import Overlay from './Overlay';
 import styled from 'styled-components';
 import { useRef } from 'react';
 
-const MoreModal = ({ menuList, isModalOpen, setIsModalOpen }) => {
+const MoreModal = ({
+  menuList,
+  clickEventListnerList,
+  isModalOpen,
+  setIsModalOpen,
+}) => {
   // tab을 누르면, 모달 안에서만 포커스 되게
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.key === 'Tab') {
@@ -29,6 +34,15 @@ const MoreModal = ({ menuList, isModalOpen, setIsModalOpen }) => {
     }
   }, []);
 
+  const handleError = () => {
+    alert('기능이 없습니다');
+    console.log(new Error('이벤트 리스너를 전달해주세요'));
+  };
+
+  MoreModal.defaultProps = {
+    menuList: ['정의되지 않음'],
+  };
+
   return (
     <Overlay onClick={handleClick}>
       <StyledDialog open role='dialog'>
@@ -37,16 +51,24 @@ const MoreModal = ({ menuList, isModalOpen, setIsModalOpen }) => {
             if (i === 0) {
               return (
                 <li key={i}>
-                  <button ref={firstEl} type='button'>
+                  <button
+                    ref={firstEl}
+                    type='button'
+                    onClick={clickEventListnerList[i] || handleError}
+                  >
                     {menu}
                   </button>
                 </li>
               );
             }
-
             return (
               <li key={i}>
-                <button type='button'>{menu}</button>
+                <button
+                  type='button'
+                  onClick={clickEventListnerList[i] || handleError}
+                >
+                  {menu}
+                </button>
               </li>
             );
           })}
@@ -57,10 +79,6 @@ const MoreModal = ({ menuList, isModalOpen, setIsModalOpen }) => {
 };
 
 export default MoreModal;
-
-MoreModal.defaultProps = {
-  menuList: ['설정 및 개인정보', '로그아웃'],
-};
 
 const StyledDialog = styled.dialog`
   position: fixed;

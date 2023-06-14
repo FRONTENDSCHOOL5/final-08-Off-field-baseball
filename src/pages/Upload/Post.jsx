@@ -2,21 +2,17 @@ import { BASIC_PROFILE_SM } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
-import MoreModal from '../../components/common/Modal/MoreModal';
 
 export default function Upload() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
       {/* h~ 태그 고려 중 */}
       <h1 className='a11y-hidden'>구장 밖 야구</h1>
       <h2 className='a11y-hidden'>{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
 
-      <TopBasicNav setIsModalOpen={setIsModalOpen} />
+      <TopBasicNav />
       <StyledSection>
         <Post></Post>
       </StyledSection>
@@ -46,10 +42,6 @@ export default function Upload() {
         </article>
       </CommentListSection>
       <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
-
-      {isModalOpen && (
-        <MoreModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
-      )}
     </>
   );
 }

@@ -2,8 +2,11 @@ import React from 'react';
 import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
+import MoreModal from '../Modal/SettingModal';
+import { useState } from 'react';
 
-export default function TopBasicNav({ loc, setIsModalOpen }) {
+export default function TopBasicNav({ loc }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
       <TopNavBar>
@@ -16,6 +19,13 @@ export default function TopBasicNav({ loc, setIsModalOpen }) {
           <MoreBtn onClick={() => setIsModalOpen(true)}>
             <img src={MORE_VERTICAL} alt='more' />
           </MoreBtn>
+        )}
+
+        {isModalOpen && (
+          <MoreModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
         )}
       </TopNavBar>
     </>
