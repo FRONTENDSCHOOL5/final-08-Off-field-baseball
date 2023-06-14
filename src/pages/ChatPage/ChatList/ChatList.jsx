@@ -2,6 +2,7 @@ import React from 'react';
 import TopBasicNav from '../../../components/common/TopNavBar/TopBasicNav';
 import ChatListStyle from './ChatListStyle';
 import ContentsLayout from '../../../components/layout/ContentsLayout/ContentsLayout';
+import TabNav from '../../../components/common/TabNavBar/TabNav';
 
 const ChatList = () => {
   return (
@@ -26,6 +27,7 @@ const ChatList = () => {
           date='2023.06.15'
         />
       </ContentsLayout>
+      <TabNav currentId={1} />
     </>
   );
 };

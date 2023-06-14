@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,8 +12,7 @@ import {
   USER_FILL,
 } from '../../../styles/CommonIcons';
 
-const TabNav = () => {
-  const [currentTabId, setCurrentTabId] = useState(0);
+const TabNav = ({ currentId }) => {
   const navigate = useNavigate();
 
   const tabList = [
@@ -28,17 +27,7 @@ const TabNav = () => {
     { id: 3, title: '프로필', icon: USER_ICON, fillIcon: USER_FILL },
   ];
 
-  useEffect(() => {
-    const storedTabId = localStorage.getItem('selectedTabId');
-    if (storedTabId) {
-      setCurrentTabId(parseInt(storedTabId));
-    }
-  }, []);
-
   const pageMove = (id) => {
-    setCurrentTabId(id);
-    localStorage.setItem('selectedTabId', id); // 선택된 탭의 ID를 로컬 스토리지에 저장
-
     switch (id) {
       case 0:
         navigate('/');
@@ -61,8 +50,8 @@ const TabNav = () => {
       <TabNavUl>
         {tabList.map(({ id, title, icon, fillIcon }) => (
           <TabNavLi key={id} onClick={() => pageMove(id)}>
-            <img src={id === currentTabId ? fillIcon : icon} alt='' />
-            <TabNavTitle id={id} currentTabId={currentTabId}>
+            <img src={id === currentId ? fillIcon : icon} alt='' />
+            <TabNavTitle id={id} currentId={currentId}>
               {title}
             </TabNavTitle>
           </TabNavLi>
@@ -110,9 +99,7 @@ const TabNavTitle = styled.span`
   display: block;
   font-size: 1rem;
   color: ${(props) =>
-    props.id === props.currentTabId
-      ? 'var(--primary-color)'
-      : 'var(--gray-400)'};
+    props.id === props.currentId ? 'var(--primary-color)' : 'var(--gray-400)'};
 `;
 
 // 테스트용 주석
