@@ -25,7 +25,7 @@ export default function Feed() {
           <Post /> */}
         </PostWrapper>
       </ContentsLayout>
-      <TabNav />
+      <TabNav currentId={0} />
     </>
   );
 }
