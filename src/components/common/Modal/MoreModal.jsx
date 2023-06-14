@@ -87,7 +87,6 @@ const StyledDialog = styled.dialog`
   border: none;
   padding: 0;
   border-radius: 10px 10px 0 0;
-  animation-duration: 0.1s;
 
   /* 밑에서 위로 모달 등장 */
   transform: translateY(100%);
