@@ -9,7 +9,6 @@ import MoreModal from '../../components/common/Modal/MoreModal';
 
 export default function Upload() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   return (
     <>
       {/* h~ 태그 고려 중 */}

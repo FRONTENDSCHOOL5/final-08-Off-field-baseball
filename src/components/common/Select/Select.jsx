@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Select({ optionTextList }) {
+export default function Select({ optionTextList, btnId }) {
   const [isOn, setIsOn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [FocusOptIndex, setFocusOptIndex] = useState(0);
@@ -62,7 +62,7 @@ export default function Select({ optionTextList }) {
         !e.target.classList.contains('select-btn') &&
         !e.target.closest('.list')
       ) {
-        handleClose(e);
+        setIsOpen(false);
         setIsOn(false);
       }
     };
@@ -103,7 +103,7 @@ export default function Select({ optionTextList }) {
       }}
     >
       <button
-        id='myTeam-btn'
+        id={btnId}
         className={isOn ? 'select-btn on' : 'select-btn'}
         // onClick : 탭, 스페이스 포함
         onClick={handleOpen}

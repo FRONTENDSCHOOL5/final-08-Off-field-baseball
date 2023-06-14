@@ -15,14 +15,14 @@ export default function Feed() {
     <>
       <TopMainNav />
       <ContentsLayout>
-        {/* <FeedWrapper>
-          <img src={SYMBOL_LOGO_GRAY} alt='' />
-          <FeedText>유저를 검색해 팔로우 해보세요!</FeedText>
-        </FeedWrapper>
-        <FeedButton>검색하기</FeedButton> */}
         <PostWrapper>
-          <Post />
-          <Post />
+          <EmptyFollow>
+            <img src={SYMBOL_LOGO_GRAY} alt='' />
+            <p>유저를 검색해 팔로우 해보세요!</p>
+            <Button mBtn>검색하기</Button>
+          </EmptyFollow>
+          {/* <Post />
+          <Post /> */}
         </PostWrapper>
       </ContentsLayout>
       <TabNav />
@@ -30,27 +30,24 @@ export default function Feed() {
   );
 }
 
-const FeedWrapper = styled.div`
+const EmptyFollow = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 210px;
+  gap: 20px;
+  p {
+    font-size: 1.4rem;
+    color: var(--gray-400);
+  }
   img {
     width: 100px;
     aspect-ratio: 1 / 1;
   }
-`;
 
-const FeedText = styled.p`
-  margin-top: 3rem;
-  font-size: 1.4rem;
-  color: var(--gray-400);
-`;
-
-const FeedButton = styled(Button)`
-  width: 120px;
-  height: 44px;
-  margin: 20px auto 0;
+  Button {
+    height: 44px;
+  }
 `;
 
 const PostWrapper = styled.div`
