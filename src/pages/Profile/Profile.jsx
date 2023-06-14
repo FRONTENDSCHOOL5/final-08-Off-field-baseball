@@ -15,7 +15,7 @@ export default function Profile() {
         <UserProduct />
         <UserPost />
       </ContentsLayout>
-      <TabNav />
+      <TabNav currentId={3} />
     </>
   );
 }
