@@ -1,14 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
+import { useNavigate } from 'react-router-dom';
 
 export default function TopSearchNav() {
+  const navigate = useNavigate();
   return (
     <>
       <TopNavBar>
-        <button>
+        <button onClick={() => navigate(-1)}>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
         <TopSearchInput placeholder='계정 검색' />
