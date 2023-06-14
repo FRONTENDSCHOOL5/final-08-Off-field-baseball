@@ -88,6 +88,15 @@ const StyledDialog = styled.dialog`
   padding: 0;
   border-radius: 10px 10px 0 0;
 
+  /* 밑에서 위로 모달 등장 */
+  transform: translateY(100%);
+  animation: modal-animation 0.3s ease-in 0s 1 forwards running;
+  @keyframes modal-animation {
+    100% {
+      transform: translateY(0);
+    }
+  }
+
   ul::before {
     display: block;
     content: '';
