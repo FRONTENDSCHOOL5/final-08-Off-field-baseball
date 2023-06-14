@@ -1,12 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASIC_PROFILE_SM } from '../../styles/CommonIcons';
+import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 
 const ChatListStyle = (props) => {
   return (
     <ProfileStyle>
       <div className='wrapper'>
         <img src={BASIC_PROFILE_SM} alt='프로필사진 입니다.' />
+        {props.isNew && <div className='new'></div>}
         <div className='text'>
           <p className='user-name'>{props.userName}</p>
           <p className='last-chat'>{props.lastChat}</p>
@@ -37,6 +38,7 @@ const ProfileStyle = styled.div`
     gap: 12px;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
   }
   // 커서 포인터 영역을 프로필 사진과 텍스트 영역까지로 지정했습니다.
 
@@ -67,5 +69,15 @@ const ProfileStyle = styled.div`
     color: #dbdbdb;
     align-self: flex-end;
     padding-bottom: 3px;
+  }
+
+  .new {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background-color: var(--primary-color);
+    border-radius: 50%;
+    top: 0;
+    left: 0;
   }
 `;

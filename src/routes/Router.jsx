@@ -8,7 +8,7 @@ import Post from '../pages/Upload/Post';
 import Profile from '../pages/Profile/Profile';
 import ProductUpload from '../pages/Product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
-import ChatList from '../pages/ChatList/ChatList';
+import ChatList from '../pages/ChatPage/ChatList/ChatList';
 import FollowList from '../pages/FollowList/FollowList';
 import Search from '../pages/Search/Search';
 
