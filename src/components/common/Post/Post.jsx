@@ -125,7 +125,7 @@ const UserText = styled.p`
 const ImgWrapper = styled.ul`
   display: flex;
   overflow: hidden;
-
+  margin-bottom: 12px;
   & li {
     flex-basis: 100%;
     height: 228px;
@@ -139,7 +139,7 @@ const ImgWrapper = styled.ul`
 
 const PostBtnWrapper = styled.div`
   display: flex;
-  margin: 12px 0 16px;
+  margin: 0 0 16px;
   gap: 16px;
   color: var(--gray-400);
 `;
