@@ -18,7 +18,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<Feed />} />
-        <Route path='/login' element={<Login />} />
+        <Route path='/user/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
         <Route path='/join/profile' element={<JoinProfile />} />
         <Route path='/post/upload' element={<Upload />} />

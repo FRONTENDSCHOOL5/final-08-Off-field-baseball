@@ -11,6 +11,7 @@ import TWINS from '../assets/images/twins.png';
 import EAGLES from '../assets/images/eagles.png';
 import HEROES from '../assets/images/heroes.png';
 import BEARS from '../assets/images/bears.png';
+import LOADING from '../assets/images/loading.gif';
 
 export {
   ERROR_404,
@@ -26,4 +27,5 @@ export {
   EAGLES,
   HEROES,
   BEARS,
+  LOADING,
 };
