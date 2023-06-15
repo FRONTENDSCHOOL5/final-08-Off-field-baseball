@@ -1,11 +1,11 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const Button = (props) => {
+const Button = ({ onClick, ...props }) => {
   const { type } = props;
 
   return (
-    <ButtonStyle type={type ? type : 'button'} {...props}>
+    <ButtonStyle type={type ? type : 'button'} {...props} onClick={onClick}>
       {props.children}
     </ButtonStyle>
   );
