@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   POST_ALBUM_OFF,
@@ -8,49 +8,116 @@ import {
   IMG_LAYERS,
 } from '../../../styles/CommonIcons';
 import Post from '../../../components/common/Post/Post';
-import { Link } from 'react-router-dom';
-import TEST from '../../../assets/images/test.jpg';
+import { Link, useParams } from 'react-router-dom';
 
-export default function UserPost({ posts }) {
+export default function UserPost() {
   const [isList, setIsList] = useState(true);
-  const [isPostExist, setIsPostExist] = useState(true); // 게시글이 없을 경우를 위한 state
+  const [posts, setPosts] = useState([]);
+  const [isPostExist, setIsPostExist] = useState(true);
+  // 추후 무한 스크롤 작업을 위한 state
+  const [numPost, setNumPost] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
+  const { accountname } = useParams();
+
+  const url = 'https://api.mandarin.weniv.co.kr';
+  // 테스트용 토큰
+  // context 사용해서 로그인한 유저의 토큰을 받아올 예정.
+  localStorage.setItem(
+    'token',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGE1OThjYjJjYjIwNTY2MzM0NmRmZSIsImV4cCI6MTY5MTk3NDIzNiwiaWF0IjoxNjg2NzkwMjM2fQ.PhATXqZV4NJUI8cd5aUmXThjG-UKPFUoE3m9PXZYjXA'
+  );
+  localStorage.setItem('accountname', 'Unbeatable_Lotte');
+  const token = localStorage.getItem('token');
+  const userAccountname = localStorage.getItem('accountname');
+
+  useEffect(() => {
+    const getPostList = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetch(
+          `${url}/post/${
+            accountname ? accountname : userAccountname
+          }/userpost?limit=10&skip=${numPost}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              'Content-type': 'application/json',
+            },
+            method: 'GET',
+          }
+        );
+        const data = await res.json();
+        if (data.post.length === 0) {
+          setIsPostExist(false);
+        } else {
+          setPosts(data.post);
+          setIsPostExist(true);
+        }
+      } catch (err) {
+        console.log(err);
+        setIsPostExist(false);
+      }
+      setIsLoading(false);
+    };
+
+    getPostList();
+  }, []);
 
   return (
     <>
       {isPostExist ? (
         <>
           <PostViewBtns>
-            <ListBtn onClick={() => setIsList(true)}>
+            <button onClick={() => setIsList(true)}>
               <img
                 src={isList ? POST_LIST_ON : POST_LIST_OFF}
                 alt='게시물 목록 보기'
               />
-            </ListBtn>
-            <AlbumBtn onClick={() => setIsList(false)}>
+            </button>
+            <button onClick={() => setIsList(false)}>
               <img
                 src={isList ? POST_ALBUM_OFF : POST_ALBUM_ON}
                 alt='게시물 앨범 보기'
               />
-            </AlbumBtn>
+            </button>
           </PostViewBtns>
-          {isList ? (
+          {isLoading ? (
+            <div>로딩중...</div>
+          ) : isList ? (
             <PostList>
-              {posts.map((post, index) => (
-                <li key={index}>
-                  <Post post={post} />
-                </li>
-              ))}
+              {posts.map((post, index) =>
+                posts.length - 1 === index ? (
+                  <li key={index}>
+                    <Post post={post} />
+                  </li>
+                ) : (
+                  <li key={index}>
+                    <Post post={post} />
+                  </li>
+                )
+              )}
             </PostList>
           ) : (
             <PostAlbum>
               {/* 이미지를 클릭하면 해당 게시글로 이동해야함 */}
-              {posts.map((post, index) => (
-                <PostAlbumItem id={index}>
-                  <Link to='#'>
-                    <img src={post.image} alt='' />
-                  </Link>
-                </PostAlbumItem>
-              ))}
+              {posts.map((post, index) => {
+                return post.image ? (
+                  post.image.includes(',') ? (
+                    <PostAlbumItem key={index}>
+                      <Link to='#'>
+                        <img src={post.image.split(',')[0]} alt='' />
+                        <img src={IMG_LAYERS} alt='' className='layer' />
+                      </Link>
+                    </PostAlbumItem>
+                  ) : (
+                    <PostAlbumItem key={index}>
+                      <Link to='#'>
+                        <img src={post.image} alt='' />
+                      </Link>
+                    </PostAlbumItem>
+                  )
+                ) : null;
+              })}
             </PostAlbum>
           )}
         </>
@@ -66,12 +133,13 @@ const PostViewBtns = styled.div`
   border-bottom: 1px solid var(--gray-200);
   margin: 0 -16px;
   text-align: right;
-`;
+  & button {
+    width: 26px;
+  }
 
-const ListBtn = styled.button``;
-
-const AlbumBtn = styled.button`
-  margin: 0 16px;
+  & button:last-child {
+    margin: 0 16px;
+  }
 `;
 
 const PostList = styled.ul`

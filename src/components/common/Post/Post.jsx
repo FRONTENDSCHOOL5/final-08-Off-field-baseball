@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  BASIC_PROFILE_SM,
-  HEART,
-  HEART_FILL,
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
   MESSAGE_CIRCLE_FILL,
 } from '../../../styles/CommonIcons';
-import { ERROR_404 } from '../../../styles/CommonImages';
 import styled from 'styled-components';
+import HeartBtn from '../HeartBtn';
 
 export default function Post({
   loc,
   post = [], // post: {id, userId, content, img, like, comment, createdAt}
 }) {
-  const date = post.createdAt.split('-');
+  const [data, setData] = useState('');
+  const [dateData, setDateData] = useState('');
+  const [imageFile, setImageFile] = useState('');
+  useEffect(() => {
+    if (post) {
+      return setData({ ...post });
+    }
+  }, [post]);
+
+  useEffect(() => {
+    if (data) {
+      setDateData(data.createdAt);
+      if (data.image) {
+        setImageFile(data.image.split(','));
+      }
+    }
+  }, [data]);
+
+  const year = new Date(dateData).getFullYear();
+  const month = new Date(dateData).getMonth() + 1;
+  const day = new Date(dateData).getDate();
 
   return (
     <PostWrapper>
-      <ProfileImg src={BASIC_PROFILE_SM} alt='' />
+      <ProfileImg src={post.author.image} alt='' />
       <UserPost>
         <UserInfo>
           <h2>{post.author.username}</h2>
@@ -26,9 +43,19 @@ export default function Post({
         </UserInfo>
         <UserText>{post.content}</UserText>
         <ImgWrapper>
-          <li>
-            <img src={post.image} alt='' />
-          </li>
+          {imageFile.length > 1 ? (
+            imageFile.map((img, index) => {
+              return (
+                <li key={index}>
+                  <img src={img} alt='' />
+                </li>
+              );
+            })
+          ) : (
+            <li>
+              <img src={imageFile[0]} alt='' />
+            </li>
+          )}
         </ImgWrapper>
         <PostBtnWrapper>
           {loc === 'product' && (
@@ -37,21 +64,14 @@ export default function Post({
               <span>채팅하기</span>
             </PostBtn>
           )}
-          <PostBtn>
-            {post.hearted ? (
-              <img src={HEART_FILL} alt='좋아요 취소 버튼' />
-            ) : (
-              <img src={HEART} alt='좋아요 누르기 버튼' />
-            )}
-            <span>{post.heartCount}</span>
-          </PostBtn>
+          <HeartBtn data={data} />
           <PostBtn>
             <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
             <span>{post.commentCount}</span>
           </PostBtn>
         </PostBtnWrapper>
-        <CreateTime dateTime={post.createdAt}>
-          {date[0]}년 {date[1]}월 {date[2]}일
+        <CreateTime dateTime={data.createdAt}>
+          {year}년 {month}월 {day}일
         </CreateTime>
       </UserPost>
       <PostMenu>
@@ -136,5 +156,8 @@ const CreateTime = styled.time`
 const PostMenu = styled.button`
   position: absolute;
   right: 0;
-  top: 2px;
+  top: 4px;
+  & img {
+    width: 18px;
+  }
 `;
