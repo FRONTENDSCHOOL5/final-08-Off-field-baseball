@@ -12,14 +12,9 @@ const ChatRoom = () => {
       <TopChatNav />
       <ChatRoomStyle>
         <MessageWrapper>
-          <UserChat>
-            옷을 인생을 그러므로 없으면 것은 이상은 것은 우리의 위하여, 뿐이다.
-            이상의 청춘의 뼈 따뜻한 그들의 그와 약동하다. 대고, 못할 넣는
-            풍부하게 뛰노는 인생의 힘있다.
-          </UserChat>
-          <UserChat>안녕하세요 야구 글러브 아직 파시나요</UserChat>
-          <MyChat>안녕하세영</MyChat>
-          <MyChat isImg img={ChatImg2}></MyChat>
+          <UserChat time='09:50'>안녕하세요 글러브 아직 파시나요</UserChat>
+          <MyChat time='10:30'>안녕하세요</MyChat>
+          <MyChat time='10:32' isImg img={ChatImg2}></MyChat>
         </MessageWrapper>
       </ChatRoomStyle>
       <Comment />

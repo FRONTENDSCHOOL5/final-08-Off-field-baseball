@@ -5,6 +5,7 @@ import { SYMBOL_LOGO_GRAY } from '../../../styles/CommonImages';
 const MyChat = (props) => {
   return (
     <Wrapper>
+      <MessageTime>{props.time}</MessageTime>
       <MessageContent>
         {!props.isImg ? (
           <MessageText>{props.children}</MessageText>
@@ -20,6 +21,9 @@ export default MyChat;
 
 const Wrapper = styled.div`
   margin-left: auto;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
 `;
 
 const MessageContent = styled.div`
@@ -39,11 +43,16 @@ const MessageText = styled.p`
 
 const MessageImg = styled.img`
   width: 240px;
-  height: 240px;
+  aspect-ratio: 1 / 1.5;
+  object-fit: cover;
   background-size: cover;
   background-color: var(--primary-color);
-  background-position: center;
   border-radius: 1rem;
   border: none;
   padding: 0;
+`;
+
+const MessageTime = styled.p`
+  color: var(--gray-400);
+  margin-bottom: 2px;
 `;

@@ -16,6 +16,7 @@ const UserChat = (props) => {
         ) : (
           <MessageImg src={props.img} />
         )}
+        <MessageTime>{props.time}</MessageTime>
       </MessageContent>
     </Wrapper>
   );
@@ -36,10 +37,13 @@ const Wrapper = styled.div`
 
 const MessageContent = styled.p`
   display: inline-block;
-  max-width: 240px;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
 `;
 
 const MessageText = styled.p`
+  max-width: 240px;
   background-color: white;
   border: 1px solid var(--gray-300);
   color: #000;
@@ -52,11 +56,16 @@ const MessageText = styled.p`
 
 const MessageImg = styled.img`
   width: 240px;
-  height: 240px;
+  aspect-ratio: 1 / 1.5;
+  object-fit: cover;
   background-size: cover;
   background-color: var(--primary-color);
-  background-position: center;
   border-radius: 1rem;
   border: none;
   padding: 0;
+`;
+
+const MessageTime = styled.p`
+  color: var(--gray-400);
+  margin-bottom: 2px;
 `;
