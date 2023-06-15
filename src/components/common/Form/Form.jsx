@@ -30,6 +30,8 @@ const StyledForm = styled.form`
   }
   input:focus {
     outline: none;
+  }
+  input:focus:not(.invalid) {
     border-color: ${(props) =>
       props.team
         ? 'var(--main-color-' + props.team + ')'
@@ -37,5 +39,17 @@ const StyledForm = styled.form`
   }
   input::placeholder {
     color: var(--gray-200);
+  }
+
+  /* 경고 문구 */
+  strong {
+    display: block;
+    font-size: 1.2rem;
+    line-height: 1.4rem;
+    color: #eb5757;
+    margin-top: 6px;
+  }
+  .invalid {
+    border-color: #eb5757;
   }
 `;
