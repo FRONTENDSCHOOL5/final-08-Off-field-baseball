@@ -46,9 +46,10 @@ const StyledForm = styled.form`
   }
   input {
     flex-grow: 1;
-    margin: 0 18px;
+    margin: 0 10px 0;
     font-size: 1.4rem;
     line-height: 1.8rem;
+    padding-left: 8px;
   }
   input:focus {
     outline: 1px solid var(--primary-color);

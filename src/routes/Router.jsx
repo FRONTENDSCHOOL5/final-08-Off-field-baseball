@@ -6,9 +6,10 @@ import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Post from '../pages/Upload/Post';
 import Profile from '../pages/Profile/Profile';
-import ProductUpload from '../pages/Product/ProductUpload';
+import ProductUpload from '../pages/product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
 import ChatList from '../pages/ChatPage/ChatList/ChatList';
+import ChatRoom from '../pages/ChatPage/ChatRoom/ChatRoom';
 import FollowList from '../pages/FollowList/FollowList';
 import Search from '../pages/Search/Search';
 
@@ -27,6 +28,7 @@ export default function Router() {
         <Route path='/search' element={<Search />} />
         <Route path='/error404' element={<Error404 />} />
         <Route path='/chatList' element={<ChatList />} />
+        <Route path='/chatRoom' element={<ChatRoom />} />
         <Route path='/follow' element={<FollowList />}></Route>
       </Routes>
     </BrowserRouter>

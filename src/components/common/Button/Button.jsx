@@ -21,7 +21,8 @@ const ButtonStyle = styled.button`
   border-radius: 30px;
 
   padding: ${(props) => (props.padding ? props.padding : '7px 0')};
-  background-color: ${(props) => (props.bgColor ? props.bgColor : '#52C33D')};
+  background-color: ${(props) =>
+    props.bgColor ? props.bgColor : 'var(--primary-color)'};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '400')};
   font-size: ${(props) => (props.fontSize ? props.fontSize : '1.4rem')};
 
@@ -29,8 +30,8 @@ const ButtonStyle = styled.button`
     props.whiteBtn &&
     css`
       background-color: white;
-      border: 1px solid #dbdbdb;
-      color: #767676;
+      border: 1px solid var(--gray-200);
+      color: var(--gray-400);
     `}
 
   ${(props) =>
