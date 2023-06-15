@@ -70,7 +70,11 @@ export default function ProfileHeader({
       {accountname === localStorage.getItem('accountname') ? (
         <MyBtns />
       ) : (
-        <UserBtns targetuser={targetuser} profileData={profileData} />
+        <UserBtns
+          targetuser={targetuser}
+          profileData={profileData}
+          isfollow={profileData.isfollow}
+        />
       )}
     </ProfileHeaderWrapper>
   );
@@ -92,6 +96,7 @@ const UserHeader = styled.div`
     width: 110px;
     aspect-ratio: 1 / 1;
     border-radius: 50%;
+    object-fit: cover;
   }
   margin-bottom: 8px;
 `;

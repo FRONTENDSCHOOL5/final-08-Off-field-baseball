@@ -5,6 +5,7 @@ import UserProduct from './UserProduct/UserProduct';
 import UserPost from './UserPost/UserPost';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import TabNav from '../../components/common/TabNavBar/TabNav';
+import Loading from '../../components/common/Loading';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 
 export default function Profile() {
@@ -65,7 +66,9 @@ export default function Profile() {
     <>
       <TopBasicNav />
       <ContentsLayout>
-        {isLoading || (
+        {isLoading ? (
+          <Loading />
+        ) : (
           <>
             <ProfileHeader
               profileData={userProfile}

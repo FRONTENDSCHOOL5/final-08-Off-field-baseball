@@ -4,6 +4,7 @@ import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayou
 import styled from 'styled-components';
 import TopTitleNav from '../../components/common/TopNavBar/TopTitleNav';
 import { useParams } from 'react-router-dom';
+import Loading from '../../components/common/Loading';
 
 export default function FollowList() {
   const { type, accountname } = useParams();
@@ -38,7 +39,7 @@ export default function FollowList() {
       <TopTitleNav loc={type} />
       <ContentsLayout>
         {isLoading ? (
-          <div>로딩중...</div>
+          <Loading />
         ) : (
           <>
             <UserListWrap>

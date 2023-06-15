@@ -3,14 +3,18 @@ import styled from 'styled-components';
 import { MESSAGE_CIRCLE_SM, SHARE } from '../../../styles/CommonIcons';
 import FollowBtn from '../../../components/common/FollowBtn';
 
-export default function UserBtns({ targetuser, profileData }) {
+export default function UserBtns({ targetuser, profileData, isfollow }) {
   return (
     <BtnsWrapper>
       <BtnSmall>
         <img src={MESSAGE_CIRCLE_SM} alt='채팅 시작하기 버튼' />
       </BtnSmall>
-      <FollowBtn profileData={profileData} targetuser={targetuser} mBtn />
-
+      <FollowBtn
+        profileData={profileData}
+        targetuser={targetuser}
+        mBtn
+        isfollow={isfollow}
+      />
       <BtnSmall>
         <img src={SHARE} alt='공유하기 버튼' />
       </BtnSmall>

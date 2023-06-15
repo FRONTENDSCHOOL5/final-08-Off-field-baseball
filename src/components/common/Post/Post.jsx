@@ -42,21 +42,24 @@ export default function Post({
           <p>@{post.author.accountname}</p>
         </UserInfo>
         <UserText>{post.content}</UserText>
-        <ImgWrapper>
-          {imageFile.length > 1 ? (
-            imageFile.map((img, index) => {
-              return (
-                <li key={index}>
-                  <img src={img} alt='' />
-                </li>
-              );
-            })
-          ) : (
-            <li>
-              <img src={imageFile[0]} alt='' />
-            </li>
-          )}
-        </ImgWrapper>
+        {imageFile.length === 0 ? null : (
+          <ImgWrapper>
+            {imageFile.length > 1 ? (
+              imageFile.map((img, index) => {
+                return (
+                  <li key={index}>
+                    <img src={img} alt='' />
+                  </li>
+                );
+              })
+            ) : (
+              <li>
+                <img src={imageFile[0]} alt='' />
+              </li>
+            )}
+          </ImgWrapper>
+        )}
+
         <PostBtnWrapper>
           {loc === 'product' && (
             <PostBtn className='chat-btn'>
@@ -91,6 +94,8 @@ const ProfileImg = styled.img`
   width: 42px;
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 const UserPost = styled.div`
@@ -120,6 +125,7 @@ const UserText = styled.p`
 const ImgWrapper = styled.ul`
   display: flex;
   overflow: hidden;
+
   & li {
     flex-basis: 100%;
     height: 228px;
@@ -128,7 +134,6 @@ const ImgWrapper = styled.ul`
   & li img {
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: inset 0 0 10px;
   }
 `;
 

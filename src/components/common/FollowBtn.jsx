@@ -10,7 +10,7 @@ export default function FollowBtn({ profileData, targetuser, ...props }) {
     if (props.isfollow) {
       return setIsFollowing(props.isfollow);
     }
-  }, []);
+  }, [props.isfollow]);
 
   const handleFollow = async () => {
     try {
@@ -31,8 +31,6 @@ export default function FollowBtn({ profileData, targetuser, ...props }) {
       console.log(err);
     }
   };
-  console.log(isFollowing);
-  console.log(props.isfollow);
   return (
     <>
       {accountname === targetuser ? null : (

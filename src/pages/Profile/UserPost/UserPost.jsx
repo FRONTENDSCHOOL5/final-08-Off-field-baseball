@@ -105,14 +105,18 @@ export default function UserPost() {
                   post.image.includes(',') ? (
                     <PostAlbumItem key={index}>
                       <Link to='#'>
-                        <img src={post.image.split(',')[0]} alt='' />
+                        <img
+                          className='thumbnail'
+                          src={post.image.split(',')[0]}
+                          alt=''
+                        />
                         <img src={IMG_LAYERS} alt='' className='layer' />
                       </Link>
                     </PostAlbumItem>
                   ) : (
                     <PostAlbumItem key={index}>
                       <Link to='#'>
-                        <img src={post.image} alt='' />
+                        <img className='thumbnail' src={post.image} alt='' />
                       </Link>
                     </PostAlbumItem>
                   )
@@ -161,6 +165,10 @@ const PostAlbumItem = styled.li`
   position: relative;
   img {
     aspect-ratio: 1 / 1;
+  }
+
+  img.thumbnail {
+    object-fit: cover;
   }
 
   img.layer {
