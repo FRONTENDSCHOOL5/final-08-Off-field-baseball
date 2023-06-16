@@ -62,9 +62,10 @@ export default function Login({ team }) {
 
   // email에서 포커스가 떠났을 때, 유효성 검사
   const handleEmailInp = (e) => {
+    console.log('a');
     if (e.target.validity.valueMissing) {
       setMessegeEmail('값을 입력해주세요');
-    } else if (e.target.validity.typeMismatch) {
+    } else if (e.target.validity.patternMismatch) {
       setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
     } else {
       setMessegeEmail('');
@@ -74,15 +75,32 @@ export default function Login({ team }) {
 
   // password에서 포커스가 떠났을 때, 유효성 검사
   const handlePasswordInp = (e) => {
+    const reg =
+      /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
+    const patternMatch = reg.test(e.target.value);
     if (e.target.validity.valueMissing) {
       setMessegePassword('값을 입력해주세요');
-    } else if (e.target.validity.patternMismatch) {
+    } else if (!patternMatch) {
       setMessegePassword('6자 이상 입력해주세요');
     } else {
       setMessegePassword('');
       setIsVaildPassword(true);
     }
   };
+
+  const handleEmailOnChange = (e) => {
+    if (!e.target.validity.valueMissing && !e.target.validity.patternMismatch) {
+      setMessegeEmail('');
+      setIsVaildEmail(true);
+    }
+  };
+  const handlePasswordOnChange = (e) => {
+    if (!e.target.validity.valueMissing && !e.target.validity.patternMismatch) {
+      setMessegePassword('');
+      setIsVaildPassword(true);
+    }
+  };
+
   return (
     <StyledLogin>
       <h1>로그인</h1>
@@ -93,8 +111,14 @@ export default function Login({ team }) {
           type='email'
           onBlur={handleEmailInp}
           value={email}
-          pattern='[a-zA-Z0-9]*@[a-z]*\.[a-z]*'
-          onChange={(e) => setEmail(e.target.value)}
+          pattern='[\w\.\-]+@[a-z]+\.[a-z]+'
+          // 이메일 아이디 + 이메일 주소
+          // 1. 이메일 아이디: 영문, 숫자, 점(.), 언더바(_), 하이픈(-) 사용 가능. 1글자 이상 필수
+          // 2. 이메일 주소: @+소문자+점(.)+소문자 필수
+          onChange={(e) => {
+            setEmail(e.target.value);
+            handleEmailOnChange(e);
+          }}
           required
           className={messegeEmail && 'invalid'}
         />
@@ -103,11 +127,17 @@ export default function Login({ team }) {
         <input
           autoComplete='off'
           id='password-inp'
-          type='password'
-          pattern='.{6,}' // 임시
+          type='text'
+          // pattern='^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;",<\.>\/?]{6,}$' // 작은따옴표는 포함하지 못하여 JS로
+          // 숫자/소문자/특수문자 각 1자 이상 필수. 6자 이상
+          // 입력할 수 없는 문자 조건 주기
+          maxLength='20' // 최대 20자(임시) 가능
           onBlur={handlePasswordInp}
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            handlePasswordOnChange(e);
+            setPassword(e.target.value);
+          }}
           className={messegePassword && 'invalid'}
           required
         />
