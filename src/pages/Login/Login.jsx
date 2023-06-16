@@ -73,29 +73,40 @@ export default function Login({ team }) {
     }
   };
 
+  // password 정규식
+  // 숫자, 소문자, 특수문자 각 1자 이상 필수. 6자 이상
+  // 대문자 허용 혹은 필수 고려중
+  const reg =
+    /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
+
   // password에서 포커스가 떠났을 때, 유효성 검사
   const handlePasswordInp = (e) => {
-    const reg =
-      /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
-    const patternMatch = reg.test(e.target.value);
     if (e.target.validity.valueMissing) {
       setMessegePassword('값을 입력해주세요');
-    } else if (!patternMatch) {
-      setMessegePassword('6자 이상 입력해주세요');
+      return;
+    }
+
+    const patternMatch = reg.test(e.target.value);
+    if (!patternMatch) {
+      setMessegePassword(
+        '숫자, 소문자, 특수문자를 포함하여 6자 이상 입력해주세요'
+      );
     } else {
       setMessegePassword('');
       setIsVaildPassword(true);
     }
   };
 
+  // 이메일/비밀번호 입력값이 변할 때, 유효성을 통과하면, 경고 문구가 사라짐
   const handleEmailOnChange = (e) => {
-    if (!e.target.validity.valueMissing && !e.target.validity.patternMismatch) {
+    if (!e.target.validity.patternMismatch) {
       setMessegeEmail('');
       setIsVaildEmail(true);
     }
   };
   const handlePasswordOnChange = (e) => {
-    if (!e.target.validity.valueMissing && !e.target.validity.patternMismatch) {
+    const patternMatch = reg.test(e.target.value);
+    if (patternMatch) {
       setMessegePassword('');
       setIsVaildPassword(true);
     }
@@ -128,10 +139,7 @@ export default function Login({ team }) {
           autoComplete='off'
           id='password-inp'
           type='text'
-          // pattern='^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;",<\.>\/?]{6,}$' // 작은따옴표는 포함하지 못하여 JS로
-          // 숫자/소문자/특수문자 각 1자 이상 필수. 6자 이상
-          // 입력할 수 없는 문자 조건 주기
-          maxLength='20' // 최대 20자(임시) 가능
+          maxLength='20' // 최대 20자(임시)
           onBlur={handlePasswordInp}
           value={password}
           onChange={(e) => {
