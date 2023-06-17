@@ -1,11 +1,10 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE, X } from '../../styles/CommonIcons';
-import { ERROR_404 } from '../../styles/CommonImages';
 import styled from 'styled-components';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import { useState } from 'react';
 import Loading from '../../components/common/Loading';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export default function Upload() {
   const [imgList, setImgList] = useState([]);
@@ -15,6 +14,8 @@ export default function Upload() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log(location.pathname);
 
   const validText = (e) => {
     setText(e.target.value);
@@ -52,7 +53,7 @@ export default function Upload() {
     }
   };
 
-  const handleUploadPost = async () => {
+  const handlePost = async () => {
     setIsLoading(true);
     try {
       const postData = {
@@ -95,11 +96,7 @@ export default function Upload() {
 
   return (
     <>
-      <TopUploadNav
-        btnTxt='업로드'
-        isValid={isValid}
-        event={handleUploadPost}
-      />
+      <TopUploadNav btnTxt='업로드' isValid={isValid} event={handlePost} />
       <ContentsLayout>
         {isLoading ? (
           <Loading />
