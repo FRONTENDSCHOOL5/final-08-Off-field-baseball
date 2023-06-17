@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function ContentsLayout({ children }) {
+export default function ContentsLayout({ children, height }) {
   return <ContentsWrapper>{children}</ContentsWrapper>;
 }
 

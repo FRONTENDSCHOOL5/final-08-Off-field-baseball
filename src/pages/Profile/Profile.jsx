@@ -31,36 +31,36 @@ export default function Profile() {
   if (location.pathname === `/profile/${userAccountname}`) {
     navigate('/profile');
   }
+  const getProfileInfo = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        `${url}/profile/${accountname ? accountname : userAccountname}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+          method: 'GET',
+        }
+      );
+
+      const data = await res.json();
+
+      const profile = data.profile;
+      setUserProfile(profile);
+      setIntro(profile.intro.split('$')[0]);
+      setTeam(profile.intro.split('$')[1]);
+      setIsLoading(false);
+    } catch (err) {
+      console.error('에러가 발생했습니다.', err);
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const getProfileInfo = async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch(
-          `${url}/profile/${accountname ? accountname : userAccountname}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-type': 'application/json',
-            },
-            method: 'GET',
-          }
-        );
-
-        const data = await res.json();
-
-        const profile = data.profile;
-        setUserProfile(profile);
-        setIntro(profile.intro.split('$')[0]);
-        setTeam(profile.intro.split('$')[1]);
-        setIsLoading(false);
-      } catch (err) {
-        console.error('에러가 발생했습니다.', err);
-        setIsLoading(false);
-      }
-    };
     getProfileInfo();
-  }, [url, token, accountname, userAccountname]);
+  }, []);
 
   return (
     <>

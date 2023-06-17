@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import MoreModal from '../Modal/SettingModal';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopBasicNav({ loc }) {
+export default function TopBasicNav({ accountname = '' }) {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -15,13 +15,10 @@ export default function TopBasicNav({ loc }) {
         <button onClick={() => navigate(-1)}>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
-        {loc === 'follow' ? (
-          <TopNavH2>Followers</TopNavH2>
-        ) : (
-          <MoreBtn onClick={() => setIsModalOpen(true)}>
-            <img src={MORE_VERTICAL} alt='more' />
-          </MoreBtn>
-        )}
+
+        <MoreBtn onClick={() => setIsModalOpen(true)}>
+          <img src={MORE_VERTICAL} alt='more' />
+        </MoreBtn>
 
         {isModalOpen && (
           <MoreModal
@@ -33,9 +30,3 @@ export default function TopBasicNav({ loc }) {
     </>
   );
 }
-
-const TopNavH2 = styled.h2`
-  font-size: 1.4rem;
-  flex-grow: 1;
-  margin-left: 0.8rem;
-`;
