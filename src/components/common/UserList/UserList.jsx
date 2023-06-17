@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
-import Button from '../Button/Button';
 import {
   LANDERS,
   GIANTS,
@@ -15,9 +13,17 @@ import {
   BEARS,
   HEROES,
 } from '../../../styles/CommonImages';
+import FollowBtn from '../FollowBtn';
 
-export default function UserList({ id, nickname, isFollow }) {
-  // 임시로 팔로우 상태를 true로 설정
+export default function UserList({ profileData, teamname }) {
+  const [data, setData] = useState('');
+  const [team, setTeam] = useState('');
+
+  useEffect(() => {
+    if (profileData) {
+      return setData(profileData);
+    }
+  }, [profileData]);
 
   // 받아온 마이 팀 데이터와 일치하는 이미지를 로드하도록 하는 배열
   const myTeam = [
@@ -33,29 +39,33 @@ export default function UserList({ id, nickname, isFollow }) {
     { id: '10', name: 'KT 위즈', img: WIZ },
   ];
 
+  useEffect(() => {
+    myTeam.forEach((item) => {
+      if (item.name === teamname) {
+        setTeam(item.img);
+      }
+    });
+  });
   return (
     <>
       <UserListItem>
         <Link to='#'>
-          <img src={BASIC_PROFILE_SM} alt='' />
+          <img src={data.image} alt='' />
           <div className='user-info'>
-            <h2>{nickname}</h2>
-            <p>{id}</p>
+            <h2>{data.username}</h2>
+            <p>{data.accountname}</p>
           </div>
         </Link>
         <Container>
           <TeamLogo>
-            <img src={myTeam[7].img} alt='내가 좋아하는 팀 로고' />
+            <img src={team} alt='내가 좋아하는 팀 로고' />
           </TeamLogo>
-          {isFollow ? (
-            <Button xsBtn whiteBtn padding='0'>
-              취소
-            </Button>
-          ) : (
-            <Button xsBtn padding='0'>
-              팔로우
-            </Button>
-          )}
+          <FollowBtn
+            profileData={data}
+            targetuser={data.accountname}
+            isfollow={data.isfollow}
+            xsBtn
+          />
         </Container>
       </UserListItem>
     </>
@@ -92,6 +102,8 @@ const UserListItem = styled.li`
   img {
     width: 50px;
     aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
   }
 `;
 

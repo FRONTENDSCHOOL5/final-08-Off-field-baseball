@@ -12,11 +12,7 @@ export default function TopTitleNav({ loc }) {
         <button onClick={() => navigate(-1)}>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
-        {loc === 'followers' ? (
-          <TopNavH2>Followers</TopNavH2>
-        ) : (
-          <TopNavH2>Followings</TopNavH2>
-        )}
+        <TopNavH2>{loc}</TopNavH2>
       </TopNavBar>
     </>
   );
