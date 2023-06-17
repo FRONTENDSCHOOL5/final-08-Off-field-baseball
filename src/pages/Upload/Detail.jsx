@@ -8,9 +8,16 @@ import Post from '../../components/common/Post/Post';
 import { useEffect } from 'react';
 import Loading from '../../components/common/Loading';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
+import CommentList from './CommentList';
 
 const Detail = () => {
   const [post, setPost] = useState([]);
+  const [comment, setComment] = useState('');
+  const [commentList, setCommentList] = useState([]);
+  // 댓글 달면 바로 업데이트 되도록 하는 state (더 좋은 방법이 있을지 고민 중)
+  const [updateComment, setUpdateComment] = useState('');
+  //추후 무한 스크롤 구현을 위한 state
+  const [numComment, setNumComment] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
@@ -35,9 +42,60 @@ const Detail = () => {
     }
   };
 
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    const data = {
+      comment: {
+        content: comment,
+      },
+    };
+    try {
+      const req = await fetch(`${url}/post/${id}/comments`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      const res = await req.json();
+      setUpdateComment(res);
+      setIsLoading(false);
+      setComment('');
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
+  const getCommentList = async () => {
+    try {
+      const req = await fetch(
+        `${url}/post/${id}/comments/?limit=10&skip=${numComment}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const res = await req.json();
+      setCommentList(res.comments);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getPostDetail();
   }, [id]);
+
+  useEffect(() => {
+    getCommentList();
+  }, [updateComment]);
 
   return (
     <>
@@ -49,33 +107,26 @@ const Detail = () => {
       ) : (
         <>
           <TopBasicNav />
-          <ContentsLayout>{post && <Post post={post} />}</ContentsLayout>
-          <CommentListSection>
-            <article>
-              {/* 야구러버의 프로파일로 연결 */}
-              <Link className='profile-img' to='/profile'>
-                <img src={BASIC_PROFILE_SM} alt='' />
-              </Link>
-              <Link to='/profile' className='name'>
-                야구러버
-              </Link>
-              <p>모자가 예쁘네요~ㅎㅎ</p>
-            </article>
-            <article>
-              {/* 야구러버의 프로파일로 연결 */}
-              <Link className='profile-img' to='/profile'>
-                <img src={BASIC_PROFILE_SM} alt='' />
-              </Link>
-              <Link to='/profile' className='name'>
-                야구러버
-              </Link>
-              <p>
-                안녕하세요. 사진이 너무 멋있어요. 한라봉 언제 먹을 수 있나요?
-                기다리기 지쳤어요 땡뻘땡뻘...
-              </p>
-            </article>
-          </CommentListSection>
-          <Comment txt='게시' placeholder='댓글 입력하기'></Comment>
+          <PostWrapper>
+            {post && <Post post={post} />}
+            <CommentListSection>
+              <h3 className='a11y-hidden'>댓글 목록</h3>
+              {commentList.length > 0 && (
+                <>
+                  {commentList.map((comment, index) => {
+                    return <CommentList key={index} comment={comment} />;
+                  })}
+                </>
+              )}
+            </CommentListSection>
+          </PostWrapper>
+          <Comment
+            txt='게시'
+            placeholder='댓글 입력하기'
+            value={comment}
+            setValue={setComment}
+            event={handleCommentSubmit}
+          ></Comment>
         </>
       )}
     </>
@@ -84,31 +135,15 @@ const Detail = () => {
 
 export default Detail;
 
-const CommentListSection = styled.section`
+const CommentListSection = styled.ul`
   border-top: 1px solid var(--gray-200);
-  padding: 20px 16px 82px; //bottom : form 높이 + 20px
-  article:not(:first-child) {
-    margin-top: 16px;
-  }
-  .profile-img {
-    display: inline-block;
-    width: 36px;
-  }
-  img {
-    width: 100%;
-    aspect-ratio: 1/1;
-  }
-  .name {
-    display: inline-block;
-    vertical-align: top;
-    margin: 6px 0 0 12px;
-    font-weight: 500;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-  }
-  p {
-    margin: 4px 48px;
-    font-size: 1.4rem;
-    line-height: 1.8rem;
-  }
+  padding: 20px 16px; //bottom : form 높이 + 20px
+  margin: 20px -16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`;
+
+const PostWrapper = styled(ContentsLayout)`
+  min-height: 0;
 `;
