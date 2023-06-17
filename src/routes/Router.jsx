@@ -22,6 +22,7 @@ export default function Router() {
         <Route path='/join' element={<Join />} />
         <Route path='/join/profile' element={<JoinProfile />} />
         <Route path='/post/upload' element={<Upload />} />
+        <Route path='/post/edit' element={<Upload />} />
         <Route path='/post/*' element={<Post />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/profile/:accountname' element={<Profile />} />
