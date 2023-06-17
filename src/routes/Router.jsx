@@ -6,7 +6,7 @@ import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Post from '../pages/Upload/Post';
 import Profile from '../pages/Profile/Profile';
-import ProductUpload from '../pages/product/ProductUpload';
+import ProductUpload from '../pages/Product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
 import ChatList from '../pages/ChatPage/ChatList/ChatList';
 import ChatRoom from '../pages/ChatPage/ChatRoom/ChatRoom';

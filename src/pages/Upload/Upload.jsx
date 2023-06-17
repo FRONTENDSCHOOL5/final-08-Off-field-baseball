@@ -5,8 +5,31 @@ import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import { useState } from 'react';
 
 export default function Upload() {
-  const [imgList, setImgList] = useState([ERROR_404, BASIC_PROFILE_LG]); // 임시로 이미지 추가
+  const [imgList, setImgList] = useState([]); // 임시로 이미지 추가
   const [isValid, setIsValid] = useState(false);
+  const url = 'https://api.mandarin.weniv.co.kr';
+  const token = localStorage.getItem('token');
+
+  const handleImageInput = async (e) => {
+    const formData = new FormData();
+    const imageFile = e.target.files[0];
+    formData.append('image', imageFile);
+
+    const response = await fetch(
+      'https://api.mandarin.weniv.co.kr/image/uploadfile',
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    setImgList([
+      ...imgList,
+      'https://api.mandarin.weniv.co.kr/' + data.filename,
+    ]);
+    console.log(imgList);
+  };
 
   const ResizeHeight = (e) => {
     e.target.style.height = 'auto';
@@ -32,7 +55,20 @@ export default function Upload() {
           onChange={ResizeHeight}
           rows={1}
         ></textarea>
-        <img className='uplode-img' src={UPLOAD_FILE} alt='이미지 업로드하기' />
+        <label for='profileImg'>
+          <img
+            className='uplode-img'
+            src={UPLOAD_FILE}
+            alt='이미지 업로드하기'
+          />
+          <input
+            type='file'
+            id='profileImg'
+            name='profile-img'
+            accept='image/*'
+            onChange={handleImageInput}
+          />
+        </label>
 
         {!!imgList.length && (
           <ul>
@@ -73,6 +109,19 @@ const StyledSection = styled.section`
   position: relative; // 업로드 아이콘 레이아웃을 위한 속성
   height: 100vh; // 업로드 아이콘 레이아웃을 위한 속성
 
+  input[type='file'] {
+    display: none;
+  }
+
+  label {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    cursor: pointer;
+  }
+
   /* reset */
   img {
     height: auto;
@@ -103,9 +152,6 @@ const StyledSection = styled.section`
     width: 50px;
     aspect-ratio: 1/1;
     /* 레이아웃 */
-    position: absolute;
-    right: 16px;
-    bottom: 16px;
   }
 
   ul {
