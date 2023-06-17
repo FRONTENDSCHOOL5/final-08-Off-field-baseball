@@ -91,7 +91,7 @@ const Detail = () => {
 
   useEffect(() => {
     getPostDetail();
-  }, [id]);
+  }, [id, updateComment]);
 
   useEffect(() => {
     getCommentList();
