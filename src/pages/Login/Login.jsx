@@ -17,6 +17,8 @@ export default function Login({ team }) {
   useEffect(() => {
     if (email && password) {
       setIsVaild(true);
+    } else {
+      setIsVaild(false);
     }
   }, [email, password]);
 
