@@ -5,9 +5,10 @@ export default function ContentsLayout({ children }) {
   return <ContentsWrapper>{children}</ContentsWrapper>;
 }
 
-const ContentsWrapper = styled.div`
+const ContentsWrapper = styled.main`
   min-height: 100vh;
   padding: 6.8rem 1.6rem 6rem;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
