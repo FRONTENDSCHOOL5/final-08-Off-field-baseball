@@ -30,7 +30,6 @@ const Feed = () => {
         method: 'GET',
       });
       const res = await req.json();
-      console.log(res);
       setPostList(res.posts);
       setIsLoading(false);
     } catch (err) {
