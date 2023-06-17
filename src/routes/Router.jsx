@@ -24,12 +24,13 @@ export default function Router() {
         <Route path='/post/upload' element={<Upload />} />
         <Route path='/post/*' element={<Post />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/profile/:accountname' element={<Profile />} />
+        <Route path='/profile/:accountname/:type' element={<FollowList />} />
         <Route path='/productupload' element={<ProductUpload />} />
         <Route path='/search' element={<Search />} />
         <Route path='/error404' element={<Error404 />} />
         <Route path='/chatList' element={<ChatList />} />
         <Route path='/chatRoom' element={<ChatRoom />} />
-        <Route path='/follow' element={<FollowList />}></Route>
       </Routes>
     </BrowserRouter>
   );
