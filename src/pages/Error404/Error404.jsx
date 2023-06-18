@@ -2,13 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
 import { ERROR_404 } from '../../styles/CommonImages';
+import { useNavigate } from 'react-router-dom';
 
 const Error404 = () => {
+  const navigate = useNavigate();
+
   return (
     <ErrorLayout>
       <img src={ERROR_404} alt='에러 화면입니다.' />
       <p>페이지를 찾을 수 없습니다 :(</p>
-      <Button mBtn>이전 페이지</Button>
+      <Button mBtn onClick={() => navigate(-1)}>
+        이전 페이지
+      </Button>
     </ErrorLayout>
   );
 };
