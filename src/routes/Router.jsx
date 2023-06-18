@@ -22,7 +22,6 @@ export default function Router() {
         <Route path='/' element={<Feed />} />
         <Route path='/user/login' element={<Login />} />
         <Route path='/join' element={<Join />} />
-        <Route path='/join/profile' element={<JoinProfile />} />
         <Route path='/post/upload' element={<Upload />} />
         <Route path='/post/:id' element={<Detail />} />
         <Route path='/post/:id/edit' element={<Upload />} />
