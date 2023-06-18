@@ -4,7 +4,6 @@ import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
 import UserChat from './UserChat';
 import Comment from '../../../components/common/Comment/Comment';
-import ChatImg2 from '../../../assets/images/chat-img2.jpg';
 import ChatImg4 from '../../../assets/images/test.jpg';
 
 const ChatRoom = () => {

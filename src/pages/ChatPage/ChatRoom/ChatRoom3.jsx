@@ -18,7 +18,7 @@ const ChatRoom = () => {
           <UserChat time='21:45'>
             네네 그럼 직거래로 하겠습니다 내일 경기 전에 괜찮으신가요?
           </UserChat>
-          <MyChat time='22:02'>네 그럼 내일 뵐게요~</MyChat>
+          <MyChat time='22:02'>네 그럼 내일 뵐게요!!</MyChat>
         </MessageWrapper>
       </ChatRoomStyle>
       <Comment />
