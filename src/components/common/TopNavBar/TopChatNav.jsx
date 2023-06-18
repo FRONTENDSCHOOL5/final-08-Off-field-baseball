@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 
-export default function TopChatNav() {
+export default function TopChatNav({ username }) {
   const navigate = useNavigate();
 
   return (
@@ -14,7 +14,7 @@ export default function TopChatNav() {
         <button onClick={() => navigate(-1)}>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
-        <TopNavH2>유저 이름</TopNavH2>
+        <TopNavH2>{username}</TopNavH2>
         <MoreBtn>
           <img src={MORE_VERTICAL} alt='more' />
         </MoreBtn>
