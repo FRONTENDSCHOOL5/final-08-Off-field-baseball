@@ -6,7 +6,7 @@ import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopUploadNav({ btnTxt, isValid }) {
+export default function TopUploadNav({ btnTxt, isValid, event }) {
   const navigate = useNavigate();
   return (
     <>
@@ -19,6 +19,7 @@ export default function TopUploadNav({ btnTxt, isValid }) {
           bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
           disabled={isValid ? '' : 'disabled'}
           sBtn
+          onClick={event}
         >
           {btnTxt}
         </Button>

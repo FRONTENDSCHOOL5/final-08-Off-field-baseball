@@ -1,63 +1,99 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  BASIC_PROFILE_SM,
-  HEART,
-  HEART_FILL,
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
   MESSAGE_CIRCLE_FILL,
 } from '../../../styles/CommonIcons';
-import { ERROR_404 } from '../../../styles/CommonImages';
 import styled from 'styled-components';
+import HeartBtn from '../HeartBtn';
+import { useParams, Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 export default function Post({
   loc,
   post = [], // post: {id, userId, content, img, like, comment, createdAt}
 }) {
-  const date = post.createdAt.split('-');
+  const [data, setData] = useState('');
+  const [dateData, setDateData] = useState('');
+  const [imageFile, setImageFile] = useState('');
+  const { id } = useParams();
+  useEffect(() => {
+    if (post) {
+      return setData({ ...post });
+    }
+  }, [post, id]);
+
+  useEffect(() => {
+    if (data) {
+      setDateData(data.createdAt);
+      if (data.image) {
+        setImageFile(data.image.split(','));
+      }
+    }
+  }, [data]);
+
+  const year = new Date(dateData).getFullYear();
+  const month = new Date(dateData).getMonth() + 1;
+  const day = new Date(dateData).getDate();
 
   return (
-    <PostWrapper>
-      <ProfileImg src={BASIC_PROFILE_SM} alt='' />
-      <UserPost>
-        <UserInfo>
-          <h2>{post.author.username}</h2>
-          <p>@{post.author.accountname}</p>
-        </UserInfo>
-        <UserText>{post.content}</UserText>
-        <ImgWrapper>
-          <li>
-            <img src={post.image} alt='' />
-          </li>
-        </ImgWrapper>
-        <PostBtnWrapper>
-          {loc === 'product' && (
-            <PostBtn className='chat-btn'>
-              <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
-              <span>채팅하기</span>
-            </PostBtn>
-          )}
-          <PostBtn>
-            {post.hearted ? (
-              <img src={HEART_FILL} alt='좋아요 취소 버튼' />
-            ) : (
-              <img src={HEART} alt='좋아요 누르기 버튼' />
+    <>
+      {data ? (
+        <PostWrapper>
+          <ProfileImg src={data.author.image} alt='' />
+          <UserPost>
+            <UserInfo>
+              <h2>{data.author.username}</h2>
+              <p>@{data.author.accountname}</p>
+            </UserInfo>
+            <UserText>
+              {!id && <Detail to={'/post/' + post.id}></Detail>}
+              {data.content}
+            </UserText>
+            {imageFile.length === 0 ? null : (
+              <ImgWrapper>
+                {!id && <Detail to={'/post/' + post.id}></Detail>}
+                {imageFile.length > 1 ? (
+                  imageFile.map((img, index) => {
+                    return (
+                      <li key={index}>
+                        <img src={img} alt='' />
+                      </li>
+                    );
+                  })
+                ) : (
+                  <li>
+                    <img src={imageFile[0]} alt='' />
+                  </li>
+                )}
+              </ImgWrapper>
             )}
-            <span>{post.heartCount}</span>
-          </PostBtn>
-          <PostBtn>
-            <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-            <span>{post.commentCount}</span>
-          </PostBtn>
-        </PostBtnWrapper>
-        <CreateTime dateTime={post.createdAt}>
-          {date[0]}년 {date[1]}월 {date[2]}일
-        </CreateTime>
-      </UserPost>
-      <PostMenu>
-        <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
-      </PostMenu>
-    </PostWrapper>
+
+            <PostBtnWrapper>
+              {loc === 'product' && (
+                <PostBtn className='chat-btn'>
+                  <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
+                  <span>채팅하기</span>
+                </PostBtn>
+              )}
+              <HeartBtn data={data} />
+              <PostBtn>
+                <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
+                <span>{data.commentCount}</span>
+              </PostBtn>
+            </PostBtnWrapper>
+            <CreateTime dateTime={data.createdAt}>
+              {year}년 {month}월 {day}일
+            </CreateTime>
+          </UserPost>
+          <PostMenu>
+            <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+          </PostMenu>
+        </PostWrapper>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 
@@ -71,6 +107,8 @@ const ProfileImg = styled.img`
   width: 42px;
   aspect-ratio: 1 / 1;
   flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
 `;
 
 const UserPost = styled.div`
@@ -95,11 +133,15 @@ const UserText = styled.p`
   margin: 16px 0;
   font-size: 1.4rem;
   line-height: 1.3;
+  position: relative;
+  word-break: break-all;
 `;
 
 const ImgWrapper = styled.ul`
+  position: relative;
   display: flex;
   overflow: hidden;
+  margin-bottom: 12px;
   & li {
     flex-basis: 100%;
     height: 228px;
@@ -108,13 +150,12 @@ const ImgWrapper = styled.ul`
   & li img {
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: inset 0 0 10px;
   }
 `;
 
 const PostBtnWrapper = styled.div`
   display: flex;
-  margin: 12px 0 16px;
+  margin: 0 0 16px;
   gap: 16px;
   color: var(--gray-400);
 `;
@@ -136,5 +177,15 @@ const CreateTime = styled.time`
 const PostMenu = styled.button`
   position: absolute;
   right: 0;
-  top: 2px;
+  top: 4px;
+  & img {
+    width: 18px;
+  }
+`;
+
+const Detail = styled(Link)`
+  position: absolute;
+  inset: 0;
+  padding: 16px 0;
+  overflow: auto;
 `;
