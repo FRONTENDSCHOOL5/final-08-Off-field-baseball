@@ -19,7 +19,6 @@ export default function JoinEmail({
 
   // 이메일, 비밀번호 모두 유효할 시, 버튼 활성화
   useEffect(() => {
-    console.log(isValidPassword);
     if (isValidEmail && isValidPassword) {
       setIsVaild(true);
     } else {
@@ -46,10 +45,12 @@ export default function JoinEmail({
 
     const json = await res.json();
 
-    if (json.message === '이미 가입된 이메일 주소 입니다.') {
+    if (json.message === '사용 가능한 이메일 입니다.') {
+      setMessegeEmail('');
+      setIsVaildEmail(true);
+    } else {
       setMessegeEmail(json.message);
-    } else if (json.message === '잘못된 접근입니다.') {
-      setMessegeEmail('값을 입력해주세요');
+      setIsVaildEmail(false);
     }
   };
 
@@ -62,13 +63,13 @@ export default function JoinEmail({
   const handleEmailInp = (e) => {
     if (e.target.validity.valueMissing) {
       setMessegeEmail('값을 입력해주세요');
+      setIsVaildEmail(false);
     } else if (e.target.validity.patternMismatch) {
       setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
+      setIsVaildEmail(false);
     } else {
-      setMessegeEmail('');
-      setIsVaildEmail(true);
+      emailvalid(); //api 검사
     }
-    emailvalid(); //api 최종 검사
   };
 
   // password 정규식
@@ -81,6 +82,7 @@ export default function JoinEmail({
   const handlePasswordInp = (e) => {
     if (e.target.validity.valueMissing) {
       setMessegePassword('값을 입력해주세요');
+      setIsVaildPassword(false);
       return;
     }
 
@@ -89,6 +91,7 @@ export default function JoinEmail({
       setMessegePassword(
         '숫자, 소문자, 특수문자를 포함하여 6자 이상 입력해주세요'
       );
+      setIsVaildPassword(false);
     } else {
       setMessegePassword('');
       setIsVaildPassword(true);
@@ -96,7 +99,7 @@ export default function JoinEmail({
   };
 
   // 이메일/비밀번호 입력값이 변할 때, 유효성을 통과하면, 경고 문구가 사라짐
-  // 다시 유효하지 않은 값을 입력하면, 버튼 비활성화
+  // 버튼 활성화/비활성화
   const handleEmailOnChange = (e) => {
     if (!e.target.validity.patternMismatch) {
       setMessegeEmail('');
@@ -139,7 +142,7 @@ export default function JoinEmail({
           autoComplete='off'
           id='password-inp'
           type='password'
-          maxLength='20' // 최대 20자(임시)
+          maxLength='20' // 임시
           onBlur={handlePasswordInp}
           value={password}
           onChange={(e) => {
