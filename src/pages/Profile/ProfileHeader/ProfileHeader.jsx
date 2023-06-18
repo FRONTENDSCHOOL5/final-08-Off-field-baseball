@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import UserBtns from './UserBtns';
 import MyBtns from './MyBtns';
-import { BASIC_PROFILE_LG } from '../../../styles/CommonIcons';
 import {
   LANDERS,
   GIANTS,
@@ -15,16 +14,15 @@ import {
   BEARS,
   HEROES,
 } from '../../../styles/CommonImages';
+import { Link } from 'react-router-dom';
 
 export default function ProfileHeader({
-  followingCount,
-  followerCount,
-  username,
-  accountname,
-  image,
-  intro,
+  profileData,
   team,
+  intro,
+  targetuser,
 }) {
+  // 로그인한 유저인지 확인
   const myTeam = [
     { id: '1', name: '두산 베어스', img: BEARS },
     { id: '2', name: '키움 히어로즈', img: HEROES },
@@ -38,6 +36,9 @@ export default function ProfileHeader({
     { id: '10', name: 'KT 위즈', img: WIZ },
   ];
   let myTeamImg = '';
+  const { username, accountname, followerCount, followingCount, image } =
+    profileData;
+
   myTeam.forEach((item) => {
     if (item.name === team) {
       myTeamImg = item.img;
@@ -47,12 +48,12 @@ export default function ProfileHeader({
   return (
     <ProfileHeaderWrapper>
       <UserHeader>
-        <Follow>
+        <Follow to={`/profile/${accountname}/follower`}>
           <strong>{followerCount}</strong>
           <p>Followers</p>
         </Follow>
-        <img src={BASIC_PROFILE_LG} alt='유저 프로필 이미지' />
-        <Follow followings>
+        <img src={image} alt='유저 프로필 이미지' />
+        <Follow className='followings' to={`/profile/${accountname}/following`}>
           <strong>{followingCount}</strong>
           <p>Followings</p>
         </Follow>
@@ -66,8 +67,15 @@ export default function ProfileHeader({
         <p className='id'>@{accountname}</p>
         <p className='text'>{intro}</p>
       </UserInfo>
-      {/* <UserBtns /> */}
-      <MyBtns />
+      {accountname === localStorage.getItem('accountname') ? (
+        <MyBtns />
+      ) : (
+        <UserBtns
+          targetuser={targetuser}
+          profileData={profileData}
+          isfollow={profileData.isfollow}
+        />
+      )}
     </ProfileHeaderWrapper>
   );
 }
@@ -87,11 +95,13 @@ const UserHeader = styled.div`
   img {
     width: 110px;
     aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
   }
   margin-bottom: 8px;
 `;
 
-const Follow = styled.div`
+const Follow = styled(Link)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -105,7 +115,9 @@ const Follow = styled.div`
   p {
     color: var(--gray-400);
   }
-  ${({ followings }) => followings && `strong { color: var(--gray-400)}`};
+  &.followings {
+    color: var(--gray-400);
+  }
 `;
 
 const MyTeamShow = styled.div`
