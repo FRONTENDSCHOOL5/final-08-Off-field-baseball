@@ -7,7 +7,6 @@ import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 
 export default function TopChatNav({ username }) {
   const navigate = useNavigate();
-
   return (
     <>
       <TopNavBar>
