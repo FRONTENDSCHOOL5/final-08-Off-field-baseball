@@ -2,11 +2,17 @@ import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export default function Select({ optionTextList, btnId }) {
+// btnId : label for과 연결
+export default function Select({
+  btnTxt,
+  optionTextList,
+  btnId,
+  selectedOpt,
+  setSelectedOpt,
+}) {
   const [isOn, setIsOn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [FocusOptIndex, setFocusOptIndex] = useState(0);
-  const [selectedOpt, setSelectedOpt] = useState(optionTextList[0]);
+  const [FocusOptIndex, setFocusOptIndex] = useState(null);
   const optionList = useRef(null);
 
   const handleOpen = (e) => {
@@ -70,9 +76,10 @@ export default function Select({ optionTextList, btnId }) {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  // 셀렉트가 open 됐을 때, 선택되어 있는 옵션에 포커스
+  // 셀렉트가 open 됐을 때
   useEffect(() => {
-    if (isOpen) {
+    // 선택된 옵션이 있다면, 선택되어 있는 옵션에 포커스
+    if (isOpen && FocusOptIndex) {
       optionList.current.children[FocusOptIndex].firstElementChild.focus();
     }
     return;
@@ -93,6 +100,7 @@ export default function Select({ optionTextList, btnId }) {
 
   return (
     <StyledSelect
+      selectedOpt={selectedOpt}
       className='custom-select'
       onKeyDown={(e) => {
         // Esc
@@ -114,7 +122,7 @@ export default function Select({ optionTextList, btnId }) {
           }
         }}
       >
-        {selectedOpt}
+        {selectedOpt || btnTxt}
       </button>
 
       {isOpen && (
@@ -153,6 +161,7 @@ const StyledSelect = styled.div`
     text-align: left;
     font-size: 1.4rem;
     border: 1px solid var(--gray-200);
+    color: ${(props) => props.selectedOpt || 'var(--gray-200)'};
   }
   ul {
     position: absolute;
