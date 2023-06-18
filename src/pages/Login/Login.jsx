@@ -42,16 +42,35 @@ export default function Login({ team }) {
     });
 
     const json = await res.json();
-    console.log(json, '제이손입니다');
+    console.log(json);
     if (json.user) {
       const token = json.user['token'];
       localStorage.setItem('token', token);
+
+      // 마이팀 저장
+      const team = await getTeam(json.user['token'], json.user.accountname);
+      localStorage.setItem('myteam', team);
       navigate('/'); // 로그인에 성공하면 홈화면으로
     } else {
       setWarningMessage(json.message);
     }
   };
+  const getTeam = async (token, accountname) => {
+    // 마이팀 불러오기
+    const url = 'https://api.mandarin.weniv.co.kr';
+    const reqPath = `/profile/${accountname}`;
+    const reqUrl = url + reqPath;
+    const res = await fetch(reqUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    });
 
+    const json = await res.json();
+    return json.profile.intro.split('$')[1];
+  };
   const handleForm = (e) => {
     e.preventDefault();
     login();
