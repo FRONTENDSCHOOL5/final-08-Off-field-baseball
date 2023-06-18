@@ -4,7 +4,7 @@ import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
 import UserChat from './UserChat';
 import Comment from '../../../components/common/Comment/Comment';
-import ChatImg2 from '../../../assets/images/chat-img2.jpg';
+import ChatImg3 from '../../../assets/images/chat-img3.jpg';
 
 const ChatRoom = () => {
   return (
@@ -12,9 +12,10 @@ const ChatRoom = () => {
       <TopChatNav />
       <ChatRoomStyle>
         <MessageWrapper>
-          <UserChat time='09:50'>안녕하세요 글러브 아직 파시나요</UserChat>
-          <MyChat time='10:30'>안녕하세요</MyChat>
-          <MyChat time='10:32' isImg img={ChatImg2}></MyChat>
+          <MyChat time='18:46'>님 오늘 경기 옴? 자리 어디? 난 여기</MyChat>
+          <MyChat time='18:47' isImg img={ChatImg3}></MyChat>
+          <UserChat time='19:10'>나 오늘은 못갔어ㅠ</UserChat>
+          <UserChat time='19:12'>재밌게 보고 와~</UserChat>
         </MessageWrapper>
       </ChatRoomStyle>
       <Comment />

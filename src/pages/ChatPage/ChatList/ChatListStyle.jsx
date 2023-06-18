@@ -1,11 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
+import { useNavigate } from 'react-router-dom';
 
 const ChatListStyle = (props) => {
+  const navigate = useNavigate();
+
   return (
     <ProfileStyle>
-      <div className='wrapper'>
+      <div className='wrapper' onClick={() => navigate(props.navigate)}>
         <img src={BASIC_PROFILE_SM} alt='프로필사진 입니다.' />
         {props.isNew && <div className='new'></div>}
         <div className='text'>

@@ -3,8 +3,11 @@ import TopBasicNav from '../../../components/common/TopNavBar/TopBasicNav';
 import ChatListStyle from './ChatListStyle';
 import ContentsLayout from '../../../components/layout/ContentsLayout/ContentsLayout';
 import TabNav from '../../../components/common/TabNavBar/TabNav';
+import { useNavigate } from 'react-router-dom';
 
 const ChatList = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <TopBasicNav />
@@ -14,17 +17,20 @@ const ChatList = () => {
           lastChat='이번엔 정정 언제하맨마씸?'
           date='2023.06.08'
           isNew={true}
+          navigate='/chat/user1'
         />
         <ChatListStyle
           userName='제주감귤마을'
           lastChat='깊은 어둠의 존재감, 롤스로이스 뉴 블랙 배지'
           date='2023.06.12'
           isNew={true}
+          navigate='/chat/user2'
         />
         <ChatListStyle
           userName='누구네 농장 친환경 한라봉'
           lastChat='내 차는 내가 평가한다. 오픈 이벤트에 참여합니다.'
           date='2023.06.15'
+          navigate='/chat/user3'
         />
       </ContentsLayout>
       <TabNav currentId={1} />
