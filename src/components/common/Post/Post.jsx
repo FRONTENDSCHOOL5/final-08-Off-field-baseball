@@ -45,14 +45,15 @@ export default function Post({
             <UserInfo>
               <h2>{data.author.username}</h2>
               <p>@{data.author.accountname}</p>
+              <LinkTo to={'/profile/' + data.author.accountname}></LinkTo>
             </UserInfo>
             <UserText>
-              {!id && <Detail to={'/post/' + post.id}></Detail>}
+              {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
               {data.content}
             </UserText>
             {imageFile.length === 0 ? null : (
               <ImgWrapper>
-                {!id && <Detail to={'/post/' + post.id}></Detail>}
+                {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                 {imageFile.length > 1 ? (
                   imageFile.map((img, index) => {
                     return (
@@ -118,6 +119,7 @@ const UserPost = styled.div`
 `;
 
 const UserInfo = styled.div`
+  position: relative;
   h2 {
     font-size: 1.4rem;
     margin-bottom: 4px;
@@ -183,7 +185,7 @@ const PostMenu = styled.button`
   }
 `;
 
-const Detail = styled(Link)`
+const LinkTo = styled(Link)`
   position: absolute;
   inset: 0;
   padding: 16px 0;

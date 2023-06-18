@@ -33,7 +33,7 @@ const TabNav = ({ currentId }) => {
         navigate('/');
         break;
       case 1:
-        navigate('/chatList');
+        navigate('/chat');
         break;
       case 2:
         navigate('/post/upload');
