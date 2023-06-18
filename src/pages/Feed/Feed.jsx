@@ -11,7 +11,7 @@ import Loading from '../../components/common/Loading';
 // 팔로우한 유저의 게시글이 있으면 게시글 리스트
 // 없으면 유저를 검색해 팔로우 해보세요! 문구와 검색하기 버튼
 
-export default function Feed() {
+const Feed = () => {
   const [postList, setPostList] = useState([]);
   // 추후 무한 스크롤 작업을 위한 state
   const [numPost, setNumPost] = useState(0);
@@ -19,22 +19,29 @@ export default function Feed() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
 
-  useEffect(() => {
-    const getFeed = async () => {
-      setIsLoading(true);
+  const getFeed = async () => {
+    setIsLoading(true);
+    try {
       const req = await fetch(`${url}/post/feed/?limit=10&skip=${numPost}`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-type': 'application/json',
         },
+        method: 'GET',
       });
       const res = await req.json();
-      console.log(res);
       setPostList(res.posts);
       setIsLoading(false);
-    };
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
     getFeed();
   }, []);
+
   return (
     <>
       <TopMainNav />
@@ -62,7 +69,9 @@ export default function Feed() {
       <TabNav currentId={0} />
     </>
   );
-}
+};
+
+export default Feed;
 
 const EmptyPost = styled.div`
   display: flex;

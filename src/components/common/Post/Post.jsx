@@ -6,6 +6,8 @@ import {
 } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
 import HeartBtn from '../HeartBtn';
+import { useParams, Link } from 'react-router-dom';
+import Loading from '../Loading';
 
 export default function Post({
   loc,
@@ -14,11 +16,12 @@ export default function Post({
   const [data, setData] = useState('');
   const [dateData, setDateData] = useState('');
   const [imageFile, setImageFile] = useState('');
+  const { id } = useParams();
   useEffect(() => {
     if (post) {
       return setData({ ...post });
     }
-  }, [post]);
+  }, [post, id]);
 
   useEffect(() => {
     if (data) {
@@ -34,53 +37,63 @@ export default function Post({
   const day = new Date(dateData).getDate();
 
   return (
-    <PostWrapper>
-      <ProfileImg src={post.author.image} alt='' />
-      <UserPost>
-        <UserInfo>
-          <h2>{post.author.username}</h2>
-          <p>@{post.author.accountname}</p>
-        </UserInfo>
-        <UserText>{post.content}</UserText>
-        {imageFile.length === 0 ? null : (
-          <ImgWrapper>
-            {imageFile.length > 1 ? (
-              imageFile.map((img, index) => {
-                return (
-                  <li key={index}>
-                    <img src={img} alt='' />
+    <>
+      {data ? (
+        <PostWrapper>
+          <ProfileImg src={data.author.image} alt='' />
+          <UserPost>
+            <UserInfo>
+              <h2>{data.author.username}</h2>
+              <p>@{data.author.accountname}</p>
+            </UserInfo>
+            <UserText>
+              {!id && <Detail to={'/post/' + post.id}></Detail>}
+              {data.content}
+            </UserText>
+            {imageFile.length === 0 ? null : (
+              <ImgWrapper>
+                {!id && <Detail to={'/post/' + post.id}></Detail>}
+                {imageFile.length > 1 ? (
+                  imageFile.map((img, index) => {
+                    return (
+                      <li key={index}>
+                        <img src={img} alt='' />
+                      </li>
+                    );
+                  })
+                ) : (
+                  <li>
+                    <img src={imageFile[0]} alt='' />
                   </li>
-                );
-              })
-            ) : (
-              <li>
-                <img src={imageFile[0]} alt='' />
-              </li>
+                )}
+              </ImgWrapper>
             )}
-          </ImgWrapper>
-        )}
 
-        <PostBtnWrapper>
-          {loc === 'product' && (
-            <PostBtn className='chat-btn'>
-              <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
-              <span>채팅하기</span>
-            </PostBtn>
-          )}
-          <HeartBtn data={data} />
-          <PostBtn>
-            <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-            <span>{post.commentCount}</span>
-          </PostBtn>
-        </PostBtnWrapper>
-        <CreateTime dateTime={data.createdAt}>
-          {year}년 {month}월 {day}일
-        </CreateTime>
-      </UserPost>
-      <PostMenu>
-        <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
-      </PostMenu>
-    </PostWrapper>
+            <PostBtnWrapper>
+              {loc === 'product' && (
+                <PostBtn className='chat-btn'>
+                  <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
+                  <span>채팅하기</span>
+                </PostBtn>
+              )}
+              <HeartBtn data={data} />
+              <PostBtn>
+                <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
+                <span>{data.commentCount}</span>
+              </PostBtn>
+            </PostBtnWrapper>
+            <CreateTime dateTime={data.createdAt}>
+              {year}년 {month}월 {day}일
+            </CreateTime>
+          </UserPost>
+          <PostMenu>
+            <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+          </PostMenu>
+        </PostWrapper>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 
@@ -120,9 +133,12 @@ const UserText = styled.p`
   margin: 16px 0;
   font-size: 1.4rem;
   line-height: 1.3;
+  position: relative;
+  word-break: break-all;
 `;
 
 const ImgWrapper = styled.ul`
+  position: relative;
   display: flex;
   overflow: hidden;
   margin-bottom: 12px;
@@ -165,4 +181,11 @@ const PostMenu = styled.button`
   & img {
     width: 18px;
   }
+`;
+
+const Detail = styled(Link)`
+  position: absolute;
+  inset: 0;
+  padding: 16px 0;
+  overflow: auto;
 `;
