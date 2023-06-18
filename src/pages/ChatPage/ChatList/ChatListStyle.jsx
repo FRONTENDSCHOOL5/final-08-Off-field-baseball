@@ -1,10 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
+import { useNavigate } from 'react-router-dom';
 
 const ChatListStyle = (props) => {
+  const navigate = useNavigate();
+
   return (
-    <ProfileStyle>
+    <ProfileStyle onClick={() => navigate(props.navigate)}>
       <div className='wrapper'>
         <img src={BASIC_PROFILE_SM} alt='프로필사진 입니다.' />
         {props.isNew && <div className='new'></div>}
@@ -25,6 +28,7 @@ const ProfileStyle = styled.div`
   align-items: center;
   justify-content: space-between;
   padding-bottom: 24px;
+  cursor: pointer;
 
   img {
     width: 42px;
@@ -36,10 +40,8 @@ const ProfileStyle = styled.div`
     align-items: center;
     gap: 12px;
     overflow: hidden;
-    cursor: pointer;
     position: relative;
   }
-  // 커서 포인터 영역을 프로필 사진과 텍스트 영역까지로 지정했습니다.
 
   .text {
     overflow: hidden;

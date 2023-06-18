@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { SYMBOL_LOGO_GRAY } from '../../../styles/CommonImages';
 
 const MyChat = (props) => {
   return (
