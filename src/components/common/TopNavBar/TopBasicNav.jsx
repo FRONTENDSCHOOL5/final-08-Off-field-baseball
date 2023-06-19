@@ -19,14 +19,10 @@ export default function TopBasicNav({ accountname = '' }) {
         <MoreBtn onClick={() => setIsModalOpen(true)}>
           <img src={MORE_VERTICAL} alt='more' />
         </MoreBtn>
-
-        {isModalOpen && (
-          <MoreModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
       </TopNavBar>
+      {isModalOpen && (
+        <MoreModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      )}
     </>
   );
 }
