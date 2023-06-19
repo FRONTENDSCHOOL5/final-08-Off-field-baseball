@@ -27,21 +27,21 @@ export default function UserList({ profileData, teamname }) {
 
   // 받아온 마이 팀 데이터와 일치하는 이미지를 로드하도록 하는 배열
   const myTeam = [
-    { id: '1', name: '두산 베어스', img: BEARS },
-    { id: '2', name: '키움 히어로즈', img: HEROES },
-    { id: '3', name: 'LG 트윈스', img: TWINS },
-    { id: '4', name: 'NC 다이노스', img: DINOS },
-    { id: '5', name: 'KIA 타이거즈', img: TIGERS },
-    { id: '6', name: '삼성 라이온즈', img: LIONS },
-    { id: '7', name: 'SSG 랜더스', img: LANDERS },
-    { id: '8', name: '롯데 자이언츠', img: GIANTS },
-    { id: '9', name: '한화 이글스', img: EAGLES },
-    { id: '10', name: 'KT 위즈', img: WIZ },
+    { id: '1', name: '두산 베어스', name2: 'doosan', img: BEARS },
+    { id: '2', name: '키움 히어로즈', name2: 'kiwoom', img: HEROES },
+    { id: '3', name: 'LG 트윈스', name2: 'lg', img: TWINS },
+    { id: '4', name: 'NC 다이노스', name2: 'nc', img: DINOS },
+    { id: '5', name: 'KIA 타이거즈', name2: 'kia', img: TIGERS },
+    { id: '6', name: '삼성 라이온즈', name2: 'samsung', img: LIONS },
+    { id: '7', name: 'SSG 랜더스', name2: 'ssg', img: LANDERS },
+    { id: '8', name: '롯데 자이언츠', name2: 'lotte', img: GIANTS },
+    { id: '9', name: '한화 이글스', name2: 'hanhwa', img: EAGLES },
+    { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
 
   useEffect(() => {
     myTeam.forEach((item) => {
-      if (item.name === teamname) {
+      if (item.name === teamname || item.name2 === teamname) {
         setTeam(item.img);
       }
     });

@@ -29,10 +29,6 @@ const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
     }
   }, []);
 
-  MoreModal.defaultProps = {
-    menuList: ['정의되지 않음'],
-  };
-
   return (
     <Overlay onClick={handleClick}>
       <StyledDialog open role='dialog'>

@@ -14,8 +14,6 @@ export default function Upload() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location.pathname);
 
   const validText = (e) => {
     setText(e.target.value);

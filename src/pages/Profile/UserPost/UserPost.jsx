@@ -17,6 +17,7 @@ export default function UserPost() {
   // 추후 무한 스크롤 작업을 위한 state
   const [numPost, setNumPost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [update, setUpdate] = useState('');
   const { accountname } = useParams();
 
   const url = 'https://api.mandarin.weniv.co.kr';
@@ -30,38 +31,38 @@ export default function UserPost() {
   const token = localStorage.getItem('token');
   const userAccountname = localStorage.getItem('accountname');
 
-  useEffect(() => {
-    const getPostList = async () => {
-      setIsLoading(true);
-      try {
-        const res = await fetch(
-          `${url}/post/${
-            accountname ? accountname : userAccountname
-          }/userpost?limit=10&skip=${numPost}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              'Content-type': 'application/json',
-            },
-            method: 'GET',
-          }
-        );
-        const data = await res.json();
-        if (data.post.length === 0) {
-          setIsPostExist(false);
-        } else {
-          setPosts(data.post);
-          setIsPostExist(true);
+  const getPostList = async () => {
+    setIsLoading(true);
+    try {
+      const res = await fetch(
+        `${url}/post/${
+          accountname ? accountname : userAccountname
+        }/userpost?limit=10&skip=${numPost}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+          method: 'GET',
         }
-      } catch (err) {
-        console.log(err);
+      );
+      const data = await res.json();
+      if (data.post.length === 0) {
         setIsPostExist(false);
+      } else {
+        setPosts(data.post);
+        setIsPostExist(true);
       }
-      setIsLoading(false);
-    };
+    } catch (err) {
+      console.log(err);
+      setIsPostExist(false);
+    }
+    setIsLoading(false);
+  };
 
+  useEffect(() => {
     getPostList();
-  }, []);
+  }, [update]);
 
   return (
     <>
@@ -88,11 +89,11 @@ export default function UserPost() {
               {posts.map((post, index) =>
                 posts.length - 1 === index ? (
                   <li key={index}>
-                    <Post post={post} />
+                    <Post post={post} updatePost={setUpdate} />
                   </li>
                 ) : (
                   <li key={index}>
-                    <Post post={post} />
+                    <Post post={post} updatePost={setUpdate} />
                   </li>
                 )
               )}
