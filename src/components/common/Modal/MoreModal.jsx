@@ -3,12 +3,7 @@ import Overlay from './Overlay';
 import styled from 'styled-components';
 import { useRef } from 'react';
 
-const MoreModal = ({
-  menuList,
-  clickEventListnerList,
-  isModalOpen,
-  setIsModalOpen,
-}) => {
+const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
   // tab을 누르면, 모달 안에서만 포커스 되게
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.key === 'Tab') {
@@ -30,7 +25,7 @@ const MoreModal = ({
   const firstEl = useRef();
   useEffect(() => {
     if (isModalOpen) {
-      firstEl.current.focus();
+      // firstEl.current.focus();
     }
   }, []);
 
@@ -47,7 +42,8 @@ const MoreModal = ({
     <Overlay onClick={handleClick}>
       <StyledDialog open role='dialog'>
         <ul onKeyDown={handleKeyDown}>
-          {menuList.map((menu, i) => {
+          {children}
+          {/* {menuList.map((menu, i) => {
             if (i === 0) {
               return (
                 <li key={i}>
@@ -71,7 +67,7 @@ const MoreModal = ({
                 </button>
               </li>
             );
-          })}
+          })} */}
         </ul>
       </StyledDialog>
     </Overlay>
