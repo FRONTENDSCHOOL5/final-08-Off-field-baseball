@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react';
 
-export const UserContextStore = createContext({
+export const UserContext = createContext({
   token: localStorage.getItem('token') || null,
   accountname: localStorage.getItem('accountname') || null,
   myTeam: localStorage.getItem('myteam') || null,
@@ -9,7 +9,7 @@ export const UserContextStore = createContext({
   setMyTeam: () => {},
 });
 
-const UserContext = ({ children }) => {
+const userProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [accountname, setAccountname] = useState(
     localStorage.getItem('accountname') || null
@@ -32,4 +32,4 @@ const UserContext = ({ children }) => {
   );
 };
 
-export default UserContext;
+export default userProvider;
