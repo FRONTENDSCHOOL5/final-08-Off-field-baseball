@@ -8,15 +8,70 @@ export default function ProductUpload() {
   const [imgPre, setImgPre] = useState(null);
   const [isValid, setIsValid] = useState(false);
   const [productName, setProductName] = useState('');
-  const [productInfo, setProductInfo] = useState('');
+  const [link, setLink] = useState('');
 
+  // 모든 입력칸에 값이 입력되면 저장 버튼 활성화
   useEffect(() => {
-    if (productName && price && productInfo && imgPre) {
+    if (productName && price && link && imgPre) {
       setIsValid(true);
     } else {
       setIsValid(false);
     }
-  }, [productName, price, productInfo, imgPre]);
+  }, [productName, price, link, imgPre]);
+
+  // API
+  const handleProductUpload = async () => {
+    const url = 'https://api.mandarin.weniv.co.kr';
+    const reqPath = '/product';
+
+    const productData = {
+      product: {
+        itemName: productName,
+        price: parseInt(price.replace(/,/g, '')),
+        link: link,
+        itemImage: imgPre,
+      },
+    };
+
+    if (imgPre !== null) {
+      const imgformData = new FormData();
+      imgformData.append('image', imgPre);
+
+      const imgReqPath = '/image/uploadfile';
+      const imgReqUrl = url + imgReqPath;
+      const imgRes = await fetch(imgReqUrl, {
+        method: 'POST',
+        body: imgformData,
+      });
+      console.log(imgRes);
+      const imgJson = await imgRes.json();
+
+      if (imgRes.ok) {
+        productData.product.itemImage =
+          'https://api.mandarin.weniv.co.kr/' + imgJson.filename;
+      } else {
+        console.log('이미지 업로드에 실패했습니다.', imgJson.error);
+        return;
+      }
+    }
+
+    const reqUrl = url + reqPath;
+    const token = localStorage.getItem('token');
+
+    localStorage.setItem('token', token);
+
+    const res = await fetch(reqUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(productData),
+    });
+
+    const json = await res.json();
+    console.log(json);
+  };
 
   // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
   const addComma = (price) => {
@@ -30,6 +85,10 @@ export default function ProductUpload() {
 
     // 이미지 미리보기 생성
     // ※ 업로드 하지않고 팝업창을 껐을 때 오류가 납니다..
+    if (!selectedImage || !selectedImage.type.startsWith('image/')) {
+      console.log('이미지를 선택해주세요.');
+      return;
+    }
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === FileReader.DONE) {
@@ -46,7 +105,7 @@ export default function ProductUpload() {
 
   return (
     <>
-      <TopUploadNav isValid={isValid} />
+      <TopUploadNav isValid={isValid} event={handleProductUpload} />
       <ProductInfo>
         <span>이미지 등록</span>
         <EmptyImg>
@@ -79,8 +138,8 @@ export default function ProductUpload() {
             type='text'
             id='name'
             minLength='2'
-            maxLength='15'
-            placeholder='2~15자 이내여야 합니다.'
+            maxLength='25'
+            placeholder='2~25자 이내여야 합니다.'
             required
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
@@ -104,10 +163,10 @@ export default function ProductUpload() {
             id='info'
             placeholder='판매하는 상품 정보를 입력해주세요.'
             required
-            value={productInfo}
+            value={link}
             onChange={(e) => {
               ResizeHeight(e);
-              setProductInfo(e.target.value);
+              setLink(e.target.value);
             }}
           />
         </ProductInput>
@@ -127,8 +186,7 @@ const ProductInfo = styled.section`
 `;
 
 const EmptyImg = styled.div`
-  max-width: 362px;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 362 / 244;
   background-color: var(--gray-100);
   margin-bottom: 30px;
   border: 0.5px solid var(--gray-200);
@@ -136,7 +194,6 @@ const EmptyImg = styled.div`
   position: relative;
 
   img {
-    object-fit: conver;
     border-radius: 10px;
   }
 
