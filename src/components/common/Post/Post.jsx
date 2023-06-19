@@ -191,7 +191,7 @@ const ImgWrapper = styled.ul`
     flex-shrink: 0;
   }
   & li img {
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 10px;
   }
 `;
