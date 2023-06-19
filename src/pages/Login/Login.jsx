@@ -46,6 +46,7 @@ export default function Login({ team }) {
     if (json.user) {
       const token = json.user['token'];
       localStorage.setItem('token', token);
+      localStorage.setItem('accountname', json.user['accountname']);
 
       // 마이팀 저장
       const team = await getTeam(json.user['token'], json.user.accountname);
