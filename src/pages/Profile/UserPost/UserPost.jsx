@@ -105,7 +105,7 @@ export default function UserPost() {
                 return post.image ? (
                   post.image.includes(',') ? (
                     <PostAlbumItem key={index}>
-                      <Link to='#'>
+                      <Link to={'/post/' + post.id}>
                         <img
                           className='thumbnail'
                           src={post.image.split(',')[0]}
@@ -116,7 +116,7 @@ export default function UserPost() {
                     </PostAlbumItem>
                   ) : (
                     <PostAlbumItem key={index}>
-                      <Link to='#'>
+                      <Link to={'/post/' + post.id}>
                         <img className='thumbnail' src={post.image} alt='' />
                       </Link>
                     </PostAlbumItem>
