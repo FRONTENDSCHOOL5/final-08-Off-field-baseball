@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
 import ERROR_404 from '../../assets/images/404.png';
 import IMG_BUTTON from '../../assets/icons/img-button.png';
 
 export default function ProductUpload() {
+  const [price, setPrice] = useState('');
+  const [imgPre, setImgPre] = useState(ERROR_404);
+
+  // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
+  const addComma = (price) => {
+    const returnNum = price.target.value.replace(/[^0-9]/g, '');
+    const commaPrice = returnNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    setPrice(commaPrice);
+  };
+
+  const handleImageChange = (event) => {
+    const selectedImage = event.target.files[0];
+
+    // 이미지 미리보기 생성
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setImgPre(reader.result);
+      }
+    };
+    reader.readAsDataURL(selectedImage);
+  };
+
   return (
     <>
       <TopUploadNav />
@@ -12,9 +35,9 @@ export default function ProductUpload() {
         <span>이미지 등록</span>
         <EmptyImg>
           {/* 임시 이미지 */}
-          <img src={ERROR_404} alt='' />
+          <img src={imgPre} alt='' />
 
-          <label For='productImg'>
+          <label htmlFor='productImg'>
             <img src={IMG_BUTTON} id='uploadBtn' alt='' />
           </label>
           <input
@@ -22,11 +45,12 @@ export default function ProductUpload() {
             id='productImg'
             name='product-img'
             accept='image/*'
+            onChange={handleImageChange}
           />
         </EmptyImg>
 
         <ProductInput>
-          <label for='name'>상품명</label>
+          <label htmlFor='name'>상품명</label>
           <input
             type='text'
             id='name'
@@ -38,17 +62,18 @@ export default function ProductUpload() {
 
           {/* '숫자만 입력 가능합니다' 경고창 추가
           금액에 콤마(,) 추가 */}
-          <label for='price'>가격</label>
+          <label htmlFor='price'>가격</label>
           <input
-            type='number'
+            type='text'
             id='price'
-            step='10'
             placeholder='숫자만 입력이 가능합니다.'
             required
+            value={price}
+            onChange={addComma}
           />
 
           {/* textarea 크기 사용자가 조정 불가 */}
-          <label for='info'>상품 소개</label>
+          <label htmlFor='info'>상품 소개</label>
           <textarea
             id='info'
             placeholder='판매하는 상품 정보를 입력해주세요.'
@@ -80,6 +105,7 @@ const EmptyImg = styled.div`
 
   img {
     object-fit: cover;
+    border-radius: 10px;
   }
 
   #uploadBtn {
@@ -119,12 +145,21 @@ const ProductInput = styled.div`
   }
 
   textarea {
-    // 글자수 따라 텍스트 상자 크기 확대 기능 구현?
     height: 10rem;
     border: 1px solid var(--gray-200);
     border-radius: 3px;
     resize: none;
     padding: 2px;
+  }
+
+  input:focus {
+    outline: none;
+    border-bottom: 1px solid var(--primary-color);
+  }
+
+  textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary-color);
   }
 
   input::placeholder,
