@@ -1,21 +1,41 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE, X } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from '../../components/common/Loading';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function Upload() {
   const [imgList, setImgList] = useState([]);
   const [isValid, setIsValid] = useState(false);
   const [text, setText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [profile, setProfile] = useState([]);
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
-  const location = useLocation();
-  console.log(location.pathname);
+  const { id } = useParams();
+
+  const userProfile = async () => {
+    try {
+      const req = await fetch(`${url}/user/myinfo`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const res = await req.json();
+      setProfile(res.user);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    userProfile();
+  }, []);
 
   const validText = (e) => {
     setText(e.target.value);
@@ -94,15 +114,77 @@ export default function Upload() {
     setImgList(list);
   };
 
+  const beforeEdit = async () => {
+    try {
+      const req = await fetch(`${url}/post/${id}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const res = await req.json();
+      console.log(res);
+      setText(res.post.content);
+      setImgList(res.post.image.split(', '));
+      setIsValid(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleEdit = async () => {
+    setIsLoading(true);
+    try {
+      const postData = {
+        post: {
+          content: text,
+          image: imgList.join(', '),
+        },
+      };
+      const req = await fetch(`${url}/post/${id}`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(postData),
+      });
+      if (req.status === 200) {
+        navigate('/profile');
+      } else {
+        throw new Error('수정 실패');
+      }
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      beforeEdit();
+    }
+  }, []);
+
   return (
     <>
-      <TopUploadNav btnTxt='업로드' isValid={isValid} event={handlePost} />
+      <TopUploadNav
+        btnTxt='업로드'
+        isValid={isValid}
+        event={id ? handleEdit : handlePost}
+      />
       <ContentsLayout>
         {isLoading ? (
           <Loading />
         ) : (
           <StyledSection>
-            <img className='profile-img' src={BASIC_PROFILE_LG} alt='' />
+            <img
+              className='profile-img'
+              src={profile ? profile.image : BASIC_PROFILE_LG}
+              alt=''
+            />
             <textarea
               name=''
               id=''
@@ -113,6 +195,7 @@ export default function Upload() {
               }}
               value={text}
               rows={1}
+              autoFocus
             ></textarea>
             <label htmlFor='profileImg'>
               <img

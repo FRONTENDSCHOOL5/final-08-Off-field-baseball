@@ -60,7 +60,7 @@ export default function Profile() {
 
   useEffect(() => {
     getProfileInfo();
-  }, []);
+  }, [accountname]);
 
   return (
     <>

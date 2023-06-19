@@ -85,11 +85,12 @@ export default function JoinProfile({ email, password }) {
     });
 
     const json = await res.json();
-    if (json.user) {
-      navigate('/user/login'); // 회원가입에 성공하면 로그인화면으로 (추후 자동로그인 고려)
-    } else {
-      alert(json.message);
-    }
+    console.log(json);
+    // if (json.user) {
+    //   navigate('/user/login'); // 회원가입에 성공하면 로그인화면으로 (추후 자동로그인 고려)
+    // } else {
+    //   alert(json.message);
+    // }
   };
 
   const handleForm = (e) => {

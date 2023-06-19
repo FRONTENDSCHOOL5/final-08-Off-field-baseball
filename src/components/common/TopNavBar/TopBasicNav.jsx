@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
-import styled from 'styled-components';
 import SettingModal from '../Modal/SettingModal';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopBasicNav({ accountname = '' }) {
+export default function TopBasicNav() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 

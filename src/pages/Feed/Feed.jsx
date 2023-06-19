@@ -16,6 +16,7 @@ const Feed = () => {
   // 추후 무한 스크롤 작업을 위한 state
   const [numPost, setNumPost] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
 
@@ -44,29 +45,31 @@ const Feed = () => {
 
   return (
     <>
-      <TopMainNav />
-      <ContentsLayout>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <PostWrapper>
-            {postList.length > 0 ? (
-              <>
-                {postList.map((post, index) => {
-                  return <Post key={index} post={post} />;
-                })}
-              </>
-            ) : (
-              <EmptyPost>
-                <img src={SYMBOL_LOGO_GRAY} alt='' />
-                <p>유저를 검색해 팔로우 해보세요!</p>
-                <Button mBtn>검색하기</Button>
-              </EmptyPost>
-            )}
-          </PostWrapper>
-        )}
-      </ContentsLayout>
-      <TabNav currentId={0} />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <TopMainNav />
+          <ContentsLayout>
+            <PostWrapper>
+              {postList.length > 0 ? (
+                <>
+                  {postList.map((post, index) => {
+                    return <Post key={index} post={post} />;
+                  })}
+                </>
+              ) : (
+                <EmptyPost>
+                  <img src={SYMBOL_LOGO_GRAY} alt='' />
+                  <p>유저를 검색해 팔로우 해보세요!</p>
+                  <Button mBtn>검색하기</Button>
+                </EmptyPost>
+              )}
+            </PostWrapper>
+          </ContentsLayout>
+          <TabNav currentId={0} />
+        </>
+      )}
     </>
   );
 };

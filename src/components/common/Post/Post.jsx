@@ -8,15 +8,21 @@ import styled from 'styled-components';
 import HeartBtn from '../HeartBtn';
 import { useParams, Link } from 'react-router-dom';
 import Loading from '../Loading';
+import PostModal from '../Modal/PostModal';
 
 export default function Post({
   loc,
   post = [], // post: {id, userId, content, img, like, comment, createdAt}
+  updatePost,
 }) {
   const [data, setData] = useState('');
   const [dateData, setDateData] = useState('');
   const [imageFile, setImageFile] = useState('');
+  const [modal, setModal] = useState(false);
   const { id } = useParams();
+  const [postId, setPostId] = useState('');
+  const [author, setAuthor] = useState('');
+
   useEffect(() => {
     if (post) {
       return setData({ ...post });
@@ -26,6 +32,8 @@ export default function Post({
   useEffect(() => {
     if (data) {
       setDateData(data.createdAt);
+      setPostId(data.id);
+      setAuthor(data.author.accountname);
       if (data.image) {
         setImageFile(data.image.split(','));
       }
@@ -39,58 +47,89 @@ export default function Post({
   return (
     <>
       {data ? (
-        <PostWrapper>
-          <ProfileImg src={data.author.image} alt='' />
-          <UserPost>
-            <UserInfo>
-              <h2>{data.author.username}</h2>
-              <p>@{data.author.accountname}</p>
-              <LinkTo to={'/profile/' + data.author.accountname}></LinkTo>
-            </UserInfo>
-            <UserText>
-              {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
-              {data.content}
-            </UserText>
-            {imageFile.length === 0 ? null : (
-              <ImgWrapper>
-                {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
-                {imageFile.length > 1 ? (
-                  imageFile.map((img, index) => {
-                    return (
-                      <li key={index}>
-                        <img src={img} alt='' />
-                      </li>
-                    );
-                  })
-                ) : (
-                  <li>
-                    <img src={imageFile[0]} alt='' />
-                  </li>
-                )}
-              </ImgWrapper>
-            )}
-
-            <PostBtnWrapper>
-              {loc === 'product' && (
-                <PostBtn className='chat-btn'>
-                  <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
-                  <span>채팅하기</span>
-                </PostBtn>
+        <>
+          <PostWrapper>
+            <ProfileImg src={data.author.image} alt='' />
+            <UserPost>
+              <UserInfo>
+                <h2>{data.author.username}</h2>
+                <p>@{data.author.accountname}</p>
+                <LinkTo to={'/profile/' + data.author.accountname}></LinkTo>
+              </UserInfo>
+              <UserText>
+                {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
+                {data.content}
+              </UserText>
+              {imageFile.length === 0 ? null : (
+                <ImgWrapper>
+                  {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
+                  {imageFile.length > 1 ? (
+                    imageFile.map((img, index) => {
+                      return (
+                        <li key={index}>
+                          <img src={img} alt='' />
+                        </li>
+                      );
+                    })
+                  ) : (
+                    <li>
+                      <img src={imageFile[0]} alt='' />
+                    </li>
+                  )}
+                </ImgWrapper>
               )}
-              <HeartBtn data={data} />
-              <PostBtn>
-                <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-                <span>{data.commentCount}</span>
-              </PostBtn>
-            </PostBtnWrapper>
-            <CreateTime dateTime={data.createdAt}>
-              {year}년 {month}월 {day}일
-            </CreateTime>
-          </UserPost>
-          <PostMenu>
-            <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
-          </PostMenu>
-        </PostWrapper>
+
+              <PostBtnWrapper>
+                {loc === 'product' && (
+                  <PostBtn className='chat-btn'>
+                    <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
+                    <span>채팅하기</span>
+                  </PostBtn>
+                )}
+                <HeartBtn data={data} />
+                <PostBtn>
+                  <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
+                  <span>{data.commentCount}</span>
+                </PostBtn>
+              </PostBtnWrapper>
+              <CreateTime dateTime={data.createdAt}>
+                {year}년 {month}월 {day}일
+              </CreateTime>
+            </UserPost>
+            <PostMenu
+              onClick={() => {
+                setModal(true);
+                console.log(data.author.accountname);
+              }}
+            >
+              <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+            </PostMenu>
+          </PostWrapper>
+          {localStorage.getItem('accountname') === author ? (
+            <>
+              {modal && (
+                <PostModal
+                  isModalOpen={modal}
+                  setIsModalOpen={setModal}
+                  id={postId}
+                  updatePost={updatePost}
+                  mode='delete'
+                />
+              )}
+            </>
+          ) : (
+            <>
+              {modal && (
+                <PostModal
+                  isModalOpen={modal}
+                  setIsModalOpen={setModal}
+                  id={postId}
+                  mode='report'
+                />
+              )}
+            </>
+          )}
+        </>
       ) : (
         <Loading />
       )}
@@ -116,6 +155,7 @@ const UserPost = styled.div`
   display: flex;
   flex-direction: column;
   padding: 4px 0;
+  width: 100%;
 `;
 
 const UserInfo = styled.div`
@@ -145,7 +185,7 @@ const ImgWrapper = styled.ul`
   overflow: hidden;
   margin-bottom: 12px;
   & li {
-    flex-basis: 100%;
+    flex-grow: 1;
     height: 228px;
     flex-shrink: 0;
   }

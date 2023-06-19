@@ -2,14 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import Overlay from './Overlay';
 
-const ConfirmModal = ({ title, trigger, triggerFunc, closeModal = '' }) => {
+const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
   return (
     <Overlay>
       <ConfirmModalWrapper>
         <h2>{title}</h2>
         <BtnContainer>
           <button onClick={closeModal}>취소</button>
-          <button onClick={triggerFunc}>{trigger}</button>
+          <button onClick={() => triggerFunc()}>{trigger}</button>
         </BtnContainer>
       </ConfirmModalWrapper>
     </Overlay>
