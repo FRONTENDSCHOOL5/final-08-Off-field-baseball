@@ -185,7 +185,7 @@ const ImgWrapper = styled.ul`
   overflow: hidden;
   margin-bottom: 12px;
   & li {
-    flex-grow: 1;
+    flex-basis: 100%;
     height: 228px;
     flex-shrink: 0;
   }
