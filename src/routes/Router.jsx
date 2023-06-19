@@ -5,7 +5,7 @@ import JoinProfile from '../pages/Join/JoinProfile';
 import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Profile from '../pages/Profile/Profile';
-import ProductUpload from '../pages/product/ProductUpload';
+import ProductUpload from '../pages/Product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
 import ChatList from '../pages/ChatPage/ChatList/ChatList';
 import ChatRoom1 from '../pages/ChatPage/ChatRoom/ChatRoom1';
@@ -28,8 +28,10 @@ export default function Router() {
         <Route path='/profile' element={<Profile />} />
         <Route path='/profile/:accountname' element={<Profile />} />
         <Route path='/profile/:accountname/:type' element={<FollowList />} />
-        <Route path='/productupload' element={<ProductUpload />} />
+
+        <Route path='/product/upload' element={<ProductUpload />} />
         <Route path='/search' element={<Search />} />
+
         <Route path='/error404' element={<Error404 />} />
         <Route path='/chat' element={<ChatList />} />
         <Route path='/chat/user1' element={<ChatRoom1 />} />
