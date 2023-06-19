@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MoreModal from './MoreModal';
 import DeleteModal from './DeleteModal';
 import ReportModal from './ReportModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function PostModal({
   isModalOpen,
@@ -11,6 +12,7 @@ export default function PostModal({
   mode,
 }) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
+  const navigate = useNavigate();
   return (
     <>
       {isConfirmOpen ? (
@@ -41,7 +43,12 @@ export default function PostModal({
                 </button>
               </li>
               <li>
-                <button type='button'>수정</button>
+                <button
+                  type='button'
+                  onClick={() => navigate('/post/' + id + '/edit')}
+                >
+                  수정
+                </button>
               </li>
             </>
           ) : (

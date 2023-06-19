@@ -8,8 +8,6 @@ import styled from 'styled-components';
 import HeartBtn from '../HeartBtn';
 import { useParams, Link } from 'react-router-dom';
 import Loading from '../Loading';
-import DeleteModal from '../Modal/DeleteModal';
-import ReportModal from '../Modal/ReportModal';
 import PostModal from '../Modal/PostModal';
 
 export default function Post({
@@ -157,6 +155,7 @@ const UserPost = styled.div`
   display: flex;
   flex-direction: column;
   padding: 4px 0;
+  width: 100%;
 `;
 
 const UserInfo = styled.div`
@@ -186,7 +185,7 @@ const ImgWrapper = styled.ul`
   overflow: hidden;
   margin-bottom: 12px;
   & li {
-    flex-basis: 100%;
+    flex-grow: 1;
     height: 228px;
     flex-shrink: 0;
   }
