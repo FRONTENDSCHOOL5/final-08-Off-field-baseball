@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import styled from 'styled-components';
 import {
   POST_ALBUM_OFF,
@@ -10,6 +10,7 @@ import {
 import Post from '../../../components/common/Post/Post';
 import { Link, useParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
+import { UserContext } from '../../../context/UserContext';
 
 export default function UserPost() {
   const [isList, setIsList] = useState(true);
@@ -18,29 +19,22 @@ export default function UserPost() {
   const [numPost, setNumPost] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [update, setUpdate] = useState('');
-  const { accountname } = useParams();
+  const { username } = useParams();
 
   const [ref, inView] = useInView();
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const url = 'https://api.mandarin.weniv.co.kr';
-  // 테스트용 토큰
-  // context 사용해서 로그인한 유저의 토큰을 받아올 예정.
-  // localStorage.setItem(
-  //   'token',
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGE1OThjYjJjYjIwNTY2MzM0NmRmZSIsImV4cCI6MTY5MTk3NDIzNiwiaWF0IjoxNjg2NzkwMjM2fQ.PhATXqZV4NJUI8cd5aUmXThjG-UKPFUoE3m9PXZYjXA'
-  // );
-  // localStorage.setItem('accountname', 'Unbeatable_Lotte');
-  const token = localStorage.getItem('token');
-  const userAccountname = localStorage.getItem('accountname');
+
+  const { token, accountname } = useContext(UserContext);
 
   const getPostList = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(
         `${url}/post/${
-          accountname ? accountname : userAccountname
+          username ? username : accountname
         }/userpost?limit=10&skip=${numPost}`,
         {
           headers: {

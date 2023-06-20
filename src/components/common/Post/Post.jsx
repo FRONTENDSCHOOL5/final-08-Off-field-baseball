@@ -66,14 +66,12 @@ export default function Post({
                   {loc === 'product' ? (
                     <Product>
                       <img src={data.itemImage} alt='' />
-                      <ProductTitle>
-                        <h2>{data.itemName}</h2>
-                        <span>
-                          {data.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원'}
-                        </span>
-                      </ProductTitle>
+                      <h2>{data.itemName}</h2>
+                      <span>
+                        {data.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원'}
+                      </span>
                       <p>{data.link}</p>
                     </Product>
                   ) : (
@@ -90,7 +88,6 @@ export default function Post({
                       }}
                       modules={[Pagination]}
                     >
-                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                       <>
                         {imageFile.map((img, index) => {
                           return (
@@ -100,10 +97,12 @@ export default function Post({
                           );
                         })}
                       </>
+                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                     </SwiperWrapper>
                   ) : (
                     <ImgWrapper>
                       <li>
+                        {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                         <img src={imageFile[0]} alt='' />
                       </li>
                     </ImgWrapper>
@@ -149,6 +148,7 @@ export default function Post({
                   id={postId}
                   updatePost={updatePost}
                   mode='delete'
+                  loc={loc}
                 />
               )}
             </>
@@ -206,7 +206,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const UserText = styled.p`
+const UserText = styled.div`
   margin: 16px 0;
   font-size: 1.4rem;
   line-height: 1.3;
@@ -215,6 +215,7 @@ const UserText = styled.p`
 `;
 
 const SwiperWrapper = styled(Swiper)`
+  position: relative;
   margin-bottom: 12px;
   aspect-ratio: 304/228;
   width: 100%;
@@ -275,8 +276,11 @@ const PostMenu = styled.button`
   position: absolute;
   right: 0;
   top: 4px;
+  z-index: 200;
+  padding: 0px 0px 10px 10px;
   & img {
     width: 18px;
+    aspect-ratio: 1 / 1;
   }
 `;
 
@@ -285,22 +289,30 @@ const LinkTo = styled(Link)`
   inset: 0;
   padding: 16px 0;
   overflow: auto;
+  z-index: 100;
 `;
 
 const Product = styled.div`
   display: flex;
   flex-direction: column;
-`;
 
-const ProductTitle = styled.div`
-  margin: 12px 0;
+  img {
+    object-fit: cover;
+    border-radius: 10px;
+  }
 
   h2 {
     font-size: 1.6rem;
     font-weight: 700;
+    margin: 16px 0 8px;
   }
   span {
     font-size: 1.2rem;
     color: var(--primary-color);
+  }
+
+  p {
+    margin-top: 16px;
+    font-size: 1.4rem;
   }
 `;

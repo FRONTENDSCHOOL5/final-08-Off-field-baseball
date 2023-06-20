@@ -28,13 +28,12 @@ export default function Router() {
         <Route path='/post/:id' element={<Detail />} />
         <Route path='/post/:id/edit' element={<Upload />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/profile/:accountname' element={<Profile />} />
+        <Route path='/profile/:username' element={<Profile />} />
         <Route path='/profile/:accountname/:type' element={<FollowList />} />
-
         <Route path='/product/upload' element={<ProductUpload />} />
         <Route path='/product/:id' element={<ProductDetail />} />
+        <Route path='/product/:id/edit' element={<ProductUpload />} />
         <Route path='/search' element={<Search />} />
-
         <Route path='/error404' element={<Error404 />} />
         <Route path='/chat' element={<ChatList />} />
         <Route path='/chat/user1' element={<ChatRoom1 />} />

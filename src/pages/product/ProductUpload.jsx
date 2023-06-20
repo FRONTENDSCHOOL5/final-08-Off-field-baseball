@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
 import IMG_BUTTON from '../../assets/icons/img-button.png';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 export default function ProductUpload() {
   const [price, setPrice] = useState('');
@@ -9,6 +10,9 @@ export default function ProductUpload() {
   const [isValid, setIsValid] = useState(false);
   const [productName, setProductName] = useState('');
   const [link, setLink] = useState('');
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // 모든 입력칸에 값이 입력되면 저장 버튼 활성화
   useEffect(() => {
@@ -87,9 +91,84 @@ export default function ProductUpload() {
     console.log(json);
   };
 
+  console.log(location.pathname.includes('edit'));
+
+  const handleEdit = async () => {
+    try {
+      const url = 'https://api.mandarin.weniv.co.kr';
+      const reqPath = `/product/${id}`;
+
+      const token = localStorage.getItem('token');
+
+      const reqUrl = url + reqPath;
+
+      const productData = {
+        product: {
+          itemName: productName,
+          price: isNaN(price) ? parseInt(price.replace(/,/g, '')) : price,
+          link: link,
+          itemImage: imgPre,
+        },
+      };
+
+      const res = await fetch(reqUrl, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+      const json = await res.json();
+      console.log(json);
+      alert('수정되었습니다.');
+      navigate('/profile');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const beforeEdit = async () => {
+    try {
+      const url = 'https://api.mandarin.weniv.co.kr';
+      const reqPath = `/product/detail/${id}`;
+
+      const token = localStorage.getItem('token');
+
+      const reqUrl = url + reqPath;
+
+      const res = await fetch(reqUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const json = await res.json();
+      setPrice(json.product.price);
+      setImgPre(json.product.itemImage);
+      setProductName(json.product.itemName);
+      setLink(json.product.link);
+      console.log(json);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      beforeEdit();
+    }
+  }, []);
+
   return (
     <>
-      <TopUploadNav isValid={isValid} event={handleProductUpload} />
+      <TopUploadNav
+        isValid={isValid}
+        event={
+          location.pathname.includes('edit') ? handleEdit : handleProductUpload
+        }
+      />
       <ProductInfo>
         <span>이미지 등록</span>
         <EmptyImg>
@@ -124,7 +203,7 @@ export default function ProductUpload() {
             maxLength='25'
             placeholder='2~25자 이내여야 합니다.'
             required
-            value={productName}
+            value={productName && productName}
             onChange={(e) => setProductName(e.target.value)}
           />
 
@@ -136,7 +215,7 @@ export default function ProductUpload() {
             id='price'
             placeholder='숫자만 입력이 가능합니다.'
             required
-            value={price}
+            value={price && price}
             onChange={addComma}
           />
 
@@ -145,7 +224,7 @@ export default function ProductUpload() {
             id='info'
             placeholder='판매하는 상품 정보를 입력해주세요.'
             required
-            value={link}
+            value={link && link}
             onChange={(e) => {
               ResizeHeight(e);
               setLink(e.target.value);

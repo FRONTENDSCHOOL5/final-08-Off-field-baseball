@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useCallback } from 'react';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Post from '../../components/common/Post/Post';
 import { useEffect } from 'react';
 import Loading from '../../components/common/Loading';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
 import CommentList from './CommentList';
+import { UserContext } from '../../context/UserContext';
+import { useInView } from 'react-intersection-observer';
 
 const Detail = () => {
   const [post, setPost] = useState([]);
@@ -18,8 +20,11 @@ const Detail = () => {
   //추후 무한 스크롤 구현을 위한 state
   const [numComment, setNumComment] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
   const url = 'https://api.mandarin.weniv.co.kr';
-  const token = localStorage.getItem('token');
+  const { token } = useContext(UserContext);
+  const { ref, inView } = useInView();
   let { id } = useParams();
 
   const getPostDetail = async () => {
@@ -69,7 +74,8 @@ const Detail = () => {
     }
   };
 
-  const getCommentList = async () => {
+  const getCommentList = useCallback(async () => {
+    setLoading(true);
     try {
       const req = await fetch(
         `${url}/post/${id}/comments/?limit=10&skip=${numComment}`,
@@ -82,18 +88,37 @@ const Detail = () => {
         }
       );
       const res = await req.json();
-      setCommentList(res.comments);
+      setCommentList(commentList.concat(res.comments));
+      if (res.comments.length < 10) setDone(true);
+      setLoading(false);
     } catch (err) {
       console.log(err);
+      setLoading(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numComment]);
+
+  useEffect(() => {
+    if (!done) {
+      getCommentList();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numComment]);
+
+  useEffect(() => {
+    if (inView && !loading) {
+      setNumComment((current) => current + 10);
+    }
+  }, [inView, loading]);
 
   useEffect(() => {
     getPostDetail();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, updateComment]);
 
   useEffect(() => {
     getCommentList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateComment]);
 
   return (
@@ -113,7 +138,14 @@ const Detail = () => {
               {commentList.length > 0 && (
                 <>
                   {commentList.map((comment, index) => {
-                    return (
+                    return commentList.length - 1 === index ? (
+                      <CommentList
+                        key={index}
+                        comment={comment}
+                        setUpdateComment={setUpdateComment}
+                        ref={ref}
+                      />
+                    ) : (
                       <CommentList
                         key={index}
                         comment={comment}
