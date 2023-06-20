@@ -14,6 +14,8 @@ import ChatRoom3 from '../pages/ChatPage/ChatRoom/ChatRoom3';
 import FollowList from '../pages/FollowList/FollowList';
 import Search from '../pages/Search/Search';
 import Detail from '../pages/Upload/Detail';
+import SplashScreen from '../pages/SplashScreen/SplashScreen';
+import SplashLogin from '../pages/Login/SplashLogin';
 
 export default function Router() {
   return (
@@ -37,7 +39,9 @@ export default function Router() {
         <Route path='/chat/user1' element={<ChatRoom1 />} />
         <Route path='/chat/user2' element={<ChatRoom2 />} />
         <Route path='/chat/user3' element={<ChatRoom3 />} />
-        <Route path='/follow' element={<FollowList />}></Route>
+        <Route path='/follow' element={<FollowList />} />
+        <Route path='/splash' element={<SplashScreen />} />
+        <Route path='/login' element={<SplashLogin />} />
       </Routes>
     </BrowserRouter>
   );

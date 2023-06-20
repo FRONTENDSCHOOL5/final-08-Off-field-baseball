@@ -12,6 +12,9 @@ import EAGLES from '../assets/images/eagles.png';
 import HEROES from '../assets/images/heroes.png';
 import BEARS from '../assets/images/bears.png';
 import LOADING from '../assets/images/loading.gif';
+import TEXT_LOGO from '../assets/images/text-logo.png';
+import BALL_ONLY from '../assets/images/ball-only.png';
+import SPEECH_BUBBLE from '../assets/images/speech-bubble.png';
 
 export {
   ERROR_404,
@@ -28,4 +31,7 @@ export {
   HEROES,
   BEARS,
   LOADING,
+  TEXT_LOGO,
+  BALL_ONLY,
+  SPEECH_BUBBLE,
 };
