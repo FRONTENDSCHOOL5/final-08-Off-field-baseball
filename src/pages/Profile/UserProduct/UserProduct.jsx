@@ -1,42 +1,59 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import TEST from '../../../assets/images/test.jpg';
+import { Link } from 'react-router-dom';
 
-export default function UserProduct() {
-  // 등록된 상품이 없을 경우를 위한 임시 state
-  const [isProductList, setIsProductList] = useState(true);
+export default function UserProduct({ accountname }) {
+  const [productList, setProductList] = useState([]);
+  const url = 'https://api.mandarin.weniv.co.kr';
+  const token = localStorage.getItem('token');
+
+  const getProductList = async () => {
+    try {
+      const req = await fetch(`${url}/product/${accountname}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const res = await req.json();
+      console.log(res);
+      setProductList(res.product);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      {isProductList && (
+      {productList && (
         <UserProductWrapper>
           <h2>판매중인 상품</h2>
           <UserProductList>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
+            {productList.map((product, index) => (
+              <UserProductItem key={index}>
+                <LinkTo to={`/product/${product.id}`} />
+                <img src={product.itemImage} alt={product.itemName} />
+                <p>{product.itemName}</p>
+                <strong>{product.price}원</strong>
+              </UserProductItem>
+            ))}
           </UserProductList>
         </UserProductWrapper>
       )}
     </>
   );
 }
+
+const LinkTo = styled(Link)`
+  position: absolute;
+  inset: 0;
+`;
 
 const UserProductWrapper = styled.div`
   height: 208px;
@@ -60,6 +77,7 @@ const UserProductList = styled.ul`
 `;
 
 const UserProductItem = styled.li`
+  position: relative;
   img {
     width: 140px;
     height: 90px;

@@ -62,7 +62,24 @@ export default function Post({
               </UserInfo>
               <UserText>
                 {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
-                {data.content}
+                <>
+                  {loc === 'product' ? (
+                    <Product>
+                      <img src={data.itemImage} alt='' />
+                      <ProductTitle>
+                        <h2>{data.itemName}</h2>
+                        <span>
+                          {data.price
+                            .toString()
+                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원'}
+                        </span>
+                      </ProductTitle>
+                      <p>{data.link}</p>
+                    </Product>
+                  ) : (
+                    data.content
+                  )}
+                </>
               </UserText>
               {imageFile.length === 0 ? null : (
                 <>
@@ -95,17 +112,20 @@ export default function Post({
               )}
 
               <PostBtnWrapper>
-                {loc === 'product' && (
+                {loc === 'product' ? (
                   <PostBtn className='chat-btn'>
                     <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
                     <span>채팅하기</span>
                   </PostBtn>
+                ) : (
+                  <>
+                    <HeartBtn data={data} />
+                    <PostBtn>
+                      <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
+                      <span>{data.commentCount}</span>
+                    </PostBtn>
+                  </>
                 )}
-                <HeartBtn data={data} />
-                <PostBtn>
-                  <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-                  <span>{data.commentCount}</span>
-                </PostBtn>
               </PostBtnWrapper>
               <CreateTime dateTime={data.createdAt}>
                 {year}년 {month}월 {day}일
@@ -265,4 +285,22 @@ const LinkTo = styled(Link)`
   inset: 0;
   padding: 16px 0;
   overflow: auto;
+`;
+
+const Product = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProductTitle = styled.div`
+  margin: 12px 0;
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+  }
+  span {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
 `;

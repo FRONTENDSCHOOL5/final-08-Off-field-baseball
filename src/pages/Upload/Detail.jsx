@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { BASIC_PROFILE_SM } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';

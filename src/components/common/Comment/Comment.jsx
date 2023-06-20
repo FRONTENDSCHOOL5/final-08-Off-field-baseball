@@ -4,13 +4,7 @@ import styled from 'styled-components';
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 import { useState } from 'react';
 
-export default function UserSearch({
-  placeholder,
-  txt,
-  value,
-  setValue,
-  event,
-}) {
+export default function Comment({ placeholder, txt, value, setValue, event }) {
   const [isValid, setIsValid] = useState(false);
   // input에 입력된 텍스트를 담는다
 
@@ -39,7 +33,7 @@ export default function UserSearch({
   );
 }
 
-UserSearch.defaultProps = {
+Comment.defaultProps = {
   txt: '전송',
   placeholder: '메시지 입력하기...',
 };

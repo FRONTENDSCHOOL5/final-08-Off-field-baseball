@@ -15,6 +15,7 @@ import Search from '../pages/Search/Search';
 import Detail from '../pages/Upload/Detail';
 import SplashScreen from '../pages/SplashScreen/SplashScreen';
 import SplashLogin from '../pages/Login/SplashLogin';
+import ProductDetail from '../pages/Product/ProductDetail';
 
 export default function Router() {
   return (
@@ -31,6 +32,7 @@ export default function Router() {
         <Route path='/profile/:accountname/:type' element={<FollowList />} />
 
         <Route path='/product/upload' element={<ProductUpload />} />
+        <Route path='/product/:id' element={<ProductDetail />} />
         <Route path='/search' element={<Search />} />
 
         <Route path='/error404' element={<Error404 />} />
