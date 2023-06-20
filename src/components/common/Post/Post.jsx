@@ -9,6 +9,10 @@ import HeartBtn from '../HeartBtn';
 import { useParams, Link } from 'react-router-dom';
 import Loading from '../Loading';
 import PostModal from '../Modal/PostModal';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper';
+import 'swiper/css/pagination';
+import 'swiper/css';
 
 export default function Post({
   loc,
@@ -61,14 +65,19 @@ export default function Post({
                 {data.content}
               </UserText>
               {imageFile.length === 0 ? null : (
-                <ImgWrapper>
+                <ImgWrapper
+                  pagination={{
+                    clickable: true,
+                  }}
+                  modules={[Pagination]}
+                >
                   {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                   {imageFile.length > 1 ? (
                     imageFile.map((img, index) => {
                       return (
-                        <li key={index}>
+                        <SwiperSlide key={index}>
                           <img src={img} alt='' />
-                        </li>
+                        </SwiperSlide>
                       );
                     })
                   ) : (
@@ -155,7 +164,7 @@ const UserPost = styled.div`
   display: flex;
   flex-direction: column;
   padding: 4px 0;
-  width: 100%;
+  width: calc(100% - 55px);
 `;
 
 const UserInfo = styled.div`
@@ -179,19 +188,24 @@ const UserText = styled.p`
   word-break: break-all;
 `;
 
-const ImgWrapper = styled.ul`
-  position: relative;
-  display: flex;
-  overflow: hidden;
+const ImgWrapper = styled(Swiper)`
   margin-bottom: 12px;
-  & li {
-    flex-basis: 100%;
-    height: 228px;
-    flex-shrink: 0;
+  aspect-ratio: 304/228;
+  width: 100%;
+  .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    background: var(--primary-color);
   }
-  & li img {
+  .swiper-pagination-bullet {
+    background: white;
+    opacity: 1;
+  }
+  img {
     object-fit: cover;
     border-radius: 10px;
+  }
+  span {
+    width: 6px;
+    height: 6px;
   }
 `;
 
