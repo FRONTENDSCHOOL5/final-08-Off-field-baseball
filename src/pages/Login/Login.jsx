@@ -45,7 +45,7 @@ export default function Login({ team }) {
     });
 
     const json = await res.json();
-    console.log(res, json);
+
     if (json.user) {
       const token = json.user['token'];
       const accountname = json.user['accountname'];
@@ -120,13 +120,7 @@ export default function Login({ team }) {
         {warningMessage && <strong>{warningMessage}</strong>}
         <StyledButton
           type='submit'
-          bgColor={
-            isValid
-              ? myTeam
-                ? `var(--brand-color-${myTeam})`
-                : 'var(--primary-color)'
-              : 'var(--secondary-color)'
-          }
+          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >

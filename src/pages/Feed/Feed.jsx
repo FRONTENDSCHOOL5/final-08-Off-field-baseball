@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import TopMainNav from '../../components/common/TopNavBar/TopMainNav';
 import TabNav from '../../components/common/TabNavBar/TabNav';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
@@ -8,6 +8,7 @@ import Button from '../../components/common/Button/Button';
 import Post from '../../components/common/Post/Post';
 import Loading from '../../components/common/Loading';
 import { useInView } from 'react-intersection-observer';
+import { UserContext } from '../../context/UserContext';
 
 // 팔로우한 유저의 게시글이 있으면 게시글 리스트
 // 없으면 유저를 검색해 팔로우 해보세요! 문구와 검색하기 버튼
@@ -17,7 +18,7 @@ const Feed = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const url = 'https://api.mandarin.weniv.co.kr';
-  const token = localStorage.getItem('token');
+  const { token, myTeam } = useContext(UserContext);
 
   const [numPost, setNumPost] = useState(0);
   const [done, setDone] = useState(false);
@@ -85,7 +86,14 @@ const Feed = () => {
                 <EmptyPost>
                   <img src={SYMBOL_LOGO_GRAY} alt='' />
                   <p>유저를 검색해 팔로우 해보세요!</p>
-                  <Button mBtn>검색하기</Button>
+                  <Button
+                    mBtn
+                    bgColor={
+                      `var(--brand-color-${myTeam})` || 'var(--primary-color'
+                    }
+                  >
+                    검색하기
+                  </Button>
                 </EmptyPost>
               )}
             </PostWrapper>
