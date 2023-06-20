@@ -114,7 +114,13 @@ const Detail = () => {
               {commentList.length > 0 && (
                 <>
                   {commentList.map((comment, index) => {
-                    return <CommentList key={index} comment={comment} />;
+                    return (
+                      <CommentList
+                        key={index}
+                        comment={comment}
+                        setUpdateComment={setUpdateComment}
+                      />
+                    );
                   })}
                 </>
               )}
