@@ -30,6 +30,7 @@ export default function CommentList({ comment }) {
     return `${Math.floor(years)}년 전`;
   };
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isReportModalOpen, setIsReportModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleMoreBtn = (e) => {
@@ -60,6 +61,29 @@ export default function CommentList({ comment }) {
     } catch (err) {
       console.log(err);
       setIsReportModalOpen(false);
+    }
+  };
+  const deleteTriggerFunc = async (e) => {
+    const url = 'https://api.mandarin.weniv.co.kr';
+    try {
+      const res = await fetch(`${url}/post/${id}/comments/${comment.id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      const json = await res.json();
+
+      if (json.status === '200') {
+        alert('삭제되었습니다');
+        setIsDeleteModalOpen(false);
+      } else {
+        throw new Error('삭제에 실패했습니다');
+      }
+    } catch (err) {
+      console.log(err);
+      setIsDeleteModalOpen(false);
     }
   };
 
@@ -101,7 +125,9 @@ export default function CommentList({ comment }) {
             </button>
           </li>
           <li>
-            <button type='button'>삭제</button>
+            <button type='button' onClick={(e) => setIsDeleteModalOpen(true)}>
+              삭제
+            </button>
           </li>
         </MoreModal>
       )}
@@ -110,6 +136,14 @@ export default function CommentList({ comment }) {
           title='댓글을 신고할까요?'
           trigger='신고'
           triggerFunc={reportTriggerFunc}
+          closeModal
+        ></ConfirmModal>
+      )}
+      {isDeleteModalOpen && (
+        <ConfirmModal
+          title='댓글을 삭제할까요?'
+          trigger='삭제'
+          triggerFunc={deleteTriggerFunc}
           closeModal
         ></ConfirmModal>
       )}
