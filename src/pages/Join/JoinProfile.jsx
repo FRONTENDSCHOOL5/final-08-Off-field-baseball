@@ -227,7 +227,7 @@ export default function JoinProfile({ email, password }) {
         <input
           id='intro'
           type='text'
-          placeholder='자신과 판매할 상품에 대해 소개해 주세요!'
+          placeholder='자신에 대해 소개해 주세요!'
           value={intro}
           onBlur={handleIntroInp}
           onChange={(e) => {
@@ -248,7 +248,7 @@ export default function JoinProfile({ email, password }) {
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >
-          감귤마켓 시작하기
+          구장 밖 야구 시작하기
         </Button>
       </Form>
     </StyledJoinProfile>
