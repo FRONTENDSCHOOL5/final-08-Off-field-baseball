@@ -9,7 +9,7 @@ export const UserContext = createContext({
   setMyTeam: () => {},
 });
 
-const userProvider = ({ children }) => {
+const UserProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
   const [accountname, setAccountname] = useState(
     localStorage.getItem('accountname') || null
@@ -17,7 +17,7 @@ const userProvider = ({ children }) => {
   const [myTeam, setMyTeam] = useState(localStorage.getItem('myteam') || null);
   console.log(localStorage.getItem('myteam'));
   return (
-    <UserContextStore.Provider
+    <UserProvider.Provider
       value={{
         token,
         setToken,
@@ -28,8 +28,8 @@ const userProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserContextStore.Provider>
+    </UserProvider.Provider>
   );
 };
 
-export default userProvider;
+export default UserProvider;
