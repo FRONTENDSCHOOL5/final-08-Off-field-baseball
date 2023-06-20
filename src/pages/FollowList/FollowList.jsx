@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import TopTitleNav from '../../components/common/TopNavBar/TopTitleNav';
 import { useParams } from 'react-router-dom';
 import Loading from '../../components/common/Loading';
-import { UserContext } from '../../contexts/UserContext';
+import { UserContext } from '../../context/UserContext';
 
 export default function FollowList() {
   const { type, accountname } = useParams();
@@ -33,6 +33,7 @@ export default function FollowList() {
       }
     };
     getFollowList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
