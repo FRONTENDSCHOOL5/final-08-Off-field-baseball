@@ -19,7 +19,7 @@ export default function ProductUpload() {
     }
   }, [productName, price, link, imgPre]);
 
-  // 이미지 미리보기 생성
+  // 이미지 미리보기
   const handleImgChange = (e) => {
     const imgFile = e.target.files[0];
     handleImgUpload(imgFile);
