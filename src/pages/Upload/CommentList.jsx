@@ -137,7 +137,7 @@ export default function CommentList({ comment, setUpdateComment }) {
           title='댓글을 신고할까요?'
           trigger='신고'
           triggerFunc={reportTriggerFunc}
-          closeModal
+          closeModal={() => setIsReportModalOpen(false)}
         ></ConfirmModal>
       )}
       {isDeleteModalOpen && (
@@ -145,7 +145,7 @@ export default function CommentList({ comment, setUpdateComment }) {
           title='댓글을 삭제할까요?'
           trigger='삭제'
           triggerFunc={deleteTriggerFunc}
-          closeModal
+          closeModal={() => setIsDeleteModalOpen(false)}
         ></ConfirmModal>
       )}
     </Comments>
