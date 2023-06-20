@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { MORE_VERTICAL_LIGHT } from '../../styles/CommonIcons';
+import ConfirmModal from '../../components/common/Modal/ConfirmModal';
+import MoreModal from '../../components/common/Modal/MoreModal';
+import { useParams } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 export default function CommentList({ comment }) {
-  const navigate = useNavigate();
+  const { token } = useContext(UserContext);
 
+  const navigate = useNavigate();
   const displayedAt = (createdAt) => {
     const milliSeconds = new Date() - Date.parse(createdAt);
     console.log(milliSeconds);
@@ -24,37 +30,96 @@ export default function CommentList({ comment }) {
     return `${Math.floor(years)}년 전`;
   };
 
-  console.log(comment);
+  const [isReportModalOpen, setIsReportModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleMoreBtn = (e) => {
+    setIsModalOpen(true);
+  };
+  const { id } = useParams();
+  const reportTriggerFunc = async (e) => {
+    const url = 'https://api.mandarin.weniv.co.kr';
+    try {
+      const res = await fetch(
+        `${url}/post/${id}/comments/${comment.id}/report`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      const json = await res.json();
+
+      if (json.report) {
+        alert('신고되었습니다');
+        setIsReportModalOpen(false);
+      } else {
+        throw new Error('신고에 실패했습니다');
+      }
+    } catch (err) {
+      console.log(err);
+      setIsReportModalOpen(false);
+    }
+  };
+
   return (
     <Comments>
       {/* { 야구러버의 프로파일로 연결 } */}
-      <button
-        className='profile-img'
-        onClick={() =>
-          navigate(`/profile/${comment.author.accountname}`, {
-            profileData: comment.author,
-          })
-        }
-      >
-        <img src={comment.author.image} alt='' />
+      <div>
+        <button
+          className='profile-img'
+          onClick={() =>
+            navigate(`/profile/${comment.author.accountname}`, {
+              profileData: comment.author,
+            })
+          }
+        >
+          <img src={comment.author.image} alt='' />
+        </button>
+        <button
+          className='name'
+          onClick={() =>
+            navigate(`/profile/${comment.author.accountname}`, {
+              profileData: comment.author,
+            })
+          }
+        >
+          {comment.author.username}
+          <span className='time'>{displayedAt(comment.createdAt)}</span>
+        </button>
+        <p>{comment.content}</p>
+      </div>
+      <button type='button' className='more' onClick={handleMoreBtn}>
+        <img src={MORE_VERTICAL_LIGHT} alt='' />
       </button>
-      <button
-        className='name'
-        onClick={() =>
-          navigate(`/profile/${comment.author.accountname}`, {
-            profileData: comment.author,
-          })
-        }
-      >
-        {comment.author.username}
-        <span className='time'>{displayedAt(comment.createdAt)}</span>
-      </button>
-      <p>{comment.content}</p>
+      {isModalOpen && (
+        <MoreModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+          <li>
+            <button type='button' onClick={(e) => setIsReportModalOpen(true)}>
+              신고하기
+            </button>
+          </li>
+          <li>
+            <button type='button'>삭제</button>
+          </li>
+        </MoreModal>
+      )}
+      {isReportModalOpen && (
+        <ConfirmModal
+          title='댓글을 신고할까요?'
+          trigger='신고'
+          triggerFunc={reportTriggerFunc}
+          closeModal
+        ></ConfirmModal>
+      )}
     </Comments>
   );
 }
 
 const Comments = styled.li`
+  display: flex;
+  align-items: flex-start;
   .profile-img {
     display: inline-block;
     width: 36px;
@@ -81,5 +146,10 @@ const Comments = styled.li`
     margin: 4px 48px;
     font-size: 1.4rem;
     line-height: 1.8rem;
+  }
+  .more {
+    width: 20px;
+    aspect-ratio: 1/1;
+    margin: 5px 0 0 auto;
   }
 `;
