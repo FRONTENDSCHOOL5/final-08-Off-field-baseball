@@ -15,9 +15,9 @@ const UserProvider = ({ children }) => {
     localStorage.getItem('accountname') || null
   );
   const [myTeam, setMyTeam] = useState(localStorage.getItem('myteam') || null);
-  console.log(localStorage.getItem('myteam'));
+
   return (
-    <UserProvider.Provider
+    <UserContext.Provider
       value={{
         token,
         setToken,
@@ -28,7 +28,7 @@ const UserProvider = ({ children }) => {
       }}
     >
       {children}
-    </UserProvider.Provider>
+    </UserContext.Provider>
   );
 };
 
