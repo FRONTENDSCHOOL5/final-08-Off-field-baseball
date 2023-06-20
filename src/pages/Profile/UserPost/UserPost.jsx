@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import {
   POST_ALBUM_OFF,
@@ -9,16 +9,20 @@ import {
 } from '../../../styles/CommonIcons';
 import Post from '../../../components/common/Post/Post';
 import { Link, useParams } from 'react-router-dom';
+import { useInView } from 'react-intersection-observer';
 
 export default function UserPost() {
   const [isList, setIsList] = useState(true);
   const [posts, setPosts] = useState([]);
-  const [isPostExist, setIsPostExist] = useState(true);
-  // 추후 무한 스크롤 작업을 위한 state
+  const [isEmptyPost, setIsEmptyPost] = useState(false);
   const [numPost, setNumPost] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [update, setUpdate] = useState('');
   const { accountname } = useParams();
+
+  const [ref, inView] = useInView();
+  const [done, setDone] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const url = 'https://api.mandarin.weniv.co.kr';
   // 테스트용 토큰
@@ -31,8 +35,8 @@ export default function UserPost() {
   const token = localStorage.getItem('token');
   const userAccountname = localStorage.getItem('accountname');
 
-  const getPostList = async () => {
-    setIsLoading(true);
+  const getPostList = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await fetch(
         `${url}/post/${
@@ -47,26 +51,35 @@ export default function UserPost() {
         }
       );
       const data = await res.json();
+      setPosts(posts.concat(data.post));
+      setIsLoading(false);
+      setLoading(false);
       if (data.post.length === 0) {
-        setIsPostExist(false);
-      } else {
-        setPosts(data.post);
-        setIsPostExist(true);
+        setIsEmptyPost(true);
+      } else if (data.post.length < 10) {
+        setDone(true);
       }
     } catch (err) {
       console.log(err);
-      setIsPostExist(false);
     }
-    setIsLoading(false);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numPost]);
 
   useEffect(() => {
-    getPostList();
-  }, [update]);
+    if (!done) {
+      getPostList();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numPost, update]);
 
+  useEffect(() => {
+    if (inView && !loading) {
+      setNumPost((current) => current + 10);
+    }
+  }, [inView, loading]);
   return (
     <>
-      {isPostExist ? (
+      {!isEmptyPost ? (
         <>
           <PostViewBtns>
             <button onClick={() => setIsList(true)}>
@@ -88,7 +101,7 @@ export default function UserPost() {
             <PostList>
               {posts.map((post, index) =>
                 posts.length - 1 === index ? (
-                  <li key={index}>
+                  <li key={index} ref={ref}>
                     <Post post={post} updatePost={setUpdate} />
                   </li>
                 ) : (
