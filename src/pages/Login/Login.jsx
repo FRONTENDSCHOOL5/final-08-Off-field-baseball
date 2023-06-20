@@ -8,7 +8,8 @@ import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
-  const { setToken, setAccountname, myTeam } = useContext(UserContext);
+  const { setToken, setAccountname, setMyTeam, myTeam } =
+    useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
@@ -58,6 +59,7 @@ export default function Login({ team }) {
       // 마이팀 저장
       const team = await getTeam(json.user['token'], json.user.accountname);
       localStorage.setItem('myteam', team);
+      setMyTeam(team);
       goHome();
     } else {
       setWarningMessage(json.message);
