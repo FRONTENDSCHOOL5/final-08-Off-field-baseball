@@ -2,11 +2,13 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
+  const { myTeam } = useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
@@ -42,7 +44,7 @@ export default function Login({ team }) {
     });
 
     const json = await res.json();
-    console.log(json);
+    console.log(res, json);
     if (json.user) {
       const token = json.user['token'];
       localStorage.setItem('token', token);
@@ -107,7 +109,13 @@ export default function Login({ team }) {
         {warningMessage && <strong>{warningMessage}</strong>}
         <StyledButton
           type='submit'
-          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          bgColor={
+            isValid
+              ? myTeam
+                ? `var(--brand-color-${myTeam})`
+                : 'var(--primary-color)'
+              : 'var(--secondary-color)'
+          }
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >
