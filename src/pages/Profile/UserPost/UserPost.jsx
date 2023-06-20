@@ -23,11 +23,11 @@ export default function UserPost() {
   const url = 'https://api.mandarin.weniv.co.kr';
   // 테스트용 토큰
   // context 사용해서 로그인한 유저의 토큰을 받아올 예정.
-  localStorage.setItem(
-    'token',
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGE1OThjYjJjYjIwNTY2MzM0NmRmZSIsImV4cCI6MTY5MTk3NDIzNiwiaWF0IjoxNjg2NzkwMjM2fQ.PhATXqZV4NJUI8cd5aUmXThjG-UKPFUoE3m9PXZYjXA'
-  );
-  localStorage.setItem('accountname', 'Unbeatable_Lotte');
+  // localStorage.setItem(
+  //   'token',
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0OGE1OThjYjJjYjIwNTY2MzM0NmRmZSIsImV4cCI6MTY5MTk3NDIzNiwiaWF0IjoxNjg2NzkwMjM2fQ.PhATXqZV4NJUI8cd5aUmXThjG-UKPFUoE3m9PXZYjXA'
+  // );
+  // localStorage.setItem('accountname', 'Unbeatable_Lotte');
   const token = localStorage.getItem('token');
   const userAccountname = localStorage.getItem('accountname');
 
