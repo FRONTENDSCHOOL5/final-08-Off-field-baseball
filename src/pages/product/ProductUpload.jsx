@@ -93,7 +93,6 @@ export default function ProductUpload() {
       <ProductInfo>
         <span>이미지 등록</span>
         <EmptyImg>
-          {/* 임시 이미지 */}
           {imgPre && (
             <img
               style={{
@@ -105,7 +104,7 @@ export default function ProductUpload() {
           )}
 
           <label htmlFor='productImg'>
-            <img src={IMG_BUTTON} itemID='uploadBtn' alt='이미지 등록 버튼' />
+            <img src={IMG_BUTTON} id='uploadBtn' alt='이미지 등록 버튼' />
           </label>
           <input
             type='file'
@@ -141,7 +140,6 @@ export default function ProductUpload() {
             onChange={addComma}
           />
 
-          {/* textarea 크기 사용자가 조정 불가 */}
           <label htmlFor='info'>상품 소개</label>
           <textarea
             id='info'
