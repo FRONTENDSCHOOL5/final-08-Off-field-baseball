@@ -89,9 +89,9 @@ export default function ProductUpload() {
 
     const json = await res.json();
     console.log(json);
+    alert('상품이 등록되었습니다.');
+    navigate('/profile');
   };
-
-  console.log(location.pathname.includes('edit'));
 
   const handleEdit = async () => {
     try {

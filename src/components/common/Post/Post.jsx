@@ -112,7 +112,10 @@ export default function Post({
 
               <PostBtnWrapper>
                 {loc === 'product' ? (
-                  <PostBtn className='chat-btn'>
+                  <PostBtn
+                    className='chat-btn'
+                    onClick={() => alert('미구현 기능입니다.')}
+                  >
                     <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
                     <span>채팅하기</span>
                   </PostBtn>

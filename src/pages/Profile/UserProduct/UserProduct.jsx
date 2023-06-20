@@ -33,7 +33,7 @@ export default function UserProduct({ accountname }) {
 
   return (
     <>
-      {productList && (
+      {productList.length !== 0 ? (
         <UserProductWrapper>
           <h2>판매중인 상품</h2>
           <UserProductList>
@@ -52,7 +52,7 @@ export default function UserProduct({ accountname }) {
             ))}
           </UserProductList>
         </UserProductWrapper>
-      )}
+      ) : null}
     </>
   );
 }
