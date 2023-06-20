@@ -286,6 +286,7 @@ const StyledJoinProfile = styled.section`
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
     border-radius: 55px;
+    object-fit: cover;
   }
   #myTeam {
     margin-top: 9px;

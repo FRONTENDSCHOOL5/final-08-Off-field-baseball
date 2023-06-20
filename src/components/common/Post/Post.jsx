@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
+import { UserContext } from '../../../context/UserContext';
 
 export default function Post({
   loc,
@@ -26,6 +27,7 @@ export default function Post({
   const { id } = useParams();
   const [postId, setPostId] = useState('');
   const [author, setAuthor] = useState('');
+  const { accountname } = useContext(UserContext);
 
   useEffect(() => {
     if (post) {
@@ -133,14 +135,17 @@ export default function Post({
                 {year}년 {month}월 {day}일
               </CreateTime>
             </UserPost>
-            <PostMenu
-              onClick={() => {
-                setModal(true);
-                console.log(data.author.accountname);
-              }}
-            >
-              <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
-            </PostMenu>
+            {loc === 'product' &&
+            data.author.accountname !== accountname ? null : (
+              <PostMenu
+                onClick={() => {
+                  setModal(true);
+                  console.log(data.author.accountname);
+                }}
+              >
+                <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+              </PostMenu>
+            )}
           </PostWrapper>
           {localStorage.getItem('accountname') === author ? (
             <>

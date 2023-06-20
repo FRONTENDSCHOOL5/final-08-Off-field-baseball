@@ -21,9 +21,6 @@ export default function Profile() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const { token, accountname } = useContext(UserContext);
 
-  if (location.pathname === `/profile/${accountname}`) {
-    navigate('/profile');
-  }
   const getProfileInfo = async () => {
     setIsLoading(true);
     try {
@@ -52,9 +49,12 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (location.pathname === `/profile/${accountname}`) {
+      navigate('/profile');
+    }
     getProfileInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [username]);
+  }, []);
 
   return (
     <>

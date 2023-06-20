@@ -24,8 +24,25 @@ const Detail = () => {
   const [done, setDone] = useState(false);
   const url = 'https://api.mandarin.weniv.co.kr';
   const { token } = useContext(UserContext);
-  const { ref, inView } = useInView();
+  const { inView, ref } = useInView();
+  const [userImg, setUserImg] = useState('');
   let { id } = useParams();
+
+  const getUserProfile = async () => {
+    try {
+      const req = await fetch(`${url}/user/myInfo`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        method: 'GET',
+      });
+      const res = await req.json();
+      setUserImg(res.user.image);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const getPostDetail = async () => {
     setIsLoading(true);
@@ -99,6 +116,11 @@ const Detail = () => {
   }, [numComment]);
 
   useEffect(() => {
+    getUserProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (!done) {
       getCommentList();
     }
@@ -143,8 +165,9 @@ const Detail = () => {
                         key={index}
                         comment={comment}
                         setUpdateComment={setUpdateComment}
-                        ref={ref}
-                      />
+                      >
+                        <Refrence ref={ref}></Refrence>
+                      </CommentList>
                     ) : (
                       <CommentList
                         key={index}
@@ -163,6 +186,7 @@ const Detail = () => {
             value={comment}
             setValue={setComment}
             event={handleCommentSubmit}
+            userImg={userImg}
           ></Comment>
         </>
       )}
@@ -183,4 +207,9 @@ const CommentListSection = styled.ul`
 
 const PostWrapper = styled(ContentsLayout)`
   min-height: 0;
+`;
+
+const Refrence = styled.div`
+  position: absolute;
+  width: 100%;
 `;

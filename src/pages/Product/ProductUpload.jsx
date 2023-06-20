@@ -159,6 +159,7 @@ export default function ProductUpload() {
     if (id) {
       beforeEdit();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

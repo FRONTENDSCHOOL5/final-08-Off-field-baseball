@@ -8,8 +8,7 @@ import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
-  const { setToken, setAccountname, setMyTeam, myTeam } =
-    useContext(UserContext);
+  const { setToken, setAccountname, setMyTeam } = useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');

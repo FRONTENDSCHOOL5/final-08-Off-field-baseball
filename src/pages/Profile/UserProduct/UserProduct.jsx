@@ -19,7 +19,6 @@ export default function UserProduct({ accountname }) {
         },
       });
       const res = await req.json();
-      console.log(res);
       setProductList(res.product);
     } catch (err) {
       console.log(err);
