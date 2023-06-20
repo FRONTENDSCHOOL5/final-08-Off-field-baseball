@@ -8,7 +8,7 @@ import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
-  const { myTeam } = useContext(UserContext);
+  const { setToken, setAccountname, myTeam } = useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
@@ -47,13 +47,18 @@ export default function Login({ team }) {
     console.log(res, json);
     if (json.user) {
       const token = json.user['token'];
+      const accountname = json.user['accountname'];
+
       localStorage.setItem('token', token);
-      localStorage.setItem('accountname', json.user['accountname']);
+      localStorage.setItem('accountname', accountname);
+
+      setToken(token);
+      setAccountname(accountname);
 
       // 마이팀 저장
       const team = await getTeam(json.user['token'], json.user.accountname);
       localStorage.setItem('myteam', team);
-      navigate('/'); // 로그인에 성공하면 홈화면으로
+      goHome();
     } else {
       setWarningMessage(json.message);
     }
@@ -77,6 +82,10 @@ export default function Login({ team }) {
   const handleForm = (e) => {
     e.preventDefault();
     login();
+  };
+
+  const goHome = () => {
+    navigate('/home');
   };
 
   return (

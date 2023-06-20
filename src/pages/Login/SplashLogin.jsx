@@ -15,21 +15,21 @@ const SplashLogin = () => {
         <img src={FULL_LOGO} alt='구장 밖 야구 입니다.' />
         <LoginBox>
           <button className='kakao-login'>
-            <img LoginLogoImg src={KAKAO} alt='' />
+            <img src={KAKAO} alt='LoginLogoImg' />
             카카오톡 계정으로 로그인
           </button>
           <button className='google-login'>
-            <img LoginLogoImg src={GOOGLE} alt='' />
+            <img src={GOOGLE} alt='LoginLogoImg' />
             구글 계정으로 로그인
           </button>
           <button className='facebook-login'>
-            <img LoginLogoImg src={FACEBOOK} alt='' />
+            <img src={FACEBOOK} alt='LoginLogoImg' />
             페이스북 계정으로 로그인
           </button>
           <div className='login-join'>
             <button
               className='email-login'
-              onClick={() => navigate('/user/login')}
+              onClick={() => navigate('/login/email')}
             >
               이메일로 로그인
             </button>
