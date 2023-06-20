@@ -65,27 +65,33 @@ export default function Post({
                 {data.content}
               </UserText>
               {imageFile.length === 0 ? null : (
-                <ImgWrapper
-                  pagination={{
-                    clickable: true,
-                  }}
-                  modules={[Pagination]}
-                >
-                  {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
+                <>
                   {imageFile.length > 1 ? (
-                    imageFile.map((img, index) => {
-                      return (
-                        <SwiperSlide key={index}>
-                          <img src={img} alt='' />
-                        </SwiperSlide>
-                      );
-                    })
+                    <SwiperWrapper
+                      pagination={{
+                        clickable: true,
+                      }}
+                      modules={[Pagination]}
+                    >
+                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
+                      <>
+                        {imageFile.map((img, index) => {
+                          return (
+                            <SwiperSlide key={index}>
+                              <img src={img} alt='' />
+                            </SwiperSlide>
+                          );
+                        })}
+                      </>
+                    </SwiperWrapper>
                   ) : (
-                    <li>
-                      <img src={imageFile[0]} alt='' />
-                    </li>
+                    <ImgWrapper>
+                      <li>
+                        <img src={imageFile[0]} alt='' />
+                      </li>
+                    </ImgWrapper>
                   )}
-                </ImgWrapper>
+                </>
               )}
 
               <PostBtnWrapper>
@@ -188,7 +194,7 @@ const UserText = styled.p`
   word-break: break-all;
 `;
 
-const ImgWrapper = styled(Swiper)`
+const SwiperWrapper = styled(Swiper)`
   margin-bottom: 12px;
   aspect-ratio: 304/228;
   width: 100%;
@@ -206,6 +212,21 @@ const ImgWrapper = styled(Swiper)`
   span {
     width: 6px;
     height: 6px;
+  }
+`;
+
+const ImgWrapper = styled.ul`
+  position: relative;
+  display: flex;
+  margin-bottom: 12px;
+  & li {
+    flex-basis: 100%;
+    height: 228px;
+    flex-shrink: 0;
+  }
+  & li img {
+    object-fit: cover;
+    border-radius: 10px;
   }
 `;
 

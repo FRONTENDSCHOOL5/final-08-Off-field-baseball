@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from '../pages/Login/Login';
 import Join from '../pages/Join/Join';
-import JoinProfile from '../pages/Join/JoinProfile';
 import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Profile from '../pages/Profile/Profile';

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TopMainNav from '../../components/common/TopNavBar/TopMainNav';
 import TabNav from '../../components/common/TabNavBar/TabNav';
 import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
@@ -7,21 +7,25 @@ import { SYMBOL_LOGO_GRAY } from '../../styles/CommonImages';
 import Button from '../../components/common/Button/Button';
 import Post from '../../components/common/Post/Post';
 import Loading from '../../components/common/Loading';
+import { useInView } from 'react-intersection-observer';
 
 // 팔로우한 유저의 게시글이 있으면 게시글 리스트
 // 없으면 유저를 검색해 팔로우 해보세요! 문구와 검색하기 버튼
 
 const Feed = () => {
   const [postList, setPostList] = useState([]);
-  // 추후 무한 스크롤 작업을 위한 state
-  const [numPost, setNumPost] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
 
-  const getFeed = async () => {
-    setIsLoading(true);
+  const [numPost, setNumPost] = useState(0);
+  const [done, setDone] = useState(false);
+  const { ref, inView } = useInView();
+  const [loading, setLoading] = useState(false);
+
+  const getFeed = useCallback(async () => {
+    setLoading(true);
     try {
       const req = await fetch(`${url}/post/feed/?limit=10&skip=${numPost}`, {
         headers: {
@@ -31,18 +35,29 @@ const Feed = () => {
         method: 'GET',
       });
       const res = await req.json();
-      setPostList(res.posts);
+      setPostList(postList.concat(res.posts));
+      if (res.posts.length < 10) setDone(true);
       setIsLoading(false);
+      setLoading(false);
     } catch (err) {
       console.log(err);
       setIsLoading(false);
     }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numPost]);
 
   useEffect(() => {
-    getFeed();
-  }, []);
+    if (!done) {
+      getFeed();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numPost]);
 
+  useEffect(() => {
+    if (inView && !loading) {
+      setNumPost((current) => current + 10);
+    }
+  }, [inView, loading]);
   return (
     <>
       {isLoading ? (
@@ -55,7 +70,15 @@ const Feed = () => {
               {postList.length > 0 ? (
                 <>
                   {postList.map((post, index) => {
-                    return <Post key={index} post={post} />;
+                    return postList.length - 1 === index ? (
+                      <li key={index} ref={ref}>
+                        <Post post={post} />
+                      </li>
+                    ) : (
+                      <li key={index}>
+                        <Post key={index} post={post} />
+                      </li>
+                    );
                   })}
                 </>
               ) : (
@@ -96,7 +119,7 @@ const EmptyPost = styled.div`
   }
 `;
 
-const PostWrapper = styled.div`
+const PostWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;

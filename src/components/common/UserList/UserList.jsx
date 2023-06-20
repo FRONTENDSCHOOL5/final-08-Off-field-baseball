@@ -49,7 +49,7 @@ export default function UserList({ profileData, teamname }) {
   return (
     <>
       <UserListItem>
-        <Link to='#'>
+        <Link to={'/profile/' + data.accountname}>
           <img src={data.image} alt='' />
           <div className='user-info'>
             <h2>{data.username}</h2>
