@@ -126,7 +126,7 @@ export default function Upload() {
       const res = await req.json();
       console.log(res);
       setText(res.post.content);
-      setImgList(res.post.image.split(', '));
+      setImgList(res.post.image ? res.post.image.split(', ') : []);
       setIsValid(true);
     } catch (err) {
       console.log(err);
@@ -279,14 +279,12 @@ const StyledSection = styled.section`
     resize: none; // 크기 고정
     font-size: 1.4rem;
     line-height: 1.8rem;
-    border-radius: 8px;
   }
   textarea::placeholder {
     color: var(--gray-300);
   }
   textarea:focus {
-    outline: 1px solid var(--primary-color);
-    border-radius: 8px;
+    outline: none;
   }
   .uplode-img {
     width: 50px;
