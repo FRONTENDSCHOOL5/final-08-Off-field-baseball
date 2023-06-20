@@ -19,160 +19,145 @@ export default function ProductUpload() {
     }
   }, [productName, price, link, imgPre]);
 
-  // API
-  const handleProductUpload = async () => {
-    const url = 'https://api.mandarin.weniv.co.kr';
-    const reqPath = '/product';
+  // 이미지 미리보기 생성
+  const handleImgChange = (e) => {
+    const imgFile = e.target.files[0];
+    handleImgUpload(imgFile);
+  };
 
-    const productData = {
-      product: {
-        itemName: productName,
-        price: parseInt(price.replace(/,/g, '')),
-        link: link,
-        itemImage: imgPre,
-      },
-    };
+  // 이미지 업로드
+  const handleImgUpload = async (imgFile) => {
+    const formData = new FormData();
+    formData.append('image', imgFile);
 
-    if (imgPre !== null) {
-      const imgformData = new FormData();
-      imgformData.append('image', imgPre);
-
-      const imgReqPath = '/image/uploadfile';
-      const imgReqUrl = url + imgReqPath;
-      const imgRes = await fetch(imgReqUrl, {
+    const resImg = await fetch(
+      'https://api.mandarin.weniv.co.kr/image/uploadfile',
+      {
         method: 'POST',
-        body: imgformData,
-      });
-      console.log(imgRes);
-      const imgJson = await imgRes.json();
-
-      if (imgRes.ok) {
-        productData.product.itemImage =
-          'https://api.mandarin.weniv.co.kr/' + imgJson.filename;
-      } else {
-        console.log('이미지 업로드에 실패했습니다.', imgJson.error);
-        return;
+        body: formData,
       }
-    }
+    );
 
-    const reqUrl = url + reqPath;
-    const token = localStorage.getItem('token');
+    const jsonImg = await resImg.json();
+    const uploadImgUrl = 'https://api.mandarin.weniv.co.kr/' + jsonImg.filename;
+    setImgPre(uploadImgUrl);
 
-    localStorage.setItem('token', token);
-
-    const res = await fetch(reqUrl, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(productData),
-    });
-
-    const json = await res.json();
-    console.log(json);
-  };
-
-  // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
-  const addComma = (price) => {
-    const returnNum = price.target.value.replace(/[^0-9]/g, '');
-    const commaPrice = returnNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    setPrice(commaPrice);
-  };
-
-  const handleImageChange = (event) => {
-    const selectedImage = event.target.files[0];
-
-    // 이미지 미리보기 생성
-    // ※ 업로드 하지않고 팝업창을 껐을 때 오류가 납니다..
-    if (!selectedImage || !selectedImage.type.startsWith('image/')) {
-      console.log('이미지를 선택해주세요.');
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === FileReader.DONE) {
-        setImgPre(reader.result);
-      }
+    // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
+    const addComma = (price) => {
+      const returnNum = price.target.value.replace(/[^0-9]/g, '');
+      const commaPrice = returnNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      setPrice(commaPrice);
     };
-    reader.readAsDataURL(selectedImage);
-  };
 
-  const ResizeHeight = (e) => {
-    e.target.style.height = 'auto';
-    e.target.style.height = e.target.scrollHeight + 'px';
-  };
+    // 상품소개란 텍스트 길이만큼 textarea height 확대
+    const ResizeHeight = (e) => {
+      e.target.style.height = 'auto';
+      e.target.style.height = e.target.scrollHeight + 'px';
+    };
 
-  return (
-    <>
-      <TopUploadNav isValid={isValid} event={handleProductUpload} />
-      <ProductInfo>
-        <span>이미지 등록</span>
-        <EmptyImg>
-          {/* 임시 이미지 */}
-          {imgPre && (
-            <img
-              style={{
-                objectFit: 'cover',
-              }}
-              src={imgPre}
-              alt=''
+    // API
+    const handleProductUpload = async () => {
+      const url = 'https://api.mandarin.weniv.co.kr';
+      const reqPath = '/product';
+
+      const productData = {
+        product: {
+          itemName: productName,
+          price: parseInt(price.replace(/,/g, '')),
+          link: link,
+          itemImage: imgPre,
+        },
+      };
+
+      const token = localStorage.getItem('token');
+
+      // API 호출
+      const reqUrl = url + reqPath;
+
+      const res = await fetch(reqUrl, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+
+      const json = await res.json();
+      console.log(json);
+    };
+
+    return (
+      <>
+        <TopUploadNav isValid={isValid} event={handleProductUpload} />
+        <ProductInfo>
+          <span>이미지 등록</span>
+          <EmptyImg>
+            {/* 임시 이미지 */}
+            {imgPre && (
+              <img
+                style={{
+                  objectFit: 'cover',
+                }}
+                src={imgPre}
+                alt='상품 이미지 미리보기'
+              />
+            )}
+
+            <label htmlFor='productImg'>
+              <img src={IMG_BUTTON} itemID='uploadBtn' alt='이미지 등록 버튼' />
+            </label>
+            <input
+              type='file'
+              id='productImg'
+              name='product-img'
+              accept='image/*'
+              onChange={handleImgChange}
             />
-          )}
+          </EmptyImg>
 
-          <label htmlFor='productImg'>
-            <img src={IMG_BUTTON} id='uploadBtn' alt='' />
-          </label>
-          <input
-            type='file'
-            id='productImg'
-            name='product-img'
-            accept='image/*'
-            onChange={handleImageChange}
-          />
-        </EmptyImg>
+          <ProductInput>
+            <label htmlFor='name'>상품명</label>
+            <input
+              type='text'
+              id='name'
+              minLength='2'
+              maxLength='25'
+              placeholder='2~25자 이내여야 합니다.'
+              required
+              value={productName}
+              onChange={(e) => setProductName(e.target.value)}
+            />
 
-        <ProductInput>
-          <label htmlFor='name'>상품명</label>
-          <input
-            type='text'
-            id='name'
-            minLength='2'
-            maxLength='25'
-            placeholder='2~25자 이내여야 합니다.'
-            required
-            value={productName}
-            onChange={(e) => setProductName(e.target.value)}
-          />
-
-          {/* '숫자만 입력 가능합니다' 경고창 추가
+            {/* '숫자만 입력 가능합니다' 경고창 추가
           금액에 콤마(,) 추가 */}
-          <label htmlFor='price'>가격</label>
-          <input
-            type='text'
-            id='price'
-            placeholder='숫자만 입력이 가능합니다.'
-            required
-            value={price}
-            onChange={addComma}
-          />
+            <label htmlFor='price'>가격</label>
+            <input
+              type='text'
+              id='price'
+              placeholder='숫자만 입력이 가능합니다.'
+              required
+              value={price}
+              onChange={addComma}
+            />
 
-          {/* textarea 크기 사용자가 조정 불가 */}
-          <label htmlFor='info'>상품 소개</label>
-          <textarea
-            id='info'
-            placeholder='판매하는 상품 정보를 입력해주세요.'
-            required
-            value={link}
-            onChange={(e) => {
-              ResizeHeight(e);
-              setLink(e.target.value);
-            }}
-          />
-        </ProductInput>
-      </ProductInfo>
-    </>
-  );
+            {/* textarea 크기 사용자가 조정 불가 */}
+            <label htmlFor='info'>상품 소개</label>
+            <textarea
+              id='info'
+              placeholder='판매하는 상품 정보를 입력해주세요.'
+              required
+              value={link}
+              onChange={(e) => {
+                ResizeHeight(e);
+                setLink(e.target.value);
+              }}
+            />
+          </ProductInput>
+        </ProductInfo>
+      </>
+    );
+  };
 }
 
 const ProductInfo = styled.section`
