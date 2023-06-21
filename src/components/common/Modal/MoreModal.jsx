@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import Overlay from './Overlay';
 import styled from 'styled-components';
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import { UserContext } from '../../../context/UserContext';
 
 const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
+  const { myTeam } = useContext(UserContext);
   // tab을 누르면, 모달 안에서만 포커스 되게
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.key === 'Tab') {
@@ -31,7 +33,7 @@ const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
 
   return (
     <Overlay onClick={handleClick}>
-      <StyledDialog open role='dialog'>
+      <StyledDialog open role='dialog' myTeam={myTeam}>
         <ul onKeyDown={handleKeyDown} ref={optionList}>
           {children}
         </ul>
@@ -47,7 +49,7 @@ const StyledDialog = styled.dialog`
   bottom: 0;
   width: min(100%, 430px);
   border: none;
-  padding: 0;
+  padding: 0 10px;
   border-radius: 10px 10px 0 0;
 
   /* 밑에서 위로 모달 등장 */
@@ -69,13 +71,16 @@ const StyledDialog = styled.dialog`
     border-radius: 2px;
   }
   li > button {
-    padding: 14px 26px;
+    padding: 14px 16px;
     width: 100%;
     font-size: 1.4rem;
     line-height: 1.8rem;
     text-align: left;
   }
   button:focus {
-    outline: 1px solid var(--primary-color);
+    outline: none;
+    background-color: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+    border-radius: 8px;
   }
 `;
