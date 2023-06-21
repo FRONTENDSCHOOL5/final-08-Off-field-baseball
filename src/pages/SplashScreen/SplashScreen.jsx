@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { BALL_ONLY } from '../../styles/CommonImages';
@@ -6,8 +6,6 @@ import { TEXT_LOGO } from '../../styles/CommonImages';
 import { SPEECH_BUBBLE } from '../../styles/CommonImages';
 
 const LogoPage = () => {
-  const [loading, setLoding] = useState(true);
-
   const navigate = useNavigate();
   const timeout = () => {
     setTimeout(() => {

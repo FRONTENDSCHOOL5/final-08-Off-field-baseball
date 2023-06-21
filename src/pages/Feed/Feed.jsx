@@ -66,10 +66,10 @@ const Feed = () => {
       ) : (
         <>
           <TopMainNav />
-          <ContentsLayout>
-            <PostWrapper>
-              {postList.length > 0 ? (
-                <>
+          {postList.length > 0 ? (
+            <>
+              <ContentsLayout>
+                <PostWrapper>
                   {postList.map((post, index) => {
                     return postList.length - 1 === index ? (
                       <li key={index} ref={ref}>
@@ -81,23 +81,26 @@ const Feed = () => {
                       </li>
                     );
                   })}
-                </>
-              ) : (
-                <EmptyPost>
-                  <img src={SYMBOL_LOGO_GRAY} alt='' />
-                  <p>유저를 검색해 팔로우 해보세요!</p>
-                  <Button
-                    mBtn
-                    bgColor={
-                      `var(--brand-color-${myTeam})` || 'var(--primary-color'
-                    }
-                  >
-                    검색하기
-                  </Button>
-                </EmptyPost>
-              )}
-            </PostWrapper>
-          </ContentsLayout>
+                </PostWrapper>
+              </ContentsLayout>
+            </>
+          ) : (
+            <EmptyLayout>
+              <EmptyPost>
+                <img src={SYMBOL_LOGO_GRAY} alt='' />
+                <p>유저를 검색해 팔로우 해보세요!</p>
+                <Button
+                  mBtn
+                  bgColor={
+                    `var(--brand-color-${myTeam})` || 'var(--primary-color)'
+                  }
+                >
+                  검색하기
+                </Button>
+              </EmptyPost>
+            </EmptyLayout>
+          )}
+
           <TabNav currentId={0} />
         </>
       )}
@@ -111,7 +114,8 @@ const EmptyPost = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 210px;
+  justify-content: center;
+  flex-grow: 1;
   gap: 20px;
   p {
     font-size: 1.4rem;
@@ -131,4 +135,11 @@ const PostWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const EmptyLayout = styled(ContentsLayout)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;

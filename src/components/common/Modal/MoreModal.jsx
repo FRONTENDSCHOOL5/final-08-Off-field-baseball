@@ -27,6 +27,7 @@ const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
     if (isModalOpen) {
       optionList.current.firstElementChild.firstElementChild.focus();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
