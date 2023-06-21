@@ -149,7 +149,7 @@ const TabNavBar = styled.footer`
   height: 60px;
   position: fixed;
   bottom: 0;
-  z-index: 100;
+  z-index: 300;
   background-color: #fff;
   border-top: 1px solid var(--gray-200);
 `;
@@ -180,17 +180,13 @@ const TabNavLi = styled.li`
   .profile-fill path:nth-child(1),
   .profile-fill path:nth-child(4) {
     fill: ${(props) =>
-      props.myTeam
-        ? `var(--brand-color-${props.myTeam})`
-        : 'var(--primary-color)'};
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
   .message-fill path,
   .home-fill path,
   .profile-fill path:not(:first-child) {
     stroke: ${(props) =>
-      props.myTeam
-        ? `var(--brand-color-${props.myTeam})`
-        : 'var(--primary-color)'};
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
 `;
 
@@ -198,7 +194,7 @@ const TabNavTitle = styled.span`
   display: block;
   font-size: 1rem;
   color: ${(props) =>
-    props.myTeam
-      ? `var(--brand-color-${props.myTeam})`
-      : 'var(--primary-color)'};
+    props.id === props.currentId
+      ? 'var(--primary-color-' + (props.myTeam || 'defalt') + ')'
+      : 'var(--gray-400)'};
 `;

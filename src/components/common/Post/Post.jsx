@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
-  MESSAGE_CIRCLE_FILL,
 } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
 import HeartBtn from '../HeartBtn';
@@ -27,7 +26,7 @@ export default function Post({
   const { id } = useParams();
   const [postId, setPostId] = useState('');
   const [author, setAuthor] = useState('');
-  const { accountname } = useContext(UserContext);
+  const { accountname, myTeam } = useContext(UserContext);
 
   useEffect(() => {
     if (post) {
@@ -85,6 +84,7 @@ export default function Post({
                 <>
                   {imageFile.length > 1 ? (
                     <SwiperWrapper
+                      myTeam={myTeam}
                       pagination={{
                         clickable: true,
                       }}
@@ -118,7 +118,27 @@ export default function Post({
                     className='chat-btn'
                     onClick={() => alert('미구현 기능입니다.')}
                   >
-                    <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
+                    <svg
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        d='M21 11.5C21.0034 12.8199 20.6951 14.1219 20.1 15.3C19.3944 16.7117 18.3098 17.8992 16.9674 18.7293C15.6251 19.5594 14.0782 19.9994 12.5 20C11.1801 20.0034 9.87812 19.6951 8.7 19.1L3 21L4.9 15.3C4.30493 14.1219 3.99656 12.8199 4 11.5C4.00061 9.92176 4.44061 8.37485 5.27072 7.03255C6.10083 5.69025 7.28825 4.60557 8.7 3.9C9.87812 3.30493 11.1801 2.99656 12.5 3H13C15.0843 3.11499 17.053 3.99476 18.5291 5.47086C20.0052 6.94695 20.885 8.91565 21 11V11.5Z'
+                        fill={
+                          'var(--primary-color-' + (myTeam || 'defalt') + ')'
+                        }
+                        stroke={
+                          'var(--primary-color-' + (myTeam || 'defalt') + ')'
+                        }
+                        stroke-width='2'
+                        stroke-linecap='round'
+                        stroke-linejoin='round'
+                      />
+                    </svg>
+
                     <span>채팅하기</span>
                   </PostBtn>
                 ) : (
@@ -228,7 +248,8 @@ const SwiperWrapper = styled(Swiper)`
   aspect-ratio: 304/228;
   width: 100%;
   .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background: var(--primary-color);
+    background: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
   .swiper-pagination-bullet {
     background: white;
@@ -316,7 +337,8 @@ const Product = styled.div`
   }
   span {
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
 
   p {
