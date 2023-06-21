@@ -45,15 +45,10 @@ export default function FollowList() {
         ) : (
           <>
             <UserListWrap>
-              {followList.map((user, index) => {
-                return (
-                  <UserList
-                    key={index}
-                    profileData={user}
-                    teamname={user.intro.split('$')[1]}
-                  ></UserList>
-                );
-              })}
+              {followList &&
+                followList.map((user, index) => {
+                  return <UserList key={index} user={user}></UserList>;
+                })}
             </UserListWrap>
           </>
         )}
