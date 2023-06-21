@@ -8,7 +8,7 @@ import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
-  const { myTeam } = useContext(UserContext);
+  const { setToken, setAccountname, setMyTeam } = useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
@@ -44,16 +44,22 @@ export default function Login({ team }) {
     });
 
     const json = await res.json();
-    console.log(res, json);
+
     if (json.user) {
       const token = json.user['token'];
+      const accountname = json.user['accountname'];
+
       localStorage.setItem('token', token);
-      localStorage.setItem('accountname', json.user['accountname']);
+      localStorage.setItem('accountname', accountname);
+
+      setToken(token);
+      setAccountname(accountname);
 
       // 마이팀 저장
       const team = await getTeam(json.user['token'], json.user.accountname);
       localStorage.setItem('myteam', team);
-      navigate('/'); // 로그인에 성공하면 홈화면으로
+      setMyTeam(team);
+      goHome();
     } else {
       setWarningMessage(json.message);
     }
@@ -77,6 +83,10 @@ export default function Login({ team }) {
   const handleForm = (e) => {
     e.preventDefault();
     login();
+  };
+
+  const goHome = () => {
+    navigate('/home');
   };
 
   return (
@@ -109,13 +119,7 @@ export default function Login({ team }) {
         {warningMessage && <strong>{warningMessage}</strong>}
         <StyledButton
           type='submit'
-          bgColor={
-            isValid
-              ? myTeam
-                ? `var(--brand-color-${myTeam})`
-                : 'var(--primary-color)'
-              : 'var(--secondary-color)'
-          }
+          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >

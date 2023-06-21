@@ -88,6 +88,7 @@ export default function JoinProfile({ email, password }) {
     });
 
     const json = await res.json();
+
     if (json.user) {
       login(); // 회원가입에 성공하면 자동로그인
     } else {
@@ -319,6 +320,7 @@ const StyledJoinProfile = styled.section`
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
     border-radius: 55px;
+    object-fit: cover;
   }
   #myTeam {
     margin-top: 9px;

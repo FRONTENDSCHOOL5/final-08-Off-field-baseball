@@ -10,6 +10,7 @@ export default function PostModal({
   id,
   updatePost,
   mode,
+  loc,
 }) {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function PostModal({
               updatePost={updatePost}
               id={id}
               setIsModalOpen={setIsModalOpen}
+              loc={loc}
             />
           )}
           {mode === 'report' && (
@@ -45,7 +47,13 @@ export default function PostModal({
               <li>
                 <button
                   type='button'
-                  onClick={() => navigate('/post/' + id + '/edit')}
+                  onClick={() =>
+                    navigate(
+                      loc === 'product'
+                        ? '/product/' + id + '/edit'
+                        : '/post/' + id + '/edit'
+                    )
+                  }
                 >
                   수정
                 </button>
