@@ -75,7 +75,12 @@ export default function JoinProfile({ email, password }) {
         body: formData,
       });
       const json = await res.json();
+      console.log(json.filename);
       userData.user.image = 'https://api.mandarin.weniv.co.kr/' + json.filename;
+    } else {
+      // 서버에 저장된 기본 프로필 저장
+      userData.user.image =
+        'https://api.mandarin.weniv.co.kr/' + '1687309142552.png';
     }
 
     const reqUrl = url + reqPath;
