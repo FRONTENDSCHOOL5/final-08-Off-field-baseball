@@ -206,20 +206,28 @@ const StyledSelect = styled.div`
   .select-btn:focus,
   .select-btn.on {
     border-color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || '') + ')'};
+      props.myTeam ? `var(--primary-${props.myTeam})` : 'var(--primary-color)'};
   }
 
   li > button:hover {
     background: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+      props.myTeam
+        ? `var(--secondary-${props.myTeam})`
+        : 'var(--primary-color)'};
   }
   /* 현재 선택된 옵션 */
   li > button:focus {
     padding: 9px 5px;
     border: 2px solid
-      ${(props) => 'var(--primary-color-' + (props.myTeam || '') + ')'};
+      ${(props) =>
+        props.myTeam
+          ? `var(--primary-${props.myTeam})`
+          : 'var(--primary-color)'};
+
     background: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+      props.myTeam
+        ? `var(--secondary-${props.myTeam})`
+        : 'var(--primary-color)'};
   }
   button:focus {
     outline: none;

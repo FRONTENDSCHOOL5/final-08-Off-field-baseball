@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../../context/UserContext';
 
 export default function Comment({
   placeholder,
@@ -10,6 +11,7 @@ export default function Comment({
   event,
   userImg,
 }) {
+  const { myTeam } = useContext(UserContext);
   const [isValid, setIsValid] = useState(false);
   // input에 입력된 텍스트를 담는다
 
@@ -22,7 +24,7 @@ export default function Comment({
   };
 
   return (
-    <StyledForm onSubmit={event} isValid={isValid}>
+    <StyledForm onSubmit={event} isValid={isValid} myTeam={myTeam}>
       {/* 임시 이미지 */}
       <img src={userImg} alt='내 프로필 사진' />
       <input
@@ -65,8 +67,7 @@ const StyledForm = styled.form`
     padding-left: 8px;
   }
   input:focus {
-    outline: 1px solid var(--primary-color);
-    border-radius: 8px;
+    outline: none;
   }
   input::placeholder {
     color: var(--gray-300);
@@ -76,6 +77,8 @@ const StyledForm = styled.form`
     font-size: 1.4rem;
     line-height: 1.8rem;
     color: ${(props) =>
-      props.isValid ? 'var(--primary-color)' : 'var(--gray-300)'};
+      props.isValid
+        ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+        : 'var(--gray-300)'};
   }
 `;

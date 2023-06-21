@@ -2,7 +2,7 @@
   font-size: 10px;
 
   /* 메인 컬러 */
-  --primary-color: #52c33d;
+  --primary-color-: #52c33d;
 
   /* 구단별 컬러 */
   --primary-color-samsung: #0066b3;
@@ -17,7 +17,8 @@
   --primary-color-kt: #000;
 
   /* 서브 컬러 */
-  --secondary-color: #c9eac3;
+  --secondary-color-default: #c9eac3;
+
   --secondary-color-samsung: red;
   --secondary-color-hanwha: red;
   --secondary-color-kiwoom: red;

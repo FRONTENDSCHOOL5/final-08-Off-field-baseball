@@ -6,7 +6,7 @@ export default function Form({ children, handleForm }) {
   const { myTeam } = useContext(UserContext);
 
   return (
-    <StyledForm team={myTeam} onSubmit={handleForm || null}>
+    <StyledForm myTeam={myTeam} onSubmit={handleForm || null}>
       {children}
     </StyledForm>
   );
@@ -35,7 +35,7 @@ const StyledForm = styled.form`
   }
   input:focus:not(.invalid) {
     border-color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || '') + ')'};
+      props.myTeam ? `var(--primary${props.myTeam})` : 'var(--primary-color)'};
   }
   input::placeholder {
     color: var(--gray-200);

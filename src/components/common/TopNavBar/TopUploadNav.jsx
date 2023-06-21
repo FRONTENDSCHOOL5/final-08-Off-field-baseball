@@ -20,8 +20,8 @@ export default function TopUploadNav({ btnTxt, isValid, event }) {
         <Button
           bgColor={
             isValid
-              ? 'var(--primary-color-' + (myTeam || '') + ')'
-              : 'var(--secondary-color-' + (myTeam || '') + ')'
+              ? 'var(--primary-color-' + (myTeam || 'default') + ')'
+              : 'var(--secondary-color-' + (myTeam || 'default') + ')'
           }
           disabled={isValid ? '' : 'disabled'}
           sBtn

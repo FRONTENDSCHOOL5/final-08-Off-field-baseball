@@ -34,7 +34,9 @@ const MessageContent = styled.div`
 
 const MessageText = styled.p`
   background-color: ${(props) =>
-    'var(--primary-color-' + (props.myTeam || '') + ')'};
+    props.isValid
+      ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+      : 'var(--gray-300)'};
   color: white;
   font-weight: 400;
   font-size: 1.4rem;
@@ -49,7 +51,9 @@ const MessageImg = styled.img`
   object-fit: cover;
   background-size: cover;
   background-color: ${(props) =>
-    'var(--primary-color-' + (props.myTeam || '') + ')'};
+    props.isValid
+      ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+      : 'var(--gray-300)'};
   border-radius: 1rem;
   border: none;
   padding: 0;

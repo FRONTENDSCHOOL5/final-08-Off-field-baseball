@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Button from './Button/Button';
+import { UserContext } from '../../context/UserContext';
 
 export default function FollowBtn({ profileData, targetuser, ...props }) {
+  const { myTeam } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState(props.isfollow);
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
@@ -39,6 +41,7 @@ export default function FollowBtn({ profileData, targetuser, ...props }) {
             mBtn={props.mBtn ? 'mBtn' : null}
             xsBtn={props.xsBtn ? 'xsBtn' : null}
             whiteBtn={isFollowing ? 'whiteBtn' : null}
+            bgColor={'var(--primary-color-' + (myTeam || 'default') + ')'}
             onClick={handleFollow}
             padding='0'
           >

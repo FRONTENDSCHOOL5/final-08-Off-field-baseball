@@ -179,17 +179,22 @@ const TabNavLi = styled.li`
   .home-fill path:nth-child(1),
   .profile-fill path:nth-child(1),
   .profile-fill path:nth-child(4) {
-    fill: ${(props) => 'var(--primary-color-' + (props.myTeam || '') + ')'};
+    fill: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
   .message-fill path,
   .home-fill path,
   .profile-fill path:not(:first-child) {
-    stroke: ${(props) => 'var(--primary-color-' + (props.myTeam || '') + ')'};
+    stroke: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
 `;
 
 const TabNavTitle = styled.span`
   display: block;
   font-size: 1rem;
-  color: ${(props) => 'var(--primary-color-' + (props.myTeam || '') + ')'};
+  color: ${(props) =>
+    props.id === props.currentId
+      ? 'var(--primary-color-' + (props.myTeam || 'defalt') + ')'
+      : 'var(--gray-400)'};
 `;
