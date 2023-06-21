@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../../context/UserContext';
 
 export default function Form({ children, handleForm }) {
-  console.log(localStorage.getItem('myteam'));
+  const { myTeam } = useContext(UserContext);
+
   return (
-    <StyledForm
-      team={localStorage.getItem('myteam')}
-      onSubmit={handleForm || null}
-    >
+    <StyledForm team={myTeam} onSubmit={handleForm || null}>
       {children}
     </StyledForm>
   );

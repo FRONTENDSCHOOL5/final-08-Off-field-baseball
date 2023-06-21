@@ -1,46 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
-import TEST from '../../../assets/images/test.jpg';
+import { Link } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
 
-export default function UserProduct() {
-  // 등록된 상품이 없을 경우를 위한 임시 state
-  const [isProductList, setIsProductList] = useState(true);
+export default function UserProduct({ accountname }) {
+  const [productList, setProductList] = useState([]);
+  const url = 'https://api.mandarin.weniv.co.kr';
+  // const token = localStorage.getItem('token');
+  const { token } = useContext(UserContext);
+
+  const getProductList = async () => {
+    try {
+      const req = await fetch(`${url}/product/${accountname}`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const res = await req.json();
+      setProductList(res.product);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getProductList();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      {isProductList && (
+      {productList.length !== 0 ? (
         <UserProductWrapper>
           <h2>판매중인 상품</h2>
           <UserProductList>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
-            <UserProductItem>
-              <img src={TEST} alt='해당 상품의 이름' />
-              <p>야구 글러브</p>
-              <strong>35,000원</strong>
-            </UserProductItem>
+            {productList.map((product, index) => (
+              <UserProductItem key={index}>
+                <LinkTo to={`/product/${product.id}`} />
+                <img src={product.itemImage} alt={product.itemName} />
+                <p className='ellipsis'>{product.itemName}</p>
+                <strong>
+                  {product.price
+                    .toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                  원
+                </strong>
+              </UserProductItem>
+            ))}
           </UserProductList>
         </UserProductWrapper>
-      )}
+      ) : null}
     </>
   );
 }
 
+const LinkTo = styled(Link)`
+  position: absolute;
+  inset: 0;
+`;
+
 const UserProductWrapper = styled.div`
   height: 208px;
-  padding: 20px 0 20px 16px;
+  padding: 20px 0 0 16px;
   margin-bottom: 6px;
   border-bottom: 6px solid var(--gray-100);
   margin: 0 -16px;
@@ -57,9 +80,29 @@ const UserProductList = styled.ul`
   gap: 10px;
   overflow-x: scroll;
   overflow-y: hidden;
+  padding-bottom: 24px;
+  /* 스크롤바 설정*/
+  &::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  /* 스크롤바 막대 설정*/
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--gray-100);
+    /* 스크롤바 둥글게 설정    */
+    border-radius: 10px;
+    border: 1px solid var(--gray-300);
+  }
+
+  /* 스크롤바 뒷 배경 설정*/
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+  }
 `;
 
 const UserProductItem = styled.li`
+  position: relative;
+  width: 140px;
   img {
     width: 140px;
     height: 90px;
@@ -70,6 +113,8 @@ const UserProductItem = styled.li`
   p {
     font-size: 1.4rem;
     margin: 6px 0 4px;
+    width: 100%;
+    display: block;
   }
 
   strong {

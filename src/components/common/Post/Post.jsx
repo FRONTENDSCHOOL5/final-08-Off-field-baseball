@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
+import { UserContext } from '../../../context/UserContext';
 
 export default function Post({
   loc,
@@ -26,6 +27,7 @@ export default function Post({
   const { id } = useParams();
   const [postId, setPostId] = useState('');
   const [author, setAuthor] = useState('');
+  const { accountname } = useContext(UserContext);
 
   useEffect(() => {
     if (post) {
@@ -62,7 +64,22 @@ export default function Post({
               </UserInfo>
               <UserText>
                 {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
-                {data.content}
+                <>
+                  {loc === 'product' ? (
+                    <Product>
+                      <img src={data.itemImage} alt='' />
+                      <h2>{data.itemName}</h2>
+                      <span>
+                        {data.price
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '원'}
+                      </span>
+                      <p>{data.link}</p>
+                    </Product>
+                  ) : (
+                    data.content
+                  )}
+                </>
               </UserText>
               {imageFile.length === 0 ? null : (
                 <>
@@ -73,7 +90,6 @@ export default function Post({
                       }}
                       modules={[Pagination]}
                     >
-                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                       <>
                         {imageFile.map((img, index) => {
                           return (
@@ -83,10 +99,12 @@ export default function Post({
                           );
                         })}
                       </>
+                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                     </SwiperWrapper>
                   ) : (
                     <ImgWrapper>
                       <li>
+                        {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                         <img src={imageFile[0]} alt='' />
                       </li>
                     </ImgWrapper>
@@ -95,30 +113,39 @@ export default function Post({
               )}
 
               <PostBtnWrapper>
-                {loc === 'product' && (
-                  <PostBtn className='chat-btn'>
+                {loc === 'product' ? (
+                  <PostBtn
+                    className='chat-btn'
+                    onClick={() => alert('미구현 기능입니다.')}
+                  >
                     <img src={MESSAGE_CIRCLE_FILL} alt='채팅하기 버튼' />
                     <span>채팅하기</span>
                   </PostBtn>
+                ) : (
+                  <>
+                    <HeartBtn data={data} />
+                    <PostBtn>
+                      <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
+                      <span>{data.commentCount}</span>
+                    </PostBtn>
+                  </>
                 )}
-                <HeartBtn data={data} />
-                <PostBtn>
-                  <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
-                  <span>{data.commentCount}</span>
-                </PostBtn>
               </PostBtnWrapper>
               <CreateTime dateTime={data.createdAt}>
                 {year}년 {month}월 {day}일
               </CreateTime>
             </UserPost>
-            <PostMenu
-              onClick={() => {
-                setModal(true);
-                console.log(data.author.accountname);
-              }}
-            >
-              <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
-            </PostMenu>
+            {loc === 'product' &&
+            data.author.accountname !== accountname ? null : (
+              <PostMenu
+                onClick={() => {
+                  setModal(true);
+                  console.log(data.author.accountname);
+                }}
+              >
+                <img src={MORE_VERTICAL_LIGHT} alt='더보기 버튼' />
+              </PostMenu>
+            )}
           </PostWrapper>
           {localStorage.getItem('accountname') === author ? (
             <>
@@ -129,6 +156,7 @@ export default function Post({
                   id={postId}
                   updatePost={updatePost}
                   mode='delete'
+                  loc={loc}
                 />
               )}
             </>
@@ -186,7 +214,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const UserText = styled.p`
+const UserText = styled.div`
   margin: 16px 0;
   font-size: 1.4rem;
   line-height: 1.3;
@@ -195,6 +223,7 @@ const UserText = styled.p`
 `;
 
 const SwiperWrapper = styled(Swiper)`
+  position: relative;
   margin-bottom: 12px;
   aspect-ratio: 304/228;
   width: 100%;
@@ -255,8 +284,11 @@ const PostMenu = styled.button`
   position: absolute;
   right: 0;
   top: 4px;
+  z-index: 200;
+  padding: 0px 0px 10px 10px;
   & img {
     width: 18px;
+    aspect-ratio: 1 / 1;
   }
 `;
 
@@ -265,4 +297,30 @@ const LinkTo = styled(Link)`
   inset: 0;
   padding: 16px 0;
   overflow: auto;
+  z-index: 100;
+`;
+
+const Product = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  img {
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 16px 0 8px;
+  }
+  span {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+  }
+
+  p {
+    margin-top: 16px;
+    font-size: 1.4rem;
+  }
 `;
