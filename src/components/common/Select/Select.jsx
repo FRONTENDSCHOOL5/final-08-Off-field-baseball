@@ -1,6 +1,7 @@
 import { useRef } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../../context/UserContext';
 import { OPEN } from '../../../styles/CommonIcons';
 
 // btnId : label for과 연결
@@ -11,6 +12,7 @@ export default function Select({
   selectedOpt,
   setSelectedOpt,
 }) {
+  const { myTeam } = useContext(UserContext);
   const [isOn, setIsOn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [FocusOptIndex, setFocusOptIndex] = useState(null);
@@ -101,6 +103,7 @@ export default function Select({
 
   return (
     <StyledSelect
+      myTeam={myTeam}
       selectedOpt={selectedOpt}
       className='custom-select'
       onKeyDown={(e) => {
@@ -202,17 +205,26 @@ const StyledSelect = styled.div`
   /* 포커스, 액션 */
   .select-btn:focus,
   .select-btn.on {
-    border-color: var(--primary-color);
+    border-color: ${(props) =>
+      props.myTeam
+        ? 'var(--brand-color-' + props.myTeam + ')'
+        : 'var(--primary-color)'};
   }
 
   li > button:hover {
-    background: var(--secondary-color);
+    background: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || '') + ')'};
   }
   /* 현재 선택된 옵션 */
   li > button:focus {
     padding: 9px 5px;
-    border: 2px solid var(--primary-color);
-    background: var(--secondary-color);
+    border: 2px solid
+      ${(props) =>
+        props.myTeam
+          ? 'var(--brand-color-' + props.myTeam + ')'
+          : 'var(--primary-color)'};
+    background: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || '') + ')'};
   }
   button:focus {
     outline: none;
