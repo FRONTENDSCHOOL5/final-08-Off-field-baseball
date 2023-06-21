@@ -19,16 +19,19 @@
   /* 서브 컬러 */
   --secondary-color-default: #c9eac3;
 
-  --secondary-color-samsung: red;
-  --secondary-color-hanwha: red;
-  --secondary-color-kiwoom: red;
-  --secondary-color-lotte: red;
-  --secondary-color-lg: red;
-  --secondary-color-kia: red;
-  --secondary-color-ssg: red;
-  --secondary-color-doosan: red;
-  --secondary-color-nc: red;
-  --secondary-color-kt: red;
+  --secondary-color-samsung: #c6dbeb;
+  --secondary-color-hanwha: #f3ccbf;
+  --secondary-color-kiwoom: #e9c4cc;
+  --secondary-color-lotte: #c8daec;
+  --secondary-color-lg: #e9bfca;
+  --secondary-color-kia: #e9c5c9;
+  --secondary-color-ssg: #eac7cd;
+  --secondary-color-doosan: #d6d5e4;
+  --secondary-color-nc: #cadaee;
+  --secondary-color-kt: #dfdede;
+
+  /* kt 포인트 컬러 */
+  --tertiary-color-kt: #ed1b23;
 
   --gray-100: #f2f2f2;
   --gray-200: #dbdbdb;
