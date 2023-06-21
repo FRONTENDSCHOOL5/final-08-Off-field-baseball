@@ -35,7 +35,7 @@ const StyledForm = styled.form`
   }
   input:focus:not(.invalid) {
     border-color: ${(props) =>
-      props.myTeam ? `var(--primary${props.myTeam})` : 'var(--primary-color)'};
+      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
   }
   input::placeholder {
     color: var(--gray-200);
