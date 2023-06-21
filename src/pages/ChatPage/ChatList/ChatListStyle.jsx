@@ -79,7 +79,7 @@ const ProfileStyle = styled.div`
     width: 12px;
     height: 12px;
     background-color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || '') + ')'};
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     border-radius: 50%;
     top: 0;
     left: 0;
