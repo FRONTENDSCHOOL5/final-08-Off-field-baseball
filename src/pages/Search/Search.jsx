@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import TopSearchNav from '../../components/common/TopNavBar/TopSearchNav';
 import UserList from '../../components/common/UserList/UserList';
 import TabNav from '../../components/common/TabNavBar/TabNav';
 import styled from 'styled-components';
 import { UserContext } from '../../context/UserContext';
+import { debounce } from 'lodash';
 
 export default function Search() {
   const [searchUsers, setSearchUsers] = useState([]);
@@ -23,14 +24,15 @@ export default function Search() {
       return response.json();
     } catch {}
   }
-  const onTyping = (searchKeyword) => {
+  const onTyping = debounce((searchKeyword) => {
     async function handleFetchData() {
       const users = await fetchData(searchKeyword);
       console.log(users);
+      console.log(searchKeyword);
       setSearchUsers(users.slice(0, 20));
     }
     handleFetchData();
-  };
+  }, 300);
 
   return (
     <>
