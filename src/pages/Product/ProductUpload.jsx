@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
-import IMG_BUTTON from '../../assets/icons/img-button.png';
+import { IMG_BUTTON, X } from '../../styles/CommonIcons';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 
 export default function ProductUpload() {
   const [price, setPrice] = useState('');
-  const [imgPre, setImgPre] = useState(null);
+  const [imgPre, setImgPre] = useState('');
   const [isValid, setIsValid] = useState(false);
   const [productName, setProductName] = useState('');
   const [link, setLink] = useState('');
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // 모든 입력칸에 값이 입력되면 저장 버튼 활성화
   useEffect(() => {
@@ -30,17 +34,28 @@ export default function ProductUpload() {
     const formData = new FormData();
     formData.append('image', imgFile);
 
-    const resImg = await fetch(
-      'https://api.mandarin.weniv.co.kr/image/uploadfile',
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+    try {
+      const resImg = await fetch(
+        'https://api.mandarin.weniv.co.kr/image/uploadfile',
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
 
-    const jsonImg = await resImg.json();
-    const uploadImgUrl = 'https://api.mandarin.weniv.co.kr/' + jsonImg.filename;
-    setImgPre(uploadImgUrl);
+      if (!resImg.ok) {
+        throw new Error('Image upload failed');
+      }
+
+      const jsonImg = await resImg.json();
+      const uploadImgUrl =
+        'https://api.mandarin.weniv.co.kr/' + jsonImg.filename;
+      setImgPre(uploadImgUrl);
+    } catch (error) {
+      console.error(error);
+      // 이미지가 정상적으로 선택되지 않았을 때 경고창
+      alert('업로드할 이미지를 선택해주세요.');
+    }
   };
 
   // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
@@ -48,12 +63,22 @@ export default function ProductUpload() {
     const returnNum = price.target.value.replace(/[^0-9]/g, '');
     const commaPrice = returnNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     setPrice(commaPrice);
+    // 숫자가 아닌 값 입력 시 경고창
+    if (price.target.value.trim() !== '' && !/^\d+$/.test(returnNum)) {
+      alert('숫자만 입력이 가능합니다.');
+      return;
+    }
   };
 
   // 상품소개란 텍스트 길이만큼 textarea height 확대
   const ResizeHeight = (e) => {
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
+  };
+
+  // 이미지 삭제
+  const handleImgDelete = () => {
+    setImgPre(null);
   };
 
   // API
@@ -86,11 +111,87 @@ export default function ProductUpload() {
 
     const json = await res.json();
     console.log(json);
+    alert('상품이 등록되었습니다.');
+    navigate('/profile');
   };
+
+  const handleEdit = async () => {
+    try {
+      const url = 'https://api.mandarin.weniv.co.kr';
+      const reqPath = `/product/${id}`;
+
+      const token = localStorage.getItem('token');
+
+      const reqUrl = url + reqPath;
+
+      const productData = {
+        product: {
+          itemName: productName,
+          price: isNaN(price) ? parseInt(price.replace(/,/g, '')) : price,
+          link: link,
+          itemImage: imgPre,
+        },
+      };
+
+      const res = await fetch(reqUrl, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(productData),
+      });
+      const json = await res.json();
+      console.log(json);
+      alert('수정되었습니다.');
+      navigate('/profile');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const beforeEdit = async () => {
+    try {
+      const url = 'https://api.mandarin.weniv.co.kr';
+      const reqPath = `/product/detail/${id}`;
+
+      const token = localStorage.getItem('token');
+
+      const reqUrl = url + reqPath;
+
+      const res = await fetch(reqUrl, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json',
+        },
+      });
+      const json = await res.json();
+      setPrice(json.product.price);
+      setImgPre(json.product.itemImage);
+      setProductName(json.product.itemName);
+      setLink(json.product.link);
+      console.log(json);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    if (id) {
+      beforeEdit();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
-      <TopUploadNav isValid={isValid} event={handleProductUpload} />
+      <TopUploadNav
+        isValid={isValid}
+        event={
+          location.pathname.includes('edit') ? handleEdit : handleProductUpload
+        }
+      />
       <ProductInfo>
         <span>이미지 등록</span>
         <EmptyImg>
@@ -103,6 +204,9 @@ export default function ProductUpload() {
               alt='상품 이미지 미리보기'
             />
           )}
+          <button onClick={handleImgDelete}>
+            <img src={X} alt='이미지 삭제하기' />
+          </button>
 
           <label htmlFor='productImg'>
             <img src={IMG_BUTTON} id='uploadBtn' alt='이미지 등록 버튼' />
@@ -125,19 +229,17 @@ export default function ProductUpload() {
             maxLength='25'
             placeholder='2~25자 이내여야 합니다.'
             required
-            value={productName}
+            value={productName && productName}
             onChange={(e) => setProductName(e.target.value)}
           />
 
-          {/* '숫자만 입력 가능합니다' 경고창 추가
-          금액에 콤마(,) 추가 */}
           <label htmlFor='price'>가격</label>
           <input
             type='text'
             id='price'
             placeholder='숫자만 입력이 가능합니다.'
             required
-            value={price}
+            value={price && price}
             onChange={addComma}
           />
 
@@ -146,7 +248,7 @@ export default function ProductUpload() {
             id='info'
             placeholder='판매하는 상품 정보를 입력해주세요.'
             required
-            value={link}
+            value={link && link}
             onChange={(e) => {
               ResizeHeight(e);
               setLink(e.target.value);
@@ -192,6 +294,14 @@ const EmptyImg = styled.div`
 
   #productImg {
     display: none;
+  }
+
+  button {
+    position: absolute;
+    width: 22px;
+    top: 6px;
+    left: 6px;
+    background-color: transparent;
   }
 `;
 
