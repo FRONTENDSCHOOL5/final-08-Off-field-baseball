@@ -1,18 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TopSearchNav from '../../components/common/TopNavBar/TopSearchNav';
 import UserList from '../../components/common/UserList/UserList';
 import TabNav from '../../components/common/TabNavBar/TabNav';
 import styled from 'styled-components';
+import { UserContext } from '../../context/UserContext';
 
 export default function Search() {
+  const [searchUsers, setSearchUsers] = useState([]);
+
+  const { token } = useContext(UserContext);
+
+  async function fetchData(searchKeyword) {
+    try {
+      const response = await fetch(
+        `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${searchKeyword}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.json();
+    } catch {}
+  }
+  const onTyping = (searchKeyword) => {
+    async function handleFetchData() {
+      const users = await fetchData(searchKeyword);
+      console.log(users);
+      setSearchUsers(users.slice(0, 20));
+    }
+    handleFetchData();
+  };
+
   return (
     <>
-      <TopSearchNav />
+      <TopSearchNav onTyping={onTyping} />
       <SearchList>
-        {/* 임시 props */}
-        <UserList loc='follow' id='samsung' nickname='오재일' isFollow={true} />
-        <UserList loc='follow' id='hanwha' nickname='문동주' isFollow={false} />
-        <UserList loc='follow' id='lotte' nickname='김원중' isFollow={true} />
+        {searchUsers.map((user) => {
+          return <UserList key={user._id} user={user} />;
+        })}
       </SearchList>
       <TabNav />
     </>
