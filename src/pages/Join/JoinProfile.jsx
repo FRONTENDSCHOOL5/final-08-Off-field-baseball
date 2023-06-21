@@ -4,14 +4,15 @@ import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
 import Button from '../../components/common/Button/Button';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 export default function JoinProfile({ email, password }) {
   const navigate = useNavigate();
   const [isValid, setIsVaild] = useState(false);
   const [username, setUsername] = useState('');
-  const [accountname, setAccountname] = useState('');
+  const [accountname, setAccountnameValue] = useState('');
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState('');
   const [src, setSrc] = useState(BASIC_PROFILE_LG);
@@ -19,6 +20,8 @@ export default function JoinProfile({ email, password }) {
   const [messageAccountname, setMessageAccountname] = useState('');
   const [messageUsername, setMessageUsername] = useState('');
   const [selectedOpt, setSelectedOpt] = useState('');
+
+  const { setAccountname, setMyTeam, setToken } = useContext(UserContext);
 
   // 소개는 필수값이 아니어서, 입력값이 없는 처음엔 true
   const [isVaildIntro, setIsVaildIntro] = useState(true);
@@ -73,6 +76,10 @@ export default function JoinProfile({ email, password }) {
       });
       const json = await res.json();
       userData.user.image = 'https://api.mandarin.weniv.co.kr/' + json.filename;
+    } else {
+      // 서버에 저장된 기본 프로필 저장
+      userData.user.image =
+        'https://api.mandarin.weniv.co.kr/' + '1687309142552.png';
     }
 
     const reqUrl = url + reqPath;
@@ -85,22 +92,53 @@ export default function JoinProfile({ email, password }) {
     });
 
     const json = await res.json();
-    console.log(json);
+
     if (json.user) {
-      navigate('/login/email');
+      login(); // 회원가입에 성공하면 자동로그인
     } else {
       alert(json.message);
     }
-    // if (json.user) {
-    //   navigate('/user/login'); // 회원가입에 성공하면 로그인화면으로 (추후 자동로그인 고려)
-    // } else {
-    //   alert(json.message);
-    // }
   };
-
   const handleForm = (e) => {
     e.preventDefault();
     join();
+  };
+  // 자동로그인
+  const login = async () => {
+    const url = 'https://api.mandarin.weniv.co.kr';
+    const reqPath = '/user/login';
+
+    const loginData = {
+      user: {
+        email: email,
+        password: password,
+      },
+    };
+    const reqUrl = url + reqPath;
+    const res = await fetch(reqUrl, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify(loginData),
+    });
+
+    const json = await res.json();
+
+    if (json.user) {
+      const token = json.user['token'];
+      const accountname = json.user['accountname'];
+      const team = teamName[selectedOpt];
+      localStorage.setItem('token', token);
+      localStorage.setItem('accountname', accountname);
+      localStorage.setItem('myteam', teamName[selectedOpt]);
+      setAccountname(accountname);
+      setMyTeam(team);
+      setToken(token);
+      navigate('/'); // 자동로그인에 성공하면 홈화면으로
+    } else {
+      navigate('/user/login'); // 자동로그인에 실패하면 로그인화면으로
+    }
   };
 
   // 사용자 이름에서 포커스가 떠났을 때, 유효성 검사
@@ -222,7 +260,7 @@ export default function JoinProfile({ email, password }) {
           value={accountname}
           onBlur={handleAccountnameInp}
           onChange={(e) => {
-            setAccountname(e.target.value);
+            setAccountnameValue(e.target.value);
           }}
           className={messageAccountname && 'invalid'}
           required
