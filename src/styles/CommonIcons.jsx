@@ -15,7 +15,6 @@ import POST_LIST_ON from '../assets/icons/post-list-on.png';
 import POST_LIST_OFF from '../assets/icons/post-list-off.png';
 import IMG_BUTTON from '../assets/icons/img-button.png';
 import IMG_LAYERS from '../assets/icons/img-layers.png';
-import MESSAGE_CIRCLE_LG from '../assets/icons/message-circle-lg.png';
 import MESSAGE_CIRCLE_SM from '../assets/icons/message-circle-sm.png';
 import IMAGE from '../assets/icons/image.png';
 import BASIC_PROFILE_LG from '../assets/icons/basic-profile-lg.png';
@@ -40,7 +39,6 @@ export {
   POST_LIST_OFF,
   IMG_BUTTON,
   IMG_LAYERS,
-  MESSAGE_CIRCLE_LG,
   MESSAGE_CIRCLE_SM,
   IMAGE,
   BASIC_PROFILE_LG,
