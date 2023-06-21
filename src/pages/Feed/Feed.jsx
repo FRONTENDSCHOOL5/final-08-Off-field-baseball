@@ -88,9 +88,7 @@ const Feed = () => {
                   <p>유저를 검색해 팔로우 해보세요!</p>
                   <Button
                     mBtn
-                    bgColor={
-                      `var(--brand-color-${myTeam})` || 'var(--primary-color'
-                    }
+                    bgColor={'var(--primary-color-' + (myTeam || '') + ')'}
                   >
                     검색하기
                   </Button>
