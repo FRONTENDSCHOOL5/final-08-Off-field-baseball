@@ -7,13 +7,12 @@ import MoreModal from '../../components/common/Modal/MoreModal';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function CommentList({ comment, setUpdateComment }) {
+export default function CommentList({ comment, setUpdateComment, children }) {
   const { token } = useContext(UserContext);
 
   const navigate = useNavigate();
   const displayedAt = (createdAt) => {
     const milliSeconds = new Date() - Date.parse(createdAt);
-    console.log(milliSeconds);
     const seconds = milliSeconds / 1000;
     if (seconds < 60) return `방금 전`;
     const minutes = seconds / 60;
@@ -148,6 +147,7 @@ export default function CommentList({ comment, setUpdateComment }) {
           closeModal={() => setIsDeleteModalOpen(false)}
         ></ConfirmModal>
       )}
+      {children}
     </Comments>
   );
 }
@@ -155,6 +155,7 @@ export default function CommentList({ comment, setUpdateComment }) {
 const Comments = styled.li`
   display: flex;
   align-items: flex-start;
+  position: relative;
   .profile-img {
     display: inline-block;
     width: 36px;
@@ -162,6 +163,7 @@ const Comments = styled.li`
   img {
     width: 100%;
     aspect-ratio: 1/1;
+    border-radius: 50%;
   }
   .name {
     display: inline-block;
