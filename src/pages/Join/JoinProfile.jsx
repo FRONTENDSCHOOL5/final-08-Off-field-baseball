@@ -86,6 +86,11 @@ export default function JoinProfile({ email, password }) {
 
     const json = await res.json();
     console.log(json);
+    if (json.user) {
+      navigate('/login/email');
+    } else {
+      alert(json.message);
+    }
     // if (json.user) {
     //   navigate('/user/login'); // 회원가입에 성공하면 로그인화면으로 (추후 자동로그인 고려)
     // } else {
@@ -281,6 +286,7 @@ const StyledJoinProfile = styled.section`
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
     border-radius: 55px;
+    object-fit: cover;
   }
   #myTeam {
     margin-top: 9px;

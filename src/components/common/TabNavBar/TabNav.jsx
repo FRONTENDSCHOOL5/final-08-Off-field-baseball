@@ -30,7 +30,7 @@ const TabNav = ({ currentId }) => {
   const pageMove = (id) => {
     switch (id) {
       case 0:
-        navigate('/');
+        navigate('/home');
         break;
       case 1:
         navigate('/chat');
