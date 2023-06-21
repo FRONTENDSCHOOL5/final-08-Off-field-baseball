@@ -5,20 +5,20 @@
   --primary-color: #52c33d;
 
   /* 구단별 컬러 */
-  --brand-color-samsung: #0066b3;
-  --brand-color-hanwha: #f15a28;
-  --brand-color-kiwoom: #7d0521;
-  --brand-color-lotte: #022242;
-  --brand-color-lg: #be0737;
-  --brand-color-kia: #b51123;
-  --brand-color-ssg: #cf0a2c;
-  --brand-color-doosan: #131230;
-  --brand-color-nc: #1d467d;
-  --brand-color-kt: #000;
+  --primary-color-samsung: #0066b3;
+  --primary-color-hanwha: #f15a28;
+  --primary-color-kiwoom: #7d0521;
+  --primary-color-lotte: #022242;
+  --primary-color-lg: #be0737;
+  --primary-color-kia: #b51123;
+  --primary-color-ssg: #cf0a2c;
+  --primary-color-doosan: #131230;
+  --primary-color-nc: #1d467d;
+  --primary-color-kt: #000;
 
   /* 서브 컬러 */
   --secondary-color: #c9eac3;
-  /* --secondary-color-samsung: red;
+  --secondary-color-samsung: red;
   --secondary-color-hanwha: red;
   --secondary-color-kiwoom: red;
   --secondary-color-lotte: red;
@@ -27,7 +27,7 @@
   --secondary-color-ssg: red;
   --secondary-color-doosan: red;
   --secondary-color-nc: red;
-  --secondary-color-kt: red; */
+  --secondary-color-kt: red;
 
   --gray-100: #f2f2f2;
   --gray-200: #dbdbdb;

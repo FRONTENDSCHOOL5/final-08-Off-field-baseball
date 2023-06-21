@@ -206,9 +206,7 @@ const StyledSelect = styled.div`
   .select-btn:focus,
   .select-btn.on {
     border-color: ${(props) =>
-      props.myTeam
-        ? 'var(--brand-color-' + props.myTeam + ')'
-        : 'var(--primary-color)'};
+      'var(--primary-color-' + (props.myTeam || '') + ')'};
   }
 
   li > button:hover {
@@ -219,10 +217,7 @@ const StyledSelect = styled.div`
   li > button:focus {
     padding: 9px 5px;
     border: 2px solid
-      ${(props) =>
-        props.myTeam
-          ? 'var(--brand-color-' + props.myTeam + ')'
-          : 'var(--primary-color)'};
+      ${(props) => 'var(--primary-color-' + (props.myTeam || '') + ')'};
     background: ${(props) =>
       'var(--secondary-color-' + (props.myTeam || '') + ')'};
   }
