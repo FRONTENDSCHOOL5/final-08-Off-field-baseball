@@ -8,7 +8,7 @@ import { FACEBOOK } from '../../styles/CommonIcons';
 
 const SplashLogin = () => {
   const navigate = useNavigate();
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
 
   return (
     <>
@@ -53,6 +53,7 @@ const BackgroundStyle = styled.div`
   position: relative;
   background-color: #52c33d;
   height: 100vh;
+  overflow: hidden;
 
   img {
     width: 225px;
@@ -75,6 +76,7 @@ const LoginBox = styled.div`
   align-items: center;
   gap: 10px;
   padding: 50px 34px;
+
   /* 밑에서 위로 모달 등장 */
   transform: translateY(100%);
   animation: modal-animation 0.3s ease-in 0s 1 forwards running;

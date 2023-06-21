@@ -9,7 +9,7 @@ import Join from '../pages/Join/Join';
 import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Profile from '../pages/Profile/Profile';
-import ProductUpload from '../pages/product/ProductUpload';
+import ProductUpload from '../pages/Product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
 import ChatList from '../pages/ChatPage/ChatList/ChatList';
 import ChatRoom1 from '../pages/ChatPage/ChatRoom/ChatRoom1';
