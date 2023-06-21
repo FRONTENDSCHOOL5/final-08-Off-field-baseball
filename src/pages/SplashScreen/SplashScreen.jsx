@@ -12,7 +12,7 @@ const LogoPage = () => {
   const timeout = () => {
     setTimeout(() => {
       navigate('/login');
-    }, 3000);
+    }, 2900);
   };
   useEffect(() => {
     timeout();
@@ -58,8 +58,8 @@ const LogoPageDiv = styled.div`
   }
 
   animation: fadeOut;
-  animation-delay: 2.5s;
-  animation-duration: 1.5s;
+  animation-delay: 2.1s;
+  animation-duration: 1s;
 `;
 
 const SpeechBubble = styled.img`
@@ -80,7 +80,7 @@ const BallImg = styled.img`
   height: auto;
   animation: bounce;
   animation-delay: 0.5s;
-  animation-duration: 1.5s;
+  animation-duration: 1.3s;
 `;
 
 const TextLogo = styled.img`

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../../context/UserContext';
+import { OPEN } from '../../../styles/CommonIcons';
 
 // btnId : label for과 연결
 export default function Select({
@@ -126,6 +127,7 @@ export default function Select({
         }}
       >
         {selectedOpt || btnTxt}
+        <img src={OPEN} alt='' className={isOpen && 'open'} />
       </button>
 
       {isOpen && (
@@ -158,6 +160,7 @@ const findIndex = (target) => {
 const StyledSelect = styled.div`
   position: relative;
   .select-btn {
+    position: relative;
     width: 100%;
     border-radius: 8px;
     padding: 9px 14px 9px 13px;
@@ -165,6 +168,16 @@ const StyledSelect = styled.div`
     font-size: 1.4rem;
     border: 1px solid var(--gray-200);
     color: ${(props) => props.selectedOpt || 'var(--gray-200)'};
+  }
+  .select-btn img {
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+    width: 10px;
+    height: 9px;
+  }
+  .select-btn img.open {
+    transform: rotate(180deg);
   }
   ul {
     position: absolute;

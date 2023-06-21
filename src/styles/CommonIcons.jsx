@@ -27,6 +27,7 @@ import IMAGE from '../assets/icons/image.png';
 import HOME_FILL from '../assets/icons/home-fill.png';
 import BASIC_PROFILE_LG from '../assets/icons/basic-profile-lg.png';
 import BASIC_PROFILE_SM from '../assets/icons/basic-profile-sm.png';
+import OPEN from '../assets/icons/open.png';
 
 export {
   ARROW_LEFT,
@@ -58,4 +59,5 @@ export {
   BASIC_PROFILE_LG,
   BASIC_PROFILE_SM,
   HEART_FILL,
+  OPEN,
 };
