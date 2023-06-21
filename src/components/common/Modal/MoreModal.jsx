@@ -49,7 +49,7 @@ const StyledDialog = styled.dialog`
   bottom: 0;
   width: min(100%, 430px);
   border: none;
-  padding: 0 10px;
+  padding: 0 10px 10px;
   border-radius: 10px 10px 0 0;
 
   /* 밑에서 위로 모달 등장 */
@@ -80,7 +80,7 @@ const StyledDialog = styled.dialog`
   button:focus {
     outline: none;
     background-color: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
     border-radius: 8px;
   }
 `;
