@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
+import { UserContext } from '../../../context/UserContext';
 
 const UserChat = (props) => {
+  const { myTeam } = useContext(UserContext);
   return (
     <Wrapper>
       <img
@@ -14,7 +16,7 @@ const UserChat = (props) => {
         {!props.isImg ? (
           <MessageText>{props.children}</MessageText>
         ) : (
-          <MessageImg src={props.img} />
+          <MessageImg src={props.img} myTeam={myTeam} />
         )}
         <MessageTime>{props.time}</MessageTime>
       </MessageContent>
@@ -59,7 +61,8 @@ const MessageImg = styled.img`
   aspect-ratio: 1 / 1.5;
   object-fit: cover;
   background-size: cover;
-  background-color: var(--primary-color);
+  background-color: ${(props) =>
+    'var(--primary-color-' + (props.myTeam || '') + ')'};
   border-radius: 1rem;
   border: none;
   padding: 0;
