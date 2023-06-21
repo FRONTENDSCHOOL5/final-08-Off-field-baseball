@@ -58,7 +58,7 @@ export default function UserList({ user, team }) {
           <img src={user.image} alt='' />
           <div className='user-info'>
             <h2>{user.username}</h2>
-            <p>@{user.accountname}</p>
+            <p className='ellipsis'>@{user.accountname}</p>
           </div>
         </Link>
         <Container>
@@ -103,6 +103,7 @@ const UserListItem = styled.li`
   }
 
   .user-info p {
+    max-width: 264px;
     font-size: 1.2rem;
     color: var(--gray-400);
   }

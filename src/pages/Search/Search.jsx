@@ -7,6 +7,8 @@ import { UserContext } from '../../context/UserContext';
 
 export default function Search() {
   const [searchUsers, setSearchUsers] = useState([]);
+  const [cntUserList, setCntUserList] = useState(20);
+  const [userList, setUserList] = useState([]);
 
   const { token } = useContext(UserContext);
 
@@ -28,9 +30,30 @@ export default function Search() {
       const users = await fetchData(searchKeyword);
       console.log(users);
       setSearchUsers(users.slice(0, 20));
+      setCntUserList(cntUserList + 20);
+      setUserList(users);
     }
     handleFetchData();
   };
+
+  useEffect(() => {
+    const addUser = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      if (scrollHeight - scrollTop === clientHeight) {
+        setSearchUsers(userList.slice(0, cntUserList));
+        setCntUserList(cntUserList + 20);
+
+        console.log(cntUserList);
+      }
+    };
+
+    window.addEventListener('scroll', addUser);
+
+    return () => window.removeEventListener('scroll', addUser);
+  }, [cntUserList]);
 
   return (
     <>
