@@ -1,4 +1,4 @@
-import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
+import { BASIC_PROFILE_LG, UPLOAD_FILE } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
@@ -215,6 +215,7 @@ export default function JoinProfile({ email, password }) {
       <Form handleForm={handleForm}>
         <label htmlFor='profileImg' className='img-label'>
           <img src={src} alt='' />
+          <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
         </label>
         <input
           type='file'
@@ -319,12 +320,22 @@ const StyledJoinProfile = styled.section`
   #profileImg {
     border: none;
   }
-  .img-label img {
+  .img-label {
+    position: relative;
     width: 110px;
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
+  }
+  .img-label img {
     border-radius: 55px;
     object-fit: cover;
+  }
+  .img-label .uplodeImg {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    bottom: 0;
+    right: 0;
   }
   #myTeam {
     margin-top: 9px;
