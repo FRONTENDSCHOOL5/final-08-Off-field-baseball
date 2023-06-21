@@ -15,7 +15,7 @@ import {
 } from '../../../styles/CommonImages';
 import FollowBtn from '../FollowBtn';
 
-export default function UserList({ user, team }) {
+export default function UserList({ user }) {
   const [myTeamImg, setMyTeamImg] = useState('');
 
   const myTeam = [
