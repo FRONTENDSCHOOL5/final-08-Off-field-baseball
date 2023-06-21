@@ -8,7 +8,7 @@ const SettingModal = ({ isModalOpen, setIsModalOpen }) => {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
   const navigate = useNavigate();
   const handleLogoutbtn = () => {
-    navigate('/user/login');
+    navigate('/');
     localStorage.clear();
     setMyTeam(null);
     setToken(null);

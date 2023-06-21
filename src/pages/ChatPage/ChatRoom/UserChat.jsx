@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const MessageContent = styled.p`
+const MessageContent = styled.div`
   display: inline-block;
   display: flex;
   align-items: flex-end;

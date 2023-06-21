@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FULL_LOGO } from '../../styles/CommonImages';
@@ -8,37 +8,40 @@ import { FACEBOOK } from '../../styles/CommonIcons';
 
 const SplashLogin = () => {
   const navigate = useNavigate();
+  const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <>
-      <BackgroundStyle>
+      <BackgroundStyle onClick={() => setModalOpen(!modalOpen)}>
         <img src={FULL_LOGO} alt='구장 밖 야구 입니다.' />
-        <LoginBox>
-          <button className='kakao-login'>
-            <img LoginLogoImg src={KAKAO} />
-            카카오톡 계정으로 로그인
-          </button>
-          <button className='google-login'>
-            <img LoginLogoImg src={GOOGLE} />
-            구글 계정으로 로그인
-          </button>
-          <button className='facebook-login'>
-            <img LoginLogoImg src={FACEBOOK} />
-            페이스북 계정으로 로그인
-          </button>
-          <div className='login-join'>
-            <button
-              className='email-login'
-              onClick={() => navigate('/user/login')}
-            >
-              이메일로 로그인
+        {modalOpen && (
+          <LoginBox>
+            <button className='kakao-login'>
+              <img src={KAKAO} alt='LoginLogoImg' />
+              카카오톡 계정으로 로그인
             </button>
-            <p>|</p>
-            <button className='join-btn' onClick={() => navigate('/join')}>
-              회원가입
+            <button className='google-login'>
+              <img src={GOOGLE} alt='LoginLogoImg' />
+              구글 계정으로 로그인
             </button>
-          </div>
-        </LoginBox>
+            <button className='facebook-login'>
+              <img src={FACEBOOK} alt='LoginLogoImg' />
+              페이스북 계정으로 로그인
+            </button>
+            <div className='login-join'>
+              <button
+                className='email-login'
+                onClick={() => navigate('/login/email')}
+              >
+                이메일로 로그인
+              </button>
+              <p>|</p>
+              <button className='join-btn' onClick={() => navigate('/join')}>
+                회원가입
+              </button>
+            </div>
+          </LoginBox>
+        )}
       </BackgroundStyle>
     </>
   );
@@ -72,6 +75,14 @@ const LoginBox = styled.div`
   align-items: center;
   gap: 10px;
   padding: 50px 34px;
+  /* 밑에서 위로 모달 등장 */
+  transform: translateY(100%);
+  animation: modal-animation 0.3s ease-in 0s 1 forwards running;
+  @keyframes modal-animation {
+    100% {
+      transform: translateY(0);
+    }
+  }
 
   button {
     position: relative;

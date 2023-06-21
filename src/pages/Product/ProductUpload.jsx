@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
-import { IMG_BUTTON, X } from '../../styles/CommonIcons';
+import IMG_BUTTON from '../../assets/icons/img-button.png';
 
 export default function ProductUpload() {
   const [price, setPrice] = useState('');
@@ -19,7 +19,7 @@ export default function ProductUpload() {
     }
   }, [productName, price, link, imgPre]);
 
-  // 이미지 미리보기
+  // 이미지 미리보기 생성
   const handleImgChange = (e) => {
     const imgFile = e.target.files[0];
     handleImgUpload(imgFile);
@@ -30,28 +30,17 @@ export default function ProductUpload() {
     const formData = new FormData();
     formData.append('image', imgFile);
 
-    try {
-      const resImg = await fetch(
-        'https://api.mandarin.weniv.co.kr/image/uploadfile',
-        {
-          method: 'POST',
-          body: formData,
-        }
-      );
-
-      if (!resImg.ok) {
-        throw new Error('Image upload failed');
+    const resImg = await fetch(
+      'https://api.mandarin.weniv.co.kr/image/uploadfile',
+      {
+        method: 'POST',
+        body: formData,
       }
+    );
 
-      const jsonImg = await resImg.json();
-      const uploadImgUrl =
-        'https://api.mandarin.weniv.co.kr/' + jsonImg.filename;
-      setImgPre(uploadImgUrl);
-    } catch (error) {
-      console.error(error);
-      // 이미지가 정상적으로 선택되지 않았을 때 경고창
-      alert('업로드할 이미지를 선택해주세요.');
-    }
+    const jsonImg = await resImg.json();
+    const uploadImgUrl = 'https://api.mandarin.weniv.co.kr/' + jsonImg.filename;
+    setImgPre(uploadImgUrl);
   };
 
   // '가격'에 숫자만 입력 && 세자리 마다 콤마 입력
@@ -59,22 +48,12 @@ export default function ProductUpload() {
     const returnNum = price.target.value.replace(/[^0-9]/g, '');
     const commaPrice = returnNum.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     setPrice(commaPrice);
-    // 숫자가 아닌 값 입력 시 경고창
-    if (price.target.value.trim() !== '' && !/^\d+$/.test(returnNum)) {
-      alert('숫자만 입력이 가능합니다.');
-      return;
-    }
   };
 
   // 상품소개란 텍스트 길이만큼 textarea height 확대
   const ResizeHeight = (e) => {
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
-  };
-
-  // 이미지 삭제
-  const handleImgDelete = () => {
-    setImgPre(null);
   };
 
   // API
@@ -124,9 +103,6 @@ export default function ProductUpload() {
               alt='상품 이미지 미리보기'
             />
           )}
-          <button onClick={handleImgDelete}>
-            <img src={X} alt='이미지 삭제하기' />
-          </button>
 
           <label htmlFor='productImg'>
             <img src={IMG_BUTTON} id='uploadBtn' alt='이미지 등록 버튼' />
@@ -153,6 +129,8 @@ export default function ProductUpload() {
             onChange={(e) => setProductName(e.target.value)}
           />
 
+          {/* '숫자만 입력 가능합니다' 경고창 추가
+          금액에 콤마(,) 추가 */}
           <label htmlFor='price'>가격</label>
           <input
             type='text'
@@ -214,14 +192,6 @@ const EmptyImg = styled.div`
 
   #productImg {
     display: none;
-  }
-
-  button {
-    position: absolute;
-    width: 22px;
-    top: 6px;
-    left: 6px;
-    background-color: transparent;
   }
 `;
 
