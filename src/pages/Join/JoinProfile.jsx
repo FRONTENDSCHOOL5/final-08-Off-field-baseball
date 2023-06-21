@@ -288,7 +288,11 @@ export default function JoinProfile({ email, password }) {
         <Button
           id='start-btn'
           type='submit'
-          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          bgColor={
+            isValid
+              ? 'var(--primary-color-default)'
+              : 'var(--secondary-color-default)'
+          }
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >
