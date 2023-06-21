@@ -50,7 +50,7 @@ const BtnContainer = styled.div`
 
   & button:last-child {
     color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     font-weight: 500;
     border-left: 1px solid var(--gray-200);
   }

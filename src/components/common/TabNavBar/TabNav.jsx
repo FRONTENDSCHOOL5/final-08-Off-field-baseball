@@ -180,13 +180,13 @@ const TabNavLi = styled.li`
   .profile-fill path:nth-child(1),
   .profile-fill path:nth-child(4) {
     fill: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
   .message-fill path,
   .home-fill path,
   .profile-fill path:not(:first-child) {
     stroke: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'defalt') + ')'};
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
 `;
 
@@ -195,6 +195,6 @@ const TabNavTitle = styled.span`
   font-size: 1rem;
   color: ${(props) =>
     props.id === props.currentId
-      ? 'var(--primary-color-' + (props.myTeam || 'defalt') + ')'
+      ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
       : 'var(--gray-400)'};
 `;
