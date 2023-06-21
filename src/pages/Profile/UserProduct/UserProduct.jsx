@@ -6,8 +6,7 @@ import { UserContext } from '../../../context/UserContext';
 export default function UserProduct({ accountname }) {
   const [productList, setProductList] = useState([]);
   const url = 'https://api.mandarin.weniv.co.kr';
-  // const token = localStorage.getItem('token');
-  const { token } = useContext(UserContext);
+  const { token, myTeam } = useContext(UserContext);
 
   const getProductList = async () => {
     try {
@@ -37,7 +36,7 @@ export default function UserProduct({ accountname }) {
           <h2>판매중인 상품</h2>
           <UserProductList>
             {productList.map((product, index) => (
-              <UserProductItem key={index}>
+              <UserProductItem key={index} myTeam={myTeam}>
                 <LinkTo to={`/product/${product.id}`} />
                 <img src={product.itemImage} alt={product.itemName} />
                 <p className='ellipsis'>{product.itemName}</p>
@@ -119,7 +118,8 @@ const UserProductItem = styled.li`
 
   strong {
     font-size: 1.2rem;
-    color: var(--primary-color);
+    color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     font-weight: bold;
   }
 `;

@@ -89,7 +89,7 @@ const Feed = () => {
                   <Button
                     mBtn
                     bgColor={
-                      'var(--primary-color-' + (myTeam || 'defalt') + ')'
+                      'var(--primary-color-' + (myTeam || 'default') + ')'
                     }
                   >
                     검색하기
