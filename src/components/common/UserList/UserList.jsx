@@ -55,17 +55,18 @@ export default function UserList({ user, keyword }) {
   // js 텍스트 하이라이팅, 리액트 텍스트 하이라이팅, 정규표현식
   const matchedText = (text, query) => {
     if (query !== '' && text.includes(query)) {
-      const parts = text.split(new RegExp(`(${query})`, 'gi'));
+      const i = text.indexOf(query);
+      const parts = [
+        text.slice(0, i),
+        text.slice(i, i + query.length),
+        text.slice(i + query.length),
+      ];
 
       return (
         <>
-          {parts.map((part, index) =>
-            part.toLowerCase() === query.toLowerCase() ? (
-              <Markedtext key={index}>{part}</Markedtext>
-            ) : (
-              part
-            )
-          )}
+          {parts[0]}
+          <Markedtext>{parts[1]}</Markedtext>
+          {parts[2]}
         </>
       );
     }
