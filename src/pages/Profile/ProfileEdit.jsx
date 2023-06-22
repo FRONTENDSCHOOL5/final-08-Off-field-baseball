@@ -209,8 +209,13 @@ export default function EditProfile() {
         },
       });
       const res = await req.json();
-      setIntro(res.user.intro.split('$')[0]); // intro 있을 경우. 잘라서
-      setSelectedOpt(res.user.intro.split('$')[1]);
+      setIntro(res.user.intro?.split('$')[0]); // intro 있을 경우. 잘라서
+      setSelectedOpt(
+        Object.keys(teamName).find(
+          (key) => teamName[key] === res.user.intro?.split('$')[1]
+        ) || res.user.intro?.split('$')[1]
+      );
+
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
       setCurrentAccountname(res.user.accountname); //임시
