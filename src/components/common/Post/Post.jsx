@@ -65,7 +65,7 @@ export default function Post({
                 {!id && <LinkTo to={'/post/' + data.id}></LinkTo>}
                 <>
                   {loc === 'product' ? (
-                    <Product>
+                    <Product myTeam={myTeam}>
                       <img src={data.itemImage} alt='' />
                       <h2>{data.itemName}</h2>
                       <span>
@@ -340,7 +340,9 @@ const Product = styled.div`
   span {
     font-size: 1.2rem;
     color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+      props.myTeam === 'kt'
+        ? 'var(--tertiary-color-kt)'
+        : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
 
   p {
