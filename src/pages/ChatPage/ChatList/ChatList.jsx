@@ -3,11 +3,8 @@ import TopBasicNav from '../../../components/common/TopNavBar/TopBasicNav';
 import ChatListStyle from './ChatListStyle';
 import ContentsLayout from '../../../components/layout/ContentsLayout/ContentsLayout';
 import TabNav from '../../../components/common/TabNavBar/TabNav';
-import { useNavigate } from 'react-router-dom';
 
 const ChatList = () => {
-  const navigate = useNavigate();
-
   return (
     <>
       <TopBasicNav />

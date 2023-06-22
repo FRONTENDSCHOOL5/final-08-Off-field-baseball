@@ -86,6 +86,7 @@ export default function Select({
       optionList.current.children[FocusOptIndex].firstElementChild.focus();
     }
     return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   // 옵션 선택

@@ -37,6 +37,7 @@ export default function Upload() {
 
   useEffect(() => {
     userProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const validText = (e) => {
@@ -168,6 +169,7 @@ export default function Upload() {
     if (id) {
       beforeEdit();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
