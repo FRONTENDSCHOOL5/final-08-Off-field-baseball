@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Comment from '../../components/common/Comment/Comment';
@@ -18,7 +18,7 @@ const Detail = () => {
   // 댓글 달면 바로 업데이트 되도록 하는 state (더 좋은 방법이 있을지 고민 중)
   const [updateComment, setUpdateComment] = useState('');
   //추후 무한 스크롤 구현을 위한 state
-  const [numComment, setNumComment] = useState(0);
+  // const [numComment, setNumComment] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -27,6 +27,8 @@ const Detail = () => {
   const { inView, ref } = useInView();
   const [userImg, setUserImg] = useState('');
   let { id } = useParams();
+
+  const [deletedComment, setDeletedComment] = useState(false); //댓글 삭제 시 id 값
 
   const getUserProfile = async () => {
     try {
@@ -83,29 +85,28 @@ const Detail = () => {
 
       const res = await req.json();
       setUpdateComment(res);
+      setCommentList([res.comment, ...commentList]);
       setIsLoading(false);
       setComment('');
+      console.log(res);
     } catch (err) {
       console.log(err);
       setIsLoading(false);
     }
   };
 
-  const getCommentList = useCallback(async () => {
+  const getCommentList = async () => {
     setLoading(true);
     try {
-      const req = await fetch(
-        `${url}/post/${id}/comments/?limit=10&skip=${numComment}`,
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const req = await fetch(`${url}/post/${id}/comments/?limit=10000`, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
       const res = await req.json();
-      setCommentList(commentList.concat(res.comments));
+      setCommentList(res.comments);
       if (res.comments.length < 10) setDone(true);
       setLoading(false);
     } catch (err) {
@@ -113,25 +114,18 @@ const Detail = () => {
       setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numComment]);
+  };
 
   useEffect(() => {
     getUserProfile();
+    getCommentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (!done) {
-      getCommentList();
-    }
+    getCommentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numComment]);
-
-  useEffect(() => {
-    if (inView && !loading) {
-      setNumComment((current) => current + 10);
-    }
-  }, [inView, loading]);
+  }, []);
 
   useEffect(() => {
     getPostDetail();
@@ -139,9 +133,14 @@ const Detail = () => {
   }, [id, updateComment]);
 
   useEffect(() => {
-    getCommentList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [updateComment]);
+    const newCommentList = [...commentList];
+    for (const i in newCommentList) {
+      if (newCommentList[i].id === deletedComment) {
+        newCommentList.splice(i, 1);
+      }
+    }
+    setCommentList(newCommentList);
+  }, [deletedComment]);
 
   return (
     <>
@@ -164,7 +163,7 @@ const Detail = () => {
                       <CommentList
                         key={index}
                         comment={comment}
-                        setUpdateComment={setUpdateComment}
+                        setDeletedComment={setDeletedComment}
                       >
                         <Refrence ref={ref}></Refrence>
                       </CommentList>
@@ -172,7 +171,7 @@ const Detail = () => {
                       <CommentList
                         key={index}
                         comment={comment}
-                        setUpdateComment={setUpdateComment}
+                        setDeletedComment={setDeletedComment}
                       />
                     );
                   })}

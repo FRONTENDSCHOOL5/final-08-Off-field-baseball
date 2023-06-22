@@ -7,7 +7,12 @@ import MoreModal from '../../components/common/Modal/MoreModal';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function CommentList({ comment, setUpdateComment, children }) {
+export default function CommentList({
+  comment,
+  setDeletedComment,
+  children,
+  updateComment,
+}) {
   const { token } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -77,7 +82,8 @@ export default function CommentList({ comment, setUpdateComment, children }) {
       if (json.status === '200') {
         alert('삭제되었습니다');
         setIsDeleteModalOpen(false);
-        setUpdateComment('댓글 삭제'); // 임시 값
+        console.log(json);
+        setDeletedComment(comment.id); // 임시 값
       } else {
         throw new Error('삭제에 실패했습니다');
       }
