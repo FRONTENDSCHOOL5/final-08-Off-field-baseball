@@ -92,7 +92,7 @@ const Feed = () => {
                 <Button
                   mBtn
                   bgColor={
-                    `var(--brand-color-${myTeam})` || 'var(--primary-color)'
+                    'var(--primary-color-' + (myTeam || 'default') + '))'
                   }
                 >
                   검색하기

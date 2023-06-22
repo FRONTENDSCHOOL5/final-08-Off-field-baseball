@@ -29,17 +29,17 @@ export default function JoinProfile({ email, password }) {
   const [isVaildAccountname, setIsVaildAccountname] = useState(false);
 
   // CSS 변수에서 사용하는 팀 이름(samsung, ...)
-  const teamName = {
-    '삼성 라이온즈': 'samsung',
-    '한화 이글스': 'hanwha',
-    '키움 히어로즈': 'kiwoom',
-    '롯데 자이언츠': 'lotte',
-    'LG 트윈스': 'lg',
-    'KIA 타이거즈': 'kia',
-    'SSG 랜더스': 'ssg',
-    '두산 베어스': 'doosan',
-    'NC 다이노스': 'nc',
-    'KT 위즈': 'kt',
+  const teamData = {
+    '삼성 라이온즈': { team: 'samsung', filename: '1687344208464.png' },
+    '한화 이글스': { team: 'hanwha', filename: '1687344233670.png' },
+    '키움 히어로즈': { team: 'kiwoom', filename: '1687344397365.png' },
+    '롯데 자이언츠': { team: 'lotte', filename: '1687344422408.png' },
+    'LG 트윈스': { team: 'lg', filename: '1687344477843.png' },
+    'KIA 타이거즈': { team: 'kia', filename: '1687344489698.png' },
+    'SSG 랜더스': { team: 'ssg', filename: '1687344502165.png' },
+    '두산 베어스': { team: 'doosan', filename: '1687344513474.png' },
+    'NC 다이노스': { team: 'nc', filename: '1687344523820.png' },
+    'KT 위즈': { team: 'kt', filename: '1687344531846.png' },
   };
 
   // 사용자 이름, 계정 ID 모두 유효하고, 소개에 $가 입력되지 않았을 때
@@ -63,7 +63,7 @@ export default function JoinProfile({ email, password }) {
     };
     userData.user.intro = intro || '';
     if (selectedOpt && selectedOpt !== '없음') {
-      userData.user.intro += `$${teamName[selectedOpt]}`;
+      userData.user.intro += `$${teamData[selectedOpt].team}`;
     }
     if (src !== BASIC_PROFILE_LG) {
       const formData = new FormData();
@@ -75,11 +75,12 @@ export default function JoinProfile({ email, password }) {
         body: formData,
       });
       const json = await res.json();
+
       userData.user.image = 'https://api.mandarin.weniv.co.kr/' + json.filename;
     } else {
-      // 서버에 저장된 기본 프로필 저장
-      userData.user.image =
-        'https://api.mandarin.weniv.co.kr/1687309142552.png';
+      // 서버에 저장된 기본 팀 컬러 프로필 저장
+      const filename = teamData[selectedOpt]?.filename || '1687309142552.png';
+      userData.user.image = 'https://api.mandarin.weniv.co.kr/' + filename;
     }
 
     const reqUrl = url + reqPath;
@@ -128,10 +129,10 @@ export default function JoinProfile({ email, password }) {
     if (json.user) {
       const token = json.user['token'];
       const accountname = json.user['accountname'];
-      const team = teamName[selectedOpt];
+      const team = teamData[selectedOpt].team;
       localStorage.setItem('token', token);
       localStorage.setItem('accountname', accountname);
-      localStorage.setItem('myteam', teamName[selectedOpt]);
+      localStorage.setItem('myteam', teamData[selectedOpt].team);
       setAccountname(accountname);
       setMyTeam(team);
       setToken(token);
@@ -288,7 +289,11 @@ export default function JoinProfile({ email, password }) {
         <Button
           id='start-btn'
           type='submit'
-          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          bgColor={
+            isValid
+              ? 'var(--primary-color-default)'
+              : 'var(--secondary-color-default)'
+          }
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >

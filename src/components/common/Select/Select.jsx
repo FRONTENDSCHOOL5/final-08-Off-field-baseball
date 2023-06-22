@@ -207,25 +207,21 @@ const StyledSelect = styled.div`
   .select-btn:focus,
   .select-btn.on {
     border-color: ${(props) =>
-      props.myTeam
-        ? 'var(--brand-color-' + props.myTeam + ')'
-        : 'var(--primary-color)'};
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
 
   li > button:hover {
     background: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
   /* 현재 선택된 옵션 */
   li > button:focus {
     padding: 9px 5px;
     border: 2px solid
-      ${(props) =>
-        props.myTeam
-          ? 'var(--brand-color-' + props.myTeam + ')'
-          : 'var(--primary-color)'};
+      ${(props) => 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+
     background: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || '') + ')'};
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
   button:focus {
     outline: none;

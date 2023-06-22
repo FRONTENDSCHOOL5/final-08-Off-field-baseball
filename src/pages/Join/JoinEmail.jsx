@@ -157,7 +157,11 @@ export default function JoinEmail({
         {messegePassword && <strong>{messegePassword}</strong>}
         <StyledButton
           type='submit'
-          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          bgColor={
+            isValid
+              ? 'var(--primary-color-default)'
+              : 'var(--secondary-color-default)'
+          }
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >

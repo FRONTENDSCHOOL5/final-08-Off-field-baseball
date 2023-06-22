@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
 
 const ChatListStyle = (props) => {
   const navigate = useNavigate();
+  const { myTeam } = useContext(UserContext);
 
   return (
-    <ProfileStyle onClick={() => navigate(props.navigate)}>
+    <ProfileStyle onClick={() => navigate(props.navigate)} myTeam={myTeam}>
       <div className='wrapper'>
         <img src={BASIC_PROFILE_SM} alt='프로필사진 입니다.' />
         {props.isNew && <div className='new'></div>}
@@ -76,7 +78,8 @@ const ProfileStyle = styled.div`
     position: absolute;
     width: 12px;
     height: 12px;
-    background-color: var(--primary-color);
+    background-color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     border-radius: 50%;
     top: 0;
     left: 0;

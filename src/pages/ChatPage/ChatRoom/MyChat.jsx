@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../../context/UserContext';
 
 const MyChat = (props) => {
+  const { myTeam } = useContext(UserContext);
   return (
     <Wrapper>
       <MessageTime>{props.time}</MessageTime>
       <MessageContent>
         {!props.isImg ? (
-          <MessageText>{props.children}</MessageText>
+          <MessageText myTeam={myTeam}>{props.children}</MessageText>
         ) : (
-          <MessageImg src={props.img} />
+          <MessageImg src={props.img} myTeam={myTeam} />
         )}
       </MessageContent>
     </Wrapper>
@@ -31,7 +33,10 @@ const MessageContent = styled.div`
 `;
 
 const MessageText = styled.p`
-  background-color: var(--primary-color);
+  background-color: ${(props) =>
+    props.isValid
+      ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+      : 'var(--gray-300)'};
   color: white;
   font-weight: 400;
   font-size: 1.4rem;
@@ -45,7 +50,10 @@ const MessageImg = styled.img`
   aspect-ratio: 1 / 1.5;
   object-fit: cover;
   background-size: cover;
-  background-color: var(--primary-color);
+  background-color: ${(props) =>
+    props.isValid
+      ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+      : 'var(--gray-300)'};
   border-radius: 1rem;
   border: none;
   padding: 0;

@@ -1,18 +1,69 @@
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import TopSearchNav from '../../components/common/TopNavBar/TopSearchNav';
 import UserList from '../../components/common/UserList/UserList';
 import TabNav from '../../components/common/TabNavBar/TabNav';
 import styled from 'styled-components';
+import { UserContext } from '../../context/UserContext';
+import { debounce } from 'lodash';
 
 export default function Search() {
+  const [searchUsers, setSearchUsers] = useState([]);
+  const [cntUserList, setCntUserList] = useState(20);
+  const [userList, setUserList] = useState([]);
+
+  const { token } = useContext(UserContext);
+
+  async function fetchData(searchKeyword) {
+    try {
+      const response = await fetch(
+        `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${searchKeyword}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response.json();
+    } catch {}
+  }
+  const onTyping = debounce((searchKeyword) => {
+    async function handleFetchData() {
+      const users = await fetchData(searchKeyword);
+      console.log(users);
+      console.log(searchKeyword);
+      setSearchUsers(users.slice(0, 20));
+      setCntUserList(cntUserList + 20);
+      setUserList(users);
+    }
+    handleFetchData();
+  }, 300);
+
+  useEffect(() => {
+    const addUser = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      if (scrollHeight - scrollTop === clientHeight) {
+        setSearchUsers(userList.slice(0, cntUserList));
+        setCntUserList(cntUserList + 20);
+
+        console.log(cntUserList);
+      }
+    };
+
+    window.addEventListener('scroll', addUser);
+
+    return () => window.removeEventListener('scroll', addUser);
+  }, [cntUserList]);
+
   return (
     <>
-      <TopSearchNav />
+      <TopSearchNav onTyping={onTyping} />
       <SearchList>
-        {/* 임시 props */}
-        <UserList loc='follow' id='samsung' nickname='오재일' isFollow={true} />
-        <UserList loc='follow' id='hanwha' nickname='문동주' isFollow={false} />
-        <UserList loc='follow' id='lotte' nickname='김원중' isFollow={true} />
+        {searchUsers.map((user) => {
+          return <UserList key={user._id} user={user} />;
+        })}
       </SearchList>
       <TabNav />
     </>

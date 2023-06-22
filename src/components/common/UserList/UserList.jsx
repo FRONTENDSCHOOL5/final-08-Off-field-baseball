@@ -15,17 +15,9 @@ import {
 } from '../../../styles/CommonImages';
 import FollowBtn from '../FollowBtn';
 
-export default function UserList({ profileData, teamname }) {
-  const [data, setData] = useState('');
-  const [team, setTeam] = useState('');
+export default function UserList({ user }) {
+  const [myTeamImg, setMyTeamImg] = useState('');
 
-  useEffect(() => {
-    if (profileData) {
-      return setData(profileData);
-    }
-  }, [profileData]);
-
-  // 받아온 마이 팀 데이터와 일치하는 이미지를 로드하도록 하는 배열
   const myTeam = [
     { id: '1', name: '두산 베어스', name2: 'doosan', img: BEARS },
     { id: '2', name: '키움 히어로즈', name2: 'kiwoom', img: HEROES },
@@ -35,39 +27,56 @@ export default function UserList({ profileData, teamname }) {
     { id: '6', name: '삼성 라이온즈', name2: 'samsung', img: LIONS },
     { id: '7', name: 'SSG 랜더스', name2: 'ssg', img: LANDERS },
     { id: '8', name: '롯데 자이언츠', name2: 'lotte', img: GIANTS },
-    { id: '9', name: '한화 이글스', name2: 'hanhwa', img: EAGLES },
+    { id: '9', name: '한화 이글스', name2: 'hanwha', img: EAGLES },
     { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
 
   useEffect(() => {
-    myTeam.forEach((item) => {
-      if (item.name === teamname || item.name2 === teamname) {
-        setTeam(item.img);
-      }
-    });
-  });
+    function findMyTeam() {
+      myTeam.forEach((item) => {
+        if (
+          item.name === user.intro?.split('$')[0] ||
+          item.name === user.intro?.split('$')[1]
+        ) {
+          setMyTeamImg(item.img);
+        } else if (
+          item.name2 === user.intro?.split('$')[1] ||
+          item.name === user.intro?.split('$')[1]
+        ) {
+          setMyTeamImg(item.img);
+        }
+      });
+    }
+    findMyTeam();
+  }, [user]);
+
   return (
     <>
-      <UserListItem>
-        <Link to={'/profile/' + data.accountname}>
-          <img src={data.image} alt='' />
-          <div className='user-info'>
-            <h2>{data.username}</h2>
-            <p>{data.accountname}</p>
-          </div>
-        </Link>
-        <Container>
-          <TeamLogo>
-            <img src={team} alt='내가 좋아하는 팀 로고' />
-          </TeamLogo>
-          <FollowBtn
-            profileData={data}
-            targetuser={data.accountname}
-            isfollow={data.isfollow}
-            xsBtn
-          />
-        </Container>
-      </UserListItem>
+      {user && (
+        <UserListItem>
+          <Link to={'/profile/' + user.accountname}>
+            <img src={user.image} alt='' />
+            <div className='user-info'>
+              <h2>{user.username}</h2>
+              <p className='ellipsis'>@{user.accountname}</p>
+            </div>
+          </Link>
+          <Container>
+            {myTeamImg ? (
+              <TeamLogo>
+                <img src={myTeamImg} alt='내가 좋아하는 팀 로고' />
+              </TeamLogo>
+            ) : null}
+
+            <FollowBtn
+              profileData={user}
+              targetuser={user.accountname}
+              isfollow={user.isfollow}
+              xsBtn
+            />
+          </Container>
+        </UserListItem>
+      )}
     </>
   );
 }
@@ -95,6 +104,7 @@ const UserListItem = styled.li`
   }
 
   .user-info p {
+    max-width: 264px;
     font-size: 1.2rem;
     color: var(--gray-400);
   }

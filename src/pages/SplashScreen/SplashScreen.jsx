@@ -17,7 +17,7 @@ const LogoPage = () => {
     return () => {
       clearTimeout(timeout);
     };
-  });
+  }, []);
 
   return (
     <>
@@ -37,11 +37,11 @@ const LogoPage = () => {
 export default LogoPage;
 
 const LayoutStyle = styled.div`
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-default);
 `;
 
 const LogoPageDiv = styled.div`
-  background-color: var(--primary-color);
+  background-color: var(--primary-color-default);
   display: flex;
   flex-direction: column;
   align-items: center;
