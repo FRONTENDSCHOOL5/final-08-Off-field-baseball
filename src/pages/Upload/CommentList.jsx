@@ -7,13 +7,8 @@ import MoreModal from '../../components/common/Modal/MoreModal';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function CommentList({
-  comment,
-  setDeletedComment,
-  children,
-  updateComment,
-}) {
-  const { token } = useContext(UserContext);
+export default function CommentList({ comment, setDeletedComment, children }) {
+  const { token, accountname } = useContext(UserContext);
 
   const navigate = useNavigate();
   const displayedAt = (createdAt) => {
@@ -130,11 +125,13 @@ export default function CommentList({
               신고하기
             </button>
           </li>
-          <li>
-            <button type='button' onClick={(e) => setIsDeleteModalOpen(true)}>
-              삭제
-            </button>
-          </li>
+          {comment.author.accountname === accountname && (
+            <li>
+              <button type='button' onClick={(e) => setIsDeleteModalOpen(true)}>
+                삭제
+              </button>
+            </li>
+          )}
         </MoreModal>
       )}
       {isReportModalOpen && (
