@@ -11,12 +11,14 @@ export default function Search() {
   const [cntUserList, setCntUserList] = useState(20);
   const [userList, setUserList] = useState([]);
 
+  const [keyword, setKeyword] = useState(''); // 검색 키워드
+
   const { token } = useContext(UserContext);
 
-  async function fetchData(searchKeyword) {
+  async function fetchData() {
     try {
       const response = await fetch(
-        `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${searchKeyword}`,
+        `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${keyword}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -26,17 +28,18 @@ export default function Search() {
       return response.json();
     } catch {}
   }
-  const onTyping = debounce((searchKeyword) => {
+  const onTyping = () => {
     async function handleFetchData() {
-      const users = await fetchData(searchKeyword);
-      console.log(users);
-      console.log(searchKeyword);
+      const users = await fetchData();
+      // console.log(users);
+      // console.log(searchKeyword);
       setSearchUsers(users.slice(0, 20));
       setCntUserList(cntUserList + 20);
       setUserList(users);
+      console.log(users);
     }
     handleFetchData();
-  }, 300);
+  };
 
   useEffect(() => {
     const addUser = () => {
@@ -57,12 +60,31 @@ export default function Search() {
     return () => window.removeEventListener('scroll', addUser);
   }, [cntUserList]);
 
+  useEffect(() => {
+    // console.log(keyword);
+    // onTyping();
+    let timeout;
+    if (keyword.length > 0) {
+      timeout = setTimeout(() => {
+        onTyping();
+      }, 200);
+    } else {
+      setUserList([]);
+      setSearchUsers([]);
+    }
+    return () => clearTimeout(timeout);
+  }, [keyword]);
+
   return (
     <>
-      <TopSearchNav onTyping={onTyping} />
+      <TopSearchNav
+        // onTyping={onTyping}
+        keyword={keyword}
+        onChange={setKeyword}
+      />
       <SearchList>
         {searchUsers.map((user) => {
-          return <UserList key={user._id} user={user} />;
+          return <UserList key={user._id} user={user} keyword={keyword} />;
         })}
       </SearchList>
       <TabNav />

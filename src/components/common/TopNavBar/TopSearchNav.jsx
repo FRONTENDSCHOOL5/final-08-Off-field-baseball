@@ -4,7 +4,7 @@ import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopSearchNav({ onTyping }) {
+export default function TopSearchNav({ keyword, onChange, onTyping }) {
   const navigate = useNavigate();
 
   return (
@@ -15,8 +15,9 @@ export default function TopSearchNav({ onTyping }) {
         </button>
         <TopSearchInput
           placeholder='계정 검색'
+          value={keyword}
           onChange={(e) => {
-            onTyping(e.target.value);
+            onChange(e.target.value);
           }}
         />
       </TopNavBar>
