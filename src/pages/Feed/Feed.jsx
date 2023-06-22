@@ -9,6 +9,7 @@ import Post from '../../components/common/Post/Post';
 import Loading from '../../components/common/Loading';
 import { useInView } from 'react-intersection-observer';
 import { UserContext } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
 // 팔로우한 유저의 게시글이 있으면 게시글 리스트
 // 없으면 유저를 검색해 팔로우 해보세요! 문구와 검색하기 버튼
@@ -24,6 +25,7 @@ const Feed = () => {
   const [done, setDone] = useState(false);
   const { ref, inView } = useInView();
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const getFeed = useCallback(async () => {
     setLoading(true);
@@ -91,6 +93,7 @@ const Feed = () => {
                 <p>유저를 검색해 팔로우 해보세요!</p>
                 <Button
                   mBtn
+                  onClick={() => navigate('/search')}
                   bgColor={'var(--primary-color-' + (myTeam || 'default') + ')'}
                 >
                   검색하기

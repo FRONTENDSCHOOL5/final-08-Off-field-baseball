@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
-import { debounce } from 'lodash';
 
 export default function TopSearchNav({ onTyping }) {
   const navigate = useNavigate();
@@ -19,9 +18,6 @@ export default function TopSearchNav({ onTyping }) {
           onChange={(e) => {
             onTyping(e.target.value);
           }}
-          // onKeyDown={(e) => {
-          //   if (e.key === 'Enter') onTyping(e.target.value);
-          // }}
         />
       </TopNavBar>
     </>
