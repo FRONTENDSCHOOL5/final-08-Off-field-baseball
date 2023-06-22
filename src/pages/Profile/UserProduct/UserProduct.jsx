@@ -119,7 +119,9 @@ const UserProductItem = styled.li`
   strong {
     font-size: 1.2rem;
     color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+      props.myTeam === 'kt'
+        ? 'var(--tertiary-color-kt)'
+        : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     font-weight: bold;
   }
 `;
