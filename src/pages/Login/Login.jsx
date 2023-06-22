@@ -76,9 +76,25 @@ export default function Login({ team }) {
         'Content-type': 'application/json',
       },
     });
-
+    const teamList = [
+      'samsung',
+      'hanwha',
+      'kiwoom',
+      'lotte',
+      'lg',
+      'kia',
+      'ssg',
+      'doosan',
+      'nc',
+      'kt',
+    ];
     const json = await res.json();
-    return json.profile.intro.split('$')[1];
+    const team = json.profile.intro.split('$')[1];
+    if (teamList.includes(team)) {
+      return json.profile.intro.split('$')[1];
+    } else {
+      return '';
+    }
   };
   const handleForm = (e) => {
     e.preventDefault();
