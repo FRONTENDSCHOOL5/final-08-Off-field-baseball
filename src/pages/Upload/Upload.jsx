@@ -218,23 +218,23 @@ export default function Upload() {
                 <path
                   d='M33.1667 14.5H16.8333C15.5447 14.5 14.5 15.5447 14.5 16.8333V33.1667C14.5 34.4553 15.5447 35.5 16.8333 35.5H33.1667C34.4553 35.5 35.5 34.4553 35.5 33.1667V16.8333C35.5 15.5447 34.4553 14.5 33.1667 14.5Z'
                   stroke='white'
-                  stroke-width='1.5'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 />
                 <path
                   d='M20.9167 22.6667C21.8832 22.6667 22.6667 21.8832 22.6667 20.9167C22.6667 19.9502 21.8832 19.1667 20.9167 19.1667C19.9502 19.1667 19.1667 19.9502 19.1667 20.9167C19.1667 21.8832 19.9502 22.6667 20.9167 22.6667Z'
                   stroke='white'
-                  stroke-width='1.5'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 />
                 <path
                   d='M35.4999 28.5L29.6666 22.6667L16.8333 35.5'
                   stroke='white'
-                  stroke-width='1.5'
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
+                  strokeWidth='1.5'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
                 />
               </svg>
               <input
