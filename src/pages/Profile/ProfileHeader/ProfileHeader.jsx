@@ -108,7 +108,7 @@ const UserHeader = styled.div`
     border-radius: 50%;
     object-fit: cover;
   }
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 `;
 
 const Follow = styled(Link)`
@@ -137,29 +137,31 @@ const MyTeamShow = styled.div`
   border-radius: 10px;
   padding: 4px;
   width: 150px;
+  height: 26px;
   margin: 0 auto;
   justify-content: center;
   gap: 4px;
   cursor: default;
   img {
     width: 20px;
+    height: auto;
   }
 
   span {
     color: var(--gray-400);
   }
 
-  margin-bottom: 9px;
+  margin-bottom: 12px;
 `;
 
 const UserInfo = styled.div`
   margin: 0 auto;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   h2 {
     font-size: 1.6rem;
     font-weight: bold;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
   p {
     color: var(--gray-400);
@@ -167,7 +169,7 @@ const UserInfo = styled.div`
 
   p.id {
     font-size: 1.2rem;
-    margin-bottom: 16px;
+    margin-bottom: 15px;
   }
 
   p.text {
