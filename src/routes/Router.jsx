@@ -9,6 +9,7 @@ import Join from '../pages/Join/Join';
 import Upload from '../pages/Upload/Upload';
 import Feed from '../pages/Feed/Feed';
 import Profile from '../pages/Profile/Profile';
+import ProfileEdit from '../pages/Profile/ProfileEdit';
 import ProductUpload from '../pages/Product/ProductUpload';
 import Error404 from '../pages/Error404/Error404';
 import ChatList from '../pages/ChatPage/ChatList/ChatList';
@@ -44,6 +45,7 @@ export default function Router() {
           <Route path='/post/:id/edit' element={<Upload />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:username' element={<Profile />} />
+          <Route path='/profile/edit' element={<ProfileEdit />} />
           <Route path='/profile/:accountname/:type' element={<FollowList />} />
           <Route path='/product/upload' element={<ProductUpload />} />
           <Route path='/product/:id' element={<ProductDetail />} />

@@ -128,7 +128,7 @@ export default function Select({
         }}
       >
         {selectedOpt || btnTxt}
-        <img src={OPEN} alt='' className={isOpen && 'open'} />
+        <img src={OPEN} alt='' className={isOpen ? 'open' : null} />
       </button>
 
       {isOpen && (
