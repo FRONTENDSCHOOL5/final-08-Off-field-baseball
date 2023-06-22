@@ -11,6 +11,7 @@ export default function Select({
   btnId,
   selectedOpt,
   setSelectedOpt,
+  selectedTeam,
 }) {
   const { myTeam } = useContext(UserContext);
   const [isOn, setIsOn] = useState(false);
@@ -104,7 +105,7 @@ export default function Select({
 
   return (
     <StyledSelect
-      myTeam={myTeam}
+      myTeam={selectedTeam || myTeam}
       selectedOpt={selectedOpt}
       className='custom-select'
       onKeyDown={(e) => {
