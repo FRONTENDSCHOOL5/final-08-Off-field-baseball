@@ -111,13 +111,18 @@ export default function EditProfile() {
 
       alert('수정되었습니다.');
       localStorage.setItem('accountname', json.user.accountname);
-      localStorage.setItem('myteam', teamName[selectedOpt].team);
       setAccountname(json.user.accountname);
-      setMyTeam(teamName[selectedOpt].team);
       navigate('/profile');
 
       if (selectedOpt && selectedOpt !== '없음') {
         userData.user.intro += `$${teamName[selectedOpt]}`;
+
+        localStorage.setItem('myteam', teamName[selectedOpt].team);
+        setMyTeam(teamName[selectedOpt].team);
+      } else {
+        // 팀 미선택 시
+        localStorage.setItem('myteam', '');
+        setMyTeam('');
       }
     } catch (err) {
       console.log(err);
