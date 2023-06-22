@@ -127,5 +127,6 @@ const TeamLogo = styled.div`
   img {
     width: 40px;
     object-fit: contain;
+    border-radius: 0;
   }
 `;
