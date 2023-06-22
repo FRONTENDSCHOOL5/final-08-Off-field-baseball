@@ -51,10 +51,38 @@ export default function EditProfile() {
     }
   }, [isVaildIntro, isVaildUsername, isVaildAccountname]);
 
+  // API
   const url = 'https://api.mandarin.weniv.co.kr';
+  const uploadProfileImage = async () => {
+    try {
+      if (image !== '') {
+        const formData = new FormData();
+        formData.append('image', image);
+
+        const reqPath = '/image/uploadfile';
+        const reqUrl = url + reqPath;
+
+        const res = await fetch(reqUrl, {
+          method: 'POST',
+          body: formData,
+        });
+
+        const json = await res.json();
+        return 'https://api.mandarin.weniv.co.kr/' + json.filename;
+      } else {
+        // 기본 프로필 이미지
+        return src;
+      }
+    } catch (err) {
+      console.log(err);
+      // 이미지 업로드 실패 시 빈문자열
+      return '';
+    }
+  };
 
   const handleEdit = async () => {
     try {
+      const profileImageUrl = await uploadProfileImage();
       const url = 'https://api.mandarin.weniv.co.kr';
       const reqPath = '/user';
 
@@ -65,7 +93,7 @@ export default function EditProfile() {
           username: username,
           accountname: accountnameValue,
           intro: intro + '$' + selectedOpt,
-          image: '',
+          image: profileImageUrl,
         },
       };
 
@@ -90,23 +118,6 @@ export default function EditProfile() {
       if (selectedOpt && selectedOpt !== '없음') {
         userData.user.intro += `$${teamName[selectedOpt]}`;
       }
-      if (src !== BASIC_PROFILE_LG) {
-        const formData = new FormData();
-        formData.append('image', image);
-        const reqPath = '/image/uploadfile';
-        const reqUrl = url + reqPath;
-        const res = await fetch(reqUrl, {
-          method: 'POST',
-          body: formData,
-        });
-        const json = await res.json();
-        userData.user.image =
-          'https://api.mandarin.weniv.co.kr/' + json.filename;
-      } else {
-        // 서버에 저장된 기본 프로필 저장
-        userData.user.image =
-          'https://api.mandarin.weniv.co.kr/1687309142552.png';
-      }
     } catch (err) {
       console.log(err);
     }
@@ -114,6 +125,7 @@ export default function EditProfile() {
 
   const handleForm = (e) => {
     e.preventDefault();
+    console.log(src);
     handleEdit();
   };
 
@@ -202,6 +214,10 @@ export default function EditProfile() {
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
       setCurrentAccountname(res.user.accountname); //임시
+      // 이미지
+      if (res.user.image !== BASIC_PROFILE_LG) {
+        setSrc(res.user.image);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -312,6 +328,11 @@ const StyledJoinProfile = styled.section`
   }
   #profileImg {
     border: none;
+  }
+
+  .img-label {
+    width: 110px;
+    margin: 0 auto;
   }
   .img-label img {
     width: 110px;
