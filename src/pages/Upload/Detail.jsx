@@ -27,8 +27,31 @@ const Detail = () => {
   const { inView, ref } = useInView();
   const [userImg, setUserImg] = useState('');
   let { id } = useParams();
+  const [showCommentList, setShowCommentList] = useState('');
+  const [cntCommentList, setCntCommentList] = useState(10); // 보여줄 댓글 수
 
   const [deletedComment, setDeletedComment] = useState(false); //댓글 삭제 시 id 값
+
+  /* 무한 스크롤 */
+  useEffect(() => {
+    const addUser = () => {
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+
+      if (scrollHeight - scrollTop === clientHeight) {
+        setShowCommentList(commentList.slice(0, cntCommentList));
+        setCntCommentList(cntCommentList + 10);
+
+        console.log(cntCommentList);
+      }
+    };
+
+    window.addEventListener('scroll', addUser);
+
+    return () => window.removeEventListener('scroll', addUser);
+  }, [cntCommentList]);
+  /* // 무한 스크롤 */
 
   const getUserProfile = async () => {
     try {
@@ -86,6 +109,9 @@ const Detail = () => {
       const res = await req.json();
       setUpdateComment(res);
       setCommentList([res.comment, ...commentList]);
+      setShowCommentList(
+        [res.comment, ...commentList].slice(0, cntCommentList)
+      );
       setIsLoading(false);
       setComment('');
       console.log(res);
@@ -107,6 +133,8 @@ const Detail = () => {
       });
       const res = await req.json();
       setCommentList(res.comments);
+      setShowCommentList(res.comments.slice(0, cntCommentList));
+      setCntCommentList(cntCommentList + 10);
       if (res.comments.length < 10) setDone(true);
       setLoading(false);
     } catch (err) {
@@ -118,11 +146,6 @@ const Detail = () => {
 
   useEffect(() => {
     getUserProfile();
-    getCommentList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     getCommentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -140,6 +163,7 @@ const Detail = () => {
       }
     }
     setCommentList(newCommentList);
+    setShowCommentList(newCommentList.slice(0, cntCommentList));
   }, [deletedComment]);
 
   return (
@@ -156,10 +180,10 @@ const Detail = () => {
             {post && <Post post={post} />}
             <CommentListSection>
               <h3 className='a11y-hidden'>댓글 목록</h3>
-              {commentList.length > 0 && (
+              {showCommentList.length > 0 && (
                 <>
-                  {commentList.map((comment, index) => {
-                    return commentList.length - 1 === index ? (
+                  {showCommentList.map((comment, index) => {
+                    return showCommentList.length - 1 === index ? (
                       <CommentList
                         key={index}
                         comment={comment}
