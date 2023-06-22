@@ -44,38 +44,39 @@ export default function UserList({ user }) {
           item.name === user.intro?.split('$')[1]
         ) {
           setMyTeamImg(item.img);
-        } else {
         }
       });
     }
     findMyTeam();
-  }, []);
+  }, [user]);
 
   return (
     <>
-      <UserListItem>
-        <Link to={'/profile/' + user.accountname}>
-          <img src={user.image} alt='' />
-          <div className='user-info'>
-            <h2>{user.username}</h2>
-            <p className='ellipsis'>@{user.accountname}</p>
-          </div>
-        </Link>
-        <Container>
-          {myTeamImg ? (
-            <TeamLogo>
-              <img src={myTeamImg} alt='내가 좋아하는 팀 로고' />
-            </TeamLogo>
-          ) : null}
+      {user && (
+        <UserListItem>
+          <Link to={'/profile/' + user.accountname}>
+            <img src={user.image} alt='' />
+            <div className='user-info'>
+              <h2>{user.username}</h2>
+              <p className='ellipsis'>@{user.accountname}</p>
+            </div>
+          </Link>
+          <Container>
+            {myTeamImg ? (
+              <TeamLogo>
+                <img src={myTeamImg} alt='내가 좋아하는 팀 로고' />
+              </TeamLogo>
+            ) : null}
 
-          <FollowBtn
-            profileData={user}
-            targetuser={user.accountname}
-            isfollow={user.isfollow}
-            xsBtn
-          />
-        </Container>
-      </UserListItem>
+            <FollowBtn
+              profileData={user}
+              targetuser={user.accountname}
+              isfollow={user.isfollow}
+              xsBtn
+            />
+          </Container>
+        </UserListItem>
+      )}
     </>
   );
 }
