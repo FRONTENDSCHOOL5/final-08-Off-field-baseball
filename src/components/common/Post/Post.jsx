@@ -145,6 +145,7 @@ export default function Post({
                   <>
                     <HeartBtn data={data} />
                     <PostBtn>
+                      <LinkTo to={'/post/' + data.id}></LinkTo>
                       <img src={MESSAGE_CIRCLE_SM} alt='댓글창 열기 버튼' />
                       <span>{data.commentCount}</span>
                     </PostBtn>
@@ -288,6 +289,7 @@ const PostBtnWrapper = styled.div`
 `;
 
 const PostBtn = styled.button`
+  position: relative;
   display: flex;
   gap: 6px;
   align-items: center;
