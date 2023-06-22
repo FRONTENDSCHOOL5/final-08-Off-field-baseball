@@ -306,6 +306,7 @@ const StyledSection = styled.section`
     aspect-ratio: 1/1;
     display: inline-block;
     vertical-align: top;
+    border-radius: 50%;
   }
   textarea {
     margin: 12px 0 0 13px;
