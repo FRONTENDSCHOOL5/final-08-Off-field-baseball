@@ -22,8 +22,7 @@ export default function EditProfile() {
   const [selectedOpt, setSelectedOpt] = useState('');
   const navigate = useNavigate();
 
-  const { accountname, setAccountname, setMyTeam, token } =
-    useContext(UserContext);
+  const { setAccountname, setMyTeam, token } = useContext(UserContext);
 
   // 소개는 필수값이 아니어서, 입력값이 없는 처음엔 true
   const [isVaildIntro, setIsVaildIntro] = useState(true);
@@ -64,15 +63,11 @@ export default function EditProfile() {
       const userData = {
         user: {
           username: username,
+          accountname: accountnameValue,
           intro: intro + '$' + selectedOpt,
           image: '',
         },
       };
-
-      // 원래 계정 아이디와 같지 않으면
-      if (currentAccountname !== accountnameValue) {
-        userData.accountname = accountnameValue;
-      }
 
       const res = await fetch(reqUrl, {
         method: 'PUT',
@@ -88,8 +83,8 @@ export default function EditProfile() {
       alert('수정되었습니다.');
       localStorage.setItem('accountname', json.user.accountname);
       localStorage.setItem('myteam', teamName[selectedOpt]);
-      setMyTeam(teamName[selectedOpt]);
       setAccountname(json.user.accountname);
+      setMyTeam(teamName[selectedOpt]);
       navigate('/profile');
 
       if (selectedOpt && selectedOpt !== '없음') {
@@ -110,7 +105,7 @@ export default function EditProfile() {
       } else {
         // 서버에 저장된 기본 프로필 저장
         userData.user.image =
-          'https://api.mandarin.weniv.co.kr/' + '1687309142552.png';
+          'https://api.mandarin.weniv.co.kr/1687309142552.png';
       }
     } catch (err) {
       console.log(err);
@@ -331,4 +326,4 @@ const StyledJoinProfile = styled.section`
   #start-btn {
     margin-top: 30px;
   }
-}`;
+`;
