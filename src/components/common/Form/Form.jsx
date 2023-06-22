@@ -35,7 +35,9 @@ const StyledForm = styled.form`
   }
   input:focus:not(.invalid) {
     border-color: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+      props.myTeam === 'kt'
+        ? 'var(--tertiary-color-kt)'
+        : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
   input::placeholder {
     color: var(--gray-200);
