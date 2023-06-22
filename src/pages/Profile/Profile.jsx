@@ -38,6 +38,7 @@ export default function Profile() {
       const data = await res.json();
 
       const profile = data.profile;
+      console.log(data);
       setUserProfile(profile);
       setIntro(profile.intro.split('$')[0]);
       setTeam(profile.intro.split('$')[1]);

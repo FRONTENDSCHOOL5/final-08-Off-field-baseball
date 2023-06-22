@@ -47,9 +47,9 @@ export default function HeartBtn({ data }) {
               ? 'var(--primary-color-' + (myTeam || 'default') + ')'
               : 'var(--gray-400)'
           }
-          stroke-width='1.5'
-          stroke-linecap='round'
-          stroke-linejoin='round'
+          strokeWidth='1.5'
+          strokeLinecap='round'
+          strokeLinejoin='round'
         />
       </svg>
       <span className='a11y-hidden'>

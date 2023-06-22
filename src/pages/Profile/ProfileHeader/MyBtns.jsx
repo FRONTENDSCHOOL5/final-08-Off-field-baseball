@@ -7,7 +7,7 @@ export default function MyBtns() {
   const navigate = useNavigate();
   return (
     <MyBtnsWrapper>
-      <Button whiteBtn mBtn>
+      <Button whiteBtn mBtn onClick={() => navigate('/profile/edit')}>
         프로필 수정
       </Button>
       <Button whiteBtn mBtn onClick={() => navigate('/product/upload')}>

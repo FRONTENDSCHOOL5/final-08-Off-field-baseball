@@ -84,7 +84,7 @@ export default function Post({
                 <>
                   {imageFile.length > 1 ? (
                     <SwiperWrapper
-                      myTeam={myTeam}
+                      myteam={myTeam}
                       pagination={{
                         clickable: true,
                       }}
@@ -133,9 +133,9 @@ export default function Post({
                         stroke={
                           'var(--primary-color-' + (myTeam || 'default') + ')'
                         }
-                        stroke-width='2'
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
+                        strokeWidth='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
                       />
                     </svg>
 
@@ -249,7 +249,7 @@ const SwiperWrapper = styled(Swiper)`
   width: 100%;
   .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background: ${(props) =>
-      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+      'var(--primary-color-' + (props.myteam || 'default') + ')'};
   }
   .swiper-pagination-bullet {
     background: white;
