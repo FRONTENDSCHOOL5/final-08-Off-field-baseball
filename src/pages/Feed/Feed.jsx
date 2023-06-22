@@ -91,16 +91,13 @@ const Feed = () => {
                 <p>유저를 검색해 팔로우 해보세요!</p>
                 <Button
                   mBtn
-                  bgColor={
-                    'var(--primary-color-' + (myTeam || 'default') + '))'
-                  }
+                  bgColor={'var(--primary-color-' + (myTeam || 'default') + ')'}
                 >
                   검색하기
                 </Button>
               </EmptyPost>
             </EmptyLayout>
           )}
-
           <TabNav currentId={0} />
         </>
       )}
@@ -124,10 +121,6 @@ const EmptyPost = styled.div`
   img {
     width: 100px;
     aspect-ratio: 1 / 1;
-  }
-
-  Button {
-    height: 44px;
   }
 `;
 
