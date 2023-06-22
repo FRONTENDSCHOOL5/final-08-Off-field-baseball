@@ -15,7 +15,7 @@ import {
 } from '../../../styles/CommonImages';
 import FollowBtn from '../FollowBtn';
 
-export default function UserList({ user }) {
+export default function UserList({ user, keyword }) {
   const [myTeamImg, setMyTeamImg] = useState('');
 
   const myTeam = [
@@ -30,6 +30,8 @@ export default function UserList({ user }) {
     { id: '9', name: '한화 이글스', name2: 'hanwha', img: EAGLES },
     { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
+
+  console.log(keyword);
 
   useEffect(() => {
     function findMyTeam() {
@@ -50,6 +52,28 @@ export default function UserList({ user }) {
     findMyTeam();
   }, [user]);
 
+  // js 텍스트 하이라이팅, 리액트 텍스트 하이라이팅, 정규표현식
+  const matchedText = (text, query) => {
+    if (query !== '' && text.includes(query)) {
+      const i = text.indexOf(query);
+      const parts = [
+        text.slice(0, i),
+        text.slice(i, i + query.length),
+        text.slice(i + query.length),
+      ];
+
+      return (
+        <>
+          {parts[0]}
+          <Markedtext>{parts[1]}</Markedtext>
+          {parts[2]}
+        </>
+      );
+    }
+
+    return text;
+  };
+
   return (
     <>
       {user && (
@@ -57,7 +81,7 @@ export default function UserList({ user }) {
           <Link to={'/profile/' + user.accountname}>
             <img src={user.image} alt='' />
             <div className='user-info'>
-              <h2>{user.username}</h2>
+              <h2>{matchedText(user.username, keyword)}</h2>
               <p className='ellipsis'>@{user.accountname}</p>
             </div>
           </Link>
@@ -129,4 +153,8 @@ const TeamLogo = styled.div`
     object-fit: contain;
     border-radius: 0;
   }
+`;
+
+const Markedtext = styled.span`
+  color: var(--primary-color-default);
 `;

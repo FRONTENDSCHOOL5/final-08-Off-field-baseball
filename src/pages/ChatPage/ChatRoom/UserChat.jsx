@@ -62,7 +62,7 @@ const MessageImg = styled.img`
   object-fit: cover;
   background-size: cover;
   background-color: ${(props) =>
-    'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+    'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   border-radius: 1rem;
   border: none;
   padding: 0;
