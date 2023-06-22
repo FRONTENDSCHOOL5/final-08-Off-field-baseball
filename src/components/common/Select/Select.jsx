@@ -1,12 +1,21 @@
 import { useRef } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../../context/UserContext';
+import { OPEN } from '../../../styles/CommonIcons';
 
-export default function Select({ optionTextList, btnId }) {
+// btnId : label for과 연결
+export default function Select({
+  btnTxt,
+  optionTextList,
+  btnId,
+  selectedOpt,
+  setSelectedOpt,
+}) {
+  const { myTeam } = useContext(UserContext);
   const [isOn, setIsOn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [FocusOptIndex, setFocusOptIndex] = useState(0);
-  const [selectedOpt, setSelectedOpt] = useState(optionTextList[0]);
+  const [FocusOptIndex, setFocusOptIndex] = useState(null);
   const optionList = useRef(null);
 
   const handleOpen = (e) => {
@@ -70,12 +79,14 @@ export default function Select({ optionTextList, btnId }) {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  // 셀렉트가 open 됐을 때, 선택되어 있는 옵션에 포커스
+  // 셀렉트가 open 됐을 때
   useEffect(() => {
-    if (isOpen) {
+    // 선택된 옵션이 있다면, 선택되어 있는 옵션에 포커스
+    if (isOpen && FocusOptIndex) {
       optionList.current.children[FocusOptIndex].firstElementChild.focus();
     }
     return;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   // 옵션 선택
@@ -93,6 +104,8 @@ export default function Select({ optionTextList, btnId }) {
 
   return (
     <StyledSelect
+      myTeam={myTeam}
+      selectedOpt={selectedOpt}
       className='custom-select'
       onKeyDown={(e) => {
         // Esc
@@ -114,7 +127,8 @@ export default function Select({ optionTextList, btnId }) {
           }
         }}
       >
-        {selectedOpt}
+        {selectedOpt || btnTxt}
+        <img src={OPEN} alt='' className={isOpen ? 'open' : null} />
       </button>
 
       {isOpen && (
@@ -147,12 +161,24 @@ const findIndex = (target) => {
 const StyledSelect = styled.div`
   position: relative;
   .select-btn {
+    position: relative;
     width: 100%;
     border-radius: 8px;
     padding: 9px 14px 9px 13px;
     text-align: left;
     font-size: 1.4rem;
     border: 1px solid var(--gray-200);
+    color: ${(props) => props.selectedOpt || 'var(--gray-200)'};
+  }
+  .select-btn img {
+    position: absolute;
+    right: 13px;
+    bottom: 13px;
+    width: 10px;
+    height: 9px;
+  }
+  .select-btn img.open {
+    transform: rotate(180deg);
   }
   ul {
     position: absolute;
@@ -180,17 +206,22 @@ const StyledSelect = styled.div`
   /* 포커스, 액션 */
   .select-btn:focus,
   .select-btn.on {
-    border-color: var(--primary-color);
+    border-color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
 
   li > button:hover {
-    background: var(--secondary-color);
+    background: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
   /* 현재 선택된 옵션 */
   li > button:focus {
     padding: 9px 5px;
-    border: 2px solid var(--primary-color);
-    background: var(--secondary-color);
+    border: 2px solid
+      ${(props) => 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+
+    background: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
   button:focus {
     outline: none;

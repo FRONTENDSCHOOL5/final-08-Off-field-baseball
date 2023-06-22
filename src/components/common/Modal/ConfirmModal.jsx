@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { UserContext } from '../../../context/UserContext';
 import Overlay from './Overlay';
 
-const ConfirmModal = ({ title, trigger, triggerFunc, closeModal = '' }) => {
+const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
+  const { myTeam } = useContext(UserContext);
   return (
     <Overlay>
       <ConfirmModalWrapper>
         <h2>{title}</h2>
-        <BtnContainer>
+        <BtnContainer myTeam={myTeam}>
           <button onClick={closeModal}>취소</button>
-          <button onClick={triggerFunc}>{trigger}</button>
+          <button onClick={() => triggerFunc()}>{trigger}</button>
         </BtnContainer>
       </ConfirmModalWrapper>
     </Overlay>
@@ -47,7 +49,8 @@ const BtnContainer = styled.div`
   }
 
   & button:last-child {
-    color: var(--primary-color);
+    color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
     font-weight: 500;
     border-left: 1px solid var(--gray-200);
   }

@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
 import UserChat from './UserChat';
 import Comment from '../../../components/common/Comment/Comment';
-import ChatImg2 from '../../../assets/images/chat-img2.jpg';
 import ChatImg4 from '../../../assets/images/test.jpg';
 
 const ChatRoom = () => {
+  const [value, setValue] = useState('');
   return (
     <>
       <TopChatNav />
@@ -19,7 +19,7 @@ const ChatRoom = () => {
           <MyChat time='10:32' isImg img={ChatImg4}></MyChat>
         </MessageWrapper>
       </ChatRoomStyle>
-      <Comment />
+      <Comment value={value} setValue={setValue} />
     </>
   );
 };

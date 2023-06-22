@@ -2,26 +2,27 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../../context/UserContext';
 
 export default function Login({ team }) {
   const navigate = useNavigate();
+  const { setToken, setAccountname, setMyTeam } = useContext(UserContext);
 
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [messegeEmail, setMessegeEmail] = useState('');
-  const [messegePassword, setMessegePassword] = useState('');
-  const [isValidEmail, setIsVaildEmail] = useState(false);
-  const [isValidPassword, setIsVaildPassword] = useState(false);
+  const [warningMessage, setWarningMessage] = useState('');
 
-  // 이메일, 비밀번호 모두 유효할 시, 버튼 활성화
+  // 이메일, 비밀번호 모두 입력되면 버튼 활성화
   useEffect(() => {
-    if (isValidEmail && isValidPassword) {
+    if (email && password) {
       setIsVaild(true);
+    } else {
+      setIsVaild(false);
     }
-  }, [isValidEmail, isValidPassword]);
+  }, [email, password]);
 
   const login = async () => {
     const url = 'https://api.mandarin.weniv.co.kr';
@@ -43,46 +44,51 @@ export default function Login({ team }) {
     });
 
     const json = await res.json();
-    console.log(json, '제이손입니다');
+
     if (json.user) {
       const token = json.user['token'];
-      // token: API 불러올 때 권한인증
+      const accountname = json.user['accountname'];
+
       localStorage.setItem('token', token);
-      navigate('/'); // 로그인에 성공하면 홈화면으로
+      localStorage.setItem('accountname', accountname);
+
+      setToken(token);
+      setAccountname(accountname);
+
+      // 마이팀 저장
+      const team = await getTeam(json.user['token'], json.user.accountname);
+      localStorage.setItem('myteam', team);
+      setMyTeam(team);
+      goHome();
     } else {
-      // 임시
-      alert('이메일 또는 비밀번호가 일치하지 않습니다');
+      setWarningMessage(json.message);
     }
   };
+  const getTeam = async (token, accountname) => {
+    // 마이팀 불러오기
+    const url = 'https://api.mandarin.weniv.co.kr';
+    const reqPath = `/profile/${accountname}`;
+    const reqUrl = url + reqPath;
+    const res = await fetch(reqUrl, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    });
 
+    const json = await res.json();
+    return json.profile.intro.split('$')[1];
+  };
   const handleForm = (e) => {
     e.preventDefault();
     login();
   };
 
-  // email에서 포커스가 떠났을 때, 유효성 검사
-  const handleEmailInp = (e) => {
-    if (e.target.validity.valueMissing) {
-      setMessegeEmail('값을 입력해주세요');
-    } else if (e.target.validity.typeMismatch) {
-      setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
-    } else {
-      setMessegeEmail('');
-      setIsVaildEmail(true);
-    }
+  const goHome = () => {
+    navigate('/home');
   };
 
-  // password에서 포커스가 떠났을 때, 유효성 검사
-  const handlePasswordInp = (e) => {
-    if (e.target.validity.valueMissing) {
-      setMessegePassword('값을 입력해주세요');
-    } else if (e.target.validity.patternMismatch) {
-      setMessegePassword('6자 이상 입력해주세요');
-    } else {
-      setMessegePassword('');
-      setIsVaildPassword(true);
-    }
-  };
   return (
     <StyledLogin>
       <h1>로그인</h1>
@@ -90,31 +96,34 @@ export default function Login({ team }) {
         <label htmlFor='email-inp'>이메일</label>
         <input
           id='email-inp'
-          type='email'
-          onBlur={handleEmailInp}
+          type='text'
           value={email}
-          pattern='[a-zA-Z0-9]*@[a-z]*\.[a-z]*'
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
           required
-          className={messegeEmail && 'invalid'}
+          maxLength='60' // 임시
         />
-        {messegeEmail && <strong>{messegeEmail}</strong>}
         <label htmlFor='password-inp'>비밀번호</label>
         <input
           autoComplete='off'
           id='password-inp'
           type='password'
-          pattern='.{6,}' // 임시
-          onBlur={handlePasswordInp}
+          maxLength='30' // 임시
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className={messegePassword && 'invalid'}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           required
         />
-        {messegePassword && <strong>{messegePassword}</strong>}
+        {warningMessage && <strong>{warningMessage}</strong>}
         <StyledButton
           type='submit'
-          bgColor={isValid ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          bgColor={
+            isValid
+              ? 'var(--primary-color-default)'
+              : 'var(--secondary-color-default)'
+          }
           lBtn
           disabled={isValid ? '' : 'disabled'}
         >

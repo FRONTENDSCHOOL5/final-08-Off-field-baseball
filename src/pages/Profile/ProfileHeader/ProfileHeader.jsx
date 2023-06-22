@@ -24,24 +24,26 @@ export default function ProfileHeader({
 }) {
   // 로그인한 유저인지 확인
   const myTeam = [
-    { id: '1', name: '두산 베어스', img: BEARS },
-    { id: '2', name: '키움 히어로즈', img: HEROES },
-    { id: '3', name: 'LG 트윈스', img: TWINS },
-    { id: '4', name: 'NC 다이노스', img: DINOS },
-    { id: '5', name: 'KIA 타이거즈', img: TIGERS },
-    { id: '6', name: '삼성 라이온즈', img: LIONS },
-    { id: '7', name: 'SSG 랜더스', img: LANDERS },
-    { id: '8', name: '롯데 자이언츠', img: GIANTS },
-    { id: '9', name: '한화 이글스', img: EAGLES },
-    { id: '10', name: 'KT 위즈', img: WIZ },
+    { id: '1', name: '두산 베어스', name2: 'doosan', img: BEARS },
+    { id: '2', name: '키움 히어로즈', name2: 'kiwoom', img: HEROES },
+    { id: '3', name: 'LG 트윈스', name2: 'lg', img: TWINS },
+    { id: '4', name: 'NC 다이노스', name2: 'nc', img: DINOS },
+    { id: '5', name: 'KIA 타이거즈', name2: 'kia', img: TIGERS },
+    { id: '6', name: '삼성 라이온즈', name2: 'samsung', img: LIONS },
+    { id: '7', name: 'SSG 랜더스', name2: 'ssg', img: LANDERS },
+    { id: '8', name: '롯데 자이언츠', name2: 'lotte', img: GIANTS },
+    { id: '9', name: '한화 이글스', name2: 'hanhwa', img: EAGLES },
+    { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
   let myTeamImg = '';
+  let myTeamName = '';
   const { username, accountname, followerCount, followingCount, image } =
     profileData;
 
   myTeam.forEach((item) => {
-    if (item.name === team) {
+    if (item.name === team || item.name2 === team) {
       myTeamImg = item.img;
+      myTeamName = item.name;
     }
   });
 
@@ -59,8 +61,16 @@ export default function ProfileHeader({
         </Follow>
       </UserHeader>
       <MyTeamShow>
-        <img src={myTeamImg} srcSet='' alt='내가 응원하는 팀' />
-        <span>{team} 응원중!</span>
+        <>
+          {myTeamImg === '' ? (
+            <span>아직 응원중인 팀이 없습니다.</span>
+          ) : (
+            <>
+              <img src={myTeamImg} srcSet='' alt='내가 응원하는 팀' />
+              <span>{myTeamName} 응원중!</span>
+            </>
+          )}
+        </>
       </MyTeamShow>
       <UserInfo>
         <h2>{username}</h2>

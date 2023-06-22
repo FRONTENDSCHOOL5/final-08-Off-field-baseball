@@ -1,14 +1,11 @@
 import { useEffect } from 'react';
 import Overlay from './Overlay';
 import styled from 'styled-components';
-import { useRef } from 'react';
+import { useRef, useContext } from 'react';
+import { UserContext } from '../../../context/UserContext';
 
-const MoreModal = ({
-  menuList,
-  clickEventListnerList,
-  isModalOpen,
-  setIsModalOpen,
-}) => {
+const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
+  const { myTeam } = useContext(UserContext);
   // tab을 누르면, 모달 안에서만 포커스 되게
   const handleKeyDown = (e) => {
     if (!e.shiftKey && e.key === 'Tab') {
@@ -26,52 +23,20 @@ const MoreModal = ({
     }
   };
 
-  // 모달이 open되면 모달 첫번째 요소에 focus
-  const firstEl = useRef();
+  // 모달이 open되면 모달 첫번째 메뉴에 focus
+  const optionList = useRef();
   useEffect(() => {
     if (isModalOpen) {
-      firstEl.current.focus();
+      optionList.current.firstElementChild.firstElementChild.focus();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const handleError = () => {
-    alert('기능이 없습니다');
-    console.log(new Error('이벤트 리스너를 전달해주세요'));
-  };
-
-  MoreModal.defaultProps = {
-    menuList: ['정의되지 않음'],
-  };
 
   return (
     <Overlay onClick={handleClick}>
-      <StyledDialog open role='dialog'>
-        <ul onKeyDown={handleKeyDown}>
-          {menuList.map((menu, i) => {
-            if (i === 0) {
-              return (
-                <li key={i}>
-                  <button
-                    ref={firstEl}
-                    type='button'
-                    onClick={clickEventListnerList[i] || handleError}
-                  >
-                    {menu}
-                  </button>
-                </li>
-              );
-            }
-            return (
-              <li key={i}>
-                <button
-                  type='button'
-                  onClick={clickEventListnerList[i] || handleError}
-                >
-                  {menu}
-                </button>
-              </li>
-            );
-          })}
+      <StyledDialog open role='dialog' myTeam={myTeam}>
+        <ul onKeyDown={handleKeyDown} ref={optionList}>
+          {children}
         </ul>
       </StyledDialog>
     </Overlay>
@@ -85,7 +50,7 @@ const StyledDialog = styled.dialog`
   bottom: 0;
   width: min(100%, 430px);
   border: none;
-  padding: 0;
+  padding: 0 10px 10px;
   border-radius: 10px 10px 0 0;
 
   /* 밑에서 위로 모달 등장 */
@@ -107,13 +72,16 @@ const StyledDialog = styled.dialog`
     border-radius: 2px;
   }
   li > button {
-    padding: 14px 26px;
+    padding: 14px 16px;
     width: 100%;
     font-size: 1.4rem;
     line-height: 1.8rem;
     text-align: left;
   }
   button:focus {
-    outline: 1px solid var(--primary-color);
+    outline: none;
+    background-color: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
+    border-radius: 8px;
   }
 `;

@@ -2,32 +2,36 @@
   font-size: 10px;
 
   /* 메인 컬러 */
-  --primary-color: #52c33d;
+  --primary-color-default: #52c33d;
 
   /* 구단별 컬러 */
-  --brand-color-samsung: red;
-  --brand-color-hanwha: red;
-  --brand-color-kiwoom: red;
-  --brand-color-lotte: red;
-  --brand-color-lg: red;
-  --brand-color-kia: red;
-  --brand-color-ssg: red;
-  --brand-color-doosan: red;
-  --brand-color-nc: red;
-  --brand-color-kt: red;
+  --primary-color-samsung: #0066b3;
+  --primary-color-hanwha: #f15a28;
+  --primary-color-kiwoom: #7d0521;
+  --primary-color-lotte: #022242;
+  --primary-color-lg: #be0737;
+  --primary-color-kia: #b51123;
+  --primary-color-ssg: #cf0a2c;
+  --primary-color-doosan: #131230;
+  --primary-color-nc: #1d467d;
+  --primary-color-kt: #000;
 
   /* 서브 컬러 */
-  --secondary-color: #c9eac3;
-  /* --secondary-color-samsung: red;
-  --secondary-color-hanwha: red;
-  --secondary-color-kiwoom: red;
-  --secondary-color-lotte: red;
-  --secondary-color-lg: red;
-  --secondary-color-kia: red;
-  --secondary-color-ssg: red;
-  --secondary-color-doosan: red;
-  --secondary-color-nc: red;
-  --secondary-color-kt: red; */
+  --secondary-color-default: #c9eac3;
+
+  --secondary-color-samsung: #c6dbeb;
+  --secondary-color-hanwha: #f3ccbf;
+  --secondary-color-kiwoom: #e9c4cc;
+  --secondary-color-lotte: #c8daec;
+  --secondary-color-lg: #e9bfca;
+  --secondary-color-kia: #e9c5c9;
+  --secondary-color-ssg: #eac7cd;
+  --secondary-color-doosan: #d6d5e4;
+  --secondary-color-nc: #cadaee;
+  --secondary-color-kt: #dfdede;
+
+  /* kt 포인트 컬러 */
+  --tertiary-color-kt: #ed1b23;
 
   --gray-100: #f2f2f2;
   --gray-200: #dbdbdb;

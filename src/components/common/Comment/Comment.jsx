@@ -1,16 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
-// 임시. 기본 프로필 사진
-import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { UserContext } from '../../../context/UserContext';
 
-export default function UserSearch({
+export default function Comment({
   placeholder,
   txt,
   value,
   setValue,
   event,
+  userImg,
 }) {
+  const { myTeam } = useContext(UserContext);
   const [isValid, setIsValid] = useState(false);
   // input에 입력된 텍스트를 담는다
 
@@ -23,9 +24,9 @@ export default function UserSearch({
   };
 
   return (
-    <StyledForm onSubmit={event} isValid={isValid}>
+    <StyledForm onSubmit={event} isValid={isValid} myTeam={myTeam}>
       {/* 임시 이미지 */}
-      <img src={BASIC_PROFILE_SM} alt='내 프로필 사진' />
+      <img src={userImg} alt='내 프로필 사진' />
       <input
         type='text'
         placeholder={placeholder}
@@ -39,7 +40,7 @@ export default function UserSearch({
   );
 }
 
-UserSearch.defaultProps = {
+Comment.defaultProps = {
   txt: '전송',
   placeholder: '메시지 입력하기...',
 };
@@ -56,6 +57,7 @@ const StyledForm = styled.form`
   img {
     width: 36px;
     aspect-ratio: 1/1;
+    border-radius: 50%;
   }
   input {
     flex-grow: 1;
@@ -65,8 +67,7 @@ const StyledForm = styled.form`
     padding-left: 8px;
   }
   input:focus {
-    outline: 1px solid var(--primary-color);
-    border-radius: 8px;
+    outline: none;
   }
   input::placeholder {
     color: var(--gray-300);
@@ -76,6 +77,8 @@ const StyledForm = styled.form`
     font-size: 1.4rem;
     line-height: 1.8rem;
     color: ${(props) =>
-      props.isValid ? 'var(--primary-color)' : 'var(--gray-300)'};
+      props.isValid
+        ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+        : 'var(--gray-300)'};
   }
 `;

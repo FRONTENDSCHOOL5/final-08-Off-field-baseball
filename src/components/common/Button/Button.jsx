@@ -22,7 +22,7 @@ const ButtonStyle = styled.button`
 
   padding: ${(props) => (props.padding ? props.padding : '7px 0')};
   background-color: ${(props) =>
-    props.bgColor ? props.bgColor : 'var(--primary-color)'};
+    props.bgColor ? props.bgColor : 'var(--primary-color-default)'};
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : '400')};
   font-size: ${(props) => (props.fontSize ? props.fontSize : '1.4rem')};
 

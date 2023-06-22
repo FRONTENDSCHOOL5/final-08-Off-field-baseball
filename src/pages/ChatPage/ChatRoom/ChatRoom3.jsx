@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
@@ -7,6 +7,7 @@ import Comment from '../../../components/common/Comment/Comment';
 import ChatImg1 from '../../../assets/images/chat-img1.jpg';
 
 const ChatRoom = () => {
+  const [value, setValue] = useState('');
   return (
     <>
       <TopChatNav />
@@ -18,10 +19,10 @@ const ChatRoom = () => {
           <UserChat time='21:45'>
             네네 그럼 직거래로 하겠습니다 내일 경기 전에 괜찮으신가요?
           </UserChat>
-          <MyChat time='22:02'>네 그럼 내일 뵐게요~</MyChat>
+          <MyChat time='22:02'>네 그럼 내일 뵐게요!!</MyChat>
         </MessageWrapper>
       </ChatRoomStyle>
-      <Comment />
+      <Comment value={value} setValue={setValue} />
     </>
   );
 };

@@ -1,14 +1,17 @@
 import GlobalStyle from './styles/GlobalStyle';
 import Router from './routes/Router';
 import MainLayout from './components/layout/MainLayout/MainLayout';
+import UserProvider from './context/UserContext';
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <MainLayout>
-        <Router />
-      </MainLayout>
+      <UserProvider>
+        <MainLayout>
+          <Router />
+        </MainLayout>
+      </UserProvider>
     </>
   );
 }
