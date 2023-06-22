@@ -93,9 +93,10 @@ export default function Select({
   // 옵션 선택
   const selectOpt = (e) => {
     e.target.focus();
-    const optIndex = findIndex(e.target.parentNode);
+    const li = e.target.parentNode;
+    const optIndex = findIndex(li);
     setFocusOptIndex(optIndex);
-    const btn = e.currentTarget.previousElementSibling;
+    const btn = li.parentNode.previousElementSibling;
     setTimeout(() => {
       setSelectedOpt(e.target.textContent);
       setIsOpen(false);
@@ -133,15 +134,12 @@ export default function Select({
       </button>
 
       {isOpen && (
-        <ul
-          className='list'
-          onKeyDown={moveOpt}
-          onClick={selectOpt}
-          ref={optionList}
-        >
+        <ul className='list' onKeyDown={moveOpt} ref={optionList}>
           {optionTextList.map((txt, i) => (
             <li key={i}>
-              <button type='button'>{txt}</button>
+              <button type='button' onClick={selectOpt}>
+                {txt}
+              </button>
             </li>
           ))}
         </ul>
