@@ -19,6 +19,8 @@ export default function Comment({
   const handleForm = (e) => {
     if (e.target.value) {
       setIsValid(true);
+    } else {
+      setIsValid(false);
     }
     setValue(e.target.value);
   };
@@ -78,7 +80,9 @@ const StyledForm = styled.form`
     line-height: 1.8rem;
     color: ${(props) =>
       props.isValid
-        ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+        ? props.myTeam === 'kt'
+          ? 'var(--tertiary-color-kt)'
+          : 'var(--primary-color-' + (props.myTeam || 'default') + ')'
         : 'var(--gray-300)'};
   }
 `;
