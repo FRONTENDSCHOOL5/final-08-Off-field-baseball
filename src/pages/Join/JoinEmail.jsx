@@ -127,7 +127,7 @@ export default function JoinEmail({
           type='email'
           onBlur={handleEmailInp}
           value={email}
-          pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z])?'
+          pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z]+)?'
           placeholder='이메일 주소를 입력해 주세요.'
           onChange={(e) => {
             setEmail(e.target.value);
