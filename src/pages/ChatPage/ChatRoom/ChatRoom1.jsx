@@ -10,7 +10,7 @@ const ChatRoom = () => {
   const [value, setValue] = useState('');
   return (
     <>
-      <TopChatNav />
+      <TopChatNav username='최강롯데' />
       <ChatRoomStyle>
         <MessageWrapper>
           <UserChat time='09:50'>안녕하세요 글러브 아직 파시나요</UserChat>
