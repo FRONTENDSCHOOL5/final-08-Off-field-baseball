@@ -274,7 +274,7 @@ export default function JoinProfile({ email, password }) {
         />
         {messageAccountname && <strong>{messageAccountname}</strong>}
         <label htmlFor='intro'>소개</label>
-        <input
+        <textarea
           id='intro'
           type='text'
           placeholder='자신에 대해 소개해 주세요!'
@@ -285,7 +285,9 @@ export default function JoinProfile({ email, password }) {
           }}
           pattern='[^$]+'
           className={messageIntro && 'invalid'}
+          maxLength={150}
         />
+        <div>0/150</div>
         {messageIntro && <strong>{messageIntro}</strong>}
         <TeamSelect
           selectedOpt={selectedOpt}
