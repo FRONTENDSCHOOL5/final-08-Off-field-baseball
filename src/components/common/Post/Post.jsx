@@ -93,7 +93,18 @@ export default function Post({
                       <>
                         {imageFile.map((img, index) => {
                           return (
-                            <SwiperSlide key={index}>
+                            <SwiperSlide
+                              key={index}
+                              style={
+                                id
+                                  ? {
+                                      aspectRatio: '1/1',
+                                    }
+                                  : {
+                                      aspectRatio: '304/228',
+                                    }
+                              }
+                            >
                               <img src={img} alt='' />
                             </SwiperSlide>
                           );
@@ -103,7 +114,13 @@ export default function Post({
                     </SwiperWrapper>
                   ) : (
                     <ImgWrapper>
-                      <li>
+                      <li
+                        style={
+                          id
+                            ? { aspectRatio: '1/1' }
+                            : { aspectRatio: '304/228' }
+                        }
+                      >
                         {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                         <img src={imageFile[0]} alt='' />
                       </li>
@@ -246,7 +263,7 @@ const UserText = styled.div`
 const SwiperWrapper = styled(Swiper)`
   position: relative;
   margin-bottom: 12px;
-  aspect-ratio: 304/228;
+  /* aspect-ratio: 304/228; */
   width: 100%;
   .swiper-pagination-bullet.swiper-pagination-bullet-active {
     background: ${(props) =>
@@ -272,7 +289,6 @@ const ImgWrapper = styled.ul`
   margin-bottom: 12px;
   & li {
     flex-basis: 100%;
-    height: 228px;
     flex-shrink: 0;
   }
   & li img {
@@ -318,7 +334,6 @@ const PostMenu = styled.button`
 const LinkTo = styled(Link)`
   position: absolute;
   inset: 0;
-  padding: 16px 0;
   overflow: auto;
   z-index: 100;
 `;
