@@ -22,25 +22,46 @@ const StyledForm = styled.form`
   label:not(:first-child) {
     margin-top: 16px;
   }
-  input {
+  input,
+  textarea {
     width: 100%;
     font-size: 1.4rem;
     line-height: 1.4rem;
     border: 1px solid #dbdbdb;
+  }
+  input {
     border-width: 0 0 1px 0;
     padding: 10px 0 8px 0;
   }
-  input:focus {
+  input:focus,
+  textarea:focus {
     outline: none;
   }
-  input:focus:not(.invalid) {
+  input:focus:not(.invalid),
+  textarea:focus:not(.invalid) {
     border-color: ${(props) =>
       props.myTeam === 'kt'
         ? 'var(--tertiary-color-kt)'
         : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
-  input::placeholder {
+  input::placeholder,
+  textarea::placeholder {
     color: var(--gray-200);
+  }
+  textarea {
+    position: relative;
+    border-radius: 8px;
+    max-height: 112px;
+    margin-top: 10px;
+    padding: 8px;
+    resize: none;
+    line-height: 1.8rem;
+  }
+  /* 임시 태그 */
+  textarea + div {
+    margin: -20px 12px 25px 0;
+    text-align: right;
+    color: var(--gray-300);
   }
 
   /* 경고 문구 */
