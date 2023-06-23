@@ -83,7 +83,7 @@ export default function Select({
   // 셀렉트가 open 됐을 때
   useEffect(() => {
     // 선택된 옵션이 있다면, 선택되어 있는 옵션에 포커스
-    if (isOpen && FocusOptIndex) {
+    if (isOpen && FocusOptIndex !== null) {
       optionList.current.children[FocusOptIndex].firstElementChild.focus();
     }
     return;
@@ -94,8 +94,6 @@ export default function Select({
   const selectOpt = (e) => {
     e.target.focus();
     const li = e.target.parentNode;
-    const optIndex = findIndex(li);
-    setFocusOptIndex(optIndex);
     const btn = li.parentNode.previousElementSibling;
     setTimeout(() => {
       setSelectedOpt(e.target.textContent);
@@ -103,6 +101,15 @@ export default function Select({
       btn.focus();
     }, 110);
   };
+
+  // 선택한 팀을, focus할 옵션(인덱스)으로 변경
+  useEffect(() => {
+    // 빈 문자열이 아니면(첫 렌더링 시, 빈 문자열)
+    if (selectedOpt) {
+      const i = optionTextList.indexOf(selectedOpt);
+      setFocusOptIndex(i);
+    }
+  }, [selectedOpt]);
 
   return (
     <StyledSelect
