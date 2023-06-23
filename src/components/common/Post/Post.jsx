@@ -99,12 +99,10 @@ export default function Post({
                           );
                         })}
                       </>
-                      {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                     </SwiperWrapper>
                   ) : (
                     <ImgWrapper>
                       <li>
-                        {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                         <img src={imageFile[0]} alt='' />
                       </li>
                     </ImgWrapper>
