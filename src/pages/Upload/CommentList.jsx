@@ -182,6 +182,10 @@ const Comments = styled.li`
     font-size: 1rem;
     color: var(--gray-400);
   }
+  .time::before {
+    content: '·';
+    margin-right: 6px;
+  }
   p {
     margin: 4px 48px;
     font-size: 1.4rem;
