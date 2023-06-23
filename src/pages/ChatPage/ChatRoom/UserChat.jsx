@@ -9,7 +9,7 @@ const UserChat = (props) => {
     <Wrapper>
       <img
         className='profileImg'
-        src={BASIC_PROFILE_SM}
+        src={props.profile}
         alt='대화 상대의 프로필 사진입니다.'
       />
       <MessageContent>
