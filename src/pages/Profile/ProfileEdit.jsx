@@ -395,10 +395,18 @@ const StyledJoinProfile = styled.section`
   }
 
   .delete-btn {
-    width: 22px;
     position: relative;
-    top: -140px;
+    top: -145px;
     left: 120px;
+    background-color: var(--gray-300);
+    border-radius: 50%;
+  }
+
+  .delete-btn img {
+    width: 22px;
+    aspect-ratio: 1/1;
+    padding-top: 2px;
+    object-fit: cover;
   }
 
   .img-label img {
