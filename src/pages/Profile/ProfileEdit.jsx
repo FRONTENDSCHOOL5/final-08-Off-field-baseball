@@ -228,11 +228,13 @@ export default function EditProfile() {
         setIntro(res.user.intro.split('$')[0]);
       }
 
-      // 리팩토링 필요
-      const teamIndex = Object.values(teamName).findIndex(
-        (v) => v.team === res.user.intro.split('$')[1]
-      );
-      setSelectedOpt(Object.keys(teamName)[teamIndex]);
+      // 마이팀 selectedOpt에 저장
+      if (myTeam) {
+        const teamIndex = Object.values(teamName).findIndex(
+          (v) => v.team === myTeam
+        );
+        setSelectedOpt(Object.keys(teamName)[teamIndex]);
+      }
 
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
