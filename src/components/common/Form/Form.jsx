@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../../context/UserContext';
 
-export default function Form({ children, handleForm }) {
+export default function Form({ children, handleForm, selectedTeam }) {
   const { myTeam } = useContext(UserContext);
 
   return (
-    <StyledForm myTeam={myTeam} onSubmit={handleForm || null}>
+    <StyledForm myTeam={selectedTeam || myTeam} onSubmit={handleForm || null}>
       {children}
     </StyledForm>
   );

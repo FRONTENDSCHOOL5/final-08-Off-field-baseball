@@ -7,7 +7,7 @@ import Button from '../Button/Button';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
 
-export default function TopUploadNav({ btnTxt, isValid, event }) {
+export default function TopUploadNav({ btnTxt, isValid, event, selectedTeam }) {
   const navigate = useNavigate();
   const { myTeam } = useContext(UserContext);
   return (
@@ -20,8 +20,12 @@ export default function TopUploadNav({ btnTxt, isValid, event }) {
         <Button
           bgColor={
             isValid
-              ? 'var(--primary-color-' + (myTeam || 'default') + ')'
-              : 'var(--secondary-color-' + (myTeam || 'default') + ')'
+              ? 'var(--primary-color-' +
+                (selectedTeam || myTeam || 'default') +
+                ')'
+              : 'var(--secondary-color-' +
+                (selectedTeam || myTeam || 'default') +
+                ')'
           }
           disabled={isValid ? '' : 'disabled'}
           sBtn
