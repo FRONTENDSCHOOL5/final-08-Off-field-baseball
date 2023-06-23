@@ -5,6 +5,7 @@ import MyChat from './MyChat';
 import UserChat from './UserChat';
 import Comment from '../../../components/common/Comment/Comment';
 import ChatImg3 from '../../../assets/images/chat-img3.jpg';
+import { IMG_BUTTON } from '../../../styles/CommonIcons';
 
 const ChatRoom = () => {
   const [value, setValue] = useState('');
@@ -19,7 +20,9 @@ const ChatRoom = () => {
           <UserChat time='19:12'>재밌게 보고 와~</UserChat>
         </MessageWrapper>
       </ChatRoomStyle>
-      <Comment value={value} setValue={setValue} />
+      <Comment value={value} setValue={setValue}>
+        <img src={IMG_BUTTON} alt='이미지 업로드 버튼' />
+      </Comment>
     </>
   );
 };
