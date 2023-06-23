@@ -98,8 +98,8 @@ export default function EditProfile() {
       };
 
       // 팀 미선택 예외 처리
-      if (!selectedOpt && selectedOpt !== '없음') {
-        userData.user.intro = intro + '$' + selectedOpt;
+      if (selectedOpt && selectedOpt !== '없음') {
+        userData.user.intro = intro + '$' + teamName[selectedOpt].team;
       } else {
         userData.user.intro = intro;
       }
@@ -121,8 +121,6 @@ export default function EditProfile() {
       navigate('/profile');
 
       if (selectedOpt && selectedOpt !== '없음') {
-        userData.user.intro += `$${teamName[selectedOpt]}`;
-
         localStorage.setItem('myteam', teamName[selectedOpt].team);
         setMyTeam(teamName[selectedOpt].team);
       } else {
