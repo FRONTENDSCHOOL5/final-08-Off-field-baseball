@@ -9,7 +9,7 @@ export default function Comment({
   value,
   setValue,
   event,
-  userImg,
+  children,
 }) {
   const { myTeam } = useContext(UserContext);
   const [isValid, setIsValid] = useState(false);
@@ -27,8 +27,7 @@ export default function Comment({
 
   return (
     <StyledForm onSubmit={event} isValid={isValid} myTeam={myTeam}>
-      {/* 임시 이미지 */}
-      <img src={userImg} alt='내 프로필 사진' />
+      {children}
       <input
         type='text'
         placeholder={placeholder}

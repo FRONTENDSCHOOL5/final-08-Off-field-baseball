@@ -210,8 +210,9 @@ const Detail = () => {
             value={comment}
             setValue={setComment}
             event={handleCommentSubmit}
-            userImg={userImg}
-          ></Comment>
+          >
+            <img src={userImg} alt='내 프로필 사진' />
+          </Comment>
         </>
       )}
     </>
