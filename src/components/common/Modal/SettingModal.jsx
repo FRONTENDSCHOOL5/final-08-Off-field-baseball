@@ -20,7 +20,13 @@ const SettingModal = ({ isModalOpen, setIsModalOpen }) => {
     <>
       <MoreModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
         <li>
-          <button type='button' onClick={(e) => setIsModalOpen(false)}>
+          <button
+            type='button'
+            onClick={(e) => {
+              setIsModalOpen(false);
+              navigate('/profile');
+            }}
+          >
             설정 및 개인정보
           </button>
         </li>

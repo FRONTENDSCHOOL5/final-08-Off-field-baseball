@@ -27,7 +27,7 @@ export const Background = styled.div`
   justify-content: center;
 
   img {
-    width: 100px;
+    width: 80px;
     height: auto;
   }
 

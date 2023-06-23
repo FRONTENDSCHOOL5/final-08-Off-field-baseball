@@ -9,7 +9,7 @@ export default function Comment({
   value,
   setValue,
   event,
-  userImg,
+  children,
 }) {
   const { myTeam } = useContext(UserContext);
   const [isValid, setIsValid] = useState(false);
@@ -19,14 +19,15 @@ export default function Comment({
   const handleForm = (e) => {
     if (e.target.value) {
       setIsValid(true);
+    } else {
+      setIsValid(false);
     }
     setValue(e.target.value);
   };
 
   return (
     <StyledForm onSubmit={event} isValid={isValid} myTeam={myTeam}>
-      {/* 임시 이미지 */}
-      <img src={userImg} alt='내 프로필 사진' />
+      {children}
       <input
         type='text'
         placeholder={placeholder}
@@ -78,7 +79,9 @@ const StyledForm = styled.form`
     line-height: 1.8rem;
     color: ${(props) =>
       props.isValid
-        ? 'var(--primary-color-' + (props.myTeam || 'default') + ')'
+        ? props.myTeam === 'kt'
+          ? 'var(--tertiary-color-kt)'
+          : 'var(--primary-color-' + (props.myTeam || 'default') + ')'
         : 'var(--gray-300)'};
   }
 `;

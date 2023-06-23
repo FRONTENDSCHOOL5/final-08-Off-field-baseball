@@ -11,6 +11,7 @@ export default function Select({
   btnId,
   selectedOpt,
   setSelectedOpt,
+  selectedTeam,
 }) {
   const { myTeam } = useContext(UserContext);
   const [isOn, setIsOn] = useState(false);
@@ -82,7 +83,7 @@ export default function Select({
   // 셀렉트가 open 됐을 때
   useEffect(() => {
     // 선택된 옵션이 있다면, 선택되어 있는 옵션에 포커스
-    if (isOpen && FocusOptIndex) {
+    if (isOpen && FocusOptIndex !== null) {
       optionList.current.children[FocusOptIndex].firstElementChild.focus();
     }
     return;
@@ -92,9 +93,8 @@ export default function Select({
   // 옵션 선택
   const selectOpt = (e) => {
     e.target.focus();
-    const optIndex = findIndex(e.target.parentNode);
-    setFocusOptIndex(optIndex);
-    const btn = e.currentTarget.previousElementSibling;
+    const li = e.target.parentNode;
+    const btn = li.parentNode.previousElementSibling;
     setTimeout(() => {
       setSelectedOpt(e.target.textContent);
       setIsOpen(false);
@@ -102,9 +102,18 @@ export default function Select({
     }, 110);
   };
 
+  // 선택한 팀을, focus할 옵션(인덱스)으로 변경
+  useEffect(() => {
+    // 빈 문자열이 아니면(첫 렌더링 시, 빈 문자열)
+    if (selectedOpt) {
+      const i = optionTextList.indexOf(selectedOpt);
+      setFocusOptIndex(i);
+    }
+  }, [selectedOpt]);
+
   return (
     <StyledSelect
-      myTeam={myTeam}
+      myTeam={selectedTeam || myTeam}
       selectedOpt={selectedOpt}
       className='custom-select'
       onKeyDown={(e) => {
@@ -132,15 +141,12 @@ export default function Select({
       </button>
 
       {isOpen && (
-        <ul
-          className='list'
-          onKeyDown={moveOpt}
-          onClick={selectOpt}
-          ref={optionList}
-        >
+        <ul className='list' onKeyDown={moveOpt} ref={optionList}>
           {optionTextList.map((txt, i) => (
             <li key={i}>
-              <button type='button'>{txt}</button>
+              <button type='button' onClick={selectOpt}>
+                {txt}
+              </button>
             </li>
           ))}
         </ul>

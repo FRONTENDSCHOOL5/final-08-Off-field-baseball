@@ -1,4 +1,4 @@
-import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
+import { BASIC_PROFILE_LG, X } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
@@ -15,33 +15,34 @@ export default function EditProfile() {
   const [accountnameValue, setAccountnameValue] = useState('');
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState('');
-  const [src, setSrc] = useState(BASIC_PROFILE_LG);
+  const [src, setSrc] = useState('');
   const [messageIntro, setMessageIntro] = useState('');
   const [messageAccountname, setMessageAccountname] = useState('');
   const [messageUsername, setMessageUsername] = useState('');
   const [selectedOpt, setSelectedOpt] = useState('');
   const navigate = useNavigate();
 
-  const { setAccountname, setMyTeam, token } = useContext(UserContext);
+  const { setAccountname, setMyTeam, token, myTeam } = useContext(UserContext);
 
   // 소개는 필수값이 아니어서, 입력값이 없는 처음엔 true
   const [isVaildIntro, setIsVaildIntro] = useState(true);
   const [isVaildUsername, setIsVaildUsername] = useState(false);
   const [isVaildAccountname, setIsVaildAccountname] = useState(false);
   const [currentAccountname, setCurrentAccountname] = useState('');
+  const [selectedTeam, setSelectedTeam] = useState(myTeam);
 
-  // CSS 변수에서 사용하는 팀 이름(samsung, ...)
+  // CSS 변수에서 사용하는 팀 이름(samsung, ...) / imgfile
   const teamName = {
-    '삼성 라이온즈': 'samsung',
-    '한화 이글스': 'hanwha',
-    '키움 히어로즈': 'kiwoom',
-    '롯데 자이언츠': 'lotte',
-    'LG 트윈스': 'lg',
-    'KIA 타이거즈': 'kia',
-    'SSG 랜더스': 'ssg',
-    '두산 베어스': 'doosan',
-    'NC 다이노스': 'nc',
-    'KT 위즈': 'kt',
+    '삼성 라이온즈': { team: 'samsung', filename: '1687344208464.png' },
+    '한화 이글스': { team: 'hanwha', filename: '1687344233670.png' },
+    '키움 히어로즈': { team: 'kiwoom', filename: '1687344397365.png' },
+    '롯데 자이언츠': { team: 'lotte', filename: '1687344422408.png' },
+    'LG 트윈스': { team: 'lg', filename: '1687344477843.png' },
+    'KIA 타이거즈': { team: 'kia', filename: '1687344489698.png' },
+    'SSG 랜더스': { team: 'ssg', filename: '1687344502165.png' },
+    '두산 베어스': { team: 'doosan', filename: '1687344513474.png' },
+    'NC 다이노스': { team: 'nc', filename: '1687344523820.png' },
+    'KT 위즈': { team: 'kt', filename: '1687344531846.png' },
   };
 
   // 사용자 이름, 계정 ID 모두 유효하고, 소개에 $가 입력되지 않았을 때
@@ -70,7 +71,7 @@ export default function EditProfile() {
         const json = await res.json();
         return 'https://api.mandarin.weniv.co.kr/' + json.filename;
       } else {
-        // 기본 프로필 이미지
+        // 기존 프로필 이미지
         return src;
       }
     } catch (err) {
@@ -92,10 +93,16 @@ export default function EditProfile() {
         user: {
           username: username,
           accountname: accountnameValue,
-          intro: intro + '$' + selectedOpt,
           image: profileImageUrl,
         },
       };
+
+      // 팀 미선택 예외 처리
+      if (selectedOpt && selectedOpt !== '없음') {
+        userData.user.intro = intro + '$' + teamName[selectedOpt].team;
+      } else {
+        userData.user.intro = intro;
+      }
 
       const res = await fetch(reqUrl, {
         method: 'PUT',
@@ -107,16 +114,19 @@ export default function EditProfile() {
       });
 
       const json = await res.json();
-      console.log(json);
+
       alert('수정되었습니다.');
       localStorage.setItem('accountname', json.user.accountname);
-      localStorage.setItem('myteam', teamName[selectedOpt]);
       setAccountname(json.user.accountname);
-      setMyTeam(teamName[selectedOpt]);
       navigate('/profile');
 
       if (selectedOpt && selectedOpt !== '없음') {
-        userData.user.intro += `$${teamName[selectedOpt]}`;
+        localStorage.setItem('myteam', teamName[selectedOpt].team);
+        setMyTeam(teamName[selectedOpt].team);
+      } else {
+        // 팀 미선택 시
+        localStorage.setItem('myteam', '');
+        setMyTeam('');
       }
     } catch (err) {
       console.log(err);
@@ -210,19 +220,24 @@ export default function EditProfile() {
       });
       const res = await req.json();
       setIntro(res.user.intro?.split('$')[0]); // intro 있을 경우. 잘라서
-      setSelectedOpt(
-        Object.keys(teamName).find(
-          (key) => teamName[key] === res.user.intro?.split('$')[1]
-        ) || res.user.intro?.split('$')[1]
-      );
+      setSrc(res.user.image); // 이미지
+
+      // intro 있을 경우
+      if (res.user.intro) {
+        setIntro(res.user.intro.split('$')[0]);
+      }
+
+      // 마이팀 selectedOpt에 저장
+      if (myTeam) {
+        const teamIndex = Object.values(teamName).findIndex(
+          (v) => v.team === myTeam
+        );
+        setSelectedOpt(Object.keys(teamName)[teamIndex]);
+      }
 
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
       setCurrentAccountname(res.user.accountname); //임시
-      // 이미지
-      if (res.user.image !== BASIC_PROFILE_LG) {
-        setSrc(res.user.image);
-      }
     } catch (err) {
       console.log(err);
     }
@@ -231,11 +246,60 @@ export default function EditProfile() {
     beforeEdit();
   }, []);
 
+  // 팀 테마 설정 (기본 테마 프사, 테마 컬러)
+  useEffect(() => {
+    if (!selectedOpt) {
+      return;
+    }
+
+    const url = 'https://api.mandarin.weniv.co.kr';
+    const filenameList = Object.values(teamName).map(
+      (v) => url + '/' + v.filename
+    );
+    filenameList.push(url + '/' + '1687309142552.png');
+
+    // 현재 프로필이 기본 프로필 사진이라면
+    if (filenameList.includes(src)) {
+      if (selectedOpt === '없음') {
+        setSrc(url + '/' + '1687309142552.png');
+        setSelectedTeam('default');
+      } else {
+        setSrc(url + '/' + teamName[selectedOpt].filename);
+        setSelectedTeam(teamName[selectedOpt].team);
+      }
+    } else {
+      if (selectedOpt === '없음') {
+        setSelectedTeam('default');
+      } else {
+        setSelectedTeam(teamName[selectedOpt].team);
+      }
+    }
+  }, [selectedOpt]);
+
+  // 이미지 삭제
+  const handleImgDelete = (e) => {
+    e.preventDefault();
+    // setSrc(BASIC_PROFILE_LG);
+    setImage('');
+
+    const url = 'https://api.mandarin.weniv.co.kr';
+    if (!selectedOpt || selectedOpt === '없음') {
+      setSrc(url + '/' + '1687309142552.png');
+      return;
+    } else {
+      setSrc(url + '/' + teamName[selectedOpt].filename);
+    }
+  };
+
   return (
     <>
-      <TopUploadNav isValid={isValid} event={handleForm} />
-      <StyledJoinProfile>
-        <Form>
+      <TopUploadNav
+        isValid={isValid}
+        event={handleForm}
+        selectedTeam={selectedTeam}
+      />
+      <StyledJoinProfile myTeam={selectedTeam}>
+        <Form selectedTeam={selectedTeam}>
           <label htmlFor='profileImg' className='img-label'>
             <img src={src} alt='' />
           </label>
@@ -257,6 +321,10 @@ export default function EditProfile() {
               }
             }}
           />
+          <button className='delete-btn' onClick={handleImgDelete}>
+            <img src={X} alt='이미지 삭제하기' />
+          </button>
+
           <label htmlFor='username'>사용자 이름</label>
           <input
             id='username'
@@ -304,6 +372,7 @@ export default function EditProfile() {
           />
           {messageIntro && <strong>{messageIntro}</strong>}
           <TeamSelect
+            selectedTeam={selectedTeam}
             selectedOpt={selectedOpt}
             setSelectedOpt={setSelectedOpt}
           ></TeamSelect>
@@ -316,21 +385,6 @@ export default function EditProfile() {
 const StyledJoinProfile = styled.section`
   padding: 78px 34px;
 
-  h1,
-  p {
-    text-align: center;
-  }
-  h1 {
-    margin-bottom: 12px;
-    font-size: 2.4rem;
-    font-weight: 500;
-    line-height: 3rem;
-  }
-  p {
-    margin-bottom: 30px;
-    font-size: 1.4rem;
-    color: var(--gray-400);
-  }
   #profileImg {
     border: none;
   }
@@ -339,17 +393,32 @@ const StyledJoinProfile = styled.section`
     width: 110px;
     margin: 0 auto;
   }
+
+  .delete-btn {
+    position: relative;
+    top: -145px;
+    left: 120px;
+    background-color: var(--gray-300);
+    border-radius: 50%;
+  }
+
+  .delete-btn img {
+    width: 22px;
+    aspect-ratio: 1/1;
+    padding-top: 2px;
+    object-fit: cover;
+  }
+
   .img-label img {
     width: 110px;
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
     border-radius: 55px;
     object-fit: cover;
+    background: ${(props) =>
+      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
   #myTeam {
     margin-top: 9px;
-  }
-  #start-btn {
-    margin-top: 30px;
   }
 `;

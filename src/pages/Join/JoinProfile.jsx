@@ -129,12 +129,17 @@ export default function JoinProfile({ email, password }) {
     if (json.user) {
       const token = json.user['token'];
       const accountname = json.user['accountname'];
-      const team = teamData[selectedOpt].team;
+      if (!selectedOpt || selectedOpt === '없음') {
+        localStorage.setItem('myteam', '');
+        setMyTeam('');
+      } else {
+        const team = teamData[selectedOpt].team;
+        localStorage.setItem('myteam', teamData[selectedOpt].team);
+        setMyTeam(team);
+      }
       localStorage.setItem('token', token);
       localStorage.setItem('accountname', accountname);
-      localStorage.setItem('myteam', teamData[selectedOpt].team);
       setAccountname(accountname);
-      setMyTeam(team);
       setToken(token);
       navigate('/'); // 자동로그인에 성공하면 홈화면으로
     } else {

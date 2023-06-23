@@ -5,6 +5,7 @@ import MyChat from './MyChat';
 import UserChat from './UserChat';
 import Comment from '../../../components/common/Comment/Comment';
 import ChatImg4 from '../../../assets/images/test.jpg';
+import { IMG_BUTTON, LOTTE_SMALL } from '../../../styles/CommonIcons';
 
 const ChatRoom = () => {
   const [value, setValue] = useState('');
@@ -13,13 +14,19 @@ const ChatRoom = () => {
       <TopChatNav username='최강롯데' />
       <ChatRoomStyle>
         <MessageWrapper>
-          <UserChat time='09:50'>안녕하세요 글러브 아직 파시나요</UserChat>
-          <UserChat time='09:51'>사진 좀 볼 수 있을까요?</UserChat>
+          <UserChat profile={LOTTE_SMALL} time='09:50'>
+            안녕하세요 글러브 아직 파시나요
+          </UserChat>
+          <UserChat profile={LOTTE_SMALL} time='09:51'>
+            사진 좀 볼 수 있을까요?
+          </UserChat>
           <MyChat time='10:30'>안녕하세요</MyChat>
           <MyChat time='10:32' isImg img={ChatImg4}></MyChat>
         </MessageWrapper>
       </ChatRoomStyle>
-      <Comment value={value} setValue={setValue} />
+      <Comment value={value} setValue={setValue}>
+        <img src={IMG_BUTTON} alt='이미지 업로드 버튼' />
+      </Comment>
     </>
   );
 };

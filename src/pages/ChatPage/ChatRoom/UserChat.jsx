@@ -9,7 +9,7 @@ const UserChat = (props) => {
     <Wrapper>
       <img
         className='profileImg'
-        src={BASIC_PROFILE_SM}
+        src={props.profile}
         alt='대화 상대의 프로필 사진입니다.'
       />
       <MessageContent>
@@ -62,7 +62,7 @@ const MessageImg = styled.img`
   object-fit: cover;
   background-size: cover;
   background-color: ${(props) =>
-    'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+    'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   border-radius: 1rem;
   border: none;
   padding: 0;

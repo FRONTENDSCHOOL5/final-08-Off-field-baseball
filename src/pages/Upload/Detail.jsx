@@ -17,8 +17,6 @@ const Detail = () => {
   const [commentList, setCommentList] = useState([]);
   // 댓글 달면 바로 업데이트 되도록 하는 state (더 좋은 방법이 있을지 고민 중)
   const [updateComment, setUpdateComment] = useState('');
-  //추후 무한 스크롤 구현을 위한 state
-  // const [numComment, setNumComment] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
@@ -35,15 +33,18 @@ const Detail = () => {
   /* 무한 스크롤 */
   useEffect(() => {
     const addUser = () => {
+      // 더 렌더링할 리스트가 없으면 얼리리턴
+      if (commentList.length + 10 < cntCommentList) {
+        return;
+      }
       const scrollHeight = document.documentElement.scrollHeight;
       const scrollTop = document.documentElement.scrollTop;
       const clientHeight = document.documentElement.clientHeight;
 
-      if (scrollHeight - scrollTop === clientHeight) {
+      // pc는 스크롤을 끝까지 내려도 정확히 clientHeight와 같아지지 않아 20 더함
+      if (scrollHeight - scrollTop <= clientHeight + 20) {
         setShowCommentList(commentList.slice(0, cntCommentList));
         setCntCommentList(cntCommentList + 10);
-
-        console.log(cntCommentList);
       }
     };
 
@@ -51,7 +52,7 @@ const Detail = () => {
 
     return () => window.removeEventListener('scroll', addUser);
   }, [cntCommentList]);
-  /* // 무한 스크롤 */
+  /* * * * * * * * * */
 
   const getUserProfile = async () => {
     try {
@@ -209,8 +210,9 @@ const Detail = () => {
             value={comment}
             setValue={setComment}
             event={handleCommentSubmit}
-            userImg={userImg}
-          ></Comment>
+          >
+            <img src={userImg} alt='내 프로필 사진' />
+          </Comment>
         </>
       )}
     </>

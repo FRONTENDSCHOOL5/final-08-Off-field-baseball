@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../../context/UserContext';
 import {
   LANDERS,
   GIANTS,
@@ -15,10 +16,11 @@ import {
 } from '../../../styles/CommonImages';
 import FollowBtn from '../FollowBtn';
 
-export default function UserList({ user }) {
+export default function UserList({ user, keyword }) {
   const [myTeamImg, setMyTeamImg] = useState('');
+  const { myTeam } = useContext(UserContext);
 
-  const myTeam = [
+  const myTeamList = [
     { id: '1', name: '두산 베어스', name2: 'doosan', img: BEARS },
     { id: '2', name: '키움 히어로즈', name2: 'kiwoom', img: HEROES },
     { id: '3', name: 'LG 트윈스', name2: 'lg', img: TWINS },
@@ -31,9 +33,11 @@ export default function UserList({ user }) {
     { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
 
+  console.log(keyword);
+
   useEffect(() => {
     function findMyTeam() {
-      myTeam.forEach((item) => {
+      myTeamList.forEach((item) => {
         if (
           item.name === user.intro?.split('$')[0] ||
           item.name === user.intro?.split('$')[1]
@@ -50,6 +54,28 @@ export default function UserList({ user }) {
     findMyTeam();
   }, [user]);
 
+  // js 텍스트 하이라이팅, 리액트 텍스트 하이라이팅, 정규표현식
+  const matchedText = (text, query) => {
+    if (query !== '' && text.includes(query)) {
+      const i = text.indexOf(query);
+      const parts = [
+        text.slice(0, i),
+        text.slice(i, i + query.length),
+        text.slice(i + query.length),
+      ];
+
+      return (
+        <>
+          {parts[0]}
+          <Markedtext myTeam={myTeam}>{parts[1]}</Markedtext>
+          {parts[2]}
+        </>
+      );
+    }
+
+    return text;
+  };
+
   return (
     <>
       {user && (
@@ -57,7 +83,7 @@ export default function UserList({ user }) {
           <Link to={'/profile/' + user.accountname}>
             <img src={user.image} alt='' />
             <div className='user-info'>
-              <h2>{user.username}</h2>
+              <h2>{matchedText(user.username, keyword)}</h2>
               <p className='ellipsis'>@{user.accountname}</p>
             </div>
           </Link>
@@ -129,4 +155,11 @@ const TeamLogo = styled.div`
     object-fit: contain;
     border-radius: 0;
   }
+`;
+
+const Markedtext = styled.span`
+  color: ${(props) =>
+    props.myTeam === 'kt'
+      ? 'var(--tertiary-color-kt)'
+      : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
 `;
