@@ -9,7 +9,7 @@ const ChatListStyle = (props) => {
   return (
     <ProfileStyle onClick={() => navigate(props.navigate)}>
       <div className='wrapper'>
-        <img src={BASIC_PROFILE_SM} alt='프로필사진 입니다.' />
+        <img src={props.profile} alt='프로필사진 입니다.' />
         {props.isNew && <div className='new'></div>}
         <div className='text'>
           <p className='user-name'>{props.userName}</p>
