@@ -32,7 +32,7 @@ export default function ProfileHeader({
     { id: '6', name: '삼성 라이온즈', name2: 'samsung', img: LIONS },
     { id: '7', name: 'SSG 랜더스', name2: 'ssg', img: LANDERS },
     { id: '8', name: '롯데 자이언츠', name2: 'lotte', img: GIANTS },
-    { id: '9', name: '한화 이글스', name2: 'hanhwa', img: EAGLES },
+    { id: '9', name: '한화 이글스', name2: 'hanwha', img: EAGLES },
     { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
   let myTeamImg = '';
