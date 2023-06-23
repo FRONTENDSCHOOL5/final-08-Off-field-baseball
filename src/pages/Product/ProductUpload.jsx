@@ -3,6 +3,7 @@ import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
 import { IMG_BUTTON, X } from '../../styles/CommonIcons';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import Form from '../../components/common/Form/Form';
 
 export default function ProductUpload() {
   const [price, setPrice] = useState('');
@@ -16,7 +17,7 @@ export default function ProductUpload() {
 
   // 모든 입력칸에 값이 입력되면 저장 버튼 활성화
   useEffect(() => {
-    if (productName && price && link && imgPre) {
+    if (productName.replace(/ /g, '').length > 1 && price && link && imgPre) {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -71,10 +72,10 @@ export default function ProductUpload() {
   };
 
   // 상품소개란 텍스트 길이만큼 textarea height 확대
-  const ResizeHeight = (e) => {
-    e.target.style.height = 'auto';
-    e.target.style.height = e.target.scrollHeight + 'px';
-  };
+  // const ResizeHeight = (e) => {
+  //   e.target.style.height = 'auto';
+  //   e.target.style.height = e.target.scrollHeight + 'px';
+  // };
 
   // 이미지 삭제
   const handleImgDelete = () => {
@@ -219,26 +220,26 @@ export default function ProductUpload() {
             onChange={handleImgChange}
           />
         </EmptyImg>
-
-        <ProductInput>
+        <Form>
+          {/* <ProductInput> */}
           <label htmlFor='name'>상품명</label>
           <input
             type='text'
             id='name'
-            minLength='2'
             maxLength='25'
             placeholder='2~25자 이내여야 합니다.'
-            required
             value={productName && productName}
-            onChange={(e) => setProductName(e.target.value)}
+            onChange={(e) =>
+              setProductName(e.target.value.replace(/\s\s+/g, ' '))
+            }
           />
 
           <label htmlFor='price'>가격</label>
           <input
             type='text'
             id='price'
+            maxLength='11'
             placeholder='숫자만 입력이 가능합니다.'
-            required
             value={price && price}
             onChange={addComma}
           />
@@ -247,14 +248,14 @@ export default function ProductUpload() {
           <textarea
             id='info'
             placeholder='판매하는 상품 정보를 입력해주세요.'
-            required
             value={link && link}
             onChange={(e) => {
-              ResizeHeight(e);
+              // ResizeHeight(e);
               setLink(e.target.value);
             }}
           />
-        </ProductInput>
+          {/* </ProductInput> */}
+        </Form>
       </ProductInfo>
     </>
   );
@@ -339,6 +340,14 @@ const ProductInput = styled.div`
   input:focus {
     outline: none;
     border-bottom: 1px solid var(--primary-color);
+  }
+
+  input:focus:not(.invalid),
+  textarea:focus:not(.invalid) {
+    border-color: ${(props) =>
+      props.myTeam === 'kt'
+        ? 'var(--tertiary-color-kt)'
+        : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
 
   textarea:focus {
