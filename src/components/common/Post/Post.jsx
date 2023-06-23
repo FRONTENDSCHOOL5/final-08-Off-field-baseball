@@ -251,7 +251,7 @@ const UserInfo = styled.div`
   }
 `;
 
-const UserText = styled.div`
+const UserText = styled.pre`
   margin: 16px 0;
   font-size: 1.4rem;
   line-height: 1.3;
