@@ -20,6 +20,9 @@ import IMAGE from '../assets/icons/image.png';
 import BASIC_PROFILE_LG from '../assets/icons/basic-profile-lg.png';
 import BASIC_PROFILE_SM from '../assets/icons/basic-profile-sm.png';
 import OPEN from '../assets/icons/open.png';
+import LOTTE_SMALL from '../assets/icons/lotte-small.png';
+import SSG_SMALL from '../assets/icons/ssg-small.png';
+import HANHWA_SMALL from '../assets/icons/hanhwa-small.png';
 
 export {
   ARROW_LEFT,
@@ -44,4 +47,7 @@ export {
   BASIC_PROFILE_LG,
   BASIC_PROFILE_SM,
   OPEN,
+  LOTTE_SMALL,
+  SSG_SMALL,
+  HANHWA_SMALL,
 };
