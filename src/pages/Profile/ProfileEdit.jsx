@@ -321,9 +321,6 @@ export default function EditProfile() {
                 };
                 reader.readAsDataURL(e.target.files[0]);
                 setImage(e.target.files[0]);
-              } else {
-                setSrc(BASIC_PROFILE_LG);
-                setImage('');
               }
             }}
           />
