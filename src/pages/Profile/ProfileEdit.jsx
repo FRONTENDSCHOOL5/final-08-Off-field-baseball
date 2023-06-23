@@ -255,6 +255,12 @@ export default function EditProfile() {
         setSrc(url + '/' + teamName[selectedOpt].filename);
         setSelectedTeam(teamName[selectedOpt].team);
       }
+    } else {
+      if (selectedOpt === '없음') {
+        setSelectedTeam('default');
+      } else {
+        setSelectedTeam(teamName[selectedOpt].team);
+      }
     }
   }, [selectedOpt]);
 
