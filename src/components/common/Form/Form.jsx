@@ -51,7 +51,7 @@ const StyledForm = styled.form`
   textarea {
     position: relative;
     border-radius: 8px;
-    max-height: 112px;
+    height: 120px;
     margin-top: 10px;
     padding: 8px;
     resize: none;
