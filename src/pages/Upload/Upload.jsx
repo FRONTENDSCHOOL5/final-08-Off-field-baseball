@@ -94,7 +94,7 @@ export default function Upload() {
         body: JSON.stringify(postData),
       });
       if (req.status === 200) {
-        navigate('/');
+        navigate('/profile');
       } else {
         throw new Error('업로드 실패');
       }

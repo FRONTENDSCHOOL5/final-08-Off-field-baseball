@@ -221,6 +221,7 @@ export default function EditProfile() {
         },
       });
       const res = await req.json();
+      setIntro(res.user.intro?.split('$')[0]); // intro 있을 경우. 잘라서
       setSrc(res.user.image); // 이미지
 
       // intro 있을 경우
