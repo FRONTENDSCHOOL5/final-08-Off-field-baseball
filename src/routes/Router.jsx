@@ -30,9 +30,9 @@ export default function Router() {
       <Routes>
         <Route path='*' element={<Error404 />} />
         <Route path='/error404' element={<Error404 />} />
+        <Route path='/' element={<SplashScreen />} />
 
         <Route element={<NonAuthRoute authenticated={token} />}>
-          <Route path='/' element={<SplashScreen />} />
           <Route path='/login' element={<SplashLogin />} />
           <Route path='/login/email' element={<Login />} />
           <Route path='/join' element={<Join />} />
