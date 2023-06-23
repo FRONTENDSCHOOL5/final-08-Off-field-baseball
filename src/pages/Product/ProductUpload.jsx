@@ -333,6 +333,7 @@ const ProductInput = styled.div`
     resize: none;
     padding: 2px;
     overflow: hidden;
+    white-space: pre-line;
   }
 
   input:focus {
