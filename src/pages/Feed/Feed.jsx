@@ -131,6 +131,7 @@ const PostWrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 20px;
+  margin-bottom: 20px;
 `;
 
 const EmptyLayout = styled(ContentsLayout)`
