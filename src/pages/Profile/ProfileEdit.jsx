@@ -1,4 +1,4 @@
-import { BASIC_PROFILE_LG } from '../../styles/CommonIcons';
+import { BASIC_PROFILE_LG, X } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
@@ -71,7 +71,7 @@ export default function EditProfile() {
         const json = await res.json();
         return 'https://api.mandarin.weniv.co.kr/' + json.filename;
       } else {
-        // 기본 프로필 이미지
+        // 기존 프로필 이미지
         return src;
       }
     } catch (err) {
@@ -219,6 +219,7 @@ export default function EditProfile() {
         },
       });
       const res = await req.json();
+      setIntro(res.user.intro?.split('$')[0]); // intro 있을 경우. 잘라서
       setSrc(res.user.image); // 이미지
 
       // intro 있을 경우
@@ -275,6 +276,21 @@ export default function EditProfile() {
     }
   }, [selectedOpt]);
 
+  // 이미지 삭제
+  const handleImgDelete = (e) => {
+    e.preventDefault();
+    // setSrc(BASIC_PROFILE_LG);
+    setImage('');
+
+    const url = 'https://api.mandarin.weniv.co.kr';
+    if (!selectedOpt || selectedOpt === '없음') {
+      setSrc(url + '/' + '1687309142552.png');
+      return;
+    } else {
+      setSrc(url + '/' + teamName[selectedOpt].filename);
+    }
+  };
+
   return (
     <>
       <TopUploadNav
@@ -305,6 +321,10 @@ export default function EditProfile() {
               }
             }}
           />
+          <button className='delete-btn' onClick={handleImgDelete}>
+            <img src={X} alt='이미지 삭제하기' />
+          </button>
+
           <label htmlFor='username'>사용자 이름</label>
           <input
             id='username'
@@ -365,21 +385,6 @@ export default function EditProfile() {
 const StyledJoinProfile = styled.section`
   padding: 78px 34px;
 
-  h1,
-  p {
-    text-align: center;
-  }
-  h1 {
-    margin-bottom: 12px;
-    font-size: 2.4rem;
-    font-weight: 500;
-    line-height: 3rem;
-  }
-  p {
-    margin-bottom: 30px;
-    font-size: 1.4rem;
-    color: var(--gray-400);
-  }
   #profileImg {
     border: none;
   }
@@ -388,6 +393,14 @@ const StyledJoinProfile = styled.section`
     width: 110px;
     margin: 0 auto;
   }
+
+  .delete-btn {
+    width: 22px;
+    position: relative;
+    top: -140px;
+    left: 120px;
+  }
+
   .img-label img {
     width: 110px;
     aspect-ratio: 1/1;
@@ -399,8 +412,5 @@ const StyledJoinProfile = styled.section`
   }
   #myTeam {
     margin-top: 9px;
-  }
-  #start-btn {
-    margin-top: 30px;
   }
 `;
