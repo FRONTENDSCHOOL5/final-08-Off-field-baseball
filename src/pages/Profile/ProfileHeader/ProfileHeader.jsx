@@ -174,5 +174,6 @@ const UserInfo = styled.div`
 
   p.text {
     font-size: 1.4rem;
+    line-height: 1.8rem;
   }
 `;
