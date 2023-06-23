@@ -93,7 +93,7 @@ export default function ProfileHeader({
 const ProfileHeaderWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 24px;
+  padding: 0 16px 24px;
   margin: 10px -16px 6px;
   border-bottom: 6px solid var(--gray-100);
 `;
