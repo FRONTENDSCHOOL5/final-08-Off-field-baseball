@@ -1,5 +1,5 @@
 # ⚾️ 구장 밖 야구
-![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/cb04c23e-4de3-4ec0-bcd5-75b4d85bce82)
+![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/16010141-c8b0-43b4-a3a8-e6df819514bb)
 
 ## 1. 서비스 소개
 
