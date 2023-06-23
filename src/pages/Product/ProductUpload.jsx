@@ -204,7 +204,7 @@ export default function ProductUpload() {
               alt='상품 이미지 미리보기'
             />
           )}
-          <button onClick={handleImgDelete}>
+          <button className='delete-btn' onClick={handleImgDelete}>
             <img src={X} alt='이미지 삭제하기' />
           </button>
 
@@ -296,7 +296,7 @@ const EmptyImg = styled.div`
     display: none;
   }
 
-  button {
+  .delete-btn {
     position: absolute;
     width: 22px;
     top: 6px;

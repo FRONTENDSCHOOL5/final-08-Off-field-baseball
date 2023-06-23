@@ -300,9 +300,15 @@ export default function EditProfile() {
       />
       <StyledJoinProfile myTeam={selectedTeam}>
         <Form selectedTeam={selectedTeam}>
-          <label htmlFor='profileImg' className='img-label'>
-            <img src={src} alt='' />
+          <label htmlFor='profileImg'>
+            <div className='img-wrap'>
+              <img className='img-label' src={src} alt='' />
+              <button className='delete-btn' onClick={handleImgDelete}>
+                <img src={X} alt='이미지 삭제하기' />
+              </button>
+            </div>
           </label>
+
           <input
             type='file'
             id='profileImg'
@@ -321,10 +327,6 @@ export default function EditProfile() {
               }
             }}
           />
-          <button className='delete-btn' onClick={handleImgDelete}>
-            <img src={X} alt='이미지 삭제하기' />
-          </button>
-
           <label htmlFor='username'>사용자 이름</label>
           <input
             id='username'
@@ -394,22 +396,28 @@ const StyledJoinProfile = styled.section`
     margin: 0 auto;
   }
 
-  .delete-btn {
+  .img-wrap {
+    width: 110px;
+    margin: 0 auto;
     position: relative;
-    top: -145px;
-    left: 120px;
-    background-color: var(--gray-300);
-    border-radius: 50%;
   }
 
-  .delete-btn img {
+  .delete-btn {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background-color: var(--gray-300);
+    border-radius: 50%;
     width: 22px;
     aspect-ratio: 1/1;
+  }
+
+  .delete-btn > img {
     padding-top: 2px;
     object-fit: cover;
   }
 
-  .img-label img {
+  .img-label {
     width: 110px;
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
@@ -418,6 +426,7 @@ const StyledJoinProfile = styled.section`
     background: ${(props) =>
       'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
   }
+
   #myTeam {
     margin-top: 9px;
   }
