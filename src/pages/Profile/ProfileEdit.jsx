@@ -93,10 +93,16 @@ export default function EditProfile() {
         user: {
           username: username,
           accountname: accountnameValue,
-          intro: intro + '$' + selectedOpt,
           image: profileImageUrl,
         },
       };
+
+      // 팀 미선택 예외 처리
+      if (!selectedOpt && selectedOpt !== '없음') {
+        userData.user.intro = intro + '$' + selectedOpt;
+      } else {
+        userData.user.intro = intro;
+      }
 
       const res = await fetch(reqUrl, {
         method: 'PUT',
@@ -216,12 +222,19 @@ export default function EditProfile() {
       });
       const res = await req.json();
       setSrc(res.user.image); // 이미지
-      setIntro(res.user.intro.split('$')[0]); // intro 있을 경우. 잘라서
-      // 리팩토링 필요
-      const teamIndex = Object.values(teamName).findIndex(
-        (v) => v.team === res.user.intro.split('$')[1]
-      );
-      setSelectedOpt(Object.keys(teamName)[teamIndex]);
+
+      // intro 있을 경우
+      if (res.user.intro) {
+        setIntro(res.user.intro.split('$')[0]);
+      }
+
+      // 마이팀 selectedOpt에 저장
+      if (myTeam) {
+        const teamIndex = Object.values(teamName).findIndex(
+          (v) => v.team === myTeam
+        );
+        setSelectedOpt(Object.keys(teamName)[teamIndex]);
+      }
 
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
