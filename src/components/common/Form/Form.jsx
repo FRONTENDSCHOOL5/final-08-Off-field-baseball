@@ -57,11 +57,15 @@ const StyledForm = styled.form`
     padding: 8px 8px 24px;
     resize: none;
     line-height: 1.8rem;
+
+    margin-bottom: -10px; // 글자수 카운트 높이(font-size)
   }
 
   /* 글자수 카운트 */
   textarea + div {
-    margin: -20px 12px 25px 0;
+    position: relative;
+    right: 8px;
+    bottom: 8px;
     text-align: right;
     color: var(--gray-300);
   }
