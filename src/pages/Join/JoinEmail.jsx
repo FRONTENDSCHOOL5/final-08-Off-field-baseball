@@ -61,18 +61,22 @@ export default function JoinEmail({
 
   // email 입력값이 변하면, 유효성 검사
   const handleEmailInp = (e) => {
-    if (e.target.validity.valueMissing) {
-      setMessegeEmail('값을 입력해주세요');
-      setIsVaildEmail(false);
-    } else if (e.target.validity.patternMismatch) {
+    if (e.target.validity.patternMismatch) {
       setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
       setIsVaildEmail(false);
+    } else {
+      setMessegeEmail('');
+      setIsVaildEmail(true);
     }
   };
   // email에서 포커스가 떠났을 때, 유효성 검사
   const handleEmailInpBlur = (e) => {
+    if (e.target.validity.valueMissing) {
+      setMessegeEmail('값을 입력해주세요');
+      setIsVaildEmail(false);
+    }
     // 형식이 유효할 시 api 검사
-    if (setIsVaildEmail) {
+    else if (setIsVaildEmail) {
       emailvalid();
     }
   };
@@ -84,14 +88,14 @@ export default function JoinEmail({
     // eslint-disable-next-line
     /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
 
-  // password에서 포커스가 떠났을 때, 유효성 검사
+  // password 값이 변하면, 유효성 검사
   const handlePasswordInp = (e) => {
-    if (e.target.validity.valueMissing) {
-      setMessegePassword('값을 입력해주세요');
-      setIsVaildPassword(false);
+    // 값이 없을 땐, 경고 문구 보여주지 않음
+    if (!e.target.value) {
+      setMessegePassword('');
+      setIsVaildPassword(true);
       return;
     }
-
     const patternMatch = reg.test(e.target.value);
     if (!patternMatch) {
       setMessegePassword(
@@ -104,25 +108,14 @@ export default function JoinEmail({
     }
   };
 
-  // 이메일/비밀번호 입력값이 변할 때, 유효성을 통과하면, 경고 문구가 사라짐
-  // 버튼 활성화/비활성화
-  const handleEmailOnChange = (e) => {
-    if (!e.target.validity.patternMismatch) {
-      setMessegeEmail('');
-      setIsVaildEmail(true);
-    } else {
-      setIsVaildEmail(false);
-    }
-  };
-  const handlePasswordOnChange = (e) => {
-    const patternMatch = reg.test(e.target.value);
-    if (patternMatch) {
-      setMessegePassword('');
-      setIsVaildPassword(true);
-    } else {
+  // password에서 포커스가 떠났을 때, 값이 없다면 경고 문구
+  const handlePasswordInpBlur = (e) => {
+    if (e.target.validity.valueMissing) {
+      setMessegePassword('값을 입력해주세요');
       setIsVaildPassword(false);
     }
   };
+
   return (
     <StyledJoinEmail>
       <h1>이메일로 회원가입</h1>
@@ -139,7 +132,6 @@ export default function JoinEmail({
           onChange={(e) => {
             handleEmailInp(e);
             setEmail(e.target.value);
-            handleEmailOnChange(e);
           }}
           required
           className={messegeEmail && 'invalid'}
@@ -152,9 +144,9 @@ export default function JoinEmail({
           type='password'
           maxLength='20'
           value={password}
+          onBlur={handlePasswordInpBlur}
           onChange={(e) => {
             handlePasswordInp(e);
-            handlePasswordOnChange(e);
             setPassword(e.target.value);
           }}
           className={messegePassword && 'invalid'}
