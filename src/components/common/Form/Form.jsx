@@ -52,17 +52,21 @@ const StyledForm = styled.form`
   textarea {
     position: relative;
     border-radius: 8px;
-    height: 120px;
     margin-top: 10px;
-    padding: 8px;
+    overflow-y: hidden; // 스크롤 숨기기 위한 속성
+    padding: 8px 8px 24px;
     resize: none;
     line-height: 1.8rem;
   }
-  /* 임시 태그 */
+
+  /* 글자수 카운트 */
   textarea + div {
     margin: -20px 12px 25px 0;
     text-align: right;
     color: var(--gray-300);
+  }
+  textarea + div > span {
+    color: var(--gray-400);
   }
 
   /* 경고 문구 */

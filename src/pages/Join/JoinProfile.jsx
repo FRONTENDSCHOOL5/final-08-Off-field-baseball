@@ -205,7 +205,7 @@ export default function JoinProfile({ email, password }) {
   };
   // 소개에서 포커스가 떠났을 때, 유효성 검사
   const handleIntroInp = (e) => {
-    if (e.target.validity.patternMismatch) {
+    if (e.target.value.includes('$')) {
       setMessageIntro('달러($)를 제외한 문자를 입력해주세요');
       setIsVaildIntro(false);
     } else {
@@ -222,6 +222,16 @@ export default function JoinProfile({ email, password }) {
     setIsModalOpen(false); // 모달창 닫기
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textCnt, setTextCnt] = useState(0);
+
+  // 텍스트 길이에 맞춰 textarea height 변경
+  const resizeHeight = (e) => {
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  };
+  const handleTextCnt = (e) => {
+    setTextCnt(e.target.value.length);
+  };
   return (
     <StyledJoinProfile>
       <h1>프로필 설정</h1>
@@ -324,15 +334,19 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='자신에 대해 소개해 주세요!'
           value={intro}
-          onBlur={handleIntroInp}
-          onChange={(e) => {
-            setIntro(e.target.value);
-          }}
           pattern='[^$]+'
+          onChange={(e) => {
+            handleIntroInp(e);
+            setIntro(e.target.value);
+            resizeHeight(e);
+            handleTextCnt(e);
+          }}
           className={messageIntro && 'invalid'}
           maxLength={150}
         />
-        <div>0/150</div>
+        <div>
+          <span>{textCnt} / </span>150
+        </div>
         {messageIntro && <strong>{messageIntro}</strong>}
         <TeamSelect
           selectedOpt={selectedOpt}
