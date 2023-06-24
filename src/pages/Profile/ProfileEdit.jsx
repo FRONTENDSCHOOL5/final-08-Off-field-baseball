@@ -1,4 +1,4 @@
-import { BASIC_PROFILE_LG, X } from '../../styles/CommonIcons';
+import { X } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
@@ -298,7 +298,7 @@ export default function EditProfile() {
         event={handleForm}
         selectedTeam={selectedTeam}
       />
-      <StyledJoinProfile myTeam={selectedTeam}>
+      <StyledEditProfile myTeam={selectedTeam}>
         <Form selectedTeam={selectedTeam}>
           <label htmlFor='profileImg'>
             <div className='img-wrap'>
@@ -357,7 +357,7 @@ export default function EditProfile() {
           />
           {messageAccountname && <strong>{messageAccountname}</strong>}
           <label htmlFor='intro'>소개</label>
-          <input
+          <textarea
             id='intro'
             type='text'
             placeholder='자신에 대해 소개해 주세요!'
@@ -368,6 +368,7 @@ export default function EditProfile() {
             }}
             pattern='[^$]+'
             className={messageIntro && 'invalid'}
+            maxLength={150}
           />
           {messageIntro && <strong>{messageIntro}</strong>}
           <TeamSelect
@@ -376,12 +377,12 @@ export default function EditProfile() {
             setSelectedOpt={setSelectedOpt}
           ></TeamSelect>
         </Form>
-      </StyledJoinProfile>
+      </StyledEditProfile>
     </>
   );
 }
 
-const StyledJoinProfile = styled.section`
+const StyledEditProfile = styled.section`
   padding: 78px 34px;
 
   #profileImg {
