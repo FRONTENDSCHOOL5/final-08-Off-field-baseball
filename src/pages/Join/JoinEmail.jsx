@@ -61,10 +61,10 @@ export default function JoinEmail({
 
   // email에서 포커스가 떠났을 때, 유효성 검사
   const handleEmailInp = (e) => {
-    if (e.target.validity.valueMissing) {
-      setMessegeEmail('값을 입력해주세요');
-      setIsVaildEmail(false);
-    } else if (e.target.validity.patternMismatch) {
+    if (!e.target.value) {
+      return;
+    }
+    if (e.target.validity.patternMismatch) {
       setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
       setIsVaildEmail(false);
     } else {
@@ -79,42 +79,34 @@ export default function JoinEmail({
     // eslint-disable-next-line
     /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
 
-  // password에서 포커스가 떠났을 때, 유효성 검사
-  const handlePasswordInp = (e) => {
+  // 이메일 입력값이 변할 때
+  const handleEmailOnChange = (e) => {
     if (e.target.validity.valueMissing) {
+      setMessegeEmail('값을 입력해주세요');
+      setIsVaildEmail(false);
+    } else if (
+      messegeEmail === '값을 입력해주세요' ||
+      !e.target.validity.patternMismatch
+    ) {
+      setMessegeEmail('');
+      setIsVaildEmail(true);
+    }
+  };
+  const handlePasswordOnChange = (e) => {
+    //값이 없으면
+    if (!e.target.value) {
       setMessegePassword('값을 입력해주세요');
       setIsVaildPassword(false);
       return;
     }
-
-    const patternMatch = reg.test(e.target.value);
-    if (!patternMatch) {
-      setMessegePassword(
-        '숫자, 소문자, 특수문자를 포함하여 6자 이상 입력해주세요'
-      );
-      setIsVaildPassword(false);
-    } else {
-      setMessegePassword('');
-      setIsVaildPassword(true);
-    }
-  };
-
-  // 이메일/비밀번호 입력값이 변할 때, 유효성을 통과하면, 경고 문구가 사라짐
-  // 버튼 활성화/비활성화
-  const handleEmailOnChange = (e) => {
-    if (!e.target.validity.patternMismatch) {
-      setMessegeEmail('');
-      setIsVaildEmail(true);
-    } else {
-      setIsVaildEmail(false);
-    }
-  };
-  const handlePasswordOnChange = (e) => {
     const patternMatch = reg.test(e.target.value);
     if (patternMatch) {
       setMessegePassword('');
       setIsVaildPassword(true);
     } else {
+      setMessegePassword(
+        '숫자, 소문자, 특수문자를 포함하여 6자 이상 입력해주세요'
+      );
       setIsVaildPassword(false);
     }
   };
@@ -145,7 +137,6 @@ export default function JoinEmail({
           id='password-inp'
           type='password'
           maxLength='20'
-          onBlur={handlePasswordInp}
           value={password}
           onChange={(e) => {
             handlePasswordOnChange(e);
