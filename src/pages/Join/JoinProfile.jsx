@@ -181,16 +181,22 @@ export default function JoinProfile({ email, password }) {
     const json = await res.json();
     return json.message;
   };
-  // 계정 id 에서 포커스가 떠났을 때, 유효성 검사
+  // 계정 id 값이 변하면, 유효성 검사
   const handleAccountnameInp = async (e) => {
     if (e.target.validity.valueMissing) {
       setMessageAccountname('값을 입력해주세요');
       setIsVaildAccountname(false);
-      return;
-    }
-    if (e.target.validity.patternMismatch) {
+    } else if (e.target.validity.patternMismatch) {
       setMessageAccountname('영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.');
       setIsVaildAccountname(false);
+    } else {
+      setMessageAccountname('');
+      setIsVaildAccountname(true);
+    }
+  };
+  // 계정 id 에서 포커스가 떠났을 때, 유효성 검사
+  const handleAccountnameInpBlur = async (e) => {
+    if (e.target.validity.valueMissing && e.target.validity.patternMismatch) {
       return;
     }
 
@@ -203,9 +209,10 @@ export default function JoinProfile({ email, password }) {
       setIsVaildAccountname(true);
     }
   };
-  // 소개에서 포커스가 떠났을 때, 유효성 검사
+
+  // 소개 유효성 검사
   const handleIntroInp = (e) => {
-    if (e.target.validity.patternMismatch) {
+    if (e.target.value.includes('$')) {
       setMessageIntro('달러($)를 제외한 문자를 입력해주세요');
       setIsVaildIntro(false);
     } else {
@@ -222,6 +229,16 @@ export default function JoinProfile({ email, password }) {
     setIsModalOpen(false); // 모달창 닫기
   };
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textCnt, setTextCnt] = useState(0);
+
+  // 텍스트 길이에 맞춰 textarea height 변경
+  const resizeHeight = (e) => {
+    e.target.style.height = 'auto';
+    e.target.style.height = e.target.scrollHeight + 'px';
+  };
+  const handleTextCnt = (e) => {
+    setTextCnt(e.target.value.length);
+  };
   return (
     <StyledJoinProfile>
       <h1>프로필 설정</h1>
@@ -292,9 +309,9 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='2~10자 이내여야 합니다.'
           value={username}
-          onBlur={handleUsernameInp}
           onChange={(e) => {
             setUsername(e.target.value);
+            handleUsernameInp(e);
           }}
           minLength={2}
           maxLength={10}
@@ -308,10 +325,12 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           pattern='[A-Za-z0-9\._]+'
-          maxLength={10} // 임시
+          // minLength={2}
+          maxLength={30}
           value={accountname}
-          onBlur={handleAccountnameInp}
+          onBlur={handleAccountnameInpBlur}
           onChange={(e) => {
+            handleAccountnameInp(e);
             setAccountnameValue(e.target.value);
           }}
           className={messageAccountname && 'invalid'}
@@ -324,15 +343,19 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='자신에 대해 소개해 주세요!'
           value={intro}
-          onBlur={handleIntroInp}
-          onChange={(e) => {
-            setIntro(e.target.value);
-          }}
           pattern='[^$]+'
+          onChange={(e) => {
+            handleIntroInp(e);
+            setIntro(e.target.value);
+            resizeHeight(e);
+            handleTextCnt(e);
+          }}
           className={messageIntro && 'invalid'}
           maxLength={150}
         />
-        <div>0/150</div>
+        <div>
+          <span>{textCnt} / </span>150
+        </div>
         {messageIntro && <strong>{messageIntro}</strong>}
         <TeamSelect
           selectedOpt={selectedOpt}
