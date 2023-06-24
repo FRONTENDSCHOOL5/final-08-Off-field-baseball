@@ -193,6 +193,11 @@ export default function JoinProfile({ email, password }) {
       setIsVaildAccountname(false);
       return;
     }
+    if (e.target.validity.tooShort) {
+      setMessageAccountname('2자 이상 입력해주세요');
+      setIsVaildAccountname(false);
+      return;
+    }
 
     const message = await verifyAccount();
     if (message !== '사용 가능한 계정ID 입니다.') {
@@ -302,9 +307,9 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='2~10자 이내여야 합니다.'
           value={username}
-          onBlur={handleUsernameInp}
           onChange={(e) => {
             setUsername(e.target.value);
+            handleUsernameInp(e);
           }}
           minLength={2}
           maxLength={10}
@@ -318,10 +323,11 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           pattern='[A-Za-z0-9\._]+'
+          minLength={2}
           maxLength={30}
           value={accountname}
-          onBlur={handleAccountnameInp}
           onChange={(e) => {
+            handleAccountnameInp(e);
             setAccountnameValue(e.target.value);
           }}
           className={messageAccountname && 'invalid'}
