@@ -59,7 +59,7 @@ export default function JoinEmail({
     setPage('joinProfile');
   };
 
-  // email에서 포커스가 떠났을 때, 유효성 검사
+  // email 입력값이 변하면, 유효성 검사
   const handleEmailInp = (e) => {
     if (e.target.validity.valueMissing) {
       setMessegeEmail('값을 입력해주세요');
@@ -67,8 +67,13 @@ export default function JoinEmail({
     } else if (e.target.validity.patternMismatch) {
       setMessegeEmail('알맞은 양식의 이메일을 입력해주세요');
       setIsVaildEmail(false);
-    } else {
-      emailvalid(); //api 검사
+    }
+  };
+  // email에서 포커스가 떠났을 때, 유효성 검사
+  const handleEmailInpBlur = (e) => {
+    // 형식이 유효할 시 api 검사
+    if (setIsVaildEmail) {
+      emailvalid();
     }
   };
 
@@ -126,11 +131,13 @@ export default function JoinEmail({
         <input
           id='email-inp'
           type='email'
-          onBlur={handleEmailInp}
+          onBlur={handleEmailInpBlur}
           value={email}
           pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z]+)?'
           placeholder='이메일 주소를 입력해 주세요.'
+          maxLength={98}
           onChange={(e) => {
+            handleEmailInp(e);
             setEmail(e.target.value);
             handleEmailOnChange(e);
           }}
@@ -143,10 +150,10 @@ export default function JoinEmail({
           autoComplete='off'
           id='password-inp'
           type='password'
-          maxLength='20' // 임시
-          onBlur={handlePasswordInp}
+          maxLength='20'
           value={password}
           onChange={(e) => {
+            handlePasswordInp(e);
             handlePasswordOnChange(e);
             setPassword(e.target.value);
           }}
