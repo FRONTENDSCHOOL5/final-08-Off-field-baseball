@@ -118,14 +118,14 @@ export default function Login({ team }) {
             setEmail(e.target.value);
           }}
           required
-          maxLength='60' // 임시
+          maxLength='98'
         />
         <label htmlFor='password-inp'>비밀번호</label>
         <input
           autoComplete='off'
           id='password-inp'
           type='password'
-          maxLength='30' // 임시
+          maxLength='20' // 임시
           value={password}
           onChange={(e) => {
             setPassword(e.target.value);
