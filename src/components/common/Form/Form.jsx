@@ -13,6 +13,7 @@ export default function Form({ children, handleForm, selectedTeam }) {
 }
 
 const StyledForm = styled.form`
+  position: relative;
   label {
     display: block;
     font-size: 1.2rem;
