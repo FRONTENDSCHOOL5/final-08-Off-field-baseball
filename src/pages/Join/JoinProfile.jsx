@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
 import Button from '../../components/common/Button/Button';
+import UploadModal from '../../components/common/Modal/UploadModal';
 
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -149,7 +150,6 @@ export default function JoinProfile({ email, password }) {
 
   // 사용자 이름에서 포커스가 떠났을 때, 유효성 검사
   const handleUsernameInp = (e) => {
-    console.log(e.target.validity);
     if (e.target.validity.valueMissing) {
       setMessageUsername('값을 입력해주세요');
       setIsVaildUsername(false);
@@ -214,30 +214,78 @@ export default function JoinProfile({ email, password }) {
     }
   };
 
+  // 이미지 삭제
+  const handleImgDelete = (e) => {
+    e.preventDefault();
+    setImage('');
+    setSrc(BASIC_PROFILE_LG);
+    setIsModalOpen(false); // 모달창 닫기
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <StyledJoinProfile>
       <h1>프로필 설정</h1>
       <p>나중에 언제든지 변경할 수 있습니다.</p>
       <Form handleForm={handleForm}>
-        <label htmlFor='profileImg' className='img-label'>
+        <button
+          type='button'
+          className='img-btn'
+          onClick={(e) => setIsModalOpen(true)}
+        >
           <img src={src} alt='' />
           <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
-        </label>
-        <input
-          type='file'
-          id='profileImg'
-          className='a11y-hidden'
-          onChange={(e) => {
-            if (e.target.files && e.target.files[0]) {
-              const reader = new FileReader();
-              reader.onload = ({ target }) => {
-                setSrc(target.result);
-              };
-              reader.readAsDataURL(e.target.files[0]);
-              setImage(e.target.files[0]);
-            }
-          }}
-        />
+        </button>
+        {isModalOpen && (
+          <UploadModal
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          >
+            <li>
+              <button
+                type='button'
+                onKeyDown={(e) => {
+                  // input에 focus 가지 않게
+                  if (!e.shiftKey && e.key === 'Tab') {
+                    e.preventDefault();
+                    e.target.parentNode.nextElementSibling.firstElementChild.focus();
+                  }
+                }}
+                // 클릭 시, file input click 이벤트 실행(이미지 업로드 창 열림)
+                onClick={(e) => {
+                  e.target.nextElementSibling.click();
+                }}
+              >
+                이미지 업로드
+              </button>
+              <input
+                type='file'
+                id='profileImg'
+                className='a11y-hidden'
+                onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = ({ target }) => {
+                      setSrc(target.result);
+                    };
+                    reader.readAsDataURL(e.target.files[0]);
+                    setImage(e.target.files[0]);
+                  }
+                  setIsModalOpen(false); // 모달창 닫기
+                }}
+              />
+            </li>
+            <li>
+              <button type='button' onClick={handleImgDelete}>
+                이미지 제거
+              </button>
+            </li>
+            <li>
+              <button type='button' onClick={(e) => setIsModalOpen(false)}>
+                취소
+              </button>
+            </li>
+          </UploadModal>
+        )}
         <label htmlFor='username'>사용자 이름</label>
         <input
           id='username'
@@ -329,17 +377,18 @@ const StyledJoinProfile = styled.section`
   #profileImg {
     border: none;
   }
-  .img-label {
+  .img-btn {
     position: relative;
+    display: flex;
     width: 110px;
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
   }
-  .img-label img {
+  .img-btn img {
     border-radius: 55px;
     object-fit: cover;
   }
-  .img-label .uplodeImg {
+  .img-btn .uplodeImg {
     position: absolute;
     width: 36px;
     height: 36px;
