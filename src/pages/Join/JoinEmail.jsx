@@ -130,6 +130,7 @@ export default function JoinEmail({
           value={email}
           pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z]+)?'
           placeholder='이메일 주소를 입력해 주세요.'
+          maxLength='98'
           onChange={(e) => {
             setEmail(e.target.value);
             handleEmailOnChange(e);
@@ -143,7 +144,7 @@ export default function JoinEmail({
           autoComplete='off'
           id='password-inp'
           type='password'
-          maxLength='20' // 임시
+          maxLength='20'
           onBlur={handlePasswordInp}
           value={password}
           onChange={(e) => {
