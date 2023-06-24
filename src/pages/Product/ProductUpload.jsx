@@ -11,6 +11,8 @@ export default function ProductUpload() {
   const [isValid, setIsValid] = useState(false);
   const [productName, setProductName] = useState('');
   const [link, setLink] = useState('');
+  const [nameMessage, setNameMessage] = useState('');
+  const [priceMessage, setPriceMessage] = useState('');
   const { id } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -66,8 +68,9 @@ export default function ProductUpload() {
     setPrice(commaPrice);
     // 숫자가 아닌 값 입력 시 경고창
     if (price.target.value.trim() !== '' && !/^\d+$/.test(returnNum)) {
-      alert('숫자만 입력이 가능합니다.');
-      return;
+      setPriceMessage('숫자만 입력이 가능합니다.');
+    } else {
+      setPriceMessage('');
     }
   };
 
@@ -221,7 +224,6 @@ export default function ProductUpload() {
           />
         </EmptyImg>
         <Form>
-          {/* <ProductInput> */}
           <label htmlFor='name'>상품명</label>
           <input
             type='text'
@@ -229,10 +231,17 @@ export default function ProductUpload() {
             maxLength='25'
             placeholder='2~25자 이내여야 합니다.'
             value={productName && productName}
-            onChange={(e) =>
-              setProductName(e.target.value.replace(/\s\s+/g, ' '))
-            }
+            className={nameMessage && 'invalid'}
+            onChange={(e) => {
+              setProductName(e.target.value.replace(/\s\s+/g, ' '));
+              if (e.target.value.includes('  ')) {
+                setNameMessage('공백은 연속으로 사용할 수 없습니다.');
+              } else {
+                setNameMessage('');
+              }
+            }}
           />
+          {nameMessage && <strong>{nameMessage}</strong>}
 
           <label htmlFor='price'>가격</label>
           <input
@@ -241,8 +250,10 @@ export default function ProductUpload() {
             maxLength='11'
             placeholder='숫자만 입력이 가능합니다.'
             value={price && price}
+            className={priceMessage && 'invalid'}
             onChange={addComma}
           />
+          {priceMessage && <strong>{priceMessage}</strong>}
 
           <label htmlFor='info'>상품 소개</label>
           <textarea
@@ -254,7 +265,6 @@ export default function ProductUpload() {
               setLink(e.target.value);
             }}
           />
-          {/* </ProductInput> */}
         </Form>
       </ProductInfo>
     </>
@@ -303,60 +313,5 @@ const EmptyImg = styled.div`
     top: 6px;
     left: 6px;
     background-color: transparent;
-  }
-`;
-
-const ProductInput = styled.div`
-  label {
-    display: block;
-    margin-bottom: 8px;
-    font-size: 1.2rem;
-    color: var(--gray-400);
-  }
-
-  input,
-  textarea {
-    min-width: 100%;
-    font-size: 1.4rem;
-    display: block;
-  }
-
-  input {
-    margin-bottom: 16px;
-    padding: 4px 2px;
-    border-bottom: 1px solid var(--gray-200);
-  }
-
-  textarea {
-    min-height: 10rem;
-    border: 1px solid var(--gray-200);
-    border-radius: 3px;
-    resize: none;
-    padding: 2px;
-    overflow: hidden;
-    white-space: pre-line;
-  }
-
-  input:focus {
-    outline: none;
-    border-bottom: 1px solid var(--primary-color);
-  }
-
-  input:focus:not(.invalid),
-  textarea:focus:not(.invalid) {
-    border-color: ${(props) =>
-      props.myTeam === 'kt'
-        ? 'var(--tertiary-color-kt)'
-        : 'var(--primary-color-' + (props.myTeam || 'default') + ')'};
-  }
-
-  textarea:focus {
-    outline: none;
-    border: 1px solid var(--primary-color);
-  }
-
-  input::placeholder,
-  textarea::placeholder {
-    color: var(--gray-200);
   }
 `;
