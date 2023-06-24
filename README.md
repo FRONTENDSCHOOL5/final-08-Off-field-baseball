@@ -19,7 +19,7 @@ FE 한수빈 | FE 김은총(임시) | FE 김하연 | FE 최예지
 
 ## 3. 프로젝트 기간
 2023년 6월 2일 ~ 2023년 6월 27일
-![스크린샷 2023-06-24 오후 4 22 02](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/9e35f181-b625-4f06-acd2-af052e23b0e5)
+![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f3dc04e9-fdf1-4fe6-9748-c146daa3b23d)
 <br>
 
 ## 4. 개발 환경
