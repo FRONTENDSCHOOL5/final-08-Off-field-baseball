@@ -73,7 +73,8 @@ const StyledDialog = styled.dialog`
     border-width: 1px 0 0 0;
   }
   li:first-child button {
-    color: var(--primary-color-default);
+    color: ${(props) =>
+      'var(--primary-color-' + (props.myTeam || 'default') + ')'};
   }
   /* li:nth-child(2) button {
     color: #eb5757;
