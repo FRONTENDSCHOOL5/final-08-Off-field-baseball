@@ -1,8 +1,9 @@
-import { X } from '../../styles/CommonIcons';
+import { UPLOAD_FILE } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form/Form';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
+import UploadModal from '../../components/common/Modal/UploadModal';
 
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -20,6 +21,7 @@ export default function EditProfile() {
   const [messageAccountname, setMessageAccountname] = useState('');
   const [messageUsername, setMessageUsername] = useState('');
   const [selectedOpt, setSelectedOpt] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
 
   const { setAccountname, setMyTeam, token, myTeam } = useContext(UserContext);
@@ -279,16 +281,9 @@ export default function EditProfile() {
   // 이미지 삭제
   const handleImgDelete = (e) => {
     e.preventDefault();
-    // setSrc(BASIC_PROFILE_LG);
     setImage('');
-
-    const url = 'https://api.mandarin.weniv.co.kr';
-    if (!selectedOpt || selectedOpt === '없음') {
-      setSrc(url + '/' + '1687309142552.png');
-      return;
-    } else {
-      setSrc(url + '/' + teamName[selectedOpt].filename);
-    }
+    setSrc(url + '/' + teamName[selectedOpt].filename);
+    setIsModalOpen(false); // 모달창 닫기
   };
 
   return (
@@ -300,30 +295,65 @@ export default function EditProfile() {
       />
       <StyledEditProfile myTeam={selectedTeam}>
         <Form selectedTeam={selectedTeam}>
-          <label htmlFor='profileImg'>
-            <div className='img-wrap'>
-              <img className='img-label' src={src} alt='' />
-              <button className='delete-btn' onClick={handleImgDelete}>
-                <img src={X} alt='이미지 삭제하기' />
-              </button>
-            </div>
-          </label>
-
-          <input
-            type='file'
-            id='profileImg'
-            className='a11y-hidden'
-            onChange={(e) => {
-              if (e.target.files && e.target.files[0]) {
-                const reader = new FileReader();
-                reader.onload = ({ target }) => {
-                  setSrc(target.result);
-                };
-                reader.readAsDataURL(e.target.files[0]);
-                setImage(e.target.files[0]);
-              }
-            }}
-          />
+          <button
+            type='button'
+            className='img-btn'
+            onClick={(e) => setIsModalOpen(true)}
+          >
+            <img src={src} alt='' />
+            <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
+          </button>
+          {isModalOpen && (
+            <UploadModal
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            >
+              <li>
+                <button
+                  type='button'
+                  onKeyDown={(e) => {
+                    // input에 focus 가지 않게
+                    if (!e.shiftKey && e.key === 'Tab') {
+                      e.preventDefault();
+                      e.target.parentNode.nextElementSibling.firstElementChild.focus();
+                    }
+                  }}
+                  // 클릭 시, file input click 이벤트 실행(이미지 업로드 창 열림)
+                  onClick={(e) => {
+                    e.target.nextElementSibling.click();
+                  }}
+                >
+                  이미지 업로드
+                </button>
+                <input
+                  type='file'
+                  id='profileImg'
+                  className='a11y-hidden'
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      const reader = new FileReader();
+                      reader.onload = ({ target }) => {
+                        setSrc(target.result);
+                      };
+                      reader.readAsDataURL(e.target.files[0]);
+                      setImage(e.target.files[0]);
+                    }
+                    setIsModalOpen(false); // 모달창 닫기
+                  }}
+                />
+              </li>
+              <li>
+                <button type='button' onClick={handleImgDelete}>
+                  이미지 제거
+                </button>
+              </li>
+              <li>
+                <button type='button' onClick={(e) => setIsModalOpen(false)}>
+                  취소
+                </button>
+              </li>
+            </UploadModal>
+          )}
           <label htmlFor='username'>사용자 이름</label>
           <input
             id='username'
@@ -388,41 +418,26 @@ const StyledEditProfile = styled.section`
   #profileImg {
     border: none;
   }
-
-  .img-label {
-    width: 110px;
-    margin: 0 auto;
-  }
-
-  .img-wrap {
-    width: 110px;
-    margin: 0 auto;
+  .img-btn {
     position: relative;
-  }
-
-  .delete-btn {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    background-color: var(--gray-300);
-    border-radius: 50%;
-    width: 22px;
-    aspect-ratio: 1/1;
-  }
-
-  .delete-btn > img {
-    padding-top: 2px;
-    object-fit: cover;
-  }
-
-  .img-label {
+    display: flex;
     width: 110px;
     aspect-ratio: 1/1;
     margin: 0 auto 30px;
+  }
+  .img-btn img {
     border-radius: 55px;
     object-fit: cover;
-    background: ${(props) =>
-      'var(--secondary-color-' + (props.myTeam || 'default') + ')'};
+  }
+  .img-btn .uplodeImg {
+    position: absolute;
+    width: 36px;
+    height: 36px;
+    bottom: 0;
+    right: 0;
+  }
+  #myTeam {
+    margin-top: 9px;
   }
 
   #myTeam {
