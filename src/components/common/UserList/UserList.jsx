@@ -54,7 +54,6 @@ export default function UserList({ user, keyword }) {
     findMyTeam();
   }, [user]);
 
-  // js 텍스트 하이라이팅, 리액트 텍스트 하이라이팅, 정규표현식
   const matchedText = (text, query) => {
     if (query !== '' && text.includes(query)) {
       const i = text.indexOf(query);

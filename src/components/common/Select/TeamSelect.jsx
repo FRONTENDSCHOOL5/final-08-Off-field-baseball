@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from './Select';
+import styled from 'styled-components';
 
 const teamList = [
   '삼성 라이온즈',
@@ -23,10 +24,10 @@ export default function TeamSelect({
 }) {
   return (
     <>
-      <label htmlFor='myTeam'>응원 중인 팀</label>
+      <label htmlFor='my-team'>응원 중인 팀</label>
       <Select
         btnTxt='응원 중인 팀을 선택해주세요'
-        btnId='myTeam'
+        btnId='my-team'
         optionTextList={teamList}
         selectedOpt={selectedOpt}
         setSelectedOpt={setSelectedOpt}

@@ -257,7 +257,7 @@ export default function JoinProfile({ email, password }) {
           onClick={(e) => setIsModalOpen(true)}
         >
           <img src={src} alt='' />
-          <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
+          <img className='uplode-img' src={UPLOAD_FILE} alt='' />
         </button>
         {isModalOpen && (
           <UploadModal
@@ -283,7 +283,7 @@ export default function JoinProfile({ email, password }) {
               </button>
               <input
                 type='file'
-                id='profileImg'
+                id='profile-img'
                 className='a11y-hidden'
                 onChange={(e) => {
                   if (e.target.files && e.target.files[0]) {
@@ -332,8 +332,7 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           pattern='[A-Za-z0-9\._]+'
-          // minLength={2}
-          maxLength={30}
+          maxLength={16}
           value={accountname}
           onBlur={handleAccountnameInpBlur}
           onChange={(e) => {
@@ -403,7 +402,7 @@ const StyledJoinProfile = styled.section`
     font-size: 1.4rem;
     color: var(--gray-400);
   }
-  #profileImg {
+  #profile-img {
     border: none;
   }
   .img-btn {
@@ -417,14 +416,14 @@ const StyledJoinProfile = styled.section`
     border-radius: 55px;
     object-fit: cover;
   }
-  .img-btn .uplodeImg {
+  .img-btn .uplode-img {
     position: absolute;
     width: 36px;
     height: 36px;
     bottom: 0;
     right: 0;
   }
-  #myTeam {
+  #my-team {
     margin-top: 9px;
   }
   #start-btn {
