@@ -332,8 +332,7 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
           pattern='[A-Za-z0-9\._]+'
-          // minLength={2}
-          maxLength={30}
+          maxLength={16}
           value={accountname}
           onBlur={handleAccountnameInpBlur}
           onChange={(e) => {
