@@ -471,7 +471,7 @@ const StyledEditProfile = styled.section`
     bottom: 0;
     right: 0;
   }
-  #myTeam {
+  #my-team {
     margin-top: 9px;
   }
 `;
