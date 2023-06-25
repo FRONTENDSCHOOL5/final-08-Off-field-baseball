@@ -21,6 +21,8 @@ export default function JoinProfile({ email, password }) {
   const [messageAccountname, setMessageAccountname] = useState('');
   const [messageUsername, setMessageUsername] = useState('');
   const [selectedOpt, setSelectedOpt] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textCnt, setTextCnt] = useState(0);
 
   const { setAccountname, setMyTeam, setToken } = useContext(UserContext);
 
@@ -45,10 +47,17 @@ export default function JoinProfile({ email, password }) {
 
   // 사용자 이름, 계정 ID 모두 유효하고, 소개에 $가 입력되지 않았을 때
   useEffect(() => {
-    if (isVaildIntro && isVaildUsername && isVaildAccountname) {
+    if (
+      isVaildIntro &&
+      isVaildUsername &&
+      isVaildAccountname &&
+      textCnt <= 150
+    ) {
       setIsVaild(true);
+    } else {
+      setIsVaild(false);
     }
-  }, [isVaildIntro, isVaildUsername, isVaildAccountname]);
+  }, [isVaildIntro, isVaildUsername, isVaildAccountname, textCnt]);
 
   const url = 'https://api.mandarin.weniv.co.kr';
   const join = async () => {
@@ -228,8 +237,6 @@ export default function JoinProfile({ email, password }) {
     setSrc(BASIC_PROFILE_LG);
     setIsModalOpen(false); // 모달창 닫기
   };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [textCnt, setTextCnt] = useState(0);
 
   // 텍스트 길이에 맞춰 textarea height 변경
   const resizeHeight = (e) => {
@@ -352,7 +359,7 @@ export default function JoinProfile({ email, password }) {
           className={messageIntro && 'invalid'}
           maxLength={150}
         />
-        <div>
+        <div className={textCnt > 150 ? 'invalid' : ''}>
           <span>{textCnt} / </span>150
         </div>
         {messageIntro && <strong>{messageIntro}</strong>}
