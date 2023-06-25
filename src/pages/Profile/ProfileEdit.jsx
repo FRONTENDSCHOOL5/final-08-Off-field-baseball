@@ -5,7 +5,7 @@ import Form from '../../components/common/Form/Form';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import UploadModal from '../../components/common/Modal/UploadModal';
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
@@ -22,6 +22,7 @@ export default function EditProfile() {
   const [messageUsername, setMessageUsername] = useState('');
   const [selectedOpt, setSelectedOpt] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [textCnt, setTextCnt] = useState(0);
   const navigate = useNavigate();
 
   const { setAccountname, setMyTeam, token, myTeam } = useContext(UserContext);
@@ -141,9 +142,8 @@ export default function EditProfile() {
     handleEdit();
   };
 
-  // 사용자 이름에서 포커스가 떠났을 때, 유효성 검사
+  // 사용자 이름 유효성 검사
   const handleUsernameInp = (e) => {
-    console.log(e.target.validity);
     if (e.target.validity.valueMissing) {
       setMessageUsername('값을 입력해주세요');
       setIsVaildUsername(false);
@@ -176,34 +176,39 @@ export default function EditProfile() {
     return json.message;
   };
 
-  // 계정 id 에서 포커스가 떠났을 때, 유효성 검사
+  // 계정 id 값이 변하면, 유효성 검사
   const handleAccountnameInp = async (e) => {
     if (e.target.validity.valueMissing) {
       setMessageAccountname('값을 입력해주세요');
       setIsVaildAccountname(false);
-      return;
-    }
-    if (e.target.validity.patternMismatch) {
+    } else if (e.target.validity.patternMismatch) {
       setMessageAccountname('영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.');
       setIsVaildAccountname(false);
-      return;
-    }
-
-    if (currentAccountname !== accountnameValue) {
-      const message = await verifyAccount();
-      if (message !== '사용 가능한 계정ID 입니다.') {
-        setMessageAccountname(message);
-        setIsVaildAccountname(false);
-      } else {
-        setMessageAccountname('');
-        setIsVaildAccountname(true);
-      }
+    } else {
+      setMessageAccountname('');
+      setIsVaildAccountname(true);
     }
   };
 
-  // 소개에서 포커스가 떠났을 때, 유효성 검사
+  // 계정 id 에서 포커스가 떠났을 때, 유효성 검사
+  const handleAccountnameInpBlur = async (e) => {
+    if (!e.target.validity.valid) {
+      return;
+    }
+
+    const message = await verifyAccount();
+    if (message !== '사용 가능한 계정ID 입니다.') {
+      setMessageAccountname(message);
+      setIsVaildAccountname(false);
+    } else {
+      setMessageAccountname('');
+      setIsVaildAccountname(true);
+    }
+  };
+
+  // 소개 유효성 검사
   const handleIntroInp = (e) => {
-    if (e.target.validity.patternMismatch) {
+    if (e.target.value.includes('$')) {
       setMessageIntro('달러($)를 제외한 문자를 입력해주세요');
       setIsVaildIntro(false);
     } else {
@@ -226,7 +231,9 @@ export default function EditProfile() {
 
       // intro 있을 경우
       if (res.user.intro) {
-        setIntro(res.user.intro.split('$')[0]);
+        const intro = res.user.intro.split('$')[0];
+        setIntro(intro);
+        setTextCnt(intro.length);
       }
 
       // 마이팀 selectedOpt에 저장
@@ -244,6 +251,7 @@ export default function EditProfile() {
       console.log(err);
     }
   };
+
   useEffect(() => {
     beforeEdit();
   }, []);
@@ -284,6 +292,21 @@ export default function EditProfile() {
     setImage('');
     setSrc(url + '/' + teamName[selectedOpt].filename);
     setIsModalOpen(false); // 모달창 닫기
+  };
+
+  // 텍스트 길이에 맞춰 textarea height 변경
+  const textarea = useRef(null);
+  useEffect(() => {
+    resizeHeight(textarea.current);
+  }, [textCnt]);
+
+  const resizeHeight = (textarea) => {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+  };
+
+  const handleTextCnt = (e) => {
+    setTextCnt(e.target.value.length);
   };
 
   return (
@@ -360,9 +383,9 @@ export default function EditProfile() {
             type='text'
             placeholder='2~10자 이내여야 합니다.'
             value={username}
-            onBlur={handleUsernameInp}
             onChange={(e) => {
               setUsername(e.target.value);
+              handleUsernameInp(e);
             }}
             minLength={2}
             maxLength={10}
@@ -376,10 +399,11 @@ export default function EditProfile() {
             type='text'
             placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
             pattern='[A-Za-z0-9\._]+'
-            maxLength={10} // 임시
+            maxLength={30}
             value={accountnameValue}
-            onBlur={handleAccountnameInp}
+            onBlur={handleAccountnameInpBlur}
             onChange={(e) => {
+              handleAccountnameInp(e);
               setAccountnameValue(e.target.value);
             }}
             className={messageAccountname && 'invalid'}
@@ -392,14 +416,18 @@ export default function EditProfile() {
             type='text'
             placeholder='자신에 대해 소개해 주세요!'
             value={intro}
-            onBlur={handleIntroInp}
             onChange={(e) => {
               setIntro(e.target.value);
+              handleTextCnt(e);
+              handleIntroInp(e);
             }}
-            pattern='[^$]+'
             className={messageIntro && 'invalid'}
             maxLength={150}
+            ref={textarea}
           />
+          <div>
+            <span>{textCnt} / </span>150
+          </div>
           {messageIntro && <strong>{messageIntro}</strong>}
           <TeamSelect
             selectedTeam={selectedTeam}

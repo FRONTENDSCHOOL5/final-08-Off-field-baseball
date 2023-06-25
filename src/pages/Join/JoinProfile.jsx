@@ -148,7 +148,7 @@ export default function JoinProfile({ email, password }) {
     }
   };
 
-  // 사용자 이름에서 포커스가 떠났을 때, 유효성 검사
+  // 사용자 이름 유효성 검사
   const handleUsernameInp = (e) => {
     if (e.target.validity.valueMissing) {
       setMessageUsername('값을 입력해주세요');
@@ -196,7 +196,7 @@ export default function JoinProfile({ email, password }) {
   };
   // 계정 id 에서 포커스가 떠났을 때, 유효성 검사
   const handleAccountnameInpBlur = async (e) => {
-    if (e.target.validity.valueMissing && e.target.validity.patternMismatch) {
+    if (!e.target.validity.valid) {
       return;
     }
 
@@ -343,7 +343,6 @@ export default function JoinProfile({ email, password }) {
           type='text'
           placeholder='자신에 대해 소개해 주세요!'
           value={intro}
-          pattern='[^$]+'
           onChange={(e) => {
             handleIntroInp(e);
             setIntro(e.target.value);
