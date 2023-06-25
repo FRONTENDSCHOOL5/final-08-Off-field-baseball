@@ -423,6 +423,9 @@ const StyledJoinProfile = styled.section`
     bottom: 0;
     right: 0;
   }
+  #my-team {
+    margin-top: 9px;
+  }
   #start-btn {
     margin-top: 30px;
   }
