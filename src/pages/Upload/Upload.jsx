@@ -18,6 +18,10 @@ export default function Upload() {
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
   const { id } = useParams();
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = `게시물 ${id ? '수정' : '작성'} | 구장 밖 야구`;
+  }, []);
 
   const userProfile = async () => {
     try {
@@ -175,7 +179,7 @@ export default function Upload() {
   return (
     <>
       <TopUploadNav
-        btnTxt='업로드'
+        btnTxt={id ? '수정' : '업로드'}
         isValid={isValid}
         event={id ? handleEdit : handlePost}
       />

@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../../context/UserContext';
 
 const MyChat = (props) => {
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '채팅룸 | 구장 밖 야구';
+  }, []);
   const { myTeam } = useContext(UserContext);
   return (
     <Wrapper>

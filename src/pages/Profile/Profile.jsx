@@ -21,6 +21,12 @@ export default function Profile() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const { token, accountname } = useContext(UserContext);
 
+  // title 변경
+  const setTitle = (username, accountname) => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = `${username}(@${accountname}) | 구장 밖 야구`;
+  };
+
   const getProfileInfo = async () => {
     setIsLoading(true);
     try {
@@ -38,7 +44,7 @@ export default function Profile() {
       const data = await res.json();
 
       const profile = data.profile;
-      console.log(data);
+      setTitle(data.profile.username, data.profile.accountname);
       setUserProfile(profile);
       setIntro(profile.intro.split('$')[0]);
       setTeam(profile.intro.split('$')[1]);

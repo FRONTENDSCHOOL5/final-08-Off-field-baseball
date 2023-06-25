@@ -13,6 +13,11 @@ export default function ProductDetail() {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
 
+  // title 변경
+  const setTitle = (product) => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = `${product} - 상품 | 구장 밖 야구`;
+  };
   const getProductDetail = async () => {
     try {
       const req = await fetch(`${url}/product/detail/${id}`, {
@@ -23,7 +28,7 @@ export default function ProductDetail() {
         },
       });
       const res = await req.json();
-      console.log(res);
+      setTitle(res.product.itemName);
       setProduct(res.product);
       setIsLoading(false);
     } catch (err) {

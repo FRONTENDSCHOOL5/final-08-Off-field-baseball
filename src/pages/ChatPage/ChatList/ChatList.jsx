@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TopBasicNav from '../../../components/common/TopNavBar/TopBasicNav';
 import ChatListStyle from './ChatListStyle';
 import ContentsLayout from '../../../components/layout/ContentsLayout/ContentsLayout';
@@ -8,6 +8,11 @@ import { SSG_SMALL } from '../../../styles/CommonIcons';
 import { HANHWA_SMALL } from '../../../styles/CommonIcons';
 
 const ChatList = () => {
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '채팅 리스트 | 구장 밖 야구';
+  }, []);
+
   return (
     <>
       <TopBasicNav />

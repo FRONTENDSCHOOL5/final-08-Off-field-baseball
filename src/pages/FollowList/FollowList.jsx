@@ -13,7 +13,12 @@ export default function FollowList() {
   const { token } = useContext(UserContext);
   const [isLoading, setIsLoading] = useState(false);
   const [followList, setFollowList] = useState([]);
-
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = `${
+      type === 'follower' ? '팔로워' : '팔로잉'
+    } | 구장 밖 야구`;
+  }, []);
   useEffect(() => {
     const getFollowList = async () => {
       setIsLoading(true);
