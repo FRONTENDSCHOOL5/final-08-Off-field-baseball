@@ -1,6 +1,6 @@
 import GlobalStyle from './styles/GlobalStyle';
 import Router from './routes/Router';
-import MainLayout from './components/layout/MainLayout/MainLayout';
+import StyledContainer from './components/layout/StyledContainer';
 import UserProvider from './context/UserContext';
 
 function App() {
@@ -8,9 +8,9 @@ function App() {
     <>
       <GlobalStyle />
       <UserProvider>
-        <MainLayout>
+        <StyledContainer>
           <Router />
-        </MainLayout>
+        </StyledContainer>
       </UserProvider>
     </>
   );

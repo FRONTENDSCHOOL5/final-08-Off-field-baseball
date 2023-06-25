@@ -180,15 +180,13 @@ const Detail = () => {
 
   return (
     <>
-      {/* h~ 태그 고려 중 */}
-      <h1 className='a11y-hidden'>구장 밖 야구</h1>
-      <h2 className='a11y-hidden'>{'애월읍 위니브 감귤농장'} 포스트 페이지</h2>
       {isLoading ? (
         <Loading />
       ) : (
         <>
           <TopBasicNav />
           <PostWrapper>
+            <h1 className='a11y-hidden'>포스트 | 구장 밖 야구</h1>
             {post && <Post post={post} />}
             <CommentListSection>
               <h3 className='a11y-hidden'>댓글 목록</h3>
