@@ -41,7 +41,10 @@ const SettingModal = ({ isModalOpen, setIsModalOpen }) => {
           title='로그아웃 하시겠습니까?'
           trigger='로그아웃'
           triggerFunc={handleLogoutbtn}
-          closeModal={() => setIsLogoutModalOpen(false)}
+          closeModal={() => {
+            setIsLogoutModalOpen(false);
+            setIsModalOpen(false);
+          }}
         ></ConfirmModal>
       )}
     </>
