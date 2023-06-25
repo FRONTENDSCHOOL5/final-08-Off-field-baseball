@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
+import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
@@ -13,6 +14,7 @@ export default function Login({ team }) {
   const [isValid, setIsVaild] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [warningMessage, setWarningMessage] = useState('');
 
   // 이메일, 비밀번호 모두 입력되면 버튼 활성화
@@ -124,7 +126,7 @@ export default function Login({ team }) {
         <input
           autoComplete='off'
           id='password-inp'
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           maxLength='20' // 임시
           value={password}
           onChange={(e) => {
@@ -132,6 +134,11 @@ export default function Login({ team }) {
           }}
           required
         />
+        <ShowPasswordBtn
+          className='show-btn'
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        ></ShowPasswordBtn>
         {warningMessage && <strong>{warningMessage}</strong>}
         <StyledButton
           type='submit'
@@ -169,5 +176,10 @@ const StyledLogin = styled.section`
     text-align: center;
     font-size: 1.2rem;
     color: var(--gray-400);
+  }
+  .show-btn {
+    position: absolute;
+    top: 86px;
+    right: -6px;
   }
 `;

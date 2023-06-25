@@ -1,6 +1,7 @@
 import Form from '../../components/common/Form/Form';
 import styled from 'styled-components';
 import Button from '../../components/common/Button/Button';
+import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
 import { useEffect, useState } from 'react';
 
 export default function JoinEmail({
@@ -16,6 +17,7 @@ export default function JoinEmail({
   const [messegePassword, setMessegePassword] = useState('');
   const [isValidEmail, setIsVaildEmail] = useState(false);
   const [isValidPassword, setIsVaildPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // 이메일, 비밀번호 모두 유효할 시, 버튼 활성화
   useEffect(() => {
@@ -135,7 +137,7 @@ export default function JoinEmail({
         <input
           autoComplete='off'
           id='password-inp'
-          type='password'
+          type={showPassword ? 'text' : 'password'}
           maxLength='20'
           value={password}
           onChange={(e) => {
@@ -146,6 +148,11 @@ export default function JoinEmail({
           required
           placeholder='비밀번호를 설정해 주세요.'
         />
+        <ShowPasswordBtn
+          className='show-btn'
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+        ></ShowPasswordBtn>
         {messegePassword && <strong>{messegePassword}</strong>}
         <StyledButton
           type='submit'
@@ -182,5 +189,10 @@ const StyledJoinEmail = styled.section`
     text-align: center;
     font-size: 1.2rem;
     color: var(--gray-400);
+  }
+  .show-btn {
+    position: absolute;
+    top: 86px;
+    right: -6px;
   }
 `;
