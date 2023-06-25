@@ -14,7 +14,7 @@
 FE 한수빈 | FE 김은총(임시) | FE 김하연 | FE 최예지 
 :-------------:|:-------------:|:-------------:|:-------------:
 <img src="https://github.com/astinaus/git-test/blob/main/8429F25B-444B-47ED-8D03-9DBCE13828C1_1_201_a.jpeg" width="180px" height="180px"> | <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/08b30968-7235-4d4d-b009-c192ab2faa2c" width="180px" height="180px"> | <img src="https://github.com/KimHayeon1/hihi/assets/108985221/34bd89c8-4b1f-4542-8f2c-d4ba55647281" width="180px" height="180px"> | 사진넣어주세요 
-[🔗GitHub](https://github.com/astinaus) | [🔗GitHub](https://github.com/echo-6) | 깃헙주소 | 깃헙주소
+[🔗GitHub](https://github.com/astinaus) | [🔗GitHub](https://github.com/echo-6) | [🔗GitHub](https://github.com/KimHayeon1) | 깃헙주소
 <br>
 
 ## 3. 프로젝트 기간
