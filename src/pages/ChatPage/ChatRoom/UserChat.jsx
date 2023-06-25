@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 import { UserContext } from '../../../context/UserContext';
 
 const UserChat = (props) => {
