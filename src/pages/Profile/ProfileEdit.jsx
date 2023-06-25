@@ -402,7 +402,7 @@ export default function EditProfile() {
             type='text'
             placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
             pattern='[A-Za-z0-9\._]+'
-            maxLength={30}
+            maxLength={16}
             value={accountnameValue}
             onBlur={handleAccountnameInpBlur}
             onChange={(e) => {
