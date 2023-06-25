@@ -1,16 +1,42 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../../context/UserContext';
 import Overlay from './Overlay';
 
 const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
   const { myTeam } = useContext(UserContext);
+
+  // tab을 누르면, 모달 안에서만 포커스 되게
+  const handleKeyDown = (e) => {
+    if (!e.shiftKey && e.key === 'Tab') {
+      if (!e.target.nextElementSibling) {
+        e.preventDefault();
+        e.currentTarget.firstElementChild.focus();
+      }
+    }
+  };
+
+  // 모달 외 클릭 시 모달 close
+  const handleClick = (e) => {
+    if (!e.target.closest('dialog')) {
+      closeModal();
+    }
+  };
+
+  // 모달이 open되면 모달 첫번째 메뉴에 focus
+  const firstOpt = useRef();
+  useEffect(() => {
+    firstOpt.current.focus();
+  }, []);
+
   return (
-    <Overlay>
+    <Overlay onClick={handleClick}>
       <ConfirmModalWrapper>
         <h2>{title}</h2>
-        <BtnContainer myTeam={myTeam}>
-          <button onClick={closeModal}>취소</button>
+        <BtnContainer myTeam={myTeam} onKeyDown={handleKeyDown}>
+          <button onClick={closeModal} ref={firstOpt}>
+            취소
+          </button>
           <button onClick={() => triggerFunc()}>{trigger}</button>
         </BtnContainer>
       </ConfirmModalWrapper>
