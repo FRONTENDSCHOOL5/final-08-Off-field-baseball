@@ -4,7 +4,7 @@ import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopSearchNav({ keyword, onChange, onTyping }) {
+export default function TopSearchNav({ keyword, onChange }) {
   const navigate = useNavigate();
 
   return (

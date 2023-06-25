@@ -85,11 +85,7 @@ export default function Search() {
 
   return (
     <>
-      <TopSearchNav
-        // onTyping={onTyping}
-        keyword={keyword}
-        onChange={setKeyword}
-      />
+      <TopSearchNav keyword={keyword} onChange={setKeyword} />
       <SearchList>
         {searchUsers.map((user) => {
           return <UserList key={user._id} user={user} keyword={keyword} />;
