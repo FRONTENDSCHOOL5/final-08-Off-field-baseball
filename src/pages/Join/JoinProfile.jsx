@@ -257,7 +257,7 @@ export default function JoinProfile({ email, password }) {
           onClick={(e) => setIsModalOpen(true)}
         >
           <img src={src} alt='' />
-          <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
+          <img className='uplode-img' src={UPLOAD_FILE} alt='' />
         </button>
         {isModalOpen && (
           <UploadModal
@@ -283,7 +283,7 @@ export default function JoinProfile({ email, password }) {
               </button>
               <input
                 type='file'
-                id='profileImg'
+                id='profile-img'
                 className='a11y-hidden'
                 onChange={(e) => {
                   if (e.target.files && e.target.files[0]) {
@@ -402,7 +402,7 @@ const StyledJoinProfile = styled.section`
     font-size: 1.4rem;
     color: var(--gray-400);
   }
-  #profileImg {
+  #profile-img {
     border: none;
   }
   .img-btn {
@@ -416,15 +416,12 @@ const StyledJoinProfile = styled.section`
     border-radius: 55px;
     object-fit: cover;
   }
-  .img-btn .uplodeImg {
+  .img-btn .uplode-img {
     position: absolute;
     width: 36px;
     height: 36px;
     bottom: 0;
     right: 0;
-  }
-  #myTeam {
-    margin-top: 9px;
   }
   #start-btn {
     margin-top: 30px;
