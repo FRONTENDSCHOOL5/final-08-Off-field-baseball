@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { FULL_LOGO } from '../../styles/CommonImages';
@@ -9,6 +9,11 @@ import { FACEBOOK } from '../../styles/CommonIcons';
 const SplashLogin = () => {
   const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(true);
+
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '로그인 | 구장 밖 야구';
+  }, []);
 
   return (
     <>

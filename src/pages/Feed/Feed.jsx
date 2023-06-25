@@ -27,6 +27,11 @@ const Feed = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '홈피드 | 구장 밖 야구';
+  }, []);
+
   const getFeed = useCallback(async () => {
     setLoading(true);
     try {

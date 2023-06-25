@@ -10,10 +10,14 @@ export default function Search() {
   const [searchUsers, setSearchUsers] = useState([]);
   const [cntUserList, setCntUserList] = useState(20);
   const [userList, setUserList] = useState([]);
-
   const [keyword, setKeyword] = useState(''); // 검색 키워드
 
   const { token } = useContext(UserContext);
+
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '계정 검색 | 구장 밖 야구';
+  }, []);
 
   async function fetchData() {
     try {

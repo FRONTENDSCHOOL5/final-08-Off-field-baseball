@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 import JoinEmail from './JoinEmail';
 import JoinProfile from './JoinProfile';
 
@@ -7,6 +6,11 @@ export default function Join() {
   const [page, setPage] = useState('joinEmail');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '회원가입 | 구장 밖 야구';
+  }, []);
 
   return (
     <>

@@ -70,6 +70,12 @@ const Detail = () => {
     }
   };
 
+  // title 변경
+  const setTitle = (username) => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = `${username} 님의 게시물 | 구장 밖 야구`;
+  };
+
   const getPostDetail = async () => {
     setIsLoading(true);
     try {
@@ -80,7 +86,12 @@ const Detail = () => {
         },
         method: 'GET',
       });
+
       const res = await req.json();
+
+      // title 변경
+      setTitle(res.post.author.username);
+
       setPost(res.post);
       setIsLoading(false);
     } catch (err) {

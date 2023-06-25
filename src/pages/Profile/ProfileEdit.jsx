@@ -33,7 +33,10 @@ export default function EditProfile() {
   const [isVaildAccountname, setIsVaildAccountname] = useState(false);
   const [currentAccountname, setCurrentAccountname] = useState('');
   const [selectedTeam, setSelectedTeam] = useState(myTeam);
-
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '프로필 수정 | 구장 밖 야구';
+  }, []);
   // CSS 변수에서 사용하는 팀 이름(samsung, ...) / imgfile
   const teamName = {
     '삼성 라이온즈': { team: 'samsung', filename: '1687344208464.png' },

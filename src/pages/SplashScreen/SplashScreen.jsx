@@ -7,6 +7,10 @@ import { SPEECH_BUBBLE } from '../../styles/CommonImages';
 
 const LogoPage = () => {
   const navigate = useNavigate();
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '구장 밖 야구';
+  }, []);
   const timeout = () => {
     setTimeout(() => {
       navigate('/login');

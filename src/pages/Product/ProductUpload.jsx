@@ -17,6 +17,10 @@ export default function ProductUpload() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  useEffect(() => {
+    const titleElement = document.getElementsByTagName('title')[0];
+    titleElement.innerHTML = '상품 등록 | 구장 밖 야구';
+  }, []);
   // 모든 입력칸에 값이 입력되면 저장 버튼 활성화
   useEffect(() => {
     if (productName.replace(/ /g, '').length > 1 && price && link && imgPre) {
