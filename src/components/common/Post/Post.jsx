@@ -257,6 +257,7 @@ const UserText = styled.pre`
   line-height: 1.3;
   position: relative;
   word-break: break-all;
+  white-space: pre-wrap;
 `;
 
 const SwiperWrapper = styled(Swiper)`
