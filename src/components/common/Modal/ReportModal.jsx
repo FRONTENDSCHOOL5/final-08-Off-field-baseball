@@ -26,7 +26,10 @@ export default function ReportModal({ closeModal, id, setIsModalOpen }) {
   return (
     <ConfirmModal
       title='게시글을 신고하시겠습니까?'
-      closeModal={closeModal}
+      closeModal={(e) => {
+        closeModal();
+        setIsModalOpen(false);
+      }}
       trigger={'신고'}
       triggerFunc={reportPost}
     />

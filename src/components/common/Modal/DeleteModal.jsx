@@ -38,7 +38,10 @@ export default function DeleteModal({
   return (
     <ConfirmModal
       title='게시글을 삭제하시겠습니까?'
-      closeModal={closeModal}
+      closeModal={(e) => {
+        closeModal();
+        setIsModalOpen(false);
+      }}
       trigger={'삭제'}
       triggerFunc={deletePost}
     />
