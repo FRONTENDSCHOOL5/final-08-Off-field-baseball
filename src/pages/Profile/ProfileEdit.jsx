@@ -429,7 +429,7 @@ export default function EditProfile() {
             maxLength={150}
             ref={textarea}
           />
-          <div className={textCnt > 150 && 'invalid'}>
+          <div className={textCnt > 150 ? 'invalid' : ''}>
             <span>{textCnt} / </span>150
           </div>
           {messageIntro && <strong>{messageIntro}</strong>}
