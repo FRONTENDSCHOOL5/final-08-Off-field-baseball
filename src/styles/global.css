@@ -37,6 +37,8 @@
   --gray-200: #dbdbdb;
   --gray-300: #c4c4c4;
   --gray-400: #767676;
+
+  --error-color: #eb5757;
 }
 
 .ellipsis {

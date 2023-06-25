@@ -72,16 +72,20 @@ const StyledForm = styled.form`
   textarea + div > span {
     color: var(--gray-400);
   }
+  textarea + div.invalid > span,
+  textarea + div.invalid {
+    color: var(--error-color);
+  }
 
   /* 경고 문구 */
   strong {
     display: block;
     font-size: 1.2rem;
     line-height: 1.4rem;
-    color: #eb5757;
+    color: var(--error-color);
     margin-top: 6px;
   }
   .invalid {
-    border-color: #eb5757;
+    border-color: var(--error-color);
   }
 `;

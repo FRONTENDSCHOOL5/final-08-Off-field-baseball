@@ -27,11 +27,9 @@ export default function EditProfile() {
 
   const { setAccountname, setMyTeam, token, myTeam } = useContext(UserContext);
 
-  // 소개는 필수값이 아니어서, 입력값이 없는 처음엔 true
   const [isVaildIntro, setIsVaildIntro] = useState(true);
-  const [isVaildUsername, setIsVaildUsername] = useState(false);
-  const [isVaildAccountname, setIsVaildAccountname] = useState(false);
-  const [currentAccountname, setCurrentAccountname] = useState('');
+  const [isVaildUsername, setIsVaildUsername] = useState(true);
+  const [isVaildAccountname, setIsVaildAccountname] = useState(true);
   const [selectedTeam, setSelectedTeam] = useState(myTeam);
 
   // CSS 변수에서 사용하는 팀 이름(samsung, ...) / imgfile
@@ -50,10 +48,17 @@ export default function EditProfile() {
 
   // 사용자 이름, 계정 ID 모두 유효하고, 소개에 $가 입력되지 않았을 때
   useEffect(() => {
-    if (isVaildIntro && isVaildUsername && isVaildAccountname) {
+    if (
+      isVaildIntro &&
+      isVaildUsername &&
+      isVaildAccountname &&
+      textCnt <= 150
+    ) {
       setIsVaild(true);
+    } else {
+      setIsVaild(false);
     }
-  }, [isVaildIntro, isVaildUsername, isVaildAccountname]);
+  }, [isVaildIntro, isVaildUsername, isVaildAccountname, textCnt]);
 
   // API
   const url = 'https://api.mandarin.weniv.co.kr';
@@ -246,7 +251,6 @@ export default function EditProfile() {
 
       setUsername(res.user.username);
       setAccountnameValue(res.user.accountname);
-      setCurrentAccountname(res.user.accountname); //임시
     } catch (err) {
       console.log(err);
     }
@@ -425,7 +429,7 @@ export default function EditProfile() {
             maxLength={150}
             ref={textarea}
           />
-          <div>
+          <div className={textCnt > 150 && 'invalid'}>
             <span>{textCnt} / </span>150
           </div>
           {messageIntro && <strong>{messageIntro}</strong>}
@@ -464,10 +468,6 @@ const StyledEditProfile = styled.section`
     bottom: 0;
     right: 0;
   }
-  #myTeam {
-    margin-top: 9px;
-  }
-
   #myTeam {
     margin-top: 9px;
   }
