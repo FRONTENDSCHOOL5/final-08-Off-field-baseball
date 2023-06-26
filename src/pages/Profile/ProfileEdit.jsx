@@ -261,6 +261,7 @@ const EditProfile = () => {
 
   useEffect(() => {
     beforeEdit();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // 팀 테마 설정 (기본 테마 프사, 테마 컬러)
@@ -273,12 +274,12 @@ const EditProfile = () => {
     const filenameList = Object.values(teamName).map(
       (v) => url + '/' + v.filename
     );
-    filenameList.push(url + '/' + '1687309142552.png');
+    filenameList.push(url + '/1687309142552.png');
 
     // 현재 프로필이 기본 프로필 사진이라면
     if (filenameList.includes(src)) {
       if (selectedOpt === '없음') {
-        setSrc(url + '/' + '1687309142552.png');
+        setSrc(url + '/1687309142552.png');
         setSelectedTeam('default');
       } else {
         setSrc(url + '/' + teamName[selectedOpt].filename);
@@ -291,6 +292,7 @@ const EditProfile = () => {
         setSelectedTeam(teamName[selectedOpt].team);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedOpt]);
 
   // 이미지 삭제
@@ -300,7 +302,7 @@ const EditProfile = () => {
     if (selectedOpt && selectedOpt !== '없음') {
       setSrc(url + '/' + teamName[selectedOpt].filename);
     } else {
-      setSrc(url + '/' + '1687309142552.png');
+      setSrc(url + '/1687309142552.png');
     }
     setIsModalOpen(false); // 모달창 닫기
   };
@@ -328,12 +330,14 @@ const EditProfile = () => {
         selectedTeam={selectedTeam}
       />
       <StyledEditProfile myTeam={selectedTeam}>
+        <h1 className='a11y-hidden'>프로필 수정 페이지</h1>
         <Form selectedTeam={selectedTeam}>
           <button
             type='button'
             className='img-btn'
             onClick={(e) => setIsModalOpen(true)}
           >
+            <h2 className='a11y-hidden'>프로필 이미지 업로드</h2>
             <img src={src} alt='' />
             <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
           </button>
@@ -388,7 +392,10 @@ const EditProfile = () => {
               </li>
             </UploadModal>
           )}
-          <label htmlFor='username'>사용자 이름</label>
+          <label htmlFor='username'>
+            <h2 className='a11y-hidden'>사용자 이름 입력</h2>
+            사용자 이름
+          </label>
           <input
             id='username'
             type='text'
@@ -404,7 +411,9 @@ const EditProfile = () => {
             required
           />
           {messageUsername && <strong>{messageUsername}</strong>}
-          <label htmlFor='accountname'>계정 ID</label>
+          <label htmlFor='accountname'>
+            <h2 className='a11y-hidden'>계정 ID 입력</h2>계정 ID
+          </label>
           <input
             id='accountname'
             type='text'
@@ -421,7 +430,9 @@ const EditProfile = () => {
             required
           />
           {messageAccountname && <strong>{messageAccountname}</strong>}
-          <label htmlFor='intro'>소개</label>
+          <label htmlFor='intro'>
+            <h2 className='a11y-hidden'>자기소개 입력</h2>소개
+          </label>
           <textarea
             id='intro'
             type='text'

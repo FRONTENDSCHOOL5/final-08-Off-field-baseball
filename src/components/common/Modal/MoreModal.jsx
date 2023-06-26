@@ -34,6 +34,7 @@ const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
 
   return (
     <Overlay onClick={handleClick}>
+      <h1 className='a11yHidden'>모달창</h1>
       <StyledDialog open role='dialog' myTeam={myTeam}>
         <ul onKeyDown={handleKeyDown} ref={optionList}>
           {children}

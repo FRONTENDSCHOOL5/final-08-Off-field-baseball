@@ -8,6 +8,7 @@ const ChatListStyle = (props) => {
   return (
     <ProfileStyle onClick={() => navigate(props.navigate)}>
       <div className='wrapper'>
+        <h2 className='a11y-hidden'>{props.userName + '님과의 채팅'}</h2>
         <img src={props.profile} alt='프로필사진 입니다.' />
         {props.isNew && <div className='new'></div>}
         <div className='text'>

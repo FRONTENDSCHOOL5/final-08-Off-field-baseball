@@ -16,7 +16,7 @@ const TopChatNav = ({ username }) => {
         <button onClick={() => navigate(-1)}>
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
-        <TopNavH2>{username}</TopNavH2>
+        <TopNavH1>{username}</TopNavH1>
         <MoreBtn onClick={() => setIsModalOpen(true)}>
           <img src={MORE_VERTICAL} alt='more' />
         </MoreBtn>
@@ -35,7 +35,7 @@ const TopChatNav = ({ username }) => {
 
 export default TopChatNav;
 
-const TopNavH2 = styled.h2`
+const TopNavH1 = styled.h1`
   font-size: 1.4rem;
   flex-grow: 1;
   margin-left: 1em;

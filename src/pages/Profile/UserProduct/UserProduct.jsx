@@ -39,7 +39,7 @@ const UserProduct = ({ accountname }) => {
               <UserProductItem key={index} myTeam={myTeam}>
                 <LinkTo to={`/product/${product.id}`} />
                 <img src={product.itemImage} alt={product.itemName} />
-                <p className='ellipsis'>{product.itemName}</p>
+                <h3 className='ellipsis'>{product.itemName}</h3>
                 <strong>
                   {product.price
                     .toString()
@@ -111,7 +111,7 @@ const UserProductItem = styled.li`
     border-radius: 8px;
   }
 
-  p {
+  h3 {
     font-size: 1.4rem;
     margin: 6px 0 4px;
     width: 100%;

@@ -116,15 +116,33 @@ const UserPost = () => {
                           <img
                             className='thumbnail'
                             src={post.image.split(',')[0]}
-                            alt=''
+                            alt={index + 1 + '번째 게시글 썸네일 이미지'}
                           />
-                          <img src={IMG_LAYERS} alt='' className='layer' />
+                          <h2 className='a11y-hidden'>
+                            {index + 1 + '번째 게시글 썸네일 이미지'}
+                          </h2>
+                          <img
+                            src={IMG_LAYERS}
+                            alt={
+                              index +
+                              1 +
+                              '번째 게시글에 이미지가 여러개 있습니다.'
+                            }
+                            className='layer'
+                          />
                         </Link>
                       </PostAlbumItem>
                     ) : (
                       <PostAlbumItem key={index}>
                         <Link to={'/post/' + post.id}>
-                          <img className='thumbnail' src={post.image} alt='' />
+                          <h2 className='a11y-hidden'>
+                            {index + 1 + '번째 게시글 썸네일 이미지'}
+                          </h2>
+                          <img
+                            className='thumbnail'
+                            src={post.image}
+                            alt={index + 1 + '번째 게시글 썸네일 이미지'}
+                          />
                         </Link>
                       </PostAlbumItem>
                     )

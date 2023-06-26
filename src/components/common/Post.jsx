@@ -105,7 +105,7 @@ const Post = ({
                                     }
                               }
                             >
-                              <img src={img} alt='' />
+                              <img src={img} alt='게시글 이미지입니다.' />
                             </SwiperSlide>
                           );
                         })}
@@ -121,7 +121,7 @@ const Post = ({
                         }
                       >
                         {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
-                        <img src={imageFile[0]} alt='' />
+                        <img src={imageFile[0]} alt='게시글 이미지입니다.' />
                       </li>
                     </ImgWrapper>
                   )}

@@ -32,7 +32,7 @@ const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
   return (
     <Overlay onClick={handleClick}>
       <ConfirmModalWrapper>
-        <h2>{title}</h2>
+        <h1>{title}</h1>
         <BtnContainer myTeam={myTeam} onKeyDown={handleKeyDown}>
           <button onClick={closeModal} ref={firstOpt}>
             취소
@@ -56,7 +56,7 @@ const ConfirmModalWrapper = styled.div`
   background-color: #fff;
   text-align: center;
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.1);
-  & h2 {
+  & h1 {
     font-size: 1.6rem;
     margin: 22px 0;
     font-weight: 500;

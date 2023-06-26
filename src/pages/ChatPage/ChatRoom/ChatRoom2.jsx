@@ -13,6 +13,7 @@ const ChatRoom = () => {
   return (
     <>
       <TopChatNav username='MSG랜더스' />
+      <h2 className='a11y-hidden'>MSG랜더스 님과의 채팅방</h2>
       <ChatRoomStyle>
         <MessageWrapper>
           <MyChat time='18:46'>님 오늘 경기 옴? 자리 어디? 난 여기</MyChat>

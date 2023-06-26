@@ -49,7 +49,7 @@ const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
           <strong>{followerCount}</strong>
           <p>Followers</p>
         </Follow>
-        <img src={image} alt='유저 프로필 이미지' />
+        <img src={image} alt={username + '님의 프로필 이미지'} />
         <Follow className='followings' to={`/profile/${accountname}/following`}>
           <strong>{followingCount}</strong>
           <p>Followings</p>

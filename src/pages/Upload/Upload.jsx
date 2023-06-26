@@ -21,6 +21,7 @@ const Upload = () => {
   useEffect(() => {
     const titleElement = document.getElementsByTagName('title')[0];
     titleElement.innerHTML = `게시물 ${id ? '수정' : '작성'} | 구장 밖 야구`;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const userProfile = async () => {
@@ -112,7 +113,6 @@ const Upload = () => {
   // 텍스트 길이에 맞춰 textarea height 변경
   const textarea = useRef(null);
   const resizeHeight = (textarea) => {
-    console.log(textarea);
     textarea.style.height = 'auto';
     textarea.style.height = textarea.scrollHeight + 'px';
   };
@@ -190,6 +190,11 @@ const Upload = () => {
         event={id ? handleEdit : handlePost}
       />
       <ContentsLayout>
+        {id ? (
+          <h1 className='a11y-hidden'>게시글 수정 페이지</h1>
+        ) : (
+          <h1 className='a11y-hidden'>게시글 작성 페이지</h1>
+        )}
         {isLoading ? (
           <Loading />
         ) : (
@@ -197,7 +202,7 @@ const Upload = () => {
             <img
               className='profile-img'
               src={profile ? profile.image : BASIC_PROFILE_LG}
-              alt=''
+              alt={profile && profile.username + '님의 프로필 이미지'}
             />
             <textarea
               name=''
@@ -212,6 +217,7 @@ const Upload = () => {
               autoFocus
             ></textarea>
             <label htmlFor='profile-img'>
+              <h2 className='a11y-hidden'>이미지 업로드 버튼</h2>
               <svg
                 width='50'
                 height='50'

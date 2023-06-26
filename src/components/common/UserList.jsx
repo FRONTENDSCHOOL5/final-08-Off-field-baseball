@@ -52,6 +52,7 @@ const UserList = ({ user, keyword }) => {
       });
     };
     findMyTeam();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   const matchedText = (text, query) => {
@@ -82,7 +83,7 @@ const UserList = ({ user, keyword }) => {
           <Link to={'/profile/' + user.accountname}>
             <img
               src={
-                user.image.includes('https://api.mandarin.weniv.co.kr')
+                user.image.includes('https://api.mandarin.weniv.co.kr/')
                   ? user.image
                   : 'https://api.mandarin.weniv.co.kr/1687309142552.png'
               }
