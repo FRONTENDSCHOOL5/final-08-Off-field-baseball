@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import { useEffect, useState, useContext } from 'react';
 import Loading from '../../components/common/Loading';
-import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
+import ContentsLayout from '../../components/layout/ContentsLayout';
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function Upload() {
+const Upload = () => {
   const { myTeam } = useContext(UserContext);
   const [imgList, setImgList] = useState([]);
   const [isValid, setIsValid] = useState(false);
@@ -205,7 +205,7 @@ export default function Upload() {
               rows={1}
               autoFocus
             ></textarea>
-            <label htmlFor='profileImg'>
+            <label htmlFor='profile-img'>
               <svg
                 width='50'
                 height='50'
@@ -247,7 +247,7 @@ export default function Upload() {
               </svg>
               <input
                 type='file'
-                id='profileImg'
+                id='profile-img'
                 name='profile-img'
                 accept='image/*'
                 onChange={handleImageInput}
@@ -277,7 +277,9 @@ export default function Upload() {
       </ContentsLayout>
     </>
   );
-}
+};
+
+export default Upload;
 
 // select에서 사용하는 동일한 함수
 const findIndex = (target) => {

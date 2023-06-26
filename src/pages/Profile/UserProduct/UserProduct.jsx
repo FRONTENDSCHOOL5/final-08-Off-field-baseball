@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
 
-export default function UserProduct({ accountname }) {
+const UserProduct = ({ accountname }) => {
   const [productList, setProductList] = useState([]);
   const url = 'https://api.mandarin.weniv.co.kr';
   const { token, myTeam } = useContext(UserContext);
@@ -53,7 +53,9 @@ export default function UserProduct({ accountname }) {
       ) : null}
     </>
   );
-}
+};
+
+export default UserProduct;
 
 const LinkTo = styled(Link)`
   position: absolute;

@@ -1,16 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useState, useContext } from 'react';
-import { UserContext } from '../../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
-export default function Comment({
-  placeholder,
-  txt,
-  value,
-  setValue,
-  event,
-  children,
-}) {
+const Comment = ({ placeholder, txt, value, setValue, event, children }) => {
   const { myTeam } = useContext(UserContext);
   const [isValid, setIsValid] = useState(false);
   // input에 입력된 텍스트를 담는다
@@ -39,12 +32,14 @@ export default function Comment({
       </button>
     </StyledForm>
   );
-}
+};
 
 Comment.defaultProps = {
   txt: '전송',
   placeholder: '메시지 입력하기...',
 };
+
+export default Comment;
 
 const StyledForm = styled.form`
   background: white;

@@ -7,7 +7,7 @@ import MoreModal from '../../components/common/Modal/MoreModal';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function CommentList({ comment, setDeletedComment, children }) {
+const CommentList = ({ comment, setDeletedComment, children }) => {
   const { token, accountname } = useContext(UserContext);
 
   const navigate = useNavigate();
@@ -153,7 +153,9 @@ export default function CommentList({ comment, setDeletedComment, children }) {
       {children}
     </Comments>
   );
-}
+};
+
+export default CommentList;
 
 const Comments = styled.li`
   display: flex;

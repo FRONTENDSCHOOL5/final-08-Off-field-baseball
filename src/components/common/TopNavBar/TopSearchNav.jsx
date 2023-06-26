@@ -4,7 +4,7 @@ import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopSearchNav({ keyword, onChange }) {
+const TopSearchNav = ({ keyword, onChange, onTyping }) => {
   const navigate = useNavigate();
 
   return (
@@ -23,7 +23,9 @@ export default function TopSearchNav({ keyword, onChange }) {
       </TopNavBar>
     </>
   );
-}
+};
+
+export default TopSearchNav;
 
 const TopSearchInput = styled.input`
   max-width: 356px;

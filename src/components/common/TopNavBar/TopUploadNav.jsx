@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
-import Button from '../Button/Button';
+import Button from '../Button';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../../context/UserContext';
 
-export default function TopUploadNav({ btnTxt, isValid, event, selectedTeam }) {
+const TopUploadNav = ({ btnTxt, isValid, event, selectedTeam }) => {
   const navigate = useNavigate();
   const { myTeam } = useContext(UserContext);
   return (
@@ -36,11 +36,13 @@ export default function TopUploadNav({ btnTxt, isValid, event, selectedTeam }) {
       </ExtendTopUploadNav>
     </>
   );
-}
+};
 
 TopUploadNav.defaultProps = {
   btnTxt: '저장',
 };
+
+export default TopUploadNav;
 
 const ExtendTopUploadNav = styled(TopNavBar)`
   padding: 0.8em 1.6em;

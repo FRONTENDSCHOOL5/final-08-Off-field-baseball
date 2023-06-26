@@ -4,14 +4,14 @@ import DeleteModal from './DeleteModal';
 import ReportModal from './ReportModal';
 import { useNavigate } from 'react-router-dom';
 
-export default function PostModal({
+const PostModal = ({
   isModalOpen,
   setIsModalOpen,
   id,
   updatePost,
   mode,
   loc,
-}) {
+}) => {
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   const navigate = useNavigate();
   return (
@@ -75,4 +75,6 @@ export default function PostModal({
       )}
     </>
   );
-}
+};
+
+export default PostModal;

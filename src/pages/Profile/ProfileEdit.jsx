@@ -1,7 +1,7 @@
 import { UPLOAD_FILE } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
-import Form from '../../components/common/Form/Form';
+import Form from '../../components/common/Form';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import UploadModal from '../../components/common/Modal/UploadModal';
 
@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext';
 
-export default function EditProfile() {
+const EditProfile = () => {
   const [isValid, setIsVaild] = useState(true);
   const [username, setUsername] = useState('');
   const [accountnameValue, setAccountnameValue] = useState('');
@@ -445,12 +445,14 @@ export default function EditProfile() {
       </StyledEditProfile>
     </>
   );
-}
+};
+
+export default EditProfile;
 
 const StyledEditProfile = styled.section`
   padding: 78px 34px;
 
-  #profileImg {
+  #profile-img {
     border: none;
   }
   .img-btn {

@@ -7,7 +7,7 @@ const UserChat = (props) => {
   return (
     <Wrapper>
       <img
-        className='profileImg'
+        className='profile-img'
         src={props.profile}
         alt='대화 상대의 프로필 사진입니다.'
       />
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   gap: 12px;
   align-items: flex-start;
 
-  .profileImg {
+  .profile-img {
     width: 42px;
     height: 42px;
   }

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import JoinEmail from './JoinEmail';
 import JoinProfile from './JoinProfile';
 
-export default function Join() {
+const Join = () => {
   const [page, setPage] = useState('joinEmail');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,4 +27,6 @@ export default function Join() {
       )}
     </>
   );
-}
+};
+
+export default Join;

@@ -4,7 +4,7 @@ import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 import SettingModal from '../Modal/SettingModal';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopBasicNav() {
+const TopBasicNav = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -27,4 +27,6 @@ export default function TopBasicNav() {
       )}
     </>
   );
-}
+};
+
+export default TopBasicNav;

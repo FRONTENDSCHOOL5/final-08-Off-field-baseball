@@ -1,13 +1,7 @@
 import ConfirmModal from './ConfirmModal';
 import { useNavigate } from 'react-router';
 
-export default function DeleteModal({
-  closeModal,
-  id,
-  updatePost,
-  setIsModalOpen,
-  loc,
-}) {
+const DeleteModal = ({ closeModal, id, updatePost, setIsModalOpen, loc }) => {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
   const navigate = useNavigate();
@@ -46,4 +40,6 @@ export default function DeleteModal({
       triggerFunc={deletePost}
     />
   );
-}
+};
+
+export default DeleteModal;

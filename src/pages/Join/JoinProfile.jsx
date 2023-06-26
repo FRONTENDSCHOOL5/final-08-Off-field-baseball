@@ -1,15 +1,15 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
-import Form from '../../components/common/Form/Form';
-import Button from '../../components/common/Button/Button';
+import Form from '../../components/common/Form';
+import Button from '../../components/common/Button';
 import UploadModal from '../../components/common/Modal/UploadModal';
 
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function JoinProfile({ email, password }) {
+const JoinProfile = ({ email, password }) => {
   const navigate = useNavigate();
   const [isValid, setIsVaild] = useState(false);
   const [username, setUsername] = useState('');
@@ -382,7 +382,9 @@ export default function JoinProfile({ email, password }) {
       </Form>
     </StyledJoinProfile>
   );
-}
+};
+
+export default JoinProfile;
 
 const StyledJoinProfile = styled.section`
   padding: 30px 34px;

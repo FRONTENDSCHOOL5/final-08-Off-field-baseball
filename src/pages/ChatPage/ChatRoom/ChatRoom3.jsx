@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
 import UserChat from './UserChat';
-import Comment from '../../../components/common/Comment/Comment';
+import Comment from '../../../components/common/Comment';
 import ChatImg1 from '../../../assets/images/chat-img1.jpg';
 
 import { IMG_BUTTON, HANHWA_SMALL } from '../../../styles/CommonIcons';

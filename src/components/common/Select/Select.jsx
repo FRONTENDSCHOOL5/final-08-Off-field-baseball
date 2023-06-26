@@ -5,14 +5,14 @@ import { UserContext } from '../../../context/UserContext';
 import { OPEN } from '../../../styles/CommonIcons';
 
 // btnId : label for과 연결
-export default function Select({
+const Select = ({
   btnTxt,
   optionTextList,
   btnId,
   selectedOpt,
   setSelectedOpt,
   selectedTeam,
-}) {
+}) => {
   const { myTeam } = useContext(UserContext);
   const [isOn, setIsOn] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -153,7 +153,9 @@ export default function Select({
       )}
     </StyledSelect>
   );
-}
+};
+
+export default Select;
 
 const findIndex = (target) => {
   const siblingList = target.parentNode.children;

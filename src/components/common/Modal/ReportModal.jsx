@@ -1,6 +1,6 @@
 import ConfirmModal from './ConfirmModal';
 
-export default function ReportModal({ closeModal, id, setIsModalOpen }) {
+const ReportModal = ({ closeModal, id, setIsModalOpen }) => {
   const url = 'https://api.mandarin.weniv.co.kr';
   const token = localStorage.getItem('token');
 
@@ -34,4 +34,6 @@ export default function ReportModal({ closeModal, id, setIsModalOpen }) {
       triggerFunc={reportPost}
     />
   );
-}
+};
+
+export default ReportModal;

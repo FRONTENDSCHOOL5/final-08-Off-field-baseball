@@ -2,23 +2,23 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   MESSAGE_CIRCLE_SM,
   MORE_VERTICAL_LIGHT,
-} from '../../../styles/CommonIcons';
+} from '../../styles/CommonIcons';
 import styled from 'styled-components';
-import HeartBtn from '../HeartBtn';
+import HeartBtn from './HeartBtn';
 import { useParams, Link } from 'react-router-dom';
-import Loading from '../Loading';
-import PostModal from '../Modal/PostModal';
+import Loading from './Loading';
+import PostModal from './Modal/PostModal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { UserContext } from '../../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
-export default function Post({
+const Post = ({
   loc,
   post = [], // post: {id, userId, content, img, like, comment, createdAt}
   updatePost,
-}) {
+}) => {
   const [data, setData] = useState('');
   const [dateData, setDateData] = useState('');
   const [imageFile, setImageFile] = useState('');
@@ -215,7 +215,9 @@ export default function Post({
       )}
     </>
   );
-}
+};
+
+export default Post;
 
 const PostWrapper = styled.article`
   display: flex;

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Button from './Button/Button';
+import Button from './Button';
 import { UserContext } from '../../context/UserContext';
 
-export default function FollowBtn({ profileData, targetuser, ...props }) {
+const FollowBtn = ({ profileData, targetuser, ...props }) => {
   const { myTeam } = useContext(UserContext);
   const [isFollowing, setIsFollowing] = useState(props.isfollow);
   const url = 'https://api.mandarin.weniv.co.kr';
@@ -51,4 +51,6 @@ export default function FollowBtn({ profileData, targetuser, ...props }) {
       )}
     </>
   );
-}
+};
+
+export default FollowBtn;

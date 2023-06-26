@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import TopBasicNav from '../../../components/common/TopNavBar/TopBasicNav';
 import ChatListStyle from './ChatListStyle';
-import ContentsLayout from '../../../components/layout/ContentsLayout/ContentsLayout';
-import TabNav from '../../../components/common/TabNavBar/TabNav';
+import ContentsLayout from '../../../components/layout/ContentsLayout';
+import TabNav from '../../../components/common/TabNav';
 import { LOTTE_SMALL } from '../../../styles/CommonIcons';
 import { SSG_SMALL } from '../../../styles/CommonIcons';
 import { HANHWA_SMALL } from '../../../styles/CommonIcons';

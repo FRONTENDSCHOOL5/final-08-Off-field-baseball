@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import TopMainNav from '../../components/common/TopNavBar/TopMainNav';
-import TabNav from '../../components/common/TabNavBar/TabNav';
-import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
+import TabNav from '../../components/common/TabNav';
+import ContentsLayout from '../../components/layout/ContentsLayout';
 import styled from 'styled-components';
 import { SYMBOL_LOGO_GRAY } from '../../styles/CommonImages';
-import Button from '../../components/common/Button/Button';
-import Post from '../../components/common/Post/Post';
+import Button from '../../components/common/Button';
+import Post from '../../components/common/Post';
 import Loading from '../../components/common/Loading';
 import { useInView } from 'react-intersection-observer';
 import { UserContext } from '../../context/UserContext';

@@ -17,11 +17,7 @@ const teamList = [
 ];
 
 // selectedOpt, setSelectedOpt : 선택한 옵션을 저장하는 useState
-export default function TeamSelect({
-  selectedOpt,
-  setSelectedOpt,
-  selectedTeam,
-}) {
+const TeamSelect = ({ selectedOpt, setSelectedOpt, selectedTeam }) => {
   return (
     <>
       <label htmlFor='my-team'>응원 중인 팀</label>
@@ -35,4 +31,6 @@ export default function TeamSelect({
       ></Select>
     </>
   );
-}
+};
+
+export default TeamSelect;

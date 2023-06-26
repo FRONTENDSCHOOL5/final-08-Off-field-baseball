@@ -7,13 +7,13 @@ import {
   POST_LIST_ON,
   IMG_LAYERS,
 } from '../../../styles/CommonIcons';
-import Post from '../../../components/common/Post/Post';
+import Post from '../../../components/common/Post';
 import { Link, useParams } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { UserContext } from '../../../context/UserContext';
 import { SYMBOL_LOGO_GRAY } from '../../../styles/CommonImages';
 
-export default function UserPost() {
+const UserPost = () => {
   const [isList, setIsList] = useState(true);
   const [posts, setPosts] = useState([]);
   const [isEmptyPost, setIsEmptyPost] = useState(false);
@@ -141,7 +141,9 @@ export default function UserPost() {
       )}
     </>
   );
-}
+};
+
+export default UserPost;
 
 const PostViewBtns = styled.div`
   padding: 9px 0;

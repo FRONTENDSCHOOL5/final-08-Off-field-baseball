@@ -4,7 +4,7 @@ import { TopNavBar, SearchBtn } from './Styled';
 import { SEARCH } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopMainNav() {
+const TopMainNav = () => {
   const navigate = useNavigate();
   return (
     <TopNavBar>
@@ -14,7 +14,9 @@ export default function TopMainNav() {
       </SearchBtn>
     </TopNavBar>
   );
-}
+};
+
+export default TopMainNav;
 
 const TopNavH1 = styled.h1`
   font-size: 1.8rem;

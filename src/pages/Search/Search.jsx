@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import TopSearchNav from '../../components/common/TopNavBar/TopSearchNav';
-import UserList from '../../components/common/UserList/UserList';
-import TabNav from '../../components/common/TabNavBar/TabNav';
+import UserList from '../../components/common/UserList';
+import TabNav from '../../components/common/TabNav';
 import styled from 'styled-components';
 import { UserContext } from '../../context/UserContext';
 import { debounce } from 'lodash';
 
-export default function Search() {
+const Search = () => {
   const [searchUsers, setSearchUsers] = useState([]);
   const [cntUserList, setCntUserList] = useState(20);
   const [userList, setUserList] = useState([]);
@@ -19,7 +19,7 @@ export default function Search() {
     titleElement.innerHTML = '계정 검색 | 구장 밖 야구';
   }, []);
 
-  async function fetchData() {
+  const fetchData = async () => {
     try {
       const response = await fetch(
         `https://api.mandarin.weniv.co.kr/user/searchuser/?keyword=${keyword}`,
@@ -31,7 +31,7 @@ export default function Search() {
       );
       return response.json();
     } catch {}
-  }
+  };
   const onTyping = () => {
     async function handleFetchData() {
       const users = await fetchData();
@@ -94,7 +94,9 @@ export default function Search() {
       <TabNav />
     </>
   );
-}
+};
+
+export default Search;
 
 const SearchList = styled.section`
   display: block;

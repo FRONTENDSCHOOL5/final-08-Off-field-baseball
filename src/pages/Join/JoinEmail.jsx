@@ -1,16 +1,10 @@
-import Form from '../../components/common/Form/Form';
+import Form from '../../components/common/Form';
 import styled from 'styled-components';
-import Button from '../../components/common/Button/Button';
+import Button from '../../components/common/Button';
 import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
 import { useEffect, useState } from 'react';
 
-export default function JoinEmail({
-  setPage,
-  email,
-  setEmail,
-  password,
-  setPassword,
-}) {
+const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
   const [isValid, setIsVaild] = useState(false);
 
   const [messegeEmail, setMessegeEmail] = useState('');
@@ -169,7 +163,9 @@ export default function JoinEmail({
       </Form>
     </StyledJoinEmail>
   );
-}
+};
+
+export default JoinEmail;
 
 const StyledButton = styled(Button)`
   margin: 30px 0 20px;
