@@ -1,7 +1,7 @@
 import { BASIC_PROFILE_LG, X } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext, useRef } from 'react';
 import Loading from '../../components/common/Loading';
 import ContentsLayout from '../../components/layout/ContentsLayout';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -109,10 +109,16 @@ const Upload = () => {
     }
   };
 
-  const ResizeHeight = (e) => {
-    e.target.style.height = 'auto';
-    e.target.style.height = e.target.scrollHeight + 'px';
+  // 텍스트 길이에 맞춰 textarea height 변경
+  const textarea = useRef(null);
+  const resizeHeight = (textarea) => {
+    console.log(textarea);
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
   };
+  useEffect(() => {
+    resizeHeight(textarea.current);
+  }, [text]);
 
   const deleteImg = (e) => {
     const i = findIndex(e.currentTarget.parentNode);
@@ -198,9 +204,9 @@ const Upload = () => {
               id=''
               placeholder='게시글 입력하기...'
               onChange={(e) => {
-                ResizeHeight(e);
                 validText(e);
               }}
+              ref={textarea}
               value={text}
               rows={1}
               autoFocus
