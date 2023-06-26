@@ -296,6 +296,7 @@ const EditProfile = () => {
   // 이미지 삭제
   const handleImgDelete = (e) => {
     e.preventDefault();
+    alert('사진 제거 리스너 테스트');
     setImage('');
     setSrc(url + '/' + teamName[selectedOpt].filename);
     setIsModalOpen(false); // 모달창 닫기
