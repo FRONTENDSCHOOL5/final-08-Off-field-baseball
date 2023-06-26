@@ -36,7 +36,7 @@ const UserList = ({ user, keyword }) => {
   console.log(keyword);
 
   useEffect(() => {
-    function findMyTeam() {
+    const findMyTeam = () => {
       myTeamList.forEach((item) => {
         if (
           item.name === user.intro?.split('$')[0] ||
@@ -50,7 +50,7 @@ const UserList = ({ user, keyword }) => {
           setMyTeamImg(item.img);
         }
       });
-    }
+    };
     findMyTeam();
   }, [user]);
 
@@ -80,7 +80,14 @@ const UserList = ({ user, keyword }) => {
       {user && (
         <UserListItem>
           <Link to={'/profile/' + user.accountname}>
-            <img src={user.image} alt='' />
+            <img
+              src={
+                user.image.includes('https://api.mandarin.weniv.co.kr')
+                  ? user.image
+                  : 'https://api.mandarin.weniv.co.kr/1687309142552.png'
+              }
+              alt={user.username + '의 프로필 사진'}
+            />
             <div className='user-info'>
               <h2>{matchedText(user.username, keyword)}</h2>
               <p className='ellipsis'>@{user.accountname}</p>
