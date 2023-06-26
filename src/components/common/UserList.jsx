@@ -137,6 +137,7 @@ const UserListItem = styled.li`
   .user-info p {
     max-width: 264px;
     font-size: 1.2rem;
+    padding: 2px 0;
     color: var(--gray-400);
   }
 
