@@ -61,7 +61,11 @@ const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
             <span>아직 응원중인 팀이 없습니다.</span>
           ) : (
             <>
-              <img src={myTeamImg} srcSet='' alt='내가 응원하는 팀' />
+              <img
+                src={myTeamImg}
+                srcSet=''
+                alt={myTeamName + '응원 중입니다.'}
+              />
               <span>{myTeamName} 응원중!</span>
             </>
           )}

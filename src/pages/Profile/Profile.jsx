@@ -71,6 +71,7 @@ const Profile = () => {
           <Loading />
         ) : (
           <>
+            <h1 className='a11y-hidden'>{username || accountname} 프로필</h1>
             <ProfileHeader
               profileData={userProfile}
               team={team}

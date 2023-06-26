@@ -17,6 +17,7 @@ const ChatList = () => {
     <>
       <TopBasicNav />
       <ContentsLayout>
+        <h1 className='a11y-hidden'>채팅 리스트 | 구장 밖 야구</h1>
         <ChatListStyle
           profile={LOTTE_SMALL}
           userName='최강롯데'
