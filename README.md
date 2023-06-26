@@ -108,7 +108,7 @@
 
 ✅ **GitHub Flow 전략 채택**
 
-![image](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/b3d595ae-bb6d-476d-8e59-a09e3f686b66)
+![깃헙플로우](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/de13426a-ddf8-4020-8879-815599e0ed07)
 <br>
 - 프로젝트의 규모와 기간을 고려했을 때, 브랜치 관리에 드는 리소스를 줄이고<br>
   최소 기능을 빠르게 구현하는데 집중하기 위하여 GitHub Flow를 채택하였습니다.
