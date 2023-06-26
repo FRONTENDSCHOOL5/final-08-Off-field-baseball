@@ -9,6 +9,7 @@ const Error404 = () => {
 
   return (
     <ErrorLayout>
+      <h1 className='a11y-hidden'>페이지를 찾을 수 없습니다.</h1>
       <img src={ERROR_404} alt='에러 화면입니다.' />
       <p>페이지를 찾을 수 없습니다 :(</p>
       <Button mBtn onClick={() => navigate(-1)}>
