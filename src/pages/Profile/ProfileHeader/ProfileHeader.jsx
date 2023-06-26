@@ -49,7 +49,14 @@ const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
           <strong>{followerCount}</strong>
           <p>Followers</p>
         </Follow>
-        <img src={image} alt={username + '님의 프로필 이미지'} />
+        <img
+          src={
+            image && image.includes('https://api.mandarin.weniv.co.kr/')
+              ? image
+              : 'https://api.mandarin.weniv.co.kr/1687309142552.png'
+          }
+          alt={username + '님의 프로필 이미지'}
+        />
         <Follow className='followings' to={`/profile/${accountname}/following`}>
           <strong>{followingCount}</strong>
           <p>Followings</p>

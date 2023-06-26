@@ -54,7 +54,15 @@ const Post = ({
       {data ? (
         <>
           <PostWrapper>
-            <ProfileImg src={data.author.image} alt='' />
+            <ProfileImg
+              src={
+                data &&
+                data.author.image.includes('https://api.mandarin.weniv.co.kr/')
+                  ? data.author.image
+                  : 'https://api.mandarin.weniv.co.kr/1687309142552.png'
+              }
+              alt={data.author.username + '님의 프로필 이미지'}
+            />
             <UserPost>
               <UserInfo>
                 <h2>{data.author.username}</h2>
