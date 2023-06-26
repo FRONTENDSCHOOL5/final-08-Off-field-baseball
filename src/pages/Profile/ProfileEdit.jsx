@@ -298,7 +298,7 @@ const EditProfile = () => {
     e.preventDefault();
     alert(e.target);
     setImage('');
-    alert(url + '/' + teamName[selectedOpt].filename);
+    alert(url + '/' + selectedOpt);
     setSrc(url + '/' + teamName[selectedOpt].filename);
     setIsModalOpen(false); // 모달창 닫기
   };
