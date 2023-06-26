@@ -32,9 +32,6 @@ const UserList = ({ user, keyword }) => {
     { id: '9', name: '한화 이글스', name2: 'hanwha', img: EAGLES },
     { id: '10', name: 'KT 위즈', name2: 'kt', img: WIZ },
   ];
-
-  console.log(keyword);
-
   useEffect(() => {
     const findMyTeam = () => {
       myTeamList.forEach((item) => {

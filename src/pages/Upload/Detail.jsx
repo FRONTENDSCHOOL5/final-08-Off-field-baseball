@@ -47,6 +47,7 @@ const Detail = () => {
     window.addEventListener('scroll', addUser);
 
     return () => window.removeEventListener('scroll', addUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cntCommentList]);
   /* * * * * * * * * */
 
@@ -168,6 +169,7 @@ const Detail = () => {
     }
     setCommentList(newCommentList);
     setShowCommentList(newCommentList.slice(0, cntCommentList));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [deletedComment]);
 
   return (
@@ -185,13 +187,7 @@ const Detail = () => {
               {showCommentList.length > 0 && (
                 <>
                   {showCommentList.map((comment, index) => {
-                    return showCommentList.length - 1 === index ? (
-                      <CommentList
-                        key={index}
-                        comment={comment}
-                        setDeletedComment={setDeletedComment}
-                      ></CommentList>
-                    ) : (
+                    return (
                       <CommentList
                         key={index}
                         comment={comment}
