@@ -297,7 +297,7 @@ const EditProfile = () => {
   const handleImgDelete = (e) => {
     e.preventDefault();
     setImage('');
-    if (selectedOpt) {
+    if (selectedOpt && selectedOpt !== '없음') {
       setSrc(url + '/' + teamName[selectedOpt].filename);
     } else {
       setSrc(url + '/' + '1687309142552.png');
