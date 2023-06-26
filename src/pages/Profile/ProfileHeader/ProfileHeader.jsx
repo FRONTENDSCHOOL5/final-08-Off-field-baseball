@@ -58,7 +58,7 @@ const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
       <MyTeamShow>
         <>
           {myTeamImg === '' ? (
-            <span>아직 응원중인 팀이 없습니다.</span>
+            <span>아직 응원 중인 팀이 없습니다.</span>
           ) : (
             <>
               <img
@@ -66,7 +66,7 @@ const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
                 srcSet=''
                 alt={myTeamName + '응원 중입니다.'}
               />
-              <span>{myTeamName} 응원중!</span>
+              <span>{myTeamName} 응원 중!</span>
             </>
           )}
         </>
