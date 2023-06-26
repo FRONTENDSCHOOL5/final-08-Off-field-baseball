@@ -30,9 +30,6 @@ const ShowPasswordBtn = ({ showPassword, setShowPassword }) => {
 export default ShowPasswordBtn;
 
 const StyledBtn = styled.button`
-  /* position: absolute;
-  top: 86px;
-  right: -6px; */
   padding: 8px;
   box-sizing: border-box;
 `;
