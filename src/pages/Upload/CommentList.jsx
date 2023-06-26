@@ -100,7 +100,14 @@ const CommentList = ({ comment, setDeletedComment, children }) => {
             })
           }
         >
-          <img src={comment.author.image} alt='' />
+          <img
+            src={
+              comment.author.image.includes('https://api.mandarin.weniv.co.kr/')
+                ? comment.author.image
+                : 'https://api.mandarin.weniv.co.kr/1687309142552.png'
+            }
+            alt={comment.author.username + '의 프로필 사진'}
+          />
         </button>
         <button
           className='name'
