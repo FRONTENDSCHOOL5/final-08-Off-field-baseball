@@ -1,12 +1,12 @@
-# ⚾️ 구장 밖 야구
+# <span id='top'>⚾️ 구장 밖 야구</span>
 
 ![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/16010141-c8b0-43b4-a3a8-e6df819514bb)
 <br>
 <br>
-바로가기 링크
+[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app)
 
-- ID
-- PW
+- ID : `baseball@test.com`
+- PW : `test123!`
   <br>
 
 ## 1. 서비스 소개
@@ -82,49 +82,73 @@
   <tr align = "center">
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/504d9b13-1494-4648-821f-187df12410c9" height="50px"><br>React</td>
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/85dee32a-eca6-403d-8b0e-521ff2270249" height="50px"><br>styled-components</td>
-    <td> 제공된 api </td>
-    <td> 미정 </td>
+    <td> 제공된 API </td>
+    <td> <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/0dc932cd-c71f-4c61-8804-4892d2065fd0" height="50px"><br>netlify </td>
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/b8470865-2d1a-4e3d-b799-8415dab1a787" height="50px"><br>Adobe Photoshop</td>
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/2125a01e-7cc3-4106-abdc-014044ed87e9" height="50px"><br>Figma</td>
     <td> <img src="https://i.namu.wiki/i/NGpXZfh1nhfo8DCNUydodk5az5YbbCMKs-7ugVuSF-p1gxjnycbN4okab4kVeDiJetcbQ_vipVynVqA7hItbgv__a_Q4cipAtbboSRwCQOuPF1vztDKZkMNCVXDBPLebJOAQIk-COQGK2nHtCyNQqw.svg" height="50px"><br>Adobe Illustrator</td>
   </tr>
 </table>
 
-### 4-1. 기타 환경 (수정해야함)
+### 4-1. 기타 환경
 
 - OS : <img src="https://img.shields.io/badge/windows-0078D6?style=flat&logo=windows&logoColor=white"/> <img src="https://img.shields.io/badge/macos-000000?style=flat&logo=macos&logoColor=white"/>
 - IDE : <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 - 협업 툴 : <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/> <img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white"/>
 - 포매터 : <img src="https://img.shields.io/badge/prettier-F7B93E?style=flat&logo=prettier&logoColor=white"/>
-- Node Modules..?
-  - react-router-dom
-  - animate.css ... 삭제해도OK
+<br>
 
 ## 5. 프로젝트 구조
 
-![폴더구조](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/8a841dbb-63f4-471b-9924-d17f5c3ba2f2)
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/8a841dbb-63f4-471b-9924-d17f5c3ba2f2" width="800px"/>
 <br>
-
+<p align="right"><a href="#top">TOP 🔼</a></p>
 ## 6. Git Branch 전략
 
 ✅ **GitHub Flow 전략 채택**
 
 ![image](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/b3d595ae-bb6d-476d-8e59-a09e3f686b66)
 <br>
+- 프로젝트의 규모와 기간을 고려했을 때, 브랜치 관리에 드는 리소스를 줄이고<br>
+  최소 기능을 빠르게 구현하는데 집중하기 위하여 GitHub Flow를 채택하였습니다.
+<br>
 
 ## 7. 협업 방식 & 프로젝트 관리
+### 📍 순조로운 프로젝트를 위한 원칙
+```
+💚 뭔가 불만이 있으면 감추고 있지 말고 바로바로 말하기
+💚 서로의 의견 경청하고 존중하기
+💚 회의에 참석하지 못하는 경우가 생기면 꼭 보고하기
+```
+### 📍 공유를 통한 성장
+```
+💛 어려움이 생겼을 때, 동료에게 도움을 요청하는 것을 어려워하지 않기
+💛 VSCode 라이브셰어 기능을 활용하여 함께 해결하기
+💛 코딩하면서 마주친 문제들에 대해 고민했던 부분, 느꼈던 부분 수시로 공유하기
+```
+
+### 🌳 프로젝트 진행
+- 정기 회의 및 코드 리뷰
+  - 월/목 AM 9시 정기회의와 주 3회 코드리뷰를 가지면서 작업 진행 상황 공유
+<br>
+
+- Discord GitHub 봇을 사용하여 실시간 PR 상황 공유 ⬇️
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/1e6aa54f-a707-4616-ab6b-7b435e935f00" width="400px"/>
+<br>
+<br>
+
+- Notion Project 템플릿을 사용하여 할 일 & 일정 관리
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
 
 ## 8. 컨벤션
 
 - 시맨틱 마크업
-
-  - 의미있는 변수명 사용, 함수명은 동사로 시작
-  - css: kebab-case
-  - js: (변수) camelCase
+  - 의미있는 변수명 사용
+  - css : kebab-case
+  - js : camelCase
   - 변수 : var 사용 금지
 
 - Prettier 설정
-
 ```
 {
   "trailingComma": "es5",
@@ -135,7 +159,7 @@
 };
 ```
 
-- 커밋 컨벤션 (Udacity의 컨벤션을 참고하였습니다.)
+- 커밋 컨벤션 (Udacity의 컨벤션 참고)
 
 ```
 - Feat: 새로운 기능 추가
@@ -150,12 +174,26 @@
 ```
 
 ## 9. 서비스 미리보기 (필요 없는 것 추리기)
-
-1. 홈 - 스플래쉬, 회원가입, 로그인페이지
-2. 피드 - 홈피드, 검색, 404
-3. 채팅 - 채팅 리스트, 채팅방, 채팅 나가기
+(표 만들기)
+1. 홈 - 스플래쉬, 회원가입, 프로필설정
+2. 피드 - 홈피드, 검색
+3. 채팅 - 채팅 리스트, 채팅방-채팅 나가기
 4. 게시글 - 게시글 상세페이지(좋아요, 댓글), 게시물 작성, 게시물 삭제, 신고하기
-5. 프로필 - 마이 프로필 페이지, 유어프로필 페이지, 리스트형/앨범형, 프로필 수정, 팔로워/팔로잉, 로그아웃
+5. 프로필 - 마이프로필 페이지, 유어프로필 페이지, 리스트형/앨범형 변환, ⭐️프로필 수정⭐️, 팔로워/팔로잉
 6. 판매 상품 - 상품 등록, 상품 수정, 상품 삭제
 
 ## 10. 로컬 환경에서의 프로젝트 구동
+- 레포지토리 클론
+```
+git clone https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball.git
+```
+- 필요한 모듈 설치
+```
+npm install
+```
+- 로컬 환경에서 리액트 앱 실행
+```
+npm start
+```
+
+<p align="right"><a href="#top">TOP 🔼</a></p>
