@@ -4,9 +4,10 @@
 <br>
 <br>
 바로가기 링크
+
 - ID
 - PW
-<br>
+  <br>
 
 ## 1. 서비스 소개
 
@@ -21,16 +22,17 @@
 
 ## 2. 팀 소개 & 역할 분담
 
-|                                                                 FE 한수빈                                                                 |                                                                       FE 김은총                                                                        |                                                             FE 김하연                                                             |                                                              FE 최예지                                                              |
-| :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: |
-| <img src="https://github.com/astinaus/git-test/blob/main/8429F25B-444B-47ED-8D03-9DBCE13828C1_1_201_a.jpeg" width="180px" height="180px"> | <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/08b30968-7235-4d4d-b009-c192ab2faa2c" width="180px" height="180px"> | <img src="https://github.com/KimHayeon1/hihi/assets/108985221/34bd89c8-4b1f-4542-8f2c-d4ba55647281" width="180px" height="180px"> | <img src="https://github.com/moojinkl/testRepo/assets/126536476/d54898c8-9d7c-49d1-a94b-6918dcd707f7" width="180px" height="180px"> |
-|                                                  [🔗GitHub](https://github.com/astinaus)                                                  |                                                            [🔗GitHub](https://github.com/echo-6)                                                             |                                             [🔗GitHub](https://github.com/KimHayeon1)                                             |                                               [🔗GitHub](https://github.com/moojinkl)                                               |
+|                                                                 FE 한수빈                                                                 |                                                                          FE 김은총                                                                           |                                                             FE 김하연                                                             |                                                                    FE 최예지                                                                    |
+| :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://github.com/astinaus/git-test/blob/main/8429F25B-444B-47ED-8D03-9DBCE13828C1_1_201_a.jpeg" width="180px" height="180px"> | <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/08b30968-7235-4d4d-b009-c192ab2faa2c" width="180px" height="180px"> | <img src="https://github.com/KimHayeon1/hihi/assets/108985221/34bd89c8-4b1f-4542-8f2c-d4ba55647281" width="180px" height="180px"> | <img src="https://user-images.githubusercontent.com/126536476/248644074-997e8180-717c-4abc-898e-84f7f3072f21.jpg" width="180px" height="180px"> |
+|                                                  [🔗GitHub](https://github.com/astinaus)                                                  |                                                            [🔗GitHub](https://github.com/echo-6)                                                             |                                             [🔗GitHub](https://github.com/KimHayeon1)                                             |                                                     [🔗GitHub](https://github.com/moojinkl)                                                     |
 
 🦜 저희는 멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 8조 `the 8색조` 팀입니다 !
 <br>
 <br>
 
 ## 🐼 한수빈
+
 - 피드 포스트 목록
 - 프로필 페이지
 - 팔로워 / 팔로잉 목록
@@ -41,6 +43,7 @@
 - 프로젝트 주도
 
 ## 🐢 김은총
+
 - 채팅 리스트 페이지
 - 채팅방 페이지
 - 로딩중 컴포넌트, 404 페이지
@@ -52,13 +55,15 @@
 - README 작성
 
 ### 김하연
+
 - 수정
 - 수정
- 
+
 ### 최예지
+
 - 수정
 - 수정
- 
+
 ## 3. 프로젝트 기간
 
 2023년 6월 2일 ~ 2023년 6월 27일 (발표 전날에 이미지 교체 예정)
@@ -66,6 +71,7 @@
 <br>
 
 ## 4. 개발 환경
+
 <table>
   <tr align = "center">
     <th colspan="2"> 프론트엔드 </th>
@@ -85,6 +91,7 @@
 </table>
 
 ### 4-1. 기타 환경 (수정해야함)
+
 - OS : <img src="https://img.shields.io/badge/windows-0078D6?style=flat&logo=windows&logoColor=white"/> <img src="https://img.shields.io/badge/macos-000000?style=flat&logo=macos&logoColor=white"/>
 - IDE : <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 - 협업 툴 : <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/> <img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white"/>
@@ -92,7 +99,6 @@
 - Node Modules..?
   - react-router-dom
   - animate.css ... 삭제해도OK
-
 
 ## 5. 프로젝트 구조
 
@@ -109,23 +115,28 @@
 ## 7. 협업 방식 & 프로젝트 관리
 
 ## 8. 컨벤션
+
 - 시맨틱 마크업
-    - 의미있는 변수명 사용, 함수명은 동사로 시작
-    - css: kebab-case
-    - js: (변수) camelCase
-    - 변수 : var 사용 금지
+
+  - 의미있는 변수명 사용, 함수명은 동사로 시작
+  - css: kebab-case
+  - js: (변수) camelCase
+  - 변수 : var 사용 금지
 
 - Prettier 설정
+
 ```
 {
-  "trailingComma": "es5", 
+  "trailingComma": "es5",
   "tabWidth": 2,
-  "semi": true, 
-  "singleQuote": true, 
-  "printWidth": 80, 
+  "semi": true,
+  "singleQuote": true,
+  "printWidth": 80,
 };
 ```
+
 - 커밋 컨벤션 (Udacity의 컨벤션을 참고하였습니다.)
+
 ```
 - Feat: 새로운 기능 추가
 - Fix: 버그 수정
@@ -137,11 +148,14 @@
 - Rename: 파일명 혹은 폴더명 수정, 위치 옮기기
 - Remove: 파일 삭제
 ```
+
 ## 9. 서비스 미리보기 (필요 없는 것 추리기)
-1) 홈 - 스플래쉬, 회원가입, 로그인페이지
-2) 피드 - 홈피드, 검색, 404
-3) 채팅 - 채팅 리스트, 채팅방, 채팅 나가기
-4) 게시글 - 게시글 상세페이지(좋아요, 댓글), 게시물 작성, 게시물 삭제, 신고하기
-5) 프로필 - 마이 프로필 페이지, 유어프로필 페이지, 리스트형/앨범형, 프로필 수정, 팔로워/팔로잉, 로그아웃
-6) 판매 상품 - 상품 등록, 상품 수정, 상품 삭제
+
+1. 홈 - 스플래쉬, 회원가입, 로그인페이지
+2. 피드 - 홈피드, 검색, 404
+3. 채팅 - 채팅 리스트, 채팅방, 채팅 나가기
+4. 게시글 - 게시글 상세페이지(좋아요, 댓글), 게시물 작성, 게시물 삭제, 신고하기
+5. 프로필 - 마이 프로필 페이지, 유어프로필 페이지, 리스트형/앨범형, 프로필 수정, 팔로워/팔로잉, 로그아웃
+6. 판매 상품 - 상품 등록, 상품 수정, 상품 삭제
+
 ## 10. 로컬 환경에서의 프로젝트 구동
