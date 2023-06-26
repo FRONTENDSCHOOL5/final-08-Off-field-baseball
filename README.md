@@ -103,6 +103,7 @@
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/8a841dbb-63f4-471b-9924-d17f5c3ba2f2" width="800px"/>
 <br>
 <p align="right"><a href="#top">TOP 🔼</a></p>
+
 ## 6. Git Branch 전략
 
 ✅ **GitHub Flow 전략 채택**
@@ -139,6 +140,7 @@
 
 - Notion Project 템플릿을 사용하여 할 일 & 일정 관리
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
+<br>
 
 ## 8. 컨벤션
 
@@ -172,6 +174,7 @@
 - Rename: 파일명 혹은 폴더명 수정, 위치 옮기기
 - Remove: 파일 삭제
 ```
+<br>
 
 ## 9. 서비스 미리보기 (필요 없는 것 추리기)
 (표 만들기)
@@ -181,6 +184,7 @@
 4. 게시글 - 게시글 상세페이지(좋아요, 댓글), 게시물 작성, 게시물 삭제, 신고하기
 5. 프로필 - 마이프로필 페이지, 유어프로필 페이지, 리스트형/앨범형 변환, ⭐️프로필 수정⭐️, 팔로워/팔로잉
 6. 판매 상품 - 상품 등록, 상품 수정, 상품 삭제
+<br>
 
 ## 10. 로컬 환경에서의 프로젝트 구동
 - 레포지토리 클론
