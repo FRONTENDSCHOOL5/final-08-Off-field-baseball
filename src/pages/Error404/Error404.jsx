@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../components/common/Button/Button';
+import Button from '../../components/common/Button';
 import { ERROR_404 } from '../../styles/CommonImages';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,9 +37,5 @@ const ErrorLayout = styled.div`
     margin-bottom: 20px;
     font-size: 1.4rem;
     color: var(--gray-400);
-  }
-
-  Button {
-    height: 44px;
   }
 `;

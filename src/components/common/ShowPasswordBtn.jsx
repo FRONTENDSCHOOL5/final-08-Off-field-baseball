@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function ShowPasswordBtn({ showPassword, setShowPassword }) {
+const ShowPasswordBtn = ({ showPassword, setShowPassword }) => {
   return (
     <StyledBtn
       type='button'
@@ -25,7 +25,9 @@ export default function ShowPasswordBtn({ showPassword, setShowPassword }) {
       </svg>
     </StyledBtn>
   );
-}
+};
+
+export default ShowPasswordBtn;
 
 const StyledBtn = styled.button`
   /* position: absolute;

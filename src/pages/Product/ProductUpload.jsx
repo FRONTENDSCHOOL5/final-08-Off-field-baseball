@@ -3,9 +3,9 @@ import TopUploadNav from '../../components/common/TopNavBar/TopUploadNav';
 import styled from 'styled-components';
 import { IMG_BUTTON, X } from '../../styles/CommonIcons';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import Form from '../../components/common/Form/Form';
+import Form from '../../components/common/Form';
 
-export default function ProductUpload() {
+const ProductUpload = () => {
   const [price, setPrice] = useState('');
   const [imgPre, setImgPre] = useState('');
   const [isValid, setIsValid] = useState(false);
@@ -216,12 +216,12 @@ export default function ProductUpload() {
             <img src={X} alt='이미지 삭제하기' />
           </button>
 
-          <label htmlFor='productImg'>
-            <img src={IMG_BUTTON} id='uploadBtn' alt='이미지 등록 버튼' />
+          <label htmlFor='product-img'>
+            <img src={IMG_BUTTON} id='upload-btn' alt='이미지 등록 버튼' />
           </label>
           <input
             type='file'
-            id='productImg'
+            id='product-img'
             name='product-img'
             accept='image/*'
             onChange={handleImgChange}
@@ -273,7 +273,9 @@ export default function ProductUpload() {
       </ProductInfo>
     </>
   );
-}
+};
+
+export default ProductUpload;
 
 const ProductInfo = styled.section`
   padding: 78px 3.4rem 0;
@@ -297,7 +299,7 @@ const EmptyImg = styled.div`
     border-radius: 10px;
   }
 
-  #uploadBtn {
+  #upload-btn {
     position: absolute;
     right: 12px;
     bottom: 12px;
@@ -307,7 +309,7 @@ const EmptyImg = styled.div`
     cursor: pointer;
   }
 
-  #productImg {
+  #product-img {
     display: none;
   }
 

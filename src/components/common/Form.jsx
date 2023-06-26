@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { UserContext } from '../../../context/UserContext';
+import { UserContext } from '../../context/UserContext';
 
-export default function Form({ children, handleForm, selectedTeam }) {
+const Form = ({ children, handleForm, selectedTeam }) => {
   const { myTeam } = useContext(UserContext);
 
   return (
@@ -10,7 +10,9 @@ export default function Form({ children, handleForm, selectedTeam }) {
       {children}
     </StyledForm>
   );
-}
+};
+
+export default Form;
 
 const StyledForm = styled.form`
   position: relative;

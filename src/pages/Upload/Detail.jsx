@@ -1,15 +1,14 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
-import Comment from '../../components/common/Comment/Comment';
+import Comment from '../../components/common/Comment';
 import { useParams } from 'react-router-dom';
-import Post from '../../components/common/Post/Post';
+import Post from '../../components/common/Post';
 import { useEffect } from 'react';
 import Loading from '../../components/common/Loading';
-import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
+import ContentsLayout from '../../components/layout/ContentsLayout';
 import CommentList from './CommentList';
 import { UserContext } from '../../context/UserContext';
-import { useInView } from 'react-intersection-observer';
 
 const Detail = () => {
   const [post, setPost] = useState([]);
@@ -18,11 +17,8 @@ const Detail = () => {
   // 댓글 달면 바로 업데이트 되도록 하는 state (더 좋은 방법이 있을지 고민 중)
   const [updateComment, setUpdateComment] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
   const url = 'https://api.mandarin.weniv.co.kr';
   const { token } = useContext(UserContext);
-  const { inView, ref } = useInView();
   const [userImg, setUserImg] = useState('');
   let { id } = useParams();
   const [showCommentList, setShowCommentList] = useState('');
@@ -134,7 +130,6 @@ const Detail = () => {
   };
 
   const getCommentList = async () => {
-    setLoading(true);
     try {
       const req = await fetch(`${url}/post/${id}/comments/?limit=10000`, {
         method: 'GET',
@@ -147,11 +142,8 @@ const Detail = () => {
       setCommentList(res.comments);
       setShowCommentList(res.comments.slice(0, cntCommentList));
       setCntCommentList(cntCommentList + 10);
-      if (res.comments.length < 10) setDone(true);
-      setLoading(false);
     } catch (err) {
       console.log(err);
-      setLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   };
@@ -198,9 +190,7 @@ const Detail = () => {
                         key={index}
                         comment={comment}
                         setDeletedComment={setDeletedComment}
-                      >
-                        <Refrence ref={ref}></Refrence>
-                      </CommentList>
+                      ></CommentList>
                     ) : (
                       <CommentList
                         key={index}
@@ -241,9 +231,4 @@ const CommentListSection = styled.ul`
 
 const PostWrapper = styled(ContentsLayout)`
   min-height: 0;
-`;
-
-const Refrence = styled.div`
-  position: absolute;
-  width: 100%;
 `;

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import TopBasicNav from '../../components/common/TopNavBar/TopBasicNav';
 import Loading from '../../components/common/Loading';
-import ContentsLayout from '../../components/layout/ContentsLayout/ContentsLayout';
-import Post from '../../components/common/Post/Post';
+import ContentsLayout from '../../components/layout/ContentsLayout';
+import Post from '../../components/common/Post';
 
-export default function ProductDetail() {
+const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +58,9 @@ export default function ProductDetail() {
       )}
     </>
   );
-}
+};
+
+export default ProductDetail;
 
 const PostWrapper = styled(ContentsLayout)`
   min-height: 0;

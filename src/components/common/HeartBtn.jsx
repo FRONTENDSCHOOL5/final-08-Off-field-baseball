@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../../context/UserContext';
 
-export default function HeartBtn({ data }) {
+const HeartBtn = ({ data }) => {
   const { myTeam } = useContext(UserContext);
   const [hearted, setHearted] = useState('');
   const [heartCount, setHeartCount] = useState('');
@@ -64,7 +64,9 @@ export default function HeartBtn({ data }) {
       <span>{heartCount}</span>
     </PostBtn>
   );
-}
+};
+
+export default HeartBtn;
 
 const PostBtn = styled.button`
   display: flex;

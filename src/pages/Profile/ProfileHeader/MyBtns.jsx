@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../../../components/common/Button/Button';
+import Button from '../../../components/common/Button';
 import { useNavigate } from 'react-router-dom';
 
-export default function MyBtns() {
+const MyBtns = () => {
   const navigate = useNavigate();
   return (
     <MyBtnsWrapper>
@@ -15,7 +15,9 @@ export default function MyBtns() {
       </Button>
     </MyBtnsWrapper>
   );
-}
+};
+
+export default MyBtns;
 
 const MyBtnsWrapper = styled.div`
   display: flex;

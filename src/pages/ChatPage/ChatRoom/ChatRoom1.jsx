@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TopChatNav from '../../../components/common/TopNavBar/TopChatNav';
 import MyChat from './MyChat';
 import UserChat from './UserChat';
-import Comment from '../../../components/common/Comment/Comment';
+import Comment from '../../../components/common/Comment';
 import ChatImg4 from '../../../assets/images/test.jpg';
 import { IMG_BUTTON, LOTTE_SMALL } from '../../../styles/CommonIcons';
 

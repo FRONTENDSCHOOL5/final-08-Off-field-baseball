@@ -16,12 +16,7 @@ import {
 } from '../../../styles/CommonImages';
 import { Link } from 'react-router-dom';
 
-export default function ProfileHeader({
-  profileData,
-  team,
-  intro,
-  targetuser,
-}) {
+const ProfileHeader = ({ profileData, team, intro, targetuser }) => {
   // 로그인한 유저인지 확인
   const myTeam = [
     { id: '1', name: '두산 베어스', name2: 'doosan', img: BEARS },
@@ -88,7 +83,9 @@ export default function ProfileHeader({
       )}
     </ProfileHeaderWrapper>
   );
-}
+};
+
+export default ProfileHeader;
 
 const ProfileHeaderWrapper = styled.div`
   display: flex;

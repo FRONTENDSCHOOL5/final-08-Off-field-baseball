@@ -1,13 +1,13 @@
 import { Link } from 'react-router-dom';
-import Form from '../../components/common/Form/Form';
+import Form from '../../components/common/Form';
 import styled from 'styled-components';
-import Button from '../../components/common/Button/Button';
+import Button from '../../components/common/Button';
 import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function Login({ team }) {
+const Login = ({ team }) => {
   const navigate = useNavigate();
   const { setToken, setAccountname, setMyTeam } = useContext(UserContext);
 
@@ -156,7 +156,9 @@ export default function Login({ team }) {
       </Form>
     </StyledLogin>
   );
-}
+};
+
+export default Login;
 
 const StyledButton = styled(Button)`
   margin: 30px 0 20px;

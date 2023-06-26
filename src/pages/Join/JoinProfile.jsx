@@ -1,15 +1,15 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE } from '../../styles/CommonIcons';
 import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
-import Form from '../../components/common/Form/Form';
-import Button from '../../components/common/Button/Button';
+import Form from '../../components/common/Form';
+import Button from '../../components/common/Button';
 import UploadModal from '../../components/common/Modal/UploadModal';
 
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
-export default function JoinProfile({ email, password }) {
+const JoinProfile = ({ email, password }) => {
   const navigate = useNavigate();
   const [isValid, setIsVaild] = useState(false);
   const [username, setUsername] = useState('');
@@ -257,7 +257,7 @@ export default function JoinProfile({ email, password }) {
           onClick={(e) => setIsModalOpen(true)}
         >
           <img src={src} alt='' />
-          <img className='uplodeImg' src={UPLOAD_FILE} alt='' />
+          <img className='uplode-img' src={UPLOAD_FILE} alt='' />
         </button>
         {isModalOpen && (
           <UploadModal
@@ -283,7 +283,7 @@ export default function JoinProfile({ email, password }) {
               </button>
               <input
                 type='file'
-                id='profileImg'
+                id='profile-img'
                 className='a11y-hidden'
                 onChange={(e) => {
                   if (e.target.files && e.target.files[0]) {
@@ -383,7 +383,9 @@ export default function JoinProfile({ email, password }) {
       </Form>
     </StyledJoinProfile>
   );
-}
+};
+
+export default JoinProfile;
 
 const StyledJoinProfile = styled.section`
   padding: 30px 34px;
@@ -403,7 +405,7 @@ const StyledJoinProfile = styled.section`
     font-size: 1.4rem;
     color: var(--gray-400);
   }
-  #profileImg {
+  #profile-img {
     border: none;
   }
   .img-btn {
@@ -417,14 +419,14 @@ const StyledJoinProfile = styled.section`
     border-radius: 55px;
     object-fit: cover;
   }
-  .img-btn .uplodeImg {
+  .img-btn .uplode-img {
     position: absolute;
     width: 36px;
     height: 36px;
     bottom: 0;
     right: 0;
   }
-  #myTeam {
+  #my-team {
     margin-top: 9px;
   }
   #start-btn {

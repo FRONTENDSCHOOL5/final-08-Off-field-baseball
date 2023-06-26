@@ -6,7 +6,7 @@ import ConfirmModal from '../Modal/ConfirmModal';
 import { TopNavBar, LeftArrow, MoreBtn } from './Styled';
 import { ARROW_LEFT, MORE_VERTICAL } from '../../../styles/CommonIcons';
 
-export default function TopChatNav({ username }) {
+const TopChatNav = ({ username }) => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -31,7 +31,9 @@ export default function TopChatNav({ username }) {
       )}
     </>
   );
-}
+};
+
+export default TopChatNav;
 
 const TopNavH2 = styled.h2`
   font-size: 1.4rem;

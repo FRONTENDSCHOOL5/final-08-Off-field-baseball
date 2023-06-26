@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { BASIC_PROFILE_SM } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
 const ChatListStyle = (props) => {

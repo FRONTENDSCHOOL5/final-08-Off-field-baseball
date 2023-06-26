@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { MESSAGE_CIRCLE_SM, SHARE } from '../../../styles/CommonIcons';
 import FollowBtn from '../../../components/common/FollowBtn';
 
-export default function UserBtns({ targetuser, profileData, isfollow }) {
+const UserBtns = ({ targetuser, profileData, isfollow }) => {
   return (
     <BtnsWrapper>
       <BtnSmall>
@@ -20,7 +20,9 @@ export default function UserBtns({ targetuser, profileData, isfollow }) {
       </BtnSmall>
     </BtnsWrapper>
   );
-}
+};
+
+export default UserBtns;
 
 const BtnsWrapper = styled.div`
   display: flex;

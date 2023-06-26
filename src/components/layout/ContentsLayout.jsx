@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function ContentsLayout({ children, height }) {
+const ContentsLayout = ({ children, height }) => {
   return <ContentsWrapper>{children}</ContentsWrapper>;
-}
+};
 
 const ContentsWrapper = styled.main`
   min-height: 100vh;
@@ -12,3 +12,5 @@ const ContentsWrapper = styled.main`
   flex-direction: column;
   position: relative;
 `;
+
+export default ContentsLayout;

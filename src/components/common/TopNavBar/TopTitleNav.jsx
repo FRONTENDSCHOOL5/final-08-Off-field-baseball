@@ -4,7 +4,7 @@ import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 
-export default function TopTitleNav({ loc }) {
+const TopTitleNav = ({ loc }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -16,7 +16,9 @@ export default function TopTitleNav({ loc }) {
       </TopNavBar>
     </>
   );
-}
+};
+
+export default TopTitleNav;
 
 const TopNavH2 = styled.h2`
   font-size: 1.4rem;
