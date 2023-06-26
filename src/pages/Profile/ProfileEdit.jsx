@@ -296,10 +296,12 @@ const EditProfile = () => {
   // 이미지 삭제
   const handleImgDelete = (e) => {
     e.preventDefault();
-    alert(e.target);
     setImage('');
-    alert(url + '/' + selectedOpt);
-    setSrc(url + '/' + teamName[selectedOpt].filename);
+    if (selectedOpt && selectedOpt !== '없음') {
+      setSrc(url + '/' + teamName[selectedOpt].filename);
+    } else {
+      setSrc(url + '/' + '1687309142552.png');
+    }
     setIsModalOpen(false); // 모달창 닫기
   };
 
