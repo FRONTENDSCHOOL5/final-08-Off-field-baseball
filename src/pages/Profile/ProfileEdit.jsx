@@ -11,9 +11,12 @@ import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
 
 const EditProfile = () => {
+  const { accountname, setAccountname, setMyTeam, token, myTeam } =
+    useContext(UserContext);
+
   const [isValid, setIsVaild] = useState(true);
   const [username, setUsername] = useState('');
-  const [accountnameValue, setAccountnameValue] = useState('');
+  const [accountnameValue, setAccountnameValue] = useState(accountname);
   const [intro, setIntro] = useState('');
   const [image, setImage] = useState('');
   const [src, setSrc] = useState('');
@@ -24,8 +27,6 @@ const EditProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [textCnt, setTextCnt] = useState(0);
   const navigate = useNavigate();
-
-  const { setAccountname, setMyTeam, token, myTeam } = useContext(UserContext);
 
   const [isVaildIntro, setIsVaildIntro] = useState(true);
   const [isVaildUsername, setIsVaildUsername] = useState(true);
@@ -205,7 +206,10 @@ const EditProfile = () => {
     }
 
     const message = await verifyAccount();
-    if (message !== '사용 가능한 계정ID 입니다.') {
+    if (
+      message !== '사용 가능한 계정ID 입니다.' &&
+      accountnameValue !== accountname
+    ) {
       setMessageAccountname(message);
       setIsVaildAccountname(false);
     } else {
@@ -253,7 +257,6 @@ const EditProfile = () => {
       }
 
       setUsername(res.user.username);
-      setAccountnameValue(res.user.accountname);
     } catch (err) {
       console.log(err);
     }

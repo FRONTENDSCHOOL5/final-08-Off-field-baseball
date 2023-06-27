@@ -7,7 +7,8 @@
 
 - ID : `baseball@test.com`
 - PW : `test123!`
-  <br>
+<br>
+<br>
 
 ## 1. 서비스 소개
 
@@ -18,7 +19,8 @@
 - 사용하던 팀 응원 소품이나 야구 관련 물품을 중고 거래를 통해 판매하고, 구입할 수 있습니다.
 - 야구와 관련된 이슈들을 실시간으로 올리며 SNS 활동을 할 수 있습니다.
 - 같은 팀을 응원하는 유저를 팔로우 하여 피드를 꾸릴 수 있고, 댓글과 좋아요 기능으로 소통할 수 있습니다.
-  <br>
+<br>
+<br>
 
 ## 2. 팀 소개 & 역할 분담
 
@@ -30,44 +32,168 @@
 🦜 저희는 멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 8조 `the 8색조` 팀입니다 !
 <br>
 <br>
+<br>
 
-## 🐼 한수빈
+## 🐼 한수빈 (팀장)
 
-- 피드 포스트 목록
+**🖥️ 화면 구현**
+- 피드 포스트 목록 프로필 페이지 팔로잉 
+- 팔로워 목록 메인 레이아웃
+- 콘텐츠 레이아웃 헤더 navbar 
+
+**🛠️ 기능 개발**
+- 피드 페이지 
+  - 팔로우 중인 유저들의 게시글 불러오기
+  - 팔로우 중인 유저가 없을 경우 검색하기 버튼 노출
+  - 무한 스크롤 구현
+- 포스트 등록/수정/삭제/신고 기능 
+- API 활용
+  - 더보기 버튼 클릭시 작성자와 사용자의 일치 여부에 따라 삭제/수정 모달과 신고 모달이 각각 뜸
+  - 포스트 등록시 한 번에 이미지 최대 3개 업로드 가능 
+- 포스트 상세 페이지 
+- pre 태그를 활용하여 게시글 작성시에 개행이 그대로 출력되도록 함 
+
+- 상품 상세 페이지 
+  - 포스트 좋아요 / 댓글 작성 기능 API활용
+  - 댓글 작성시 댓글 리스트 재렌더링으로 새로고침없이 작성한 댓글이 바로 렌더링 
+
 - 프로필 페이지
-- 팔로워 / 팔로잉 목록
-- 유저 정보, 등록 상품, 작성글 (앨범&리스트)
-- 포스트 삭제 / 신고
-- 좋아요 기능
-- 포스트 등록 / 수정
-- 프로젝트 주도
+  - 유저 프로필, 해당 유저가 등록한 포스트 / 상품 등을 보여주는 페이지
+  - 포스트 목록을 앨범형/리스트형으로 볼 수 있는 토글 버튼
+  - 포스트 목록에 무한 스크롤 구현
+  - 팔로우한 유저/ 팔로잉중인 유저 리스트 무한 스크롤 구현
+  - 사용자의 프로필은 프로필수정/상품등록 버튼, 다른 유저의 프로필은 팔로우,채팅,공유 버튼(채팅, 공유 미구현
+- 접근성
+  - 이미지 alt(대체텍스트) 추가
+  - 접근성 텍스트 h1~h3태그 추가
+- 라우터 
+  - context의 usertoken 유무에 따라 페이지 라우팅되도록 구현
+
+- 기타 프로젝트 주도
+  - 프로젝트 메인 주제를 정하고 핵심 기능 제안
+  - 정기/비정기 회의 주도
+  - 역할 분담 주도
+- 발표
+<br>
 
 ## 🐢 김은총
 
+**🖥️ 화면 구현**
 - 채팅 리스트 페이지
 - 채팅방 페이지
-- 로딩중 컴포넌트, 404 페이지
+  - 채팅방 나가기 모달 연결
+- 로딩중 컴포넌트
+- 404 페이지
 - splash 스크린
 - 공통 Button 컴포넌트
+  - 재사용성을 고려하여 모든 페이지에서 사용 가능하도록 제작
+  
+**🛠️ 기능 개발**
 - 유저 검색 기능
-- 닉네임 검색어 하이라이트 기능
+  - 검색어를 타이핑 하면 별도의 버튼 클릭 없이 바로 input value와 같은 검색어 리스트 출력
+  - 안정성을 위해 검색어 api 요청 텀을 200ms로 제한
+  - 검색 리스트 유저 프로필에 응원 중인 팀 로고 배치
+- 검색어 하이라이트 기능
+  - 검색어와 겹치는 닉네임 단어에 컬러 하이라이트
+- splash 스크린
+  - 3초간 애니메이션이 작동한 후 Login Modal 페이지로 이동
 - 전체 디자인 담당
+  - 시그니처 컬러, 스플래쉬 스크린, 메인로고, 파비콘, Error404 이미지, etc
+  
+**기타**
 - README 작성
+  - 서비스 소개 등 이미지 제작
+  - 전체 구조 기획 / 작성
+<br>
 
-### 김하연
+## 김하연
 
-- 수정
-- 수정
+**🖥️ 화면 구현**
+- form, select, comment, modal(더보기, 세팅 모달 및 오버레이), container 컴포넌트
+- 로그인, 회원가입, 게시글 , 댓글 페이지
 
-### 🐈 최예지
+**🛠️ 기능 개발**
+- 기본 테마와 응원 중인 팀이 있는 사용자를 위한 10가지 테마 전환 로직
+  - 컬러와 팀 변동에 상관없이 동작하도록, CSS 변수로 관리
+  - 이미지 : 하나의 SVG 코드로 모든 테마 지원
+- 회원가입 / 로그인 / 로그아웃
+  - 유효성 검사
+    - HTML, JavaScript로 가능한 검증은 입력값이 변할 때마다 시행
+    - API로만 가능한 검증(이메일 중복 등)은 포커스가 떠났을 때 시행 및 피드백
+    - 유효성에 따른 실시간 버튼 활성화/비활성화 기능
+    - 양식이 올바르지 않을 시, 실시간 텍스트 피드백 (회원가입)
+  - 편의성을 위해, 비밀번호 보기/숨기기 기능 제공
+  - 회원가입 성공 시 자동 로그인 기능
+- 검색, 댓글 페이지 무한 스크롤
+  - 로딩 시간을 줄이기 위해, 한번에 렌더링하는 리스트 개수를 제한하고, 스크롤이 바닥에 닿으면, 추가 렌더링
+- 캐러셀
+  - Swiper 라이브러리를 활용한 페이지네이션 캐러셀 구현
+- 기타
+  - 댓글 삭제 / 신고, context API 구조 세팅
 
-- 수정
-- 수정
+**사용성 및 접근성**
+- 모달창
+  - Tab을 누를 시, 포커스가 모달창을 벗어나지 않도록 구현
+- 커스텀 셀렉트 박스
+  - 키보드 사용 시 포커스가 셀렉트 박스 내에서 이동하도록 구현
+  - 위아래 방향키, Tab, shift + Tab, 스페이스, 엔터를 이용한 포커스 이동, 열기/닫기, 선택 기능 제공
+- 폼(form)
+  - textarea 실시간 글자수/최대 글자수 피드백 및 리사이징
+
+**기타**
+- 지식 공유
+  - API 사용법, 상태 끌어올리기, setTimeout/clearTimeout 활용법 등 프로젝트를 진행하며 필요할 때마다 팀 내, 팀 외 지식 공유
+<br>
+
+## 🐈 최예지
+
+**🖥️ 화면 구현**
+- 모든 페이지에서 재사용되는 공통 컴포넌트 제작
+  - 하단 탭 메뉴바
+- 상품 등록(수정) 페이지
+- 검색 결과 페이지
+
+**🛠️ 기능 개발**
+- 하단 탭 메뉴 바
+  - 하단 탭 메뉴 클릭 시 해당 페이지로 이동
+  - 선택된 메뉴 아이콘만 색칠(활성화) 되도록 구현
+
+- 회원 정보 수정 기능
+  - 기존 마이 프로필 이미지와 정보 불러오기
+  - 프로필 이미지 삭제(초기화) 기능
+  - 수정 페이지에서 이미지 미수정 시 기존 마이 프로필 이미지 유지
+
+- 상품 등록 기능
+  - 업로드한 상품 이미지 미리보기 및 삭제
+  - 각 입력값에 대한 유효성 관리 =>
+    - 이미지 등록 실패 경고창 
+    - 상품 가격의 천 단위 콤마 생성 및 숫자만 입력 받도록 제한 
+      - API 연결 => 콤마를 삭제한 숫자 형태로 변경해서 전송되도록 함
+    - 상품 가격의 최대 금액(자릿수) 지정
+    - 상품명의 유효 글자수 지정 (2~25글자)
+    - 악의적인 입력을 방지하기 위해 상품명에 공백 연속 사용 제한
+- 유효한 값이 모두 입력 되었을 때만 저장 버튼 활성화
+- 상품 소개란 줄바꿈 처리로 가독성 개선
+- API 연결을 통해 등록된 상품 정보 전송
+
+**기타**
+  - notion 문서 작성 -> 회의록 정리
+<br>
+
+## 👍 공통
+
+- README 작성
+- 이미지
+  - 레티나 디스플레이에 대응하기 위해, 원본 이미지의 2배 사이즈 이미지 사용
+- 커밋 메시지 컨벤션, 코드 컨벤션, 네이밍 컨벤션, 폴더 구조 컨벤션 설립
+<br>
+<br>
 
 ## 3. 프로젝트 기간
 
 2023년 6월 2일 ~ 2023년 6월 27일 (발표 전날에 이미지 교체 예정)
 ![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f3dc04e9-fdf1-4fe6-9748-c146daa3b23d)
+<br>
 <br>
 
 ## 4. 개발 환경
@@ -77,18 +203,18 @@
     <th colspan="2"> 프론트엔드 </th>
     <th> 백엔드 </th>
     <th> 배포 </th>
-    <th colspan="3"> 디자인 </th>
+    <th colspan="2"> 디자인 </th>
   </tr>
   <tr align = "center">
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/504d9b13-1494-4648-821f-187df12410c9" height="50px"><br>React</td>
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/85dee32a-eca6-403d-8b0e-521ff2270249" height="50px"><br>styled-components</td>
     <td> 제공된 API </td>
     <td> <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/0dc932cd-c71f-4c61-8804-4892d2065fd0" height="50px"><br>netlify </td>
-    <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/b8470865-2d1a-4e3d-b799-8415dab1a787" height="50px"><br>Adobe Photoshop</td>
     <td> <img src="https://github.com/echo-6/final-8-Off-field-baseball/assets/58187854/2125a01e-7cc3-4106-abdc-014044ed87e9" height="50px"><br>Figma</td>
     <td> <img src="https://i.namu.wiki/i/NGpXZfh1nhfo8DCNUydodk5az5YbbCMKs-7ugVuSF-p1gxjnycbN4okab4kVeDiJetcbQ_vipVynVqA7hItbgv__a_Q4cipAtbboSRwCQOuPF1vztDKZkMNCVXDBPLebJOAQIk-COQGK2nHtCyNQqw.svg" height="50px"><br>Adobe Illustrator</td>
   </tr>
 </table>
+<br>
 
 ### 4-1. 기타 환경
 
@@ -97,11 +223,14 @@
 - 협업 툴 : <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/> <img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white"/>
 - 포매터 : <img src="https://img.shields.io/badge/prettier-F7B93E?style=flat&logo=prettier&logoColor=white"/>
 <br>
+<br>
 
 ## 5. 프로젝트 구조
 
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/8a841dbb-63f4-471b-9924-d17f5c3ba2f2" width="800px"/>
 <br>
+<br>
+
 <p align="right"><a href="#top">TOP 🔼</a></p>
 
 ## 6. Git Branch 전략
@@ -136,6 +265,7 @@
 ### 🌳 프로젝트 진행
 - 정기 회의 및 코드 리뷰
   - 월/목 AM 9시 정기회의와 주 3회 코드리뷰를 가지면서 작업 진행 상황 공유
+  - 회의록 : [Notion](https://www.notion.so/75e771e2f0074516986d9e8a93106bbc?pvs=4)
 <br>
 
 - Discord GitHub 봇을 사용하여 실시간 PR 상황 공유 ⬇️
@@ -146,6 +276,8 @@
 - Notion Project 템플릿을 사용하여 할 일 & 일정 관리
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
 <br>
+<br>
+
 
 ## 8. 컨벤션
 
@@ -180,29 +312,157 @@
 - Remove: 파일 삭제
 ```
 <br>
-
-## 9. 서비스 미리보기 (필요 없는 것 추리기)
-(표 만들기)
-1. 홈 - 스플래쉬, 회원가입, 프로필설정
-2. 피드 - 홈피드, 검색
-3. 채팅 - 채팅 리스트, 채팅방-채팅 나가기
-4. 게시글 - 게시글 상세페이지(좋아요, 댓글), 게시물 작성, 게시물 삭제, 신고하기
-5. 프로필 - 마이프로필 페이지, 유어프로필 페이지, 리스트형/앨범형 변환, ⭐️프로필 수정⭐️, 팔로워/팔로잉
-6. 판매 상품 - 상품 등록, 상품 수정, 상품 삭제
 <br>
 
-## 10. 로컬 환경에서의 프로젝트 구동
-- 레포지토리 클론
-```
-git clone https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball.git
-```
-- 필요한 모듈 설치
-```
-npm install
-```
-- 로컬 환경에서 리액트 앱 실행
-```
-npm start
-```
+## 9. 서비스 미리보기
+<table width="100%">
+  
+<tr>
+    <th colspan="3">홈</th>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+    스플래시
+    </td>
+    <td valign="top" width="30%">
+    회원가입
+    </td>
+    <td valign="top" width="30%">
+    프로필설정
+    </td>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a1da77f8-ec66-4ad6-8be0-f5b0c9a230fc" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/ae7a207a-d90b-4b8a-92bc-045ae0ae8493" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/c648699a-dd87-49dd-9176-daeafc819e63" width="300px">
+    </td>
+</tr>
+
+<tr>
+    <th colspan="3">피드 / 채팅</th>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+    홈피드, 검색기능
+    </td>
+    <td valign="top" width="30%">
+    신고하기
+    </td>
+    <td valign="top" width="30%">
+    채팅
+    </td>
+ </tr>
+<tr align="center">
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/5654a29b-5474-432f-9031-929499ed078c" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/9c0571de-c091-4ef6-9c97-15028e577ae9" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f5d3f312-8015-452a-9761-4c1880400d5b" width="300px">
+    </td>
+ </tr>
+
+ <tr>
+    <th colspan="3">게시글</th>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+    게시글 상세페이지(좋아요, 댓글)
+    </td>
+    <td valign="top" width="30%">
+    게시물 작성
+    </td>
+    <td valign="top" width="30%">
+    게시물 삭제
+    </td>
+ </tr>
+<tr align="center">
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/df449c04-02c6-4440-b262-2e799997d9d5" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/452f127a-27c8-4728-b38a-d92b0fd4fdc2" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/95bf953e-3d73-44ea-a0ae-199185c05d40" width="300px">
+    </td>
+ </tr>
+
+<tr>
+    <th colspan="3">프로필</th>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+    마이프로필
+    </td>
+    <td valign="top" width="30%">
+    유어프로필
+    </td>
+    <td valign="top" width="30%">
+    리스트형/앨범형
+    </td>
+ </tr>
+<tr align="center">
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/431d1f38-1410-4684-a3d8-52b32de436ab" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/1002a3d5-0880-475c-972c-b42c412ce661" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/354cd9cc-85d5-4d03-bd99-deac96136ef1" width="300px">
+    </td>
+ </tr>
+ <tr align="center">
+    <td colspan="2" valign="top" width="50%">
+    프로필 수정
+    </td>
+    <td valign="top" width="30%">
+    팔로워 / 팔로잉
+    </td>
+ </tr>
+<tr align="center">
+    <td colspan="2" valign="top" width="60%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/91395e8f-ea09-420f-92bb-66748ca5ee58" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2e234c92-4483-4711-9242-f1d63f799185" width="300px">
+    </td> 
+</tr>
+
+<tr>
+    <th colspan="3">판매 상품</th>
+</tr>
+<tr align="center">
+    <td valign="top" width="30%">
+    상품 등록
+    </td>
+    <td valign="top" width="30%">
+    상품 수정
+    </td>
+    <td valign="top" width="30%">
+    상품 삭제
+    </td>
+ </tr>
+<tr align="center">
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/b9e44515-ab97-47c8-980e-1bda02c82287" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/30360a52-a1d9-4e83-bdf8-89f612b204a4" width="300px">
+    </td>
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a94378c8-98a1-4108-ad0d-4f87130c8bcd" width="300px">
+    </td>
+ </tr>
+<br>
+
 
 <p align="right"><a href="#top">TOP 🔼</a></p>
