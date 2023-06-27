@@ -197,7 +197,7 @@ const StyledSelect = styled.div`
     border-radius: 8px;
     padding: 6px;
     overflow: hidden;
-    max-height: 200px;
+    max-height: 136px;
     overflow-y: scroll;
     background: white;
   }
