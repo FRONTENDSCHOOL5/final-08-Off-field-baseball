@@ -81,7 +81,6 @@ const Search = () => {
 
     return () => {
       clearTimeout(timeout);
-      setSearchUsers([]);
     };
   }, [keyword]);
 
