@@ -265,6 +265,7 @@
 ### 🌳 프로젝트 진행
 - 정기 회의 및 코드 리뷰
   - 월/목 AM 9시 정기회의와 주 3회 코드리뷰를 가지면서 작업 진행 상황 공유
+  - 회의록 : [Notion](https://www.notion.so/75e771e2f0074516986d9e8a93106bbc?pvs=4)
 <br>
 
 - Discord GitHub 봇을 사용하여 실시간 PR 상황 공유 ⬇️
@@ -276,6 +277,7 @@
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
 <br>
 <br>
+
 
 ## 8. 컨벤션
 
