@@ -69,8 +69,6 @@ const Search = () => {
   }, [cntUserList]);
 
   useEffect(() => {
-    // console.log(keyword);
-    // onTyping();
     let timeout;
     if (keyword.length > 0) {
       timeout = setTimeout(() => {
@@ -80,7 +78,11 @@ const Search = () => {
       setUserList([]);
       setSearchUsers([]);
     }
-    return () => clearTimeout(timeout);
+
+    return () => {
+      clearTimeout(timeout);
+      setSearchUsers([]);
+    };
   }, [keyword]);
 
   return (
