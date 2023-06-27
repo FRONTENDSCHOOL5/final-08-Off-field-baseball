@@ -7,7 +7,8 @@
 
 - ID : `baseball@test.com`
 - PW : `test123!`
-  <br>
+<br>
+<br>
 
 ## 1. 서비스 소개
 
@@ -18,7 +19,8 @@
 - 사용하던 팀 응원 소품이나 야구 관련 물품을 중고 거래를 통해 판매하고, 구입할 수 있습니다.
 - 야구와 관련된 이슈들을 실시간으로 올리며 SNS 활동을 할 수 있습니다.
 - 같은 팀을 응원하는 유저를 팔로우 하여 피드를 꾸릴 수 있고, 댓글과 좋아요 기능으로 소통할 수 있습니다.
-  <br>
+<br>
+<br>
 
 ## 2. 팀 소개 & 역할 분담
 
@@ -28,6 +30,7 @@
 |                                                  [🔗GitHub](https://github.com/astinaus)                                                  |                                                            [🔗GitHub](https://github.com/echo-6)                                                             |                                             [🔗GitHub](https://github.com/KimHayeon1)                                             |                                                     [🔗GitHub](https://github.com/moojinkl)                                                     |
 
 🦜 저희는 멋쟁이사자처럼 프론트엔드스쿨 5기 프로젝트 8조 `the 8색조` 팀입니다 !
+<br>
 <br>
 <br>
 
@@ -172,10 +175,20 @@
   - notion 문서 작성 -> 회의록 정리
 <br>
 
+## 👍 공통
+
+- README 작성
+- 이미지
+  - 레티나 디스플레이에 대응하기 위해, 원본 이미지의 2배 사이즈 이미지 사용
+- 커밋 메시지 컨벤션, 코드 컨벤션, 네이밍 컨벤션, 폴더 구조 컨벤션 설립
+<br>
+<br>
+
 ## 3. 프로젝트 기간
 
 2023년 6월 2일 ~ 2023년 6월 27일 (발표 전날에 이미지 교체 예정)
 ![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f3dc04e9-fdf1-4fe6-9748-c146daa3b23d)
+<br>
 <br>
 
 ## 4. 개발 환경
@@ -196,6 +209,7 @@
     <td> <img src="https://i.namu.wiki/i/NGpXZfh1nhfo8DCNUydodk5az5YbbCMKs-7ugVuSF-p1gxjnycbN4okab4kVeDiJetcbQ_vipVynVqA7hItbgv__a_Q4cipAtbboSRwCQOuPF1vztDKZkMNCVXDBPLebJOAQIk-COQGK2nHtCyNQqw.svg" height="50px"><br>Adobe Illustrator</td>
   </tr>
 </table>
+<br>
 
 ### 4-1. 기타 환경
 
@@ -204,11 +218,14 @@
 - 협업 툴 : <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/> <img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white"/>
 - 포매터 : <img src="https://img.shields.io/badge/prettier-F7B93E?style=flat&logo=prettier&logoColor=white"/>
 <br>
+<br>
 
 ## 5. 프로젝트 구조
 
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/8a841dbb-63f4-471b-9924-d17f5c3ba2f2" width="800px"/>
 <br>
+<br>
+
 <p align="right"><a href="#top">TOP 🔼</a></p>
 
 ## 6. Git Branch 전략
@@ -253,6 +270,7 @@
 - Notion Project 템플릿을 사용하여 할 일 & 일정 관리
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
 <br>
+<br>
 
 ## 8. 컨벤션
 
@@ -286,6 +304,7 @@
 - Rename: 파일명 혹은 폴더명 수정, 위치 옮기기
 - Remove: 파일 삭제
 ```
+<br>
 <br>
 
 ## 9. 서비스 미리보기
