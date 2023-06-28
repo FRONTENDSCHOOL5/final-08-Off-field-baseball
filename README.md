@@ -324,7 +324,6 @@
 
 ## 9. 서비스 미리보기
 <table width="100%">
-  
 <tr>
     <th colspan="3">홈</th>
 </tr>
@@ -470,7 +469,64 @@
       <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a94378c8-98a1-4108-ad0d-4f87130c8bcd" width="300px">
     </td>
  </tr>
+</table>
 <br>
+
+
+## 10. 핵심 코드 설명
+
+API 명세에서 자기소개 정보를 담당하는 intro 키의 값으로 자기소개와 응원하는 팀 정보를 $로 구분하여 서버에 전달
+<br>
+![image](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/190bd427-bdb4-4886-9190-9a48f60fde47)
+
+```json
+{
+  "user": {
+    "username": "test",
+    "email": "test@test.test",
+    "password": "test123!",
+    "accountname": "testman123",
+    "intro": "자기소개입니다.$hanhwa",
+    "image": "",
+  }
+} 
+```
+<hr>
+구단별 시그니처 컬러 및 서브컬러를 global.css 에 변수로 저장
+<br>
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/fac271f0-9c19-4da5-9173-322cfe82356f" width="300px">
+
+<hr>
+
+```jsx
+// 로그인한 유저의 팀 정보 불러오기
+// const res = await fetch ...
+const json = await res.json();
+const team = json.profile.intro.split('$')[1];
+// 팀 정보 로컬스토리지에 저장 / context에 저장됨
+localStorage.setItem('myTeam', team);
+
+// context에 저장된 myTeam 사용하기
+const { myTeam } = useContext(UserContext);
+
+// 팀 컬러 적용
+background: ${(props) =>
+        'var(--primary-color-' + (props.myTeam || 'default') + ')'};
+
+// 아이콘 적용 
+<svg>
+        <path //생략
+          fill={
+            hearted
+              ? myTeam === 'kt'
+                ? 'var(--tertiary-color-kt)'
+                : 'var(--primary-color-' + (myTeam || 'default') + ')'
+              : ''
+          }/>
+</svg>
+```
+
+
 
 
 <p align="right"><a href="#top">TOP 🔼</a></p>
