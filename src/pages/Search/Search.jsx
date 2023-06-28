@@ -4,7 +4,6 @@ import UserList from '../../components/common/UserList';
 import TabNav from '../../components/common/TabNav';
 import styled from 'styled-components';
 import { UserContext } from '../../context/UserContext';
-import { debounce } from 'lodash';
 
 const Search = () => {
   const [searchUsers, setSearchUsers] = useState([]);
@@ -12,7 +11,7 @@ const Search = () => {
   const [userList, setUserList] = useState([]);
   const [keyword, setKeyword] = useState(''); // 검색 키워드
 
-  const { token } = useContext(UserContext);
+  const { token, accountname } = useContext(UserContext);
 
   useEffect(() => {
     const titleElement = document.getElementsByTagName('title')[0];
@@ -66,6 +65,7 @@ const Search = () => {
     window.addEventListener('scroll', addUser);
 
     return () => window.removeEventListener('scroll', addUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cntUserList]);
 
   useEffect(() => {
@@ -82,6 +82,7 @@ const Search = () => {
     return () => {
       clearTimeout(timeout);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
 
   return (
@@ -89,7 +90,11 @@ const Search = () => {
       <TopSearchNav keyword={keyword} onChange={setKeyword} />
       <SearchList>
         {searchUsers.map((user) => {
-          return <UserList key={user._id} user={user} keyword={keyword} />;
+          return (
+            accountname !== user.accountname && (
+              <UserList key={user._id} user={user} keyword={keyword} />
+            )
+          );
         })}
       </SearchList>
       <TabNav />
