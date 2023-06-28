@@ -6,7 +6,7 @@ import FollowBtn from '../../../components/common/FollowBtn';
 const UserBtns = ({ targetuser, profileData, isfollow }) => {
   return (
     <BtnsWrapper>
-      <BtnSmall>
+      <BtnSmall onClick={() => alert('미구현 기능입니다.')}>
         <img src={MESSAGE_CIRCLE_SM} alt='채팅 시작하기 버튼' />
       </BtnSmall>
       <FollowBtn
@@ -15,7 +15,7 @@ const UserBtns = ({ targetuser, profileData, isfollow }) => {
         mBtn
         isfollow={isfollow}
       />
-      <BtnSmall>
+      <BtnSmall onClick={() => alert('미구현 기능입니다.')}>
         <img src={SHARE} alt='공유하기 버튼' />
       </BtnSmall>
     </BtnsWrapper>

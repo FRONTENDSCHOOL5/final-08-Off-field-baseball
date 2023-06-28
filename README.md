@@ -1,12 +1,12 @@
 # <span id='top'>⚾️ 구장 밖 야구</span>
 
-![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/16010141-c8b0-43b4-a3a8-e6df819514bb)
+![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/53a09af4-9a1b-49bc-8c34-c8df2fd3e238)
 <br>
 <br>
-[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app)
-
+[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app) 
 - ID : `baseball@test.com`
 - PW : `test123!`
+- 모바일로 확인하기 : <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a13cb450-1f8d-42fa-acae-94dc39319d6c" width="70px">
 <br>
 <br>
 
@@ -191,8 +191,16 @@
 
 ## 3. 프로젝트 기간
 
-2023년 6월 2일 ~ 2023년 6월 27일 (발표 전날에 이미지 교체 예정)
-![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f3dc04e9-fdf1-4fe6-9748-c146daa3b23d)
+2023년 6월 2일 ~ 2023년 6월 27일
+![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/c9376685-de57-4fd7-a78e-5e5436b6918a)
+<br>
+- 기획 회의 (서비스 컨셉, 컨벤션 수립, 역할 분배, 일정 구상) : 6월 2일 ~ 6월 3일
+- 로고, UI 디자인 : 6월 2일 ~ 6월 5일
+- 공통 UI 컴포넌트 개발 : 6월 3일 ~ 6월 8일
+- 페이지 구현 : 6월 8일 ~ 6월 14일
+- 기능 개발 : 6월 15일 ~ 6월 24일
+- 버그 수정 : 6월 25일 ~ 6월 27일
+- 배포 : 6월 26일 ~ 6월 27일
 <br>
 <br>
 
