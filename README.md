@@ -1,6 +1,6 @@
 # <span id='top'>⚾️ 구장 밖 야구</span>
 
-![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/16010141-c8b0-43b4-a3a8-e6df819514bb)
+![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/64171a6d-f3c9-4168-befb-ef93781496b5)
 <br>
 <br>
 [🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app)
