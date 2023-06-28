@@ -191,8 +191,8 @@
 
 ## 3. 프로젝트 기간
 
-2023년 6월 2일 ~ 2023년 6월 27일 (발표 전날에 이미지 교체 예정)
-![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/f3dc04e9-fdf1-4fe6-9748-c146daa3b23d)
+2023년 6월 2일 ~ 2023년 6월 27일
+![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/c9376685-de57-4fd7-a78e-5e5436b6918a)
 <br>
 <br>
 
