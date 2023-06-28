@@ -1,12 +1,12 @@
 # <span id='top'>⚾️ 구장 밖 야구</span>
 
-![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/16010141-c8b0-43b4-a3a8-e6df819514bb)
+![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/53a09af4-9a1b-49bc-8c34-c8df2fd3e238)
 <br>
 <br>
-[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app)
-
+[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app) 
 - ID : `baseball@test.com`
 - PW : `test123!`
+- 모바일로 확인하기 : <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a13cb450-1f8d-42fa-acae-94dc39319d6c" width="70px">
 <br>
 <br>
 
