@@ -70,17 +70,19 @@ const Profile = () => {
         {isLoading ? (
           <Loading />
         ) : (
-          <>
-            <h1 className='a11y-hidden'>{username || accountname} 프로필</h1>
-            <ProfileHeader
-              profileData={userProfile}
-              team={team}
-              intro={intro}
-              targetuser={username}
-            />
-            <UserProduct accountname={username ? username : accountname} />
-            <UserPost key={location.key} />
-          </>
+          userProfile && (
+            <>
+              <h1 className='a11y-hidden'>{username || accountname} 프로필</h1>
+              <ProfileHeader
+                profileData={userProfile}
+                team={team}
+                intro={intro}
+                targetuser={username}
+              />
+              <UserProduct accountname={username ? username : accountname} />
+              <UserPost key={location.key} />
+            </>
+          )
         )}
       </ContentsLayout>
       <TabNav currentId={3} />
