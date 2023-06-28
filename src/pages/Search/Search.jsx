@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import TopSearchNav from '../../components/common/TopNavBar/TopSearchNav';
 import UserList from '../../components/common/UserList';
 import TabNav from '../../components/common/TabNav';
@@ -35,12 +35,17 @@ const Search = () => {
   const onTyping = () => {
     async function handleFetchData() {
       const users = await fetchData();
-      // console.log(users);
-      // console.log(searchKeyword);
-      setSearchUsers(users.slice(0, 20));
-      setCntUserList(cntUserList + 20);
+      // 현재 inp 값으로 바뀌기 이전의 함수라면 얼리리턴
+      if (keyword !== searchInp.current.value) {
+        return;
+      }
+      if (cntUserList === 20) {
+        setSearchUsers(users.slice(0, cntUserList));
+        setCntUserList(cntUserList + 20);
+      } else {
+        setSearchUsers(users.slice(0, cntUserList - 20));
+      }
       setUserList(users);
-      console.log(users);
     }
     handleFetchData();
   };
@@ -66,7 +71,7 @@ const Search = () => {
     window.addEventListener('scroll', addUser);
 
     return () => window.removeEventListener('scroll', addUser);
-  }, [cntUserList]);
+  }, [cntUserList, userList]);
 
   useEffect(() => {
     let timeout;
@@ -81,13 +86,16 @@ const Search = () => {
 
     return () => {
       clearTimeout(timeout);
-      setSearchUsers([]);
     };
   }, [keyword]);
-
+  const searchInp = useRef(null);
   return (
     <>
-      <TopSearchNav keyword={keyword} onChange={setKeyword} />
+      <TopSearchNav
+        keyword={keyword}
+        onChange={setKeyword}
+        searchInp={searchInp}
+      />
       <SearchList>
         {searchUsers.map((user) => {
           return <UserList key={user._id} user={user} keyword={keyword} />;

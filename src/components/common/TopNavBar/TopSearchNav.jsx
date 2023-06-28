@@ -4,7 +4,7 @@ import { TopNavBar, LeftArrow } from './Styled';
 import { ARROW_LEFT } from '../../../styles/CommonIcons';
 import { useNavigate } from 'react-router-dom';
 
-const TopSearchNav = ({ keyword, onChange, onTyping }) => {
+const TopSearchNav = ({ keyword, onChange, onTyping, searchInp }) => {
   const navigate = useNavigate();
 
   return (
@@ -14,6 +14,7 @@ const TopSearchNav = ({ keyword, onChange, onTyping }) => {
           <LeftArrow src={ARROW_LEFT} alt='뒤로 가기 버튼' />
         </button>
         <TopSearchInput
+          ref={searchInp}
           placeholder='계정 검색'
           value={keyword}
           onChange={(e) => {
