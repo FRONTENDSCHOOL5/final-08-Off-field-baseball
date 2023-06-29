@@ -142,7 +142,8 @@
 
 **기타**
 - 지식 공유
-  - API 사용법, 상태 끌어올리기, setTimeout/clearTimeout 활용법 등 프로젝트를 진행하며 필요할 때마다 팀 내, 팀 외 지식 공유
+  - API 사용법, 상태 끌어올리기, setTimeout/clearTimeout 활용법 등<br>
+    프로젝트를 진행하며 필요할 때마다 팀 내, 팀 외 지식 공유
 <br>
 
 ## 🐈 최예지
@@ -482,7 +483,7 @@
 <br>
 
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/190bd427-bdb4-4886-9190-9a48f60fde47" width="
-350px">
+340px">
 
 ```json
 {
