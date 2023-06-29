@@ -500,7 +500,7 @@
 <hr>
   
 ```
-✔️ 구단별 시그니처 컬러 및 서브컬러를 global.css 에 변수로 저장
+✔️ 구단별 시그니처 컬러 및 서브컬러를 global.css에 변수로 저장
 ```
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/baa5593e-de96-468c-b30a-7b2998e014f6" width="350px">
 <br>
