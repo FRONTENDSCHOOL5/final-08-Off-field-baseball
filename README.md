@@ -475,9 +475,14 @@
 
 ## 10. 핵심 코드 설명
 
-API 명세에서 자기소개 정보를 담당하는 intro 키의 값으로 자기소개와 응원하는 팀 정보를 $로 구분하여 서버에 전달
+### 👨‍👧‍👦 마이 팀 테마 변경 코드
+```
+✔️ API 명세에서 자기소개 정보를 담당하는 intro 키의 값으로 자기소개와 응원하는 팀 정보를 $로 구분하여 서버에 전달
+```
 <br>
-![image](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/190bd427-bdb4-4886-9190-9a48f60fde47)
+
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/190bd427-bdb4-4886-9190-9a48f60fde47" width="
+350px">
 
 ```json
 {
@@ -491,12 +496,14 @@ API 명세에서 자기소개 정보를 담당하는 intro 키의 값으로 자�
   }
 } 
 ```
-<hr>
-구단별 시그니처 컬러 및 서브컬러를 global.css 에 변수로 저장
 <br>
-<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/fac271f0-9c19-4da5-9173-322cfe82356f" width="300px">
-
 <hr>
+  
+```
+✔️ 구단별 시그니처 컬러 및 서브컬러를 global.css 에 변수로 저장
+```
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/baa5593e-de96-468c-b30a-7b2998e014f6" width="350px">
+<br>
 
 ```jsx
 // 로그인한 유저의 팀 정보 불러오기
@@ -525,14 +532,15 @@ background: ${(props) =>
           }/>
 </svg>
 ```
-
-
+<br>
+<br>
 
 ## 11. 회고 및 소감
-<hr>
+
 - 팀별로 게시판을 만들면 좋겠다는 의견이 있었는데 구현하지 못해서 아쉽습니다. 
 - 이미지 최적화, 코드 리팩토링 등 개선될 부분들이 많은데 제대로 진행하지 못해서 아쉽습니다.
-- 수료하고나서도 프로젝트를 계속 유지하여 최적화, 기능 추가 등 꾸준히 지속할 것입니다.
+- 수료 후에도 프로젝트를 계속 유지하여 최적화, 기능 추가 등 꾸준히 지속할 것입니다.
+<br>
 <br>
 
 <p align="right"><a href="#top">TOP 🔼</a></p>
