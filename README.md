@@ -429,19 +429,25 @@
     </td>
  </tr>
  <tr align="center">
-    <td colspan="2" valign="top" width="50%">
+    <td valign="top" width="30%">
     프로필 수정
     </td>
     <td valign="top" width="30%">
     팔로워 / 팔로잉
     </td>
+   <td valign="top" width="30%">
+    에러페이지
+    </td>
  </tr>
 <tr align="center">
-    <td colspan="2" valign="top" width="60%">
+    <td valign="top" width="30%">
       <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/91395e8f-ea09-420f-92bb-66748ca5ee58" width="300px">
     </td>
     <td valign="top" width="30%">
       <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2e234c92-4483-4711-9242-f1d63f799185" width="300px">
+    </td> 
+    <td valign="top" width="30%">
+      <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/98a1d581-4046-4d27-bab0-74ac7bcbb631" width="300px">
     </td> 
 </tr>
 
