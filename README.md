@@ -252,6 +252,11 @@
   최소 기능을 빠르게 구현하는데 집중하기 위하여 GitHub Flow를 채택하였습니다.
 <br>
 
+- 브랜치 실제 관리 모습 🔽
+<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/e0ec629d-44c4-4d03-b973-422bf8d2211c" width="500px">
+<br>
+<br>
+
 ## 7. 협업 방식 & 프로젝트 관리
 ### 📍 순조로운 프로젝트를 위한 원칙
 **💛 나누면서 성장하기**
