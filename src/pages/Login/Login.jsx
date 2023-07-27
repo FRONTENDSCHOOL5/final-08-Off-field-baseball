@@ -108,53 +108,56 @@ const Login = ({ team }) => {
   };
 
   return (
-    <StyledLogin>
-      <h1>로그인</h1>
-      <Form team={team} handleForm={handleForm}>
-        <label htmlFor='email-inp'>이메일</label>
-        <input
-          id='email-inp'
-          type='text'
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          required
-          maxLength='98'
-        />
-        <label htmlFor='password-inp'>비밀번호</label>
-        <input
-          autoComplete='off'
-          id='password-inp'
-          type={showPassword ? 'text' : 'password'}
-          maxLength='20' // 임시
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          required
-        />
-        <ShowPasswordBtn
-          className='show-btn'
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-        ></ShowPasswordBtn>
-        {warningMessage && <strong>{warningMessage}</strong>}
-        <StyledButton
-          type='submit'
-          bgColor={
-            isValid
-              ? 'var(--primary-color-default)'
-              : 'var(--secondary-color-default)'
-          }
-          lBtn
-          disabled={isValid ? '' : 'disabled'}
-        >
-          로그인
-        </StyledButton>
-        <Link to='/join'>이메일로 회원가입</Link>
-      </Form>
-    </StyledLogin>
+    <>
+      <h1 className='a11y-hidden'>구장 밖 야구</h1>
+      <StyledLogin>
+        <h2>로그인</h2>
+        <Form team={team} handleForm={handleForm}>
+          <label htmlFor='email-inp'>이메일</label>
+          <input
+            id='email-inp'
+            type='text'
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            required
+            maxLength='98'
+          />
+          <label htmlFor='password-inp'>비밀번호</label>
+          <input
+            autoComplete='off'
+            id='password-inp'
+            type={showPassword ? 'text' : 'password'}
+            maxLength='20' // 임시
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            required
+          />
+          <ShowPasswordBtn
+            className='show-btn'
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          ></ShowPasswordBtn>
+          {warningMessage && <strong>{warningMessage}</strong>}
+          <StyledButton
+            type='submit'
+            bgColor={
+              isValid
+                ? 'var(--primary-color-default)'
+                : 'var(--secondary-color-default)'
+            }
+            lBtn
+            disabled={isValid ? '' : 'disabled'}
+          >
+            로그인
+          </StyledButton>
+          <Link to='/join'>이메일로 회원가입</Link>
+        </Form>
+      </StyledLogin>
+    </>
   );
 };
 
@@ -166,7 +169,7 @@ const StyledButton = styled(Button)`
 
 const StyledLogin = styled.section`
   padding: 30px 34px;
-  h1 {
+  h2 {
     margin-bottom: 40px;
     font-weight: 500;
     font-size: 2.4rem;

@@ -157,15 +157,6 @@ const Select = ({
 
 export default Select;
 
-const findIndex = (target) => {
-  const siblingList = target.parentNode.children;
-  for (let i = 0; i < siblingList.length; i++) {
-    if (siblingList[i] === target) {
-      return i;
-    }
-  }
-};
-
 const StyledSelect = styled.div`
   position: relative;
   .select-btn {

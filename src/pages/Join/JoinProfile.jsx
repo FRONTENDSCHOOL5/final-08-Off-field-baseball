@@ -247,140 +247,143 @@ const JoinProfile = ({ email, password }) => {
     setTextCnt(e.target.value.length);
   };
   return (
-    <StyledJoinProfile>
-      <h1>프로필 설정</h1>
-      <p>나중에 언제든지 변경할 수 있습니다.</p>
-      <Form handleForm={handleForm}>
-        <button
-          type='button'
-          className='img-btn'
-          onClick={(e) => setIsModalOpen(true)}
-        >
-          <img src={src} alt='' />
-          <img className='uplode-img' src={UPLOAD_FILE} alt='' />
-        </button>
-        {isModalOpen && (
-          <UploadModal
-            isModalOpen={isModalOpen}
-            setIsModalOpen={setIsModalOpen}
+    <>
+      <h1 className='a11y-hidden'>구장 밖 야구</h1>
+      <StyledJoinProfile>
+        <h2>프로필 설정</h2>
+        <p>나중에 언제든지 변경할 수 있습니다.</p>
+        <Form handleForm={handleForm}>
+          <button
+            type='button'
+            className='img-btn'
+            onClick={(e) => setIsModalOpen(true)}
           >
-            <li>
-              <button
-                type='button'
-                onKeyDown={(e) => {
-                  // input에 focus 가지 않게
-                  if (!e.shiftKey && e.key === 'Tab') {
-                    e.preventDefault();
-                    e.target.parentNode.nextElementSibling.firstElementChild.focus();
-                  }
-                }}
-                // 클릭 시, file input click 이벤트 실행(이미지 업로드 창 열림)
-                onClick={(e) => {
-                  e.target.nextElementSibling.click();
-                }}
-              >
-                이미지 업로드
-              </button>
-              <input
-                type='file'
-                id='profile-img'
-                className='a11y-hidden'
-                onChange={(e) => {
-                  if (e.target.files && e.target.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = ({ target }) => {
-                      setSrc(target.result);
-                    };
-                    reader.readAsDataURL(e.target.files[0]);
-                    setImage(e.target.files[0]);
-                  }
-                  setIsModalOpen(false); // 모달창 닫기
-                }}
-              />
-            </li>
-            <li>
-              <button type='button' onClick={handleImgDelete}>
-                이미지 제거
-              </button>
-            </li>
-            <li>
-              <button type='button' onClick={(e) => setIsModalOpen(false)}>
-                취소
-              </button>
-            </li>
-          </UploadModal>
-        )}
-        <label htmlFor='username'>사용자 이름</label>
-        <input
-          id='username'
-          type='text'
-          placeholder='2~10자 이내여야 합니다.'
-          value={username}
-          onChange={(e) => {
-            setUsername(e.target.value);
-            handleUsernameInp(e);
-          }}
-          minLength={2}
-          maxLength={10}
-          className={messageUsername && 'invalid'}
-          required
-        />
-        {messageUsername && <strong>{messageUsername}</strong>}
-        <label htmlFor='accountname'>계정 ID</label>
-        <input
-          id='accountname'
-          type='text'
-          placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
-          pattern='[A-Za-z0-9\._]+'
-          maxLength={16}
-          value={accountname}
-          onBlur={handleAccountnameInpBlur}
-          onChange={(e) => {
-            handleAccountnameInp(e);
-            setAccountnameValue(e.target.value);
-          }}
-          className={messageAccountname && 'invalid'}
-          required
-        />
-        {messageAccountname && <strong>{messageAccountname}</strong>}
-        <label htmlFor='intro'>소개</label>
-        <textarea
-          id='intro'
-          type='text'
-          placeholder='자신에 대해 소개해 주세요!'
-          value={intro}
-          onChange={(e) => {
-            handleIntroInp(e);
-            setIntro(e.target.value);
-            resizeHeight(e);
-            handleTextCnt(e);
-          }}
-          className={messageIntro && 'invalid'}
-          maxLength={150}
-        />
-        <div className={textCnt > 150 ? 'invalid' : ''}>
-          <span>{textCnt} / </span>150
-        </div>
-        {messageIntro && <strong>{messageIntro}</strong>}
-        <TeamSelect
-          selectedOpt={selectedOpt}
-          setSelectedOpt={setSelectedOpt}
-        ></TeamSelect>
-        <Button
-          id='start-btn'
-          type='submit'
-          bgColor={
-            isValid
-              ? 'var(--primary-color-default)'
-              : 'var(--secondary-color-default)'
-          }
-          lBtn
-          disabled={isValid ? '' : 'disabled'}
-        >
-          구장 밖 야구 시작하기
-        </Button>
-      </Form>
-    </StyledJoinProfile>
+            <img src={src} alt='' />
+            <img className='uplode-img' src={UPLOAD_FILE} alt='' />
+          </button>
+          {isModalOpen && (
+            <UploadModal
+              isModalOpen={isModalOpen}
+              setIsModalOpen={setIsModalOpen}
+            >
+              <li>
+                <button
+                  type='button'
+                  onKeyDown={(e) => {
+                    // input에 focus 가지 않게
+                    if (!e.shiftKey && e.key === 'Tab') {
+                      e.preventDefault();
+                      e.target.parentNode.nextElementSibling.firstElementChild.focus();
+                    }
+                  }}
+                  // 클릭 시, file input click 이벤트 실행(이미지 업로드 창 열림)
+                  onClick={(e) => {
+                    e.target.nextElementSibling.click();
+                  }}
+                >
+                  이미지 업로드
+                </button>
+                <input
+                  type='file'
+                  id='profile-img'
+                  className='a11y-hidden'
+                  onChange={(e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      const reader = new FileReader();
+                      reader.onload = ({ target }) => {
+                        setSrc(target.result);
+                      };
+                      reader.readAsDataURL(e.target.files[0]);
+                      setImage(e.target.files[0]);
+                    }
+                    setIsModalOpen(false); // 모달창 닫기
+                  }}
+                />
+              </li>
+              <li>
+                <button type='button' onClick={handleImgDelete}>
+                  이미지 제거
+                </button>
+              </li>
+              <li>
+                <button type='button' onClick={(e) => setIsModalOpen(false)}>
+                  취소
+                </button>
+              </li>
+            </UploadModal>
+          )}
+          <label htmlFor='username'>사용자 이름</label>
+          <input
+            id='username'
+            type='text'
+            placeholder='2~10자 이내여야 합니다.'
+            value={username}
+            onChange={(e) => {
+              setUsername(e.target.value);
+              handleUsernameInp(e);
+            }}
+            minLength={2}
+            maxLength={10}
+            className={messageUsername && 'invalid'}
+            required
+          />
+          {messageUsername && <strong>{messageUsername}</strong>}
+          <label htmlFor='accountname'>계정 ID</label>
+          <input
+            id='accountname'
+            type='text'
+            placeholder='영문, 숫자, 특수문자(.),(_)만 사용 가능합니다.'
+            pattern='[A-Za-z0-9\._]+'
+            maxLength={16}
+            value={accountname}
+            onBlur={handleAccountnameInpBlur}
+            onChange={(e) => {
+              handleAccountnameInp(e);
+              setAccountnameValue(e.target.value);
+            }}
+            className={messageAccountname && 'invalid'}
+            required
+          />
+          {messageAccountname && <strong>{messageAccountname}</strong>}
+          <label htmlFor='intro'>소개</label>
+          <textarea
+            id='intro'
+            type='text'
+            placeholder='자신에 대해 소개해 주세요!'
+            value={intro}
+            onChange={(e) => {
+              handleIntroInp(e);
+              setIntro(e.target.value);
+              resizeHeight(e);
+              handleTextCnt(e);
+            }}
+            className={messageIntro && 'invalid'}
+            maxLength={150}
+          />
+          <div className={textCnt > 150 ? 'invalid' : ''}>
+            <span>{textCnt} / </span>150
+          </div>
+          {messageIntro && <strong>{messageIntro}</strong>}
+          <TeamSelect
+            selectedOpt={selectedOpt}
+            setSelectedOpt={setSelectedOpt}
+          ></TeamSelect>
+          <Button
+            id='start-btn'
+            type='submit'
+            bgColor={
+              isValid
+                ? 'var(--primary-color-default)'
+                : 'var(--secondary-color-default)'
+            }
+            lBtn
+            disabled={isValid ? '' : 'disabled'}
+          >
+            구장 밖 야구 시작하기
+          </Button>
+        </Form>
+      </StyledJoinProfile>
+    </>
   );
 };
 
@@ -389,11 +392,11 @@ export default JoinProfile;
 const StyledJoinProfile = styled.section`
   padding: 30px 34px;
 
-  h1,
+  h2,
   p {
     text-align: center;
   }
-  h1 {
+  h2 {
     margin-bottom: 12px;
     font-size: 2.4rem;
     font-weight: 500;

@@ -38,7 +38,11 @@ const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
 
   return (
     <Overlay onClick={handleClick}>
-      <ConfirmModalWrapper>
+      <ConfirmModalWrapper
+        role='alertdialog'
+        aria-modal='true'
+        aria-labelledby='dialog_label'
+      >
         <h1>{title}</h1>
         <BtnContainer myTeam={myTeam} onKeyDown={handleKeyDown}>
           <button onClick={closeModal} ref={firstOpt}>
