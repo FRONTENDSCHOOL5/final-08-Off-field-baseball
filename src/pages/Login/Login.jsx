@@ -137,6 +137,7 @@ const Login = ({ team }) => {
             required
           />
           <ShowPasswordBtn
+            aria-label='비밀번호 표시 토글'
             className='show-btn'
             showPassword={showPassword}
             setShowPassword={setShowPassword}

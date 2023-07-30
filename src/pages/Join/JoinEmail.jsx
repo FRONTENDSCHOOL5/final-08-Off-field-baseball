@@ -145,6 +145,7 @@ const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
             placeholder='비밀번호를 설정해 주세요.'
           />
           <ShowPasswordBtn
+            aria-label='비밀번호 표시 토글'
             className='show-btn'
             showPassword={showPassword}
             setShowPassword={setShowPassword}

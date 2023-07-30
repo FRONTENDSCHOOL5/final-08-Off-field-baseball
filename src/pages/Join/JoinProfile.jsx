@@ -254,9 +254,10 @@ const JoinProfile = ({ email, password }) => {
         <p>나중에 언제든지 변경할 수 있습니다.</p>
         <Form handleForm={handleForm}>
           <button
+            aria-label='프로필 사진 업로드 메뉴'
             type='button'
             className='img-btn'
-            onClick={(e) => setIsModalOpen(true)}
+            onClick={() => setIsModalOpen(true)}
           >
             <img src={src} alt='' />
             <img className='uplode-img' src={UPLOAD_FILE} alt='' />
@@ -284,9 +285,9 @@ const JoinProfile = ({ email, password }) => {
                   이미지 업로드
                 </button>
                 <input
+                  aria-hidden='true'
                   type='file'
                   id='profile-img'
-                  className='a11y-hidden'
                   onChange={(e) => {
                     if (e.target.files && e.target.files[0]) {
                       const reader = new FileReader();
@@ -433,5 +434,8 @@ const StyledJoinProfile = styled.section`
   }
   #start-btn {
     margin-top: 30px;
+  }
+  #profile-img {
+    display: none;
   }
 `;

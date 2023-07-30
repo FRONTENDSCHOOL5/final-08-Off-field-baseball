@@ -217,7 +217,6 @@ const Upload = () => {
               autoFocus
             ></textarea>
             <label htmlFor='profile-img'>
-              <h2 className='a11y-hidden'>이미지 업로드 버튼</h2>
               <svg
                 width='50'
                 height='50'
@@ -264,6 +263,7 @@ const Upload = () => {
                 accept='image/*'
                 onChange={handleImageInput}
                 multiple
+                aria-label='이미지 업로드하기'
               />
             </label>
             {!!imgList.length && (
