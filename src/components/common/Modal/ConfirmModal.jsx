@@ -38,12 +38,8 @@ const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
 
   return (
     <Overlay onClick={handleClick}>
-      <ConfirmModalWrapper
-        role='alertdialog'
-        aria-modal='true'
-        aria-labelledby='dialog_label'
-      >
-        <h1>{title}</h1>
+      <ConfirmModalWrapper role='alertdialog' aria-labelledby='dialog_label'>
+        <h1 id='dialog_label'>{title}</h1>
         <BtnContainer myTeam={myTeam} onKeyDown={handleKeyDown}>
           <button onClick={closeModal} ref={firstOpt}>
             취소
