@@ -6,7 +6,8 @@ const ShowPasswordBtn = ({ showPassword, setShowPassword }) => {
     <StyledBtn
       type='button'
       className='show-btn'
-      onClick={(e) => setShowPassword(!showPassword)}
+      aria-label='비밀번호 표시 토글'
+      onClick={() => setShowPassword(!showPassword)}
     >
       <svg
         xmlns='http://www.w3.org/2000/svg'
