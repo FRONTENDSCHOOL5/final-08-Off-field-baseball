@@ -1,12 +1,11 @@
 import Form from '../../components/common/Form';
-import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
+import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
   const [isValid, setIsVaild] = useState(false);
-
   const [messegeEmail, setMessegeEmail] = useState('');
   const [messegePassword, setMessegePassword] = useState('');
   const [isValidEmail, setIsVaildEmail] = useState(false);
@@ -68,11 +67,8 @@ const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
     }
   };
 
-  // password 정규식
   // 숫자, 소문자, 특수문자 각 1자 이상 필수. 6자 이상
-  // 대문자 허용 혹은 필수 고려중
   const reg =
-    // eslint-disable-next-line
     /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
 
   // 이메일 입력값이 변할 때
@@ -145,7 +141,6 @@ const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
             placeholder='비밀번호를 설정해 주세요.'
           />
           <ShowPasswordBtn
-            aria-label='비밀번호 표시 토글'
             className='show-btn'
             showPassword={showPassword}
             setShowPassword={setShowPassword}

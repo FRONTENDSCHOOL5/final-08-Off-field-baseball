@@ -1,10 +1,9 @@
 import { BASIC_PROFILE_LG, UPLOAD_FILE } from '../../styles/CommonIcons';
-import styled from 'styled-components';
 import TeamSelect from '../../components/common/Select/TeamSelect';
 import Form from '../../components/common/Form';
 import Button from '../../components/common/Button';
 import UploadModal from '../../components/common/Modal/UploadModal';
-
+import styled from 'styled-components';
 import { useEffect, useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
@@ -31,7 +30,6 @@ const JoinProfile = ({ email, password }) => {
   const [isVaildUsername, setIsVaildUsername] = useState(false);
   const [isVaildAccountname, setIsVaildAccountname] = useState(false);
 
-  // CSS 변수에서 사용하는 팀 이름(samsung, ...)
   const teamData = {
     '삼성 라이온즈': { team: 'samsung', filename: '1687344208464.png' },
     '한화 이글스': { team: 'hanwha', filename: '1687344233670.png' },
@@ -235,7 +233,7 @@ const JoinProfile = ({ email, password }) => {
     e.preventDefault();
     setImage('');
     setSrc(BASIC_PROFILE_LG);
-    setIsModalOpen(false); // 모달창 닫기
+    setIsModalOpen(false);
   };
 
   // 텍스트 길이에 맞춰 textarea height 변경
@@ -297,7 +295,7 @@ const JoinProfile = ({ email, password }) => {
                       reader.readAsDataURL(e.target.files[0]);
                       setImage(e.target.files[0]);
                     }
-                    setIsModalOpen(false); // 모달창 닫기
+                    setIsModalOpen(false);
                   }}
                 />
               </li>
@@ -307,7 +305,7 @@ const JoinProfile = ({ email, password }) => {
                 </button>
               </li>
               <li>
-                <button type='button' onClick={(e) => setIsModalOpen(false)}>
+                <button type='button' onClick={() => setIsModalOpen(false)}>
                   취소
                 </button>
               </li>
