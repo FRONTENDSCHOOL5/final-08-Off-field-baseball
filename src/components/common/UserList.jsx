@@ -163,7 +163,8 @@ const TeamLogo = styled.div`
   }
 `;
 
-const Markedtext = styled.span`
+const Markedtext = styled.mark`
+  background: none;
   color: ${(props) =>
     props.myTeam === 'kt'
       ? 'var(--tertiary-color-kt)'

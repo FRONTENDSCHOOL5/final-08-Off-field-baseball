@@ -20,7 +20,7 @@ const TeamSelect = ({ selectedOpt, setSelectedOpt, selectedTeam }) => {
   return (
     <>
       <label htmlFor='my-team'>
-        <h2 className='a11y-hidden'>응원 중인 팀 선택</h2>응원 중인 팀
+        응원 중인 팀<span className='a11y-hidden'>선택하기</span>
       </label>
       <Select
         btnTxt='응원 중인 팀을 선택해주세요'

@@ -17,6 +17,7 @@ const SplashLogin = () => {
 
   return (
     <>
+      <h1 className='a11y-hidden'>구장 밖 야구</h1>
       <BackgroundStyle onClick={() => setModalOpen(!modalOpen)}>
         <img src={FULL_LOGO} alt='구장 밖 야구 입니다.' />
         {modalOpen && (

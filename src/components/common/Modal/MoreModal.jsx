@@ -23,19 +23,26 @@ const MoreModal = ({ isModalOpen, setIsModalOpen, children }) => {
     }
   };
 
-  // 모달이 open되면 모달 첫번째 메뉴에 focus
   const optionList = useRef();
   useEffect(() => {
+    // 모달이 open되면 모달 첫번째 메뉴에 focus
     if (isModalOpen) {
       optionList.current.firstElementChild.firstElementChild.focus();
     }
+
+    // esc
+    window.addEventListener('keydown', (e) => {
+      if (e.keyCode === 27) {
+        setIsModalOpen(false);
+      }
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <Overlay onClick={handleClick}>
       <h1 className='a11yHidden'>모달창</h1>
-      <StyledDialog open role='dialog' myTeam={myTeam}>
+      <StyledDialog open myTeam={myTeam}>
         <ul onKeyDown={handleKeyDown} ref={optionList}>
           {children}
         </ul>
