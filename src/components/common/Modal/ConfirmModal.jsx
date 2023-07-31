@@ -23,16 +23,23 @@ const ConfirmModal = ({ title, trigger, triggerFunc, closeModal }) => {
     }
   };
 
-  // 모달이 open되면 모달 첫번째 메뉴에 focus
   const firstOpt = useRef();
   useEffect(() => {
+    // 모달이 open되면 모달 첫번째 메뉴에 focus
     firstOpt.current.focus();
+
+    // esc
+    window.addEventListener('keydown', (e) => {
+      if (e.keyCode === 27) {
+        closeModal();
+      }
+    });
   }, []);
 
   return (
     <Overlay onClick={handleClick}>
-      <ConfirmModalWrapper>
-        <h1>{title}</h1>
+      <ConfirmModalWrapper role='alertdialog' aria-labelledby='dialog_label'>
+        <h1 id='dialog_label'>{title}</h1>
         <BtnContainer myTeam={myTeam} onKeyDown={handleKeyDown}>
           <button onClick={closeModal} ref={firstOpt}>
             취소

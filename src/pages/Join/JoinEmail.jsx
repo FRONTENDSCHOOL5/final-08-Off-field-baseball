@@ -1,12 +1,11 @@
 import Form from '../../components/common/Form';
-import styled from 'styled-components';
 import Button from '../../components/common/Button';
 import ShowPasswordBtn from '../../components/common/ShowPasswordBtn';
+import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 
 const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
   const [isValid, setIsVaild] = useState(false);
-
   const [messegeEmail, setMessegeEmail] = useState('');
   const [messegePassword, setMessegePassword] = useState('');
   const [isValidEmail, setIsVaildEmail] = useState(false);
@@ -68,11 +67,8 @@ const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
     }
   };
 
-  // password 정규식
   // 숫자, 소문자, 특수문자 각 1자 이상 필수. 6자 이상
-  // 대문자 허용 혹은 필수 고려중
   const reg =
-    // eslint-disable-next-line
     /^(?=.*\d+)(?=.*[a-z]+)(?=.*[`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]+)[A-Za-z\d`~!@#$%^&*\-_=+\[\]\{\}\\\|:;'",<\.>\/?]{6,}$/;
 
   // 이메일 입력값이 변할 때
@@ -107,61 +103,64 @@ const JoinEmail = ({ setPage, email, setEmail, password, setPassword }) => {
     }
   };
   return (
-    <StyledJoinEmail>
-      <h1>이메일로 회원가입</h1>
-      <Form handleForm={handleForm}>
-        <label htmlFor='email-inp'>이메일</label>
-        <input
-          id='email-inp'
-          type='email'
-          onBlur={handleEmailInp}
-          value={email}
-          pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z]+)?'
-          placeholder='이메일 주소를 입력해 주세요.'
-          maxLength='98'
-          onChange={(e) => {
-            setEmail(e.target.value);
-            handleEmailOnChange(e);
-          }}
-          required
-          className={messegeEmail && 'invalid'}
-        />
-        {messegeEmail && <strong>{messegeEmail}</strong>}
-        <label htmlFor='password-inp'>비밀번호</label>
-        <input
-          autoComplete='off'
-          id='password-inp'
-          type={showPassword ? 'text' : 'password'}
-          maxLength='20'
-          value={password}
-          onChange={(e) => {
-            handlePasswordOnChange(e);
-            setPassword(e.target.value);
-          }}
-          className={messegePassword && 'invalid'}
-          required
-          placeholder='비밀번호를 설정해 주세요.'
-        />
-        <ShowPasswordBtn
-          className='show-btn'
-          showPassword={showPassword}
-          setShowPassword={setShowPassword}
-        ></ShowPasswordBtn>
-        {messegePassword && <strong>{messegePassword}</strong>}
-        <StyledButton
-          type='submit'
-          bgColor={
-            isValid
-              ? 'var(--primary-color-default)'
-              : 'var(--secondary-color-default)'
-          }
-          lBtn
-          disabled={isValid ? '' : 'disabled'}
-        >
-          다음
-        </StyledButton>
-      </Form>
-    </StyledJoinEmail>
+    <>
+      <h1 className='a11y-hidden'>구장 밖 야구</h1>
+      <StyledJoinEmail>
+        <h2>이메일로 회원가입</h2>
+        <Form handleForm={handleForm}>
+          <label htmlFor='email-inp'>이메일</label>
+          <input
+            id='email-inp'
+            type='email'
+            onBlur={handleEmailInp}
+            value={email}
+            pattern='[\w\.\-]+@[a-z]+\.[a-z]{2,}(.?[a-z]+)?'
+            placeholder='이메일 주소를 입력해 주세요.'
+            maxLength='98'
+            onChange={(e) => {
+              setEmail(e.target.value);
+              handleEmailOnChange(e);
+            }}
+            required
+            className={messegeEmail && 'invalid'}
+          />
+          {messegeEmail && <strong>{messegeEmail}</strong>}
+          <label htmlFor='password-inp'>비밀번호</label>
+          <input
+            autoComplete='off'
+            id='password-inp'
+            type={showPassword ? 'text' : 'password'}
+            maxLength='20'
+            value={password}
+            onChange={(e) => {
+              handlePasswordOnChange(e);
+              setPassword(e.target.value);
+            }}
+            className={messegePassword && 'invalid'}
+            required
+            placeholder='비밀번호를 설정해 주세요.'
+          />
+          <ShowPasswordBtn
+            className='show-btn'
+            showPassword={showPassword}
+            setShowPassword={setShowPassword}
+          ></ShowPasswordBtn>
+          {messegePassword && <strong>{messegePassword}</strong>}
+          <StyledButton
+            type='submit'
+            bgColor={
+              isValid
+                ? 'var(--primary-color-default)'
+                : 'var(--secondary-color-default)'
+            }
+            lBtn
+            disabled={isValid ? '' : 'disabled'}
+          >
+            다음
+          </StyledButton>
+        </Form>
+      </StyledJoinEmail>
+    </>
   );
 };
 
@@ -173,7 +172,7 @@ const StyledButton = styled(Button)`
 
 const StyledJoinEmail = styled.section`
   padding: 30px 34px;
-  h1 {
+  h2 {
     margin-bottom: 40px;
     font-weight: 500;
     font-size: 2.4rem;

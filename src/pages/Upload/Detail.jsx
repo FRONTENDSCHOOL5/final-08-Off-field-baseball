@@ -183,7 +183,7 @@ const Detail = () => {
             <h1 className='a11y-hidden'>포스트 | 구장 밖 야구</h1>
             {post && <Post post={post} />}
             <CommentListSection>
-              <h3 className='a11y-hidden'>댓글 목록</h3>
+              <h2 className='a11y-hidden'>댓글 목록</h2>
               {showCommentList.length > 0 && (
                 <>
                   {showCommentList.map((comment, index) => {
