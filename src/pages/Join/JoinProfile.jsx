@@ -241,9 +241,64 @@ const JoinProfile = ({ email, password }) => {
     e.target.style.height = 'auto';
     e.target.style.height = e.target.scrollHeight + 'px';
   };
+
   const handleTextCnt = (e) => {
     setTextCnt(e.target.value.length);
   };
+
+  const resizeImg = (e) => {
+    const $canvas = document.createElement(`canvas`);
+    const ctx = $canvas.getContext(`2d`);
+
+    let [width, height] = [220, 220];
+
+    if (e.target.width < e.target.height) {
+      const resizeRatio = e.target.width / 220;
+      height = e.target.height / resizeRatio;
+    } else if (e.target.width > e.target.height) {
+      const resizeRatio = e.target.height / 220;
+      width = e.target.width / resizeRatio;
+    }
+
+    $canvas.width = width;
+    $canvas.height = height;
+    ctx.drawImage(e.target, 0, 0, width, height);
+
+    const i = e.target.src.indexOf(';');
+    const type = e.target.src.slice(5, i);
+
+    // 용량이 줄어든 이미지
+    return $canvas.toDataURL(type, 1);
+  };
+
+  const setImg = (e) => {
+    const file = e.target.files[0];
+    if (!/^image\/(jpg|gif|png|jpeg|bmp|tif|heic)$/.test(file.type)) {
+      alert(
+        '이미지 파일 확장자는 jpg, gif, png, jpeg, bmp, tif, heic만 가능합니다.'
+      );
+      return;
+    }
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    setImage(file);
+
+    reader.addEventListener('load', ({ target }) => {
+      const image = new Image();
+      image.src = target.result;
+      image.addEventListener('load', (e) => {
+        if (e.target.width <= 330) {
+          setSrc(target.result);
+        } else {
+          const resizeSrc = resizeImg(e);
+          setSrc(resizeSrc);
+        }
+      });
+    });
+  };
+
   return (
     <>
       <h1 className='a11y-hidden'>구장 밖 야구</h1>
@@ -285,17 +340,11 @@ const JoinProfile = ({ email, password }) => {
                 <input
                   aria-hidden='true'
                   type='file'
+                  accept='.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic'
                   id='profile-img'
                   onChange={(e) => {
-                    if (e.target.files && e.target.files[0]) {
-                      const reader = new FileReader();
-                      reader.onload = ({ target }) => {
-                        setSrc(target.result);
-                      };
-                      reader.readAsDataURL(e.target.files[0]);
-                      setImage(e.target.files[0]);
-                    }
-                    setIsModalOpen(false);
+                    setImg(e);
+                    setIsModalOpen(false); // 모달창 닫기
                   }}
                 />
               </li>
