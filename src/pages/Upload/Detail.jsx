@@ -123,7 +123,6 @@ const Detail = () => {
       );
       setIsLoading(false);
       setComment('');
-      console.log(res);
     } catch (err) {
       console.log(err);
       setIsLoading(false);

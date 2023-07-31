@@ -3,12 +3,13 @@
 ![리드미 타이틀](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/53a09af4-9a1b-49bc-8c34-c8df2fd3e238)
 <br>
 <br>
-[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app) 
+[🔗 구장 밖 야구 바로가기](https://off-field-baseball.netlify.app)
+
 - ID : `baseball@test.com`
 - PW : `test123!`
 - 모바일로 확인하기 : <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/a13cb450-1f8d-42fa-acae-94dc39319d6c" width="70px">
-<br>
-<br>
+  <br>
+  <br>
 
 ## 1. 서비스 소개
 
@@ -19,8 +20,8 @@
 - 사용하던 팀 응원 소품이나 야구 관련 물품을 중고 거래를 통해 판매하고, 구입할 수 있습니다.
 - 야구와 관련된 이슈들을 실시간으로 올리며 SNS 활동을 할 수 있습니다.
 - 같은 팀을 응원하는 유저를 팔로우 하여 피드를 꾸릴 수 있고, 댓글과 좋아요 기능으로 소통할 수 있습니다.
-<br>
-<br>
+  <br>
+  <br>
 
 ## 2. 팀 소개 & 역할 분담
 
@@ -37,25 +38,28 @@
 ## 🐼 한수빈 (팀장)
 
 **🖥️ 화면 구현**
-- 피드 포스트 목록 프로필 페이지 팔로잉 
+
+- 피드 포스트 목록 프로필 페이지 팔로잉
 - 팔로워 목록 메인 레이아웃
-- 콘텐츠 레이아웃 헤더 navbar 
+- 콘텐츠 레이아웃 헤더 navbar
 
 **🛠️ 기능 개발**
-- 피드 페이지 
+
+- 피드 페이지
   - 팔로우 중인 유저들의 게시글 불러오기
   - 팔로우 중인 유저가 없을 경우 검색하기 버튼 노출
   - 무한 스크롤 구현
-- 포스트 등록/수정/삭제/신고 기능 
+- 포스트 등록/수정/삭제/신고 기능
 - API 활용
   - 더보기 버튼 클릭시 작성자와 사용자의 일치 여부에 따라 삭제/수정 모달과 신고 모달이 각각 뜸
-  - 포스트 등록시 한 번에 이미지 최대 3개 업로드 가능 
-- 포스트 상세 페이지 
-- pre 태그를 활용하여 게시글 작성시에 개행이 그대로 출력되도록 함 
+  - 포스트 등록시 한 번에 이미지 최대 3개 업로드 가능
+- 포스트 상세 페이지
+- pre 태그를 활용하여 게시글 작성시에 개행이 그대로 출력되도록 함
 
-- 상품 상세 페이지 
+- 상품 상세 페이지
+
   - 포스트 좋아요 / 댓글 작성 기능 API활용
-  - 댓글 작성시 댓글 리스트 재렌더링으로 새로고침없이 작성한 댓글이 바로 렌더링 
+  - 댓글 작성시 댓글 리스트 재렌더링으로 새로고침없이 작성한 댓글이 바로 렌더링
 
 - 프로필 페이지
   - 유저 프로필, 해당 유저가 등록한 포스트 / 상품 등을 보여주는 페이지
@@ -66,7 +70,8 @@
 - 접근성
   - 이미지 alt(대체텍스트) 추가
   - 접근성 텍스트 h1~h3태그 추가
-- 라우터 
+- 라우터
+
   - context의 usertoken 유무에 따라 페이지 라우팅되도록 구현
 
 - 기타 프로젝트 주도
@@ -74,11 +79,12 @@
   - 정기/비정기 회의 주도
   - 역할 분담 주도
 - 발표
-<br>
+  <br>
 
 ## 🐢 김은총
 
 **🖥️ 화면 구현**
+
 - 채팅 리스트 페이지
 - 채팅방 페이지
   - 채팅방 나가기 모달 연결
@@ -87,8 +93,9 @@
 - splash 스크린
 - 공통 Button 컴포넌트
   - 재사용성을 고려하여 모든 페이지에서 사용 가능하도록 제작
-  
+
 **🛠️ 기능 개발**
+
 - 유저 검색 기능
   - 검색어를 타이핑 하면 별도의 버튼 클릭 없이 바로 input value와 같은 검색어 리스트 출력
   - 안정성을 위해 검색어 api 요청 텀을 200ms로 제한
@@ -99,20 +106,23 @@
   - 3초간 애니메이션이 작동한 후 Login Modal 페이지로 이동
 - 전체 디자인 담당
   - 시그니처 컬러, 스플래쉬 스크린, 메인로고, 파비콘, Error404 이미지, etc
-  
+
 **기타**
+
 - README 작성
   - 서비스 소개 등 이미지 제작
   - 전체 구조 기획 / 작성
-<br>
+    <br>
 
 ## 김하연
 
 **🖥️ 화면 구현**
+
 - form, select, comment, modal(더보기, 세팅 모달 및 오버레이), container 컴포넌트
 - 로그인, 회원가입, 게시글 , 댓글 페이지
 
 **🛠️ 기능 개발**
+
 - 기본 테마와 응원 중인 팀이 있는 사용자를 위한 10가지 테마 전환 로직
   - 컬러와 팀 변동에 상관없이 동작하도록, CSS 변수로 관리
   - 이미지 : 하나의 SVG 코드로 모든 테마 지원
@@ -132,6 +142,7 @@
   - 댓글 삭제 / 신고, context API 구조 세팅
 
 **사용성 및 접근성**
+
 - 모달창
   - Tab을 누를 시, 포커스가 모달창을 벗어나지 않도록 구현
 - 커스텀 셀렉트 박스
@@ -141,25 +152,30 @@
   - textarea 실시간 글자수/최대 글자수 피드백 및 리사이징
 
 **기타**
+
 - 지식 공유
   - API 사용법, 상태 끌어올리기, setTimeout/clearTimeout 활용법 등<br>
     프로젝트를 진행하며 필요할 때마다 팀 내, 팀 외 지식 공유
-<br>
+    <br>
 
 ## 🐈 최예지
 
 **🖥️ 화면 구현**
+
 - 모든 페이지에서 재사용되는 공통 컴포넌트 제작
   - 하단 탭 메뉴바
 - 상품 등록(수정) 페이지
 - 검색 결과 페이지
 
 **🛠️ 기능 개발**
+
 - 하단 탭 메뉴 바
+
   - 하단 탭 메뉴 클릭 시 해당 페이지로 이동
   - 선택된 메뉴 아이콘만 색칠(활성화) 되도록 구현
 
 - 회원 정보 수정 기능
+
   - 기존 마이 프로필 이미지와 정보 불러오기
   - 프로필 이미지 삭제(초기화) 기능
   - 수정 페이지에서 이미지 미수정 시 기존 마이 프로필 이미지 유지
@@ -167,8 +183,8 @@
 - 상품 등록 기능
   - 업로드한 상품 이미지 미리보기 및 삭제
   - 각 입력값에 대한 유효성 관리 =>
-    - 이미지 등록 실패 경고창 
-    - 상품 가격의 천 단위 콤마 생성 및 숫자만 입력 받도록 제한 
+    - 이미지 등록 실패 경고창
+    - 상품 가격의 천 단위 콤마 생성 및 숫자만 입력 받도록 제한
       - API 연결 => 콤마를 삭제한 숫자 형태로 변경해서 전송되도록 함
     - 상품 가격의 최대 금액(자릿수) 지정
     - 상품명의 유효 글자수 지정 (2~25글자)
@@ -178,8 +194,9 @@
 - API 연결을 통해 등록된 상품 정보 전송
 
 **기타**
-  - notion 문서 작성 -> 회의록 정리
-<br>
+
+- notion 문서 작성 -> 회의록 정리
+  <br>
 
 ## 👍 공통
 
@@ -187,14 +204,15 @@
 - 이미지
   - 레티나 디스플레이에 대응하기 위해, 원본 이미지의 2배 사이즈 이미지 사용
 - 커밋 메시지 컨벤션, 코드 컨벤션, 네이밍 컨벤션, 폴더 구조 컨벤션 설립
-<br>
-<br>
+  <br>
+  <br>
 
 ## 3. 프로젝트 기간
 
 2023년 6월 2일 ~ 2023년 6월 27일
 ![개발기간](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/c9376685-de57-4fd7-a78e-5e5436b6918a)
 <br>
+
 - 기획 회의 (서비스 컨셉, 컨벤션 수립, 역할 분배, 일정 구상) : 6월 2일 ~ 6월 3일
 - 로고, UI 디자인 : 6월 2일 ~ 6월 5일
 - 공통 UI 컴포넌트 개발 : 6월 3일 ~ 6월 8일
@@ -202,8 +220,8 @@
 - 기능 개발 : 6월 15일 ~ 6월 24일
 - 버그 수정 : 6월 25일 ~ 6월 27일
 - 배포 : 6월 26일 ~ 6월 27일
-<br>
-<br>
+  <br>
+  <br>
 
 ## 4. 개발 환경
 
@@ -231,8 +249,8 @@
 - IDE : <img src="https://img.shields.io/badge/visualstudiocode-007ACC?style=flat&logo=visualstudiocode&logoColor=white"/>
 - 협업 툴 : <img src="https://img.shields.io/badge/git-F05032?style=flat&logo=git&logoColor=white"/> <img src="https://img.shields.io/badge/github-181717?style=flat&logo=github&logoColor=white"/> <img src="https://img.shields.io/badge/notion-000000?style=flat&logo=notion&logoColor=white"/> <img src="https://img.shields.io/badge/figma-F24E1E?style=flat&logo=figma&logoColor=white"/> <img src="https://img.shields.io/badge/discord-5865F2?style=flat&logo=discord&logoColor=white"/>
 - 포매터 : <img src="https://img.shields.io/badge/prettier-F7B93E?style=flat&logo=prettier&logoColor=white"/>
-<br>
-<br>
+  <br>
+  <br>
 
 ## 5. 프로젝트 구조
 
@@ -248,60 +266,71 @@
 
 ![깃헙플로우](https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/de13426a-ddf8-4020-8879-815599e0ed07)
 <br>
+
 - 프로젝트의 규모와 기간을 고려했을 때, 브랜치 관리에 드는 리소스를 줄이고<br>
   최소 기능을 빠르게 구현하는데 집중하기 위하여 GitHub Flow를 채택하였습니다.
-<br>
+  <br>
 
 - 브랜치 실제 관리 모습 🔽
-<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/e0ec629d-44c4-4d03-b973-422bf8d2211c" width="500px">
-<br>
-<br>
+  <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/e0ec629d-44c4-4d03-b973-422bf8d2211c" width="500px">
+  <br>
+  <br>
 
 ## 7. 협업 방식 & 프로젝트 관리
+
 ### 📍 순조로운 프로젝트를 위한 원칙
+
 **💛 나누면서 성장하기**
+
 ```
 - 동료에게 도움 요청하는 것을 어려워하지 않기
 - 팀원이 도움을 요청했을 때, VSCode 라이브 셰어 기능을 활용하여 다 함께 해결하기
 - 코딩하면서 마주친 문제들에 대해 고민했던 부분, 느꼈던 부분을 디스코드 스레드에 수시로 공유하기
 ```
+
 **🔥 코드만큼 감정 챙기기**
+
 ```
-- 불만이 있으면 참지 말고 바로 말하기 
+- 불만이 있으면 참지 말고 바로 말하기
 - 서로의 의견 경청하고 존중하기
 - 채팅방과 디엠을 적극적으로 활용하여 소통하기
 ```
+
 **🤔 서로 신뢰주기**
- ```
+
+```
 - 회의에 참석하지 못하는 경우가 생기면 꼭 보고하기
 ```
 
 ### 🌳 프로젝트 진행
+
 - 정기 회의 및 코드 리뷰
+
   - 월/목 AM 9시 정기회의와 주 3회 코드리뷰를 가지면서 작업 진행 상황 공유
   - 회의록 : [Notion](https://www.notion.so/75e771e2f0074516986d9e8a93106bbc?pvs=4)
-<br>
+    <br>
 
 - Discord GitHub 봇을 사용하여 실시간 PR 상황 공유 ⬇️
-<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/1e6aa54f-a707-4616-ab6b-7b435e935f00" width="400px"/>
-<br>
-<br>
+  <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/1e6aa54f-a707-4616-ab6b-7b435e935f00" width="400px"/>
+  <br>
+  <br>
 
 - Notion Project 템플릿을 사용하여 할 일 & 일정 관리
-<img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
-<br>
-<br>
-
+  <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/58187854/2ac3ca1d-e854-49a4-a568-dfb38a86159d" width="600px"/>
+  <br>
+  <br>
 
 ## 8. 컨벤션
 
 - 시맨틱 마크업
+
   - 의미있는 변수명 사용
   - css : kebab-case
   - js : camelCase
   - 변수 : var 사용 금지
 
 - Prettier 설정
+
 ```
 {
   "trailingComma": "es5",
@@ -325,10 +354,12 @@
 - Rename: 파일명 혹은 폴더명 수정, 위치 옮기기
 - Remove: 파일 삭제
 ```
+
 <br>
 <br>
 
 ## 9. 서비스 미리보기
+
 <table width="100%">
 <tr>
     <th colspan="3">홈</th>
@@ -484,13 +515,14 @@
 </table>
 <br>
 
-
 ## 10. 핵심 코드 설명
 
 ### 👨‍👧‍👦 마이 팀 테마 변경 코드
+
 ```
 ✔️ API 명세에서 자기소개 정보를 담당하는 intro 키의 값으로 자기소개와 응원하는 팀 정보를 $로 구분하여 서버에 전달
 ```
+
 <br>
 
 <img src="https://github.com/FRONTENDSCHOOL5/final-08-Off-field-baseball/assets/116331221/190bd427-bdb4-4886-9190-9a48f60fde47" width="
@@ -504,10 +536,11 @@
     "password": "test123!",
     "accountname": "testman123",
     "intro": "자기소개입니다.$hanhwa",
-    "image": "",
+    "image": ""
   }
-} 
+}
 ```
+
 <br>
 <hr>
   
@@ -532,7 +565,7 @@ const { myTeam } = useContext(UserContext);
 background: ${(props) =>
         'var(--primary-color-' + (props.myTeam || 'default') + ')'};
 
-// 아이콘 적용 
+// 아이콘 적용
 <svg>
         <path //생략
           fill={
@@ -544,15 +577,44 @@ background: ${(props) =>
           }/>
 </svg>
 ```
+
 <br>
 <br>
 
-## 11. 회고 및 소감
+## 11. 트러블 슈팅
 
-- 팀별로 게시판을 만들면 좋겠다는 의견이 있었는데 구현하지 못해서 아쉽습니다. 
+**11-1 이전 검색어 결과가 렌더링되는 버그**
+
+- 현상 : 예를 들어, 'test'라고 검색했을 때, 'tes' 혹은 'te' 같이 키워드를 다 입력하기 전의 검색 결과가 최종적으로 나타나는 경우가 있음
+- 원인 : 입력값 변경 시, clearTimeOut로 클린업하기 전, setTimeOut이 실행되었다면, 이전 검색어에 대한 함수 실행(onTyping)이 취소되지 않음
+- 해결 방법 : 현재 입력값과, data 받아올 때 사용된 키워드(입력값)이 다르면 얼리리턴
+
+**11-2 댓글 작성자 이미지 깨지는 버그**
+
+- 현상 : 댓글 작성자의 이미지가 엑박으로 나오는 경우가 있음
+- 원인 : 서버에 저장된 이미지 경로가 올바르지 않은 경우 깨짐
+- 해결 방법 : 이미지 경로에 올바른 url이 포함되어 있는지 체크하고, 그렇지 않을 경우 기본 이미지 렌더링
+
+**11-3 뒤로가기 클릭 시, 하단 탭 메뉴 버그**
+
+- 현상 : 뒤로가기 버튼 클릭 시, 하단 탭 메뉴의 현재 메뉴가 변경되지 않음
+- 원인 : 하단 탭 컴포넌트 안에서, 현재 페이지 정보 관리
+- 해결 방법 : 각 페이지에서 현재 페이지 정보를 currentId로 하단 탭 컴포넌트에 넘겨주도록 변경
+
+**11-4 textarea 리사이즈 버그**
+
+- 현상 : 처음 화면이 렌더링 될 때, textarea가 글자 줄 수에 맞게 리사이징되지 않음
+- 원인 : 입력값이 변할 때, 리사이징 함수가 실행되기 때문
+- 해결 방법 : textarea의 value를 useState로 컨트롤해서, value가 변할 때, 리사이징 함수가 실행되도록 변경
+  <br>
+  <br>
+
+## 12. 회고 및 소감
+
+- 팀별로 게시판을 만들면 좋겠다는 의견이 있었는데 구현하지 못해서 아쉽습니다.
 - 이미지 최적화, 코드 리팩토링 등 개선될 부분들이 많은데 제대로 진행하지 못해서 아쉽습니다.
 - 수료 후에도 프로젝트를 계속 유지하여 최적화, 기능 추가 등 꾸준히 지속할 것입니다.
-<br>
-<br>
+  <br>
+  <br>
 
 <p align="right"><a href="#top">TOP 🔼</a></p>
