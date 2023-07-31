@@ -295,7 +295,6 @@ const JoinProfile = ({ email, password }) => {
           setSrc(target.result);
         } else {
           const resizeSrc = resizeImg(e);
-          console.log(resizeSrc);
           setSrc(resizeSrc);
         }
       });
@@ -343,6 +342,7 @@ const JoinProfile = ({ email, password }) => {
                 <input
                   aria-hidden='true'
                   type='file'
+                  accept='.jpg, .gif, .png, .jpeg, .bmp, .tif, .heic'
                   id='profile-img'
                   onChange={(e) => {
                     setImg(e);
