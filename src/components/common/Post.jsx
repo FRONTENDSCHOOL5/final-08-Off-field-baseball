@@ -113,6 +113,7 @@ const Post = ({
                                     }
                               }
                             >
+                              {!id && <LinkTo to={'/post/' + post.id}></LinkTo>}
                               <img src={img} alt='게시글 이미지입니다.' />
                             </SwiperSlide>
                           );
